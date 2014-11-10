@@ -5,8 +5,6 @@ protected/runtime/*
 protected/data/*.db
 themes/classic/views/
 framework/*
-gallery/*
-images/*
 
 # =========================
 # Operating System Files
