@@ -109,7 +109,7 @@ class Profile extends UActiveRecord
 		$relations = array(
 			'user'=>array(self::HAS_ONE, 'User', 'id'),
 		);
-		//if (isset(Yii::app()->getModule('user')->profileRelations)) $relations = array_merge($relations,Yii::app()->getModule('user')->profileRelations);
+		if (isset(Yii::app()->getModule('user')->profileRelations)) $relations = array_merge($relations,Yii::app()->getModule('user')->profileRelations);
 		return $relations;
 	}
 
