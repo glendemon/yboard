@@ -38,10 +38,10 @@ class AdminModule extends CWebModule
 	 * @return string
 	 */
 	public static function t($str='',$params=array(),$dic='admin') {
-            if (Yii::t("AdminModule", $str)==$str)
-                return Yii::t("AdminModule.".$dic, $str, $params);
-            else
-                return Yii::t("AdminModule", $str, $params);
+		if (Yii::t("AdminModule", $str)==$str)
+		    return Yii::t("AdminModule.".$dic, $str, $params);
+        else
+            return Yii::t("AdminModule", $str, $params);
 	}
 
 }

@@ -114,7 +114,6 @@ return array(
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ),
         ),
-		/*
         'db' => array(
             'connectionString' => 'sqlite:' . dirname(__FILE__) . '/../data/testdrive.db',
             'tablePrefix' => '',
@@ -122,44 +121,37 @@ return array(
 //            'enableParamLogging' => true,
             'queryCacheID' => 'cache',
         ),
-		*/
         // uncomment the following to use a MySQL database
-        'db'=>array(
-            'connectionString' => 'mysql:host=localhost;dbname=yboard',
-            'emulatePrepare' => true,
-            'username' => 'root',
-            'password' => '123456',
-            'charset' => 'utf8',
-            'tablePrefix' => '',
-        ),
-        
+        /*
+          'db'=>array(
+          'connectionString' => 'mysql:host=localhost;dbname=testdrive',
+          'emulatePrepare' => true,
+          'username' => 'root',
+          'password' => '',
+          'charset' => 'utf8',
+          ),
+         */
         'errorHandler' => array(
             // use 'site/error' action to display errors
             'errorAction' => 'site/error',
         ),
-        'log'=>array(
-			'class'=>'CLogRouter',
-			'routes'=>array(
-				array(
-					'class'=>'CFileLogRoute',
-					'levels'=>'info',
-					'logPath'=>'logs/',
-					'logFile'=>'actions.log',
-				),
-				array(
-					'class'=>'CFileLogRoute',
-					'levels'=>'error, warning',
-					'logPath'=>'logs/',
-					'logFile'=>'errors.log',
-				),
-				// uncomment the following to show log messages on web pages
-				/*
-				array(
-					'class'=>'CWebLogRoute',
-				),
-				*/
-			),
-		),
+        'log' => array(
+            'class' => 'CLogRouter',
+            'routes' => array(
+                array(
+                    'class' => 'CFileLogRoute',
+                    'levels' => 'error, warning',
+//                    'class'=>'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
+//                    'ipFilters'=>array('127.0.0.1','192.168.1.3'),
+                ),
+            // uncomment the following to show log messages on web pages
+            /*
+              array(
+              'class'=>'CWebLogRoute',
+              ),
+             */
+            ),
+        ),
     ),
     // application-level parameters that can be accessed
     // using Yii::app()->params['paramName']

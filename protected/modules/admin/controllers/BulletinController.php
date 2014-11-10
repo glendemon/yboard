@@ -63,7 +63,7 @@ class BulletinController extends BackendController
 
         $this->render('update', array(
             'model' => $model,
-        ));
+        ));;
 	}
 
 	/**
