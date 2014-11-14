@@ -51,17 +51,20 @@ class CategoryController extends BackendController
     public function actionUpdate($id)
     {
         $model = $this->loadModel($id);
-
+		
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['Category']))
         {
             $model->attributes = $_POST['Category'];
+			$model->fieldsSave();
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
 
+		
+		$model->fields=  json_decode($model->fields);
         $this->render('update', array(
             'model' => $model,
         ));

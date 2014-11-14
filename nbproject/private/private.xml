@@ -3,10 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/AppServ/www/yboard/protected/messages/ru/admin.php</file>
             <file>file:/D:/AppServ/www/yboard/themes/yboard/views/admin/layouts/main.php</file>
-            <file>file:/D:/AppServ/www/yboard/protected/modules/admin/controllers/DefaultController.php</file>
-            <file>file:/D:/AppServ/www/yboard/protected/config/main.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/admin/layouts/column2.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/widgets/JsTreeWidget.php</file>
             <file>file:/D:/AppServ/www/yboard/themes/yboard/views/admin/layouts/=main.php</file>
+            <file>file:/D:/AppServ/www/yboard/test.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/modules/admin/AdminModule.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/messages/ru/bulletin.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/messages/ru/main.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/modules/admin/controllers/CategoryController.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/components/Controller.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/modules/admin/controllers/DefaultController.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/admin/category/index.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/js/cookies.js</file>
+            <file>file:/D:/AppServ/www/yboard/protected/modules/admin/messages/ru/admin.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/admin/layouts/column1.php</file>
         </group>
     </open-files>
 </project-private>

@@ -4,34 +4,46 @@ BeyondAdmin - Responsive Admin Dashboard Template build with Twitter Bootstrap 3
 Version: 1.0.0
 Purchase: http://wrapbootstrap.com
 -->
-<html xmlns="http://www.w3.org/1999/xhtml"><!-- Head -->
-	<head>
-	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- Head --><head>
     <meta charset="utf-8" >
-		
-    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	
+<link rel="stylesheet" type="text/css" href="/yboard/js_plugins/fancybox2/jquery.fancybox.css" />
+<link rel="stylesheet" type="text/css" href="/yboard/assets/e3ecaab1/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/yboard/assets/e3ecaab1/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" type="text/css" href="/yboard/assets/e3ecaab1/css/yii.css" />
+<link rel="stylesheet" type="text/css" href="/yboard/css/main.css" />
+<link rel="stylesheet" type="text/css" href="/yboard/css/form.css" />
+<script type="text/javascript" src="/yboard/assets/8bd8ef3d/jquery.min.js"></script>
+<script type="text/javascript" src="/yboard/assets/8bd8ef3d/jquery.cookie.js"></script>
+<script type="text/javascript" src="/yboard/assets/8bd8ef3d/jquery.yiiactiveform.js"></script>
+<script type="text/javascript" src="/yboard/js_plugins/json2/json2.js"></script>
+<script type="text/javascript" src="/yboard/assets/e3ecaab1/js/bootstrap.min.js"></script>
+<title>Dashboard</title>
 
     <meta name="description" content="Dashboard">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl; ?>/img/favicon.png" type="image/x-icon">
-	
+    <link rel="shortcut icon" href="/yboard/themes/yboard/img/favicon.png" type="image/x-icon">
+
 
     <!--Basic Styles-->
-    <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/bootstrap.css" rel="stylesheet">
+    <link href="/yboard/themes/yboard/css/bootstrap.css" rel="stylesheet">
     <link id="bootstrap-rtl-link" href="" rel="stylesheet">
-    <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/font-awesome.css" rel="stylesheet">
-    <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/weather-icons.css" rel="stylesheet">
+    <link href="/yboard/themes/yboard/css/font-awesome.css" rel="stylesheet">
+    <link href="/yboard/themes/yboard/css/weather-icons.css" rel="stylesheet">
 
     <!--Fonts-->
-    <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/css.css" rel="stylesheet" type="text/css">
+    <link href="/yboard/themes/yboard/css/css.css" rel="stylesheet" type="text/css">
 
     <!--Beyond styles-->
-    <link  type="text/css" rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/beyond.min.css">
+    <link  type="text/css" rel="stylesheet" href="/yboard/themes/yboard/css/beyond.min.css">
     <link id="beyond-link" type="text/css" rel="stylesheet" >
-    <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/demo.css" rel="stylesheet">
-    <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/typicons.css" rel="stylesheet">
-    <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/animate.css" rel="stylesheet">
+    <link href="/yboard/themes/yboard/css/demo.css" rel="stylesheet">
+    <link href="/yboard/themes/yboard/css/typicons.css" rel="stylesheet">
+    <link href="/yboard/themes/yboard/css/animate.css" rel="stylesheet">
     <link id="skin-link" href="" rel="stylesheet" type="text/css">
 
     <!--Skin Script: Place this script in head to load scripts for skins and rtl support-->
@@ -43,16 +55,13 @@ Purchase: http://wrapbootstrap.com
 
 
 	<!-- blueprint CSS framework -->
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print" />
+	<link rel="stylesheet" type="text/css" href="/yboard/css/screen.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="/yboard/css/print.css" media="print" />
 	<!--[if lt IE 8]>
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="/yboard/css/ie.css" media="screen, projection" />
 	<![endif]-->
 
-	<?php Yii::app()->bootstrap->register(); ?>
-	<?php Yii::app()->clientScript->registerCSSFile(Yii::app()->request->baseUrl . '/css/main.css'); ?>
-	<?php Yii::app()->clientScript->registerCSSFile(Yii::app()->request->baseUrl . '/css/form.css'); ?>
-
+			
 
     <!--Skin Script: Place this script in head to load scripts for skins and rtl support-->
 
@@ -92,7 +101,7 @@ Purchase: http://wrapbootstrap.com
                 <div class="navbar-header pull-left">
                     <a href="#" class="navbar-brand">
                         <small>
-                            <img src="<?php echo Yii::app()->theme->baseUrl; ?>/img/logo.png" alt="">
+                            <img src="/yboard/themes/yboard/img/logo.png" alt="">
                         </small>
                     </a>
                 </div>
@@ -198,7 +207,7 @@ Purchase: http://wrapbootstrap.com
                                 <ul class="pull-right dropdown-menu dropdown-arrow dropdown-messages">
                                     <li>
                                         <a href="#">
-                                            <img src="<?php echo Yii::app()->theme->baseUrl; ?>/img/divyia.jpg" class="message-avatar" alt="Divyia Austin">
+                                            <img src="/yboard/themes/yboard/img/divyia.jpg" class="message-avatar" alt="Divyia Austin">
                                             <div class="message">
                                                 <span class="message-sender">
                                                     Divyia Austin
@@ -218,7 +227,7 @@ sending application when the senders image is shown for the main icon
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <img src="<?php echo Yii::app()->theme->baseUrl; ?>/img/bing.png" class="message-avatar" alt="Microsoft Bing">
+                                            <img src="/yboard/themes/yboard/img/bing.png" class="message-avatar" alt="Microsoft Bing">
                                             <div class="message">
                                                 <span class="message-sender">
                                                     Bing.com
@@ -237,7 +246,7 @@ sending application when the senders image is shown for the main icon
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <img src="<?php echo Yii::app()->theme->baseUrl; ?>/img/adam-jansen.jpg" class="message-avatar" alt="Divyia Austin">
+                                            <img src="/yboard/themes/yboard/img/adam-jansen.jpg" class="message-avatar" alt="Divyia Austin">
                                             <div class="message">
                                                 <span class="message-sender">
                                                     Nicolas
@@ -330,7 +339,7 @@ has come over the horizon and is reaching the general populous
                             <li>
                                 <a class="login-area dropdown-toggle" data-toggle="dropdown">
                                     <div class="avatar" title="View your public profile">
-                                        <img src="<?php echo Yii::app()->theme->baseUrl; ?>/img/adam-jansen.jpg">
+                                        <img src="/yboard/themes/yboard/img/adam-jansen.jpg">
                                     </div>
                                     <section>
                                         <h2><span class="profile"><span>David Stevenson</span></span></h2>
@@ -343,7 +352,7 @@ has come over the horizon and is reaching the general populous
                                     <!--Avatar Area-->
                                     <li>
                                         <div class="avatar-area">
-                                            <img src="<?php echo Yii::app()->theme->baseUrl; ?>/img/adam-jansen.jpg" class="avatar">
+                                            <img src="/yboard/themes/yboard/img/adam-jansen.jpg" class="avatar">
                                             <span class="caption">Change Photo</span>
                                         </div>
                                     </li>
@@ -426,36 +435,23 @@ has come over the horizon and is reaching the general populous
                 </div>
                 <!-- /Page Sidebar Header -->
                 <!-- Sidebar Menu -->
-                 <?php
-            $this->widget('zii.widgets.CMenu', 
-                    array(
-                        'items' => array(
-                            array('label' => '<i class="menu-icon glyphicon glyphicon-home"></i>Меню сайта<i class="menu-expand"></i>', 'url' => '#', 
-                                "items"=>array(
-                                        array('label' => '<i class="menu-icon glyphicon glyphicon-home"></i>Главная страница', 'url' => array('/site/index')),
-                                        array('label' => 'Добавить объявление', 'url' => array('/site/create')),
-                                        array('label' => 'Правила работы', 'url' => array('/site/page', 'view' => 'about')),
-                                        array('label' => Yii::t('main', 'Answers'), 'url' => array('/answer/index')),
-                                        array('label' => 'Обратная связь', 'url' => array('/site/contact')),
-                                        array('url' => Yii::app()->getModule('user')->loginUrl, 'label' => Yii::app()->getModule('user')->t("Login"), 'visible' => Yii::app()->user->isGuest),
-                                        array('url' => Yii::app()->getModule('user')->registrationUrl, 'label' => Yii::app()->getModule('user')->t("Register"), 'visible' => Yii::app()->user->isGuest),
-                                        array('url' => Yii::app()->getModule('user')->profileUrl, 'label' => Yii::app()->getModule('user')->t("Profile"), 'visible' => !Yii::app()->user->isGuest),
-                                        array('url' => Yii::app()->getModule('user')->logoutUrl, 'label' => Yii::app()->getModule('user')->t("Logout") . ' (' . Yii::app()->user->name . ')', 'visible' => !Yii::app()->user->isGuest),
-                                    ),
-                                'linkOptions'=>array('class'=>'menu-dropdown'),
-                            ),
-							array('label' => Yii::t('main', 'Advertisment'), 'url' => array('/admin/advertisement')),
-							array('label' => Yii::t('main', 'Bulletin'), 'url' => array('/admin/bulletin')),
-							array('label' => 'Категории', 'url' => array('/admin/category')),
-							array('label' => 'Галереи', 'url' => array('/admin/gallery')),
-                        ),
-                        'htmlOptions' => array('class'=>'nav sidebar-menu'),
-                        'encodeLabel' => FALSE,
-                        'submenuHtmlOptions'=>array('class'=>'submenu'),
-                    )
-            );
-            ?>
-  
+                 <ul class="nav sidebar-menu" id="yw1">
+<li><a class="menu-dropdown" href="#"><i class="menu-icon glyphicon glyphicon-home"></i>Меню сайта<i class="menu-expand"></i></a>
+<ul class="submenu">
+<li><a href="/yboard/"><i class="menu-icon glyphicon glyphicon-home"></i>Главная страница</a></li>
+<li><a href="/yboard/site/create">Добавить объявление</a></li>
+<li><a href="/yboard/site/page?view=about">Правила работы</a></li>
+<li><a href="/yboard/answer/index">Уголок ветеринара</a></li>
+<li><a href="/yboard/site/contact">Обратная связь</a></li>
+<li><a href="/yboard/user/profile">Профиль</a></li>
+<li><a href="/yboard/user/logout">Выйти (admin)</a></li>
+</ul>
+</li>
+<li><a href="/yboard/admin/advertisement">Рекламные блоки</a></li>
+<li><a href="/yboard/admin/bulletin">Объявления</a></li>
+<li><a href="/yboard/admin/category">Категории</a></li>
+<li><a href="/yboard/admin/gallery">Галереи</a></li>
+</ul>  
             <!-- /Sidebar Menu -->
             </div>
             <!-- /Page Sidebar -->
@@ -463,20 +459,8 @@ has come over the horizon and is reaching the general populous
             <div class="page-content">
                 <!-- Page Breadcrumb -->
                 <div class="page-breadcrumbs">
-                    <? 
-                    if (!isset($this->breadcrumbs))
-                        $this->breadcrumbs=array("Главная");
-
-                    $this->widget('zii.widgets.CBreadcrumbs', array(
-                        'links' => $this->breadcrumbs,
-                        'homeLink' => '<li><i class="fa fa-home"></i><a href="/yboard/admin/">Админка</a></li>',
-                        'htmlOptions' => array('class'=>'breadcrumb'),
-                        'inactiveLinkTemplate' => '<li><a href="{url}">{label}</a></li>',
-                        'activeLinkTemplate' => '<li><a href="{url}">{label}</a></li>',
-                        'tagName' => 'ul',
-                        'separator' => '',
-                    ));
-                    ?><!-- breadcrumbs -->
+                    <ul class="breadcrumb">
+<li><i class="fa fa-home"></i><a href="/yboard/admin/">Админка</a></li><li><a href="{url}">Категории</a></li></ul><!-- breadcrumbs -->
                 </div>
                 <!-- /Page Breadcrumb -->
                 <!-- Page Header -->
@@ -503,8 +487,43 @@ has come over the horizon and is reaching the general populous
                 <!-- /Page Header -->
                 <!-- Page Body -->
                 <div class="page-body">
-                    <?=$content?>
-                </div>
+                    <div class="span-13">
+    <div id="content">
+        
+<h1>Категории</h1>
+
+<!--
+ /**
+  * treewidget view file
+  *
+  * Date: 1/29/13
+  * Time: 12:00 PM
+  *
+  * @author: Spiros Kabasakalis <kabasakalis@gmail.com>
+  * @link http://iws.kabasakalis.gr/
+  * @link http://www.reverbnation.com/spiroskabasakalis
+  * @copyright Copyright &copy; Spiros Kabasakalis 2013
+  * @license http://opensource.org/licenses/MIT  The MIT License (MIT)
+  * @version 1.0.0
+  */
+  -->
+<div class="span8">
+    <h1 class="page-header">Tree widget</h1>
+    <div class="row">
+        <input id="reload" type="button" class="btn btn btn-success btn-large" value="Refresh" class="btn btn-large pull-left">
+        <input id="add_root" class="btn btn-primary btn-large" type="button" value="Create Root" class="btn btn-large pull-left">
+    </div>
+    <div class="row">
+        <!--The tree will be rendered in this div-->
+        <div class="well" style="margin-top: 20px" class="row" id="Category-wrapper"></div>
+    </div>
+</div>    </div><!-- content -->
+</div>
+<div class="span-5 last">
+    <div id="sidebar">
+        <ul class="operations nav nav-list" id="yw0"><li><a href="/yboard/category/create"><i class="icon-plus"></i> Создать категорию</a></li><li><a href="/yboard/category/admin"><i class="icon-folder-open"></i> Управление категориями</a></li></ul>    </div><!-- sidebar -->
+</div>
+                        </div>
                 <!-- /Page Body -->
             </div>
             <!-- /Page Content -->
@@ -517,5 +536,35 @@ has come over the horizon and is reaching the general populous
     <!--Basic Scripts-->
 
 
+<script type="text/javascript" src="/yboard/js_plugins/noty/js/noty/jquery.noty.js"></script>
+<script type="text/javascript" src="/yboard/js_plugins/noty/js/noty/layouts/center.js"></script>
+<script type="text/javascript" src="/yboard/js_plugins/noty/js/noty/themes/default.js"></script>
+<script type="text/javascript" src="/yboard/js_plugins/spin.min.js"></script>
+<script type="text/javascript" src="/yboard/js_plugins/fancybox2/jquery.fancybox.js"></script>
+<script type="text/javascript" src="/yboard/js_plugins/ajaxform/jquery.form.js"></script>
+<script type="text/javascript" src="/yboard/js_plugins/ajaxform/form.js"></script>
+<script type="text/javascript" src="/yboard/js_plugins/jstree/jquery.jstree.js"></script>
+<script type="text/javascript" src="/yboard/js_plugins/jstree.behavior.js"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+      (function ($) {
+          JsTreeBehavior = {
+           controllerID:'category',
+            container_ID:'Category-wrapper',
+            open_nodes:['node_1','node_2','node_3','node_4','node_5','node_6','node_7','node_10','node_14','node_18','node_8','node_11','node_15','node_19','node_9','node_12','node_16','node_20','node_13','node_17','node_21','node_22'],
+            themes:{"theme":"default","dots":true,"icons":false},
+            plugins:["themes","html_data","contextmenu","crrm","dnd","cookies","ui"],
+              },
+         Yii_js = {
+           baseUrl:'/yboard',
+           csrf:'c004014bd1462d2a9a86b8f88843482c4d16525e'
+           }
+      }(jQuery));
+jQuery(function($) {
+jQuery('body').tooltip({'selector':'a[rel=tooltip]'});
+jQuery('body').popover({'selector':'a[rel=popover]'});
+});
+/*]]>*/
+</script>
 </body><!--  /Body -->
 </html>

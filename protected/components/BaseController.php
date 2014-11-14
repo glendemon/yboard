@@ -15,7 +15,7 @@
  * @link http://www.yiiframework.com/forum/index.php/topic/10652-actions-by-behavioring/
  *
  */
-class BaseController extends CController
+class BaseController extends Controller
 {
 
     private $_behaviorIDs = array();
@@ -30,7 +30,7 @@ class BaseController extends CController
      * @var string the default layout for the controller view. Defaults to '//layouts/column1',
      * meaning using a single column layout. See 'protected/views/layouts/column1.php'.
      */
-    public $layout = '//layouts/col2';
+    public $layout = '//layouts/main';
 
     /**
      * @var array context menu items. This property will be assigned to {@link CMenu::items}.

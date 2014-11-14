@@ -114,6 +114,7 @@ return array(
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ),
         ),
+		/*
         'db' => array(
             'connectionString' => 'sqlite:' . dirname(__FILE__) . '/../data/testdrive.db',
             'tablePrefix' => '',
@@ -121,16 +122,17 @@ return array(
 //            'enableParamLogging' => true,
             'queryCacheID' => 'cache',
         ),
+		 * 
+		 */
         // uncomment the following to use a MySQL database
-        /*
-          'db'=>array(
-          'connectionString' => 'mysql:host=localhost;dbname=testdrive',
+        'db'=>array(
+          'connectionString' => 'mysql:host=localhost;dbname=yboard',
           'emulatePrepare' => true,
           'username' => 'root',
-          'password' => '',
+          'password' => '123456',
           'charset' => 'utf8',
+		  'tablePrefix' => '',
           ),
-         */
         'errorHandler' => array(
             // use 'site/error' action to display errors
             'errorAction' => 'site/error',

@@ -41,5 +41,6 @@ return array(
     'Answers' => 'Уголок ветеринара',
     'Config' => 'Настройки',
     'Config updated.' => 'Настройки сохранены',
+	'Advertisment' => 'Рекламные блоки',
 );
 

@@ -39,6 +39,16 @@ $val_success_message = ($model->isNewRecord) ?
 <?php echo $val_error_msg; ?>
 </div>
 
+
+<script>
+	var new_field_id=1;
+	
+	function addFiled(){
+		$('#fields-list').append('<div class="controls"><input type="text" id="Category_fields_price_&quot;name&quot;" name="Category[fields][\'fn_'+new_field_id+'\'][\'name\']" maxlength="128" size="60" value="Цена">			<select id="Category_fields_price_&quot;type&quot;" name="Category[fields][\'fn_'+new_field_id+'\'][\'type\']"><option value="0">text</option><option value="1">checkbox</option></select></div>');
+		new_field_id++;
+	}
+</script>	
+
 <div id="ajax-form" class='form'>
     <?php
     $formId = "$modelClassName-form";
@@ -50,7 +60,6 @@ $val_success_message = ($model->isNewRecord) ?
     $form = $this->beginWidget('CActiveForm', array(
         'id' => $formId,
         //  'htmlOptions' => array('enctype' => 'multipart/form-data'),
-        'action' => $actionUrl,
         // 'enableAjaxValidation'=>true,
         'enableClientValidation' => true,
         'focus' => array($model, 'name'),
@@ -61,7 +70,6 @@ $val_success_message = ($model->isNewRecord) ?
             'inputContainer' => '.control-group',
             'errorCssClass' => 'error',
             'successCssClass' => 'success',
-            'afterValidate' => 'js:function(form,data,hasError){$.js_afterValidate(form,data,hasError);  }',
         ),
         ));
     ?>
@@ -96,6 +104,30 @@ $val_success_message = ($model->isNewRecord) ?
         <input type="hidden" name="YII_CSRF_TOKEN"
                value="<?php echo Yii::app()->request->csrfToken; ?>"/>
         <input type="hidden" name= "parent_id" value="<?php echo !empty($_POST['parent_id']) ? $_POST['parent_id'] : ''; ?>"  />
+		
+		<? 
+		
+		if(sizeof($model->fields)>0) { ?>
+		<div class="control-group" id="fields-list">
+			<?php echo $form->labelEx($model, 'fields', array('class' => 'control-label')); 
+		foreach($model->fields as $fn=>$fl){ ?>
+					<?php
+					
+					var_dump($fn);
+					var_dump($fl);
+					
+					?>
+            <div class="controls">
+            <?php echo $form->textField($model, 'fields['.$fn.']["name"]', array('value' => !empty($_POST['fields'][$fn]['name']) ? $_POST['fields'][$fn]['name'] : $model->fields->$fn->name, 'size' => 60, 'maxlength' => 128)); ?>
+			<?php echo $form->dropDownList($model, 'fields['.$fn.']["type"]',$this->settings['fileds_type']); ?>
+				
+                <p class="help-block"><?php echo $form->error($model, 'fields'); ?></p>
+            </div>
+        
+		<? }?>
+		</div>	
+		<? } ?>
+		<a href='javascript:addFiled()'>Добавить дополнительное поле</a>
 
 <?php if (!$model->isNewRecord): ?>
             <input type="hidden" name="update_id"
