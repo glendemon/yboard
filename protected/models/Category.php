@@ -99,6 +99,7 @@ class Category extends CActiveRecord
 			else
 				$fields[$fn]=$fd;
 		}
+				
 		$this->fields=json_encode($fields);
 	}
 

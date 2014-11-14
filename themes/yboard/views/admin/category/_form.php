@@ -111,15 +111,9 @@ $val_success_message = ($model->isNewRecord) ?
 		<div class="control-group" id="fields-list">
 			<?php echo $form->labelEx($model, 'fields', array('class' => 'control-label')); 
 		foreach($model->fields as $fn=>$fl){ ?>
-					<?php
-					
-					var_dump($fn);
-					var_dump($fl);
-					
-					?>
             <div class="controls">
-            <?php echo $form->textField($model, 'fields['.$fn.']["name"]', array('value' => !empty($_POST['fields'][$fn]['name']) ? $_POST['fields'][$fn]['name'] : $model->fields->$fn->name, 'size' => 60, 'maxlength' => 128)); ?>
-			<?php echo $form->dropDownList($model, 'fields['.$fn.']["type"]',$this->settings['fileds_type']); ?>
+            <?php echo $form->textField($model, 'fields['.$fn.'][name]', array('value' => !empty($_POST['fields'][$fn]['name']) ? $_POST['fields'][$fn]['name'] : $fl->name, 'size' => 60, 'maxlength' => 128)); ?>
+			<?php echo $form->dropDownList($model, 'fields['.$fn.'][type]',$this->settings['fileds_type']); ?>
 				
                 <p class="help-block"><?php echo $form->error($model, 'fields'); ?></p>
             </div>
