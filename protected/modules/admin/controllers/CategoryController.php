@@ -8,6 +8,8 @@ class CategoryController extends BackendController
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
     public $layout = '/main';
+	
+	public $title='Категории';
 
     /**
      * Displays a particular model.
@@ -143,8 +145,8 @@ class CategoryController extends BackendController
         return array(
             'jsTreeBehavior' => array('class' => 'application.behaviors.JsTreeBehavior',
                 'modelClassName' => 'Category',
-                'form_alias_path' => 'admin.views.category._form',
-                'view_alias_path' => 'admin.views.category.view',
+                'form_alias_path' => '_form',
+                'view_alias_path' => 'view',
                 'label_property' => 'name',
                 'rel_property' => 'name'
             )

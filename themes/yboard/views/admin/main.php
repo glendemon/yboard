@@ -480,7 +480,7 @@ has come over the horizon and is reaching the general populous
 				<div class="page-header position-relative">
 					<div class="header-title">
 						<h1>
-							<?php echo AdminModule::t('Categories'); ?>
+							<?=$this->title?>
 						</h1>
 					</div>
 					<!--Header Buttons-->
@@ -500,10 +500,11 @@ has come over the horizon and is reaching the general populous
                 <div class="page-body">
 					<div id="sidebar">
 						<?php
-						$this->widget('bootstrap.widgets.TbMenu', array(
-							'type' => 'list',
+						$this->widget('zii.widgets.CMenu', array(
+							//'type' => 'list',
 							'items' => $this->menu,
 							'htmlOptions' => array('class' => 'operations'),
+							'encodeLabel' => false,
 						));
 						?>
 					</div>

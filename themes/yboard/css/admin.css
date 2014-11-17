@@ -55,3 +55,14 @@
 	display: inline-block;
 	margin-left:10px;
 }
+
+.page-body #sidebar ul i{
+	margin-right:5px;
+}
+.page-body #sidebar ul{
+	margin:0px;
+	padding:0px;
+}
+.page-body #sidebar{
+	padding:0px;
+}
