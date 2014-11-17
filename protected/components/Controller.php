@@ -15,12 +15,31 @@ class Controller extends CController
 	 */
 	public $menu=array();
 	public $settings=array();
+	public $banners=array();
 
 	public function __construct($id, $module = null)
 	{
 		parent::__construct($id, $module);
 		$this->settings = include_once Yii::getPathOfAlias('application.config.settings').'.php';
+		$this->banners = include_once Yii::getPathOfAlias('application.config.banners').'.php';
+	}
+	
+	public function getBanner($var){
+		$debug="";
+		if(YII_DEBUG) {
+			$debug= "<div style='background:#990000; min-height:20px;' align='center'>".$var."</div>";
+			if(!isset($this->banners[$var]))
+				$debug.= "No Ads";
+		}
 
+		if(isset($this->banners[$var]) and sizeof($this->banners[$var])>0)
+			if(is_array($this->banners[$var])){
+			return "<div class='pblock ".$var."' align='center'>".$debug.$this->banners[$var][array_rand($this->banners[$var],1)]."</div>";
+			}else
+			return "<div class='pblock ".$var."' align='center'>".$debug.$this->banners[$var]."</div>";
+		else
+			return $debug;
+	
 	}
 	/**
 	 * @var array the breadcrumbs of the current page. The value of this property will

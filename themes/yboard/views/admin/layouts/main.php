@@ -43,19 +43,14 @@ Purchase: http://wrapbootstrap.com
 
 
 	<!-- blueprint CSS framework -->
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/style.css" media="screen, projection" />
 	<!--[if lt IE 8]>
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 	<![endif]-->
 
 	<?php Yii::app()->bootstrap->register(); ?>
-	<?php Yii::app()->clientScript->registerCSSFile(Yii::app()->request->baseUrl . '/css/main.css'); ?>
-	<?php Yii::app()->clientScript->registerCSSFile(Yii::app()->request->baseUrl . '/css/form.css'); ?>
-
 
     <!--Skin Script: Place this script in head to load scripts for skins and rtl support-->
-
 
 </head>
 <!-- /Head -->
@@ -444,7 +439,8 @@ has come over the horizon and is reaching the general populous
                                     ),
                                 'linkOptions'=>array('class'=>'menu-dropdown'),
                             ),
-							array('label' => Yii::t('main', 'Advertisment'), 'url' => array('/admin/advertisement')),
+							array('label' => "Реклама", 'url' => array('/admin/advertisement')),
+							array('label' => "Баннерные блоки", 'url' => array('/admin/banners')),
 							array('label' => Yii::t('main', 'Bulletin'), 'url' => array('/admin/bulletin')),
 							array('label' => 'Категории', 'url' => array('/admin/category')),
 							array('label' => 'Галереи', 'url' => array('/admin/gallery')),
