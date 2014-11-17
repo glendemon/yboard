@@ -6,7 +6,7 @@ class SiteController extends Controller
 	 * Declares class-based actions.
 	 */
 	
-	public $layout='/main';
+	public $layout='/main-template';
 	
 	public function actions()
 	{
