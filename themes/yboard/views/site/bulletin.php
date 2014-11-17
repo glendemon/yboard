@@ -8,6 +8,11 @@ if ($model->category->parent)
     $this->breadcrumbs[$model->category->parent->name] = array('site/category', 'id' => $model->category->parent->id);
 $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $model->category->id);
 $this->breadcrumbs[] = CHtml::encode($model->name);
+
+
+var_dump($model->fields);
+var_dump($model->category->fields);
+
 ?>
 <div class="well">
     <table class="table">

@@ -20,6 +20,7 @@ class Controller extends CController
 	{
 		parent::__construct($id, $module);
 		$this->settings = include_once Yii::getPathOfAlias('application.config.settings').'.php';
+
 	}
 	/**
 	 * @var array the breadcrumbs of the current page. The value of this property will

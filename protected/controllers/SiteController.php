@@ -33,6 +33,19 @@ class SiteController extends Controller
 			'accessControl', // perform access control for CRUD operations
 		);
 	}
+	
+	public function actionGetfields($cat_id){
+		$model= Category::model()->findByPk($cat_id);
+		
+		$fields=json_decode($model->fields);
+
+		if(sizeof($fields)>0)
+		foreach($fields as $f_iden=>$fv){ ?>
+			<div class="controls">
+				<label for='Fields[<?=$f_iden?>]'><?=$fv->name?></label><input type="text" id="Fields[<?=$f_iden?>]" name="Fields[<?=$f_iden?>]" >
+			</div>	
+		<? }
+	}
 
 	/**
 	 * Specifies the access control rules.
@@ -43,7 +56,7 @@ class SiteController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform actions
-				'actions'=>array('index','error','contact','bulletin','category','captcha','page','advertisement'),
+				'actions'=>array('index','error','contact','bulletin','category','captcha','page','advertisement','getfields','search'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user
@@ -134,18 +147,18 @@ class SiteController extends Controller
      * Show category.
      * @param int $id Category's id
      */
-    public function actionCategory($id)
+    public function actionCategory($cat_id)
     {
         $dataProvider=new CActiveDataProvider('Bulletin', array(
             'criteria'=>array(
                 'select'=>'*, IFNULL(updated_at, created_at) as sort',
                 'condition'=>'category_id = :id',
                 'order' => 'sort DESC',
-                'params'=>array(':id'=>(int)$id),
+                'params'=>array(':id'=>(int)$cat_id),
             ),
         ));
 		$this->render('category', array(
-			'model'=>$this->loadCategory($id),
+			'model'=>$this->loadCategory($cat_id),
             'dataProvider'=>$dataProvider,
 		));
 
@@ -221,5 +234,20 @@ class SiteController extends Controller
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
+	}
+	
+	public function actionSearch($searchStr=""){
+		$model=new Bulletin('search');
+				
+		$model->unsetAttributes();  // clear any default values
+		$model->name=$searchStr;
+		$model->text=$searchStr;
+		
+
+		
+		$this->render('search',array(
+			'model'=>$model,
+		));
+
 	}
 }

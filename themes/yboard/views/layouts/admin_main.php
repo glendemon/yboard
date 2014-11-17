@@ -6,7 +6,7 @@ Purchase: http://wrapbootstrap.com
 -->
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- Head -->
 	<head>
-	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <meta charset="utf-8" >
 		
     <title>Dashboard</title>
@@ -40,7 +40,7 @@ Purchase: http://wrapbootstrap.com
 
 
 
-
+	<script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/beyond.js" type="text/javascript"></script>
 
 	<!-- blueprint CSS framework -->
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />

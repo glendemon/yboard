@@ -578,7 +578,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col=lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class="col lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <div class="databox databox-lg databox-inverted radius-bordered databox-shadowed databox-graded databox-vertical">
                                         <div class="databox-top bg-palegreen no-padding">
                                             <div class="databox-stat white bg-palegreen font-120">
@@ -603,7 +603,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col=lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class="col lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <div class="databox databox-lg databox-inverted radius-bordered databox-shadowed databox-graded databox-vertical">
                                         <div class="databox-top bg-orange no-padding">
                                             <div class="databox-stat white bg-orange font-120">
@@ -629,7 +629,7 @@
                                     </div>
 
                                 </div>
-                                <div class="col=lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class="col lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <div class="databox databox-lg databox-inverted radius-bordered databox-shadowed databox-graded databox-vertical">
                                         <div class="databox-top bg-azure no-padding">
                                             <div class="databox-stat white bg-azure font-120">

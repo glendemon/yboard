@@ -3,22 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/AppServ/www/yboard/protected/messages/ru/admin.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/site/bulletin.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/js/beyond.js</file>
             <file>file:/D:/AppServ/www/yboard/themes/yboard/views/admin/layouts/main.php</file>
-            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/admin/layouts/column2.php</file>
-            <file>file:/D:/AppServ/www/yboard/protected/widgets/JsTreeWidget.php</file>
-            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/admin/layouts/=main.php</file>
-            <file>file:/D:/AppServ/www/yboard/test.php</file>
-            <file>file:/D:/AppServ/www/yboard/protected/modules/admin/AdminModule.php</file>
-            <file>file:/D:/AppServ/www/yboard/protected/messages/ru/bulletin.php</file>
-            <file>file:/D:/AppServ/www/yboard/protected/messages/ru/main.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/widgets/BulletinCategoryWidget.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/js/jquery.js</file>
+            <file>file:/D:/AppServ/www/yboard/protected/models/Bulletin.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/controllers/SiteController.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/layouts/-main.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/site/index.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/widgets/views/bulletinCategoryWidget.php</file>
             <file>file:/D:/AppServ/www/yboard/protected/modules/admin/controllers/CategoryController.php</file>
-            <file>file:/D:/AppServ/www/yboard/protected/components/Controller.php</file>
-            <file>file:/D:/AppServ/www/yboard/protected/modules/admin/controllers/DefaultController.php</file>
-            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/admin/category/index.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/site/create.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/layouts/main.php</file>
             <file>file:/D:/AppServ/www/yboard/themes/yboard/js/cookies.js</file>
-            <file>file:/D:/AppServ/www/yboard/protected/modules/admin/messages/ru/admin.php</file>
-            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/admin/layouts/column1.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/site/_form.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/controllers/site/CreateAction.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/models/Category.php</file>
         </group>
     </open-files>
 </project-private>

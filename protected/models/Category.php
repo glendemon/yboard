@@ -56,6 +56,32 @@ class Category extends CActiveRecord
             'bulletins' => array(self::HAS_MANY, 'Bulletin', 'category_id'),
         );
     }
+	
+	// Формирование поля items для виджета Cmenu для Меню Категории
+	public function menuItems($cat_id){
+		$catlist=self::model()->findAll("level='1'");
+		$catMenuItems=Array();
+		foreach($catlist as $cat){
+			$catItem=Array();
+			$catItem['label']=$cat->name;
+			$catItem['url']=array("/category/".$cat->id);
+			//Вывод подкатегории для выбраной категории
+			if($cat->id==$cat_id){
+				$subCat=self::model()->findAll("lft>'".$cat->lft."' and rgt<'".$cat->rgt."' and level='".($cat->level+1)."'");
+				$subItem=array();
+				if(sizeof($subCat)>0){
+					foreach($subCat as $scat){
+						$subItem['label']=$scat->name;
+						$subItem['url']=array("/category/".$scat->id);
+						$catItem['items'][]=$subItem;
+					}
+				}
+			}
+			$catMenuItems[]=$catItem;
+		}
+
+		return $catMenuItems;
+	}
 
     /**
      * @return array customized attribute labels (name=>label)

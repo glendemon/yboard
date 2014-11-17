@@ -107,7 +107,7 @@ return array(
             'rules' => array(
                 '' => 'site/index',
                 '<id:\d+>' => 'site/bulletin',
-                'category/<id:\d+>' => 'site/category',
+                'category/<cat_id:\d+>' => 'site/category',
                 'category/<action:\w+>/' => 'admin/category/<action>',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
@@ -139,6 +139,7 @@ return array(
         ),
         'log' => array(
             'class' => 'CLogRouter',
+			'enabled'=>YII_DEBUG,
             'routes' => array(
                 array(
                     'class' => 'CFileLogRoute',
@@ -146,6 +147,10 @@ return array(
 //                    'class'=>'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
 //                    'ipFilters'=>array('127.0.0.1','192.168.1.3'),
                 ),
+				array(
+					'class'=>'application.extensions.yii-debug-toolbar.YiiDebugToolbarRoute',
+					'ipFilters'=>array('127.0.0.1','192.168.1.215'),
+				),
             // uncomment the following to show log messages on web pages
             /*
               array(

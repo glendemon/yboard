@@ -4,7 +4,14 @@
 /* @var $form CActiveForm */
 /* @var $categories array */
 ?>
-
+<script> 
+function loadFields(){
+	console.log($('#Bulletin_category_id').val());
+	$.get("<?=Yii::app()->baseUrl?>/site/getfields/cat_id/"+$('#Bulletin_category_id').val(),function(data){
+		$("#aditional_fields").html(data);
+	})
+}
+</script>
 <div class="form well">
 
     <?php
@@ -25,15 +32,17 @@
 <?php echo $form->error($model, 'name'); ?>
     </div>
 
-    <div class="row">
-<?php $this->widget('application.widgets.BulletinCategoryWidget', array('model' => $model, 'form' => $form)); ?>
-    </div>
+<div class="row">
+	<?php $this->widget('application.widgets.BulletinCategoryWidget', array('model' => $model, 'form' => $form)); ?>
+</div>
 
-    <div class="row">
-<?php $this->widget('application.widgets.BulletinTypeWidget', array('model' => $model, 'form' => $form)); ?>
-    </div>
+<div class="row">
+	<?php $this->widget('application.widgets.BulletinTypeWidget', array('model' => $model, 'form' => $form)); ?>
+</div>
+	
+<div id='aditional_fields'> </div>
 
-    <div class="row">
+<div class="row">
         <?php echo $form->labelEx($model, 'gallery_id'); ?>
         <?php
         $this->widget('CMultiFileUpload', array(
@@ -44,8 +53,8 @@
             'max' => 5,
         ));
         ?>
-<?php echo $form->error($model, 'gallery_id'); ?>
-    </div>
+	<?php echo $form->error($model, 'gallery_id'); ?>
+</div>
 
     <div class="row">
         <?php echo $form->labelEx($model, 'youtube_id'); ?>

@@ -98,8 +98,12 @@ class BulletinController extends BackendController
 	{
 		$model=new Bulletin('search');
 		$model->unsetAttributes();  // clear any default values
+		/*
 		if(isset($_GET['Bulletin']))
 			$model->attributes=$_GET['Bulletin'];
+		 * 
+		 */
+		$model->name='xcd';
 
 		$this->render('admin',array(
 			'model'=>$model,

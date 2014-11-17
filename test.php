@@ -23,19 +23,7 @@ Purchase: http://wrapbootstrap.com
 <script type="text/javascript" src="/yboard/assets/e3ecaab1/js/bootstrap.min.js"></script>
 <title>Dashboard</title>
 
-    <meta name="asdasdasdasdas
-		  da
-		  sd
-		  as
-		  в
-		  as
-		  da
-		  sd
-		  a
-		  sd
-		  a
-		  sd
-		  asddescription" content="Dashboard">
+    <meta name="description" content="Dashboard">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="shortcut icon" href="/yboard/themes/yboard/img/favicon.png" type="image/x-icon">
