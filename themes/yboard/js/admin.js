@@ -14,4 +14,14 @@ $(window).load(function(){
 			$(el).slideUp(200); //('Blind',{'easing':'linear'});
 		}
 	});
+	
+	//console.log("Admin script");
+	
+	/*
+	$('.jstree ul li').hover(function(){
+		$(this).find('div.catActions').show();
+	}, function(){
+		$(this).find('div.catActions').hide();
+	})
+	*/
 });

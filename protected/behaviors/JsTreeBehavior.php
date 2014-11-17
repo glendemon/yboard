@@ -312,6 +312,7 @@ class JsTreeBehavior extends CBehavior
             echo CHtml::openTag('a', array('href' => '#'));
             echo CHtml::encode($category->getAttribute($this->label_property));
             echo CHtml::closeTag('a');
+			echo "<div class='catActions'><a href='".Yii::app()->createUrl("category/update",array('id'=>$category->primaryKey))."'><i class='fa fa-pencil'></i></a></div>";
 
             $level = $category->level;
         }

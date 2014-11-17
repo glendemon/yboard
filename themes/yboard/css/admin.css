@@ -69,3 +69,15 @@
 .page-body #sidebar{
 	padding:0px;
 }
+
+.jstree ul li div{
+	display: inline-block;
+	margin-left: 30px;
+}
+.jstree ul li.jstree-leaf a{
+	color:#666;
+	padding:4px;	
+	display:inline-block;
+	height:auto;
+	line-height: normal;
+}

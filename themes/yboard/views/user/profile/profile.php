@@ -3,6 +3,8 @@ $this->pageTitle = Yii::app()->name . ' - ' . UserModule::t("Profile");
 $this->breadcrumbs = array(
     UserModule::t("Profile"),
 );
+
+
 $this->menu = array(
     ((UserModule::isAdmin()) ? array('label' => UserModule::t('Manage Users'), 'icon' => 'icon-folder-open', 'url' => array('/user/admin')) : array()),
     array('label' => UserModule::t('List User'), 'icon' => 'icon-list', 'url' => array('/user')),

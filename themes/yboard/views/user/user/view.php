@@ -3,7 +3,7 @@ $this->breadcrumbs=array(
 	UserModule::t('Users')=>array('index'),
 	$model->username,
 );
-$this->layout='//layouts/column2';
+$this->layout='//main-template';
 $this->menu=array(
     array('label'=>UserModule::t('List User'), 'icon'=>'icon-list', 'url'=>array('index')),
 );
