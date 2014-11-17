@@ -13,11 +13,10 @@
   * @version 1.0.0
   */
   -->
-<div class="span8">
-    <h1 class="page-header">Tree widget</h1>
+<div class="">
     <div class="row">
-        <input id="reload" type="button" class="btn btn btn-success btn-large" value="Refresh" class="btn btn-large pull-left">
-        <input id="add_root" class="btn btn-primary btn-large" type="button" value="Create Root" class="btn btn-large pull-left">
+        <input id="reload" type="button" class="btn btn btn-success btn-large" value="Обновить" class="btn btn-large pull-left">
+        <input id="add_root" class="btn btn-primary btn-large" type="button" value="Создать корневую категорию" class="btn btn-large pull-left">
     </div>
     <div class="row">
         <!--The tree will be rendered in this div-->

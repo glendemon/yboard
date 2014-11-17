@@ -12,8 +12,6 @@ $this->menu = array(
 );
 ?>
 
-<h1><?php echo AdminModule::t('Categories'); ?></h1>
-
 <?php
 
 $this->widget('application.widgets.JsTreeWidget', array('modelClassName' => 'Category',

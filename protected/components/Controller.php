@@ -26,6 +26,7 @@ class Controller extends CController
 	
 	public function getBanner($var){
 		$debug="";
+
 		if(YII_DEBUG) {
 			$debug= "<div style='background:#990000; min-height:20px;' align='center'>".$var."</div>";
 			if(!isset($this->banners[$var]))

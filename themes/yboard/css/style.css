@@ -98,6 +98,11 @@ body
 }
 .content{
 	margin-left:255px;
+	margin-right:205px;
+}
+.rightbar{
+	width:200px;
+	float:right;
 }
 
 #sidebar
