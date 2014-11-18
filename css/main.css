@@ -1,0 +1,279 @@
+body
+{
+	color: #555;
+	background: #ffffff;
+    min-width: 1200px;
+}
+
+#header
+{
+	margin: 0;
+	padding: 0;
+    height: 10px;
+    background:#000000;
+}
+
+#header .logo
+{
+    width: 256px;
+}
+
+#header td
+{
+    text-align: center;
+}
+
+#wrap
+{
+    margin: 4em auto;
+    width: 800px;
+    min-height: 700px;
+}
+
+#sidebar
+{
+	padding: 20px 20px 20px 0;
+}
+
+#footer
+{
+    background: url(../images/logobg.png);
+	padding: 10px;
+	font-size: 0.8em;
+	text-align: center;
+}
+
+#logo
+{
+	padding: 10px 20px;
+	font-size: 200%;
+}
+
+#mainmenu
+{
+    width: 900px;
+    margin: 0 auto;
+}
+
+div.flash-error, div.flash-notice, div.flash-success
+{
+	padding:.8em;
+	margin-bottom:1em;
+	border:2px solid #ddd;
+}
+
+div.flash-error
+{
+	background:#FBE3E4;
+	color:#8a1f11;
+	border-color:#FBC2C4;
+}
+
+div.flash-notice
+{
+	background:#FFF6BF;
+	color:#514721;
+	border-color:#FFD324;
+}
+
+div.flash-success
+{
+	background:#E6EFC2;
+	color:#264409;
+	border-color:#C6D880;
+}
+
+div.flash-error a
+{
+	color:#8a1f11;
+}
+
+div.flash-notice a
+{
+	color:#514721;
+}
+
+div.flash-success a
+{
+	color:#264409;
+}
+
+div.form .rememberMe label
+{
+	display: inline;
+}
+
+div.view
+{
+	padding: 10px;
+	margin: 10px 0;
+	border: 1px solid #C9E0ED;
+}
+
+div.breadcrumbs
+{
+	font-size: 0.9em;
+	padding: 5px 20px;
+}
+
+div.breadcrumbs span
+{
+	font-weight: bold;
+}
+
+div.search-form
+{
+	padding: 10px;
+	margin: 10px 0;	
+}
+
+.portlet
+{
+
+}
+
+.portlet-decoration
+{
+	padding: 3px 8px;
+	background: #B7D6E7;
+	border-left: 5px solid #6FACCF;
+}
+
+.portlet-title
+{
+	font-size: 12px;
+	font-weight: bold;
+	padding: 0;
+	margin: 0;
+	color: #298dcd;
+}
+
+.portlet-content
+{
+	font-size:0.9em;
+	margin: 0 0 15px 0;
+	padding: 5px 8px;
+	background:#EFFDFF;
+}
+
+.portlet-content ul
+{
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:none;
+	margin: 0;
+	padding: 0;
+}
+
+.portlet-content li
+{
+	padding: 2px 0 4px 0px;
+}
+
+.operations li a
+{
+    font: bold 12px Arial;
+}
+
+.partition
+{
+    width: 270px;
+}
+
+.partition a, .partition a:visited
+{
+    text-decoration: underline;
+    color: #666666;
+}
+
+.partition a:hover, .partition a:active
+{
+    text-decoration: underline;
+    color: #93C4E1;
+}
+
+.partition td
+{
+    padding: 0;
+}
+
+.partition .title td
+{
+    height: 75px;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+.partition .image
+{
+    margin: 0;
+    padding: 0;
+    width: 75px;
+}
+
+.labels
+{
+    width: 30%;
+}
+
+.demand
+{
+    color: #0000FF;
+}
+
+.offer
+{
+    color: #FF0000;
+}
+
+thead th
+{
+    text-align: center;
+}
+
+.lastBulletins a
+{
+    color: #666666;
+    text-decoration: underline;
+}
+
+.lastBulletins a:hover
+{
+	color: #93C4E1;
+	text-decoration:underline;
+}
+
+.odd
+{
+
+}
+
+.even
+{
+    background: #EEEEEE;
+}
+
+.left_block, .right_block
+{
+    width: 120px;
+}
+
+.left_block
+{
+    float: left;
+}
+
+.right_block
+{
+    float: right;
+}
+
+.roots, .roots td
+{
+    vertical-align: top;
+}
+
+.row:before,
+.row:after {
+    display: none;
+}

@@ -1,0 +1,13 @@
+RewriteEngine on
+
+## Completely hide some files and directories.
+RedirectMatch 404 "(?:.*)/(?:[.#].*)$"
+RedirectMatch 404 "(?:.*)~$"
+RedirectMatch 404 "(?:.*)/(?:CVS|RCS|_darcs)(?:/.*)?$"
+
+# if a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# otherwise forward it to index.php
+RewriteRule . index.php

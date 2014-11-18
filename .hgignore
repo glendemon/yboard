@@ -1,0 +1,12 @@
+syntax: glob
+
+nbproject/private/
+.svn/
+datafoto/
+nbproject/configs/
+syntax: regexp
+# ignore all except .hgkeep
+^assets/(?!.*\.hgkeep$).+
+^gallery/(?!.*\.hgkeep$).+
+protected/runtime/(?!.*\.hgkeep$).+
+protected/tests/report/(?!.*\.hgkeep$).+
