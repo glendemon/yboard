@@ -5,9 +5,12 @@ class SiteController extends Controller
 	/**
 	 * Declares class-based actions.
 	 */
+<<<<<<< HEAD
 	
 	public $layout='/main-template';
 	
+=======
+>>>>>>> origin/master
 	public function actions()
 	{
 		return array(
@@ -36,6 +39,7 @@ class SiteController extends Controller
 			'accessControl', // perform access control for CRUD operations
 		);
 	}
+<<<<<<< HEAD
 	
 	public function actionGetfields($cat_id){
 		$model= Category::model()->findByPk($cat_id);
@@ -49,6 +53,8 @@ class SiteController extends Controller
 			</div>	
 		<? }
 	}
+=======
+>>>>>>> origin/master
 
 	/**
 	 * Specifies the access control rules.
@@ -59,7 +65,11 @@ class SiteController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform actions
+<<<<<<< HEAD
 				'actions'=>array('index','error','contact','bulletin','category','captcha','page','advertisement','getfields','search'),
+=======
+				'actions'=>array('index','error','contact','bulletin','category','captcha','page','advertisement'),
+>>>>>>> origin/master
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user
@@ -150,18 +160,30 @@ class SiteController extends Controller
      * Show category.
      * @param int $id Category's id
      */
+<<<<<<< HEAD
     public function actionCategory($cat_id)
+=======
+    public function actionCategory($id)
+>>>>>>> origin/master
     {
         $dataProvider=new CActiveDataProvider('Bulletin', array(
             'criteria'=>array(
                 'select'=>'*, IFNULL(updated_at, created_at) as sort',
                 'condition'=>'category_id = :id',
                 'order' => 'sort DESC',
+<<<<<<< HEAD
                 'params'=>array(':id'=>(int)$cat_id),
             ),
         ));
 		$this->render('category', array(
 			'model'=>$this->loadCategory($cat_id),
+=======
+                'params'=>array(':id'=>(int)$id),
+            ),
+        ));
+		$this->render('category', array(
+			'model'=>$this->loadCategory($id),
+>>>>>>> origin/master
             'dataProvider'=>$dataProvider,
 		));
 
@@ -238,6 +260,7 @@ class SiteController extends Controller
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+<<<<<<< HEAD
 	
 	public function actionSearch($searchStr=""){
 		$model=new Bulletin('search');
@@ -253,4 +276,6 @@ class SiteController extends Controller
 		));
 
 	}
+=======
+>>>>>>> origin/master
 }

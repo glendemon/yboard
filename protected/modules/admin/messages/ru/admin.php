@@ -28,6 +28,7 @@ return array(
     'Update Advertisement' => 'Обновить рекламу',
     'Delete Advertisement' => 'Удалить рекламу',
     'Manage Advertisements' => 'Управление рекламой',
+<<<<<<< HEAD
     'List Answer' => 'Список ответов',
     'Create Answer' => 'Создать ответ',
     'View Answer' => 'Просмотреть ответ',
@@ -39,6 +40,11 @@ return array(
     '<span style="color:red;">Warning: Direct changes!</span>' => '<span style="color:red;">Осторожно: изменения вносятся сразу!</span>',
     'Advertisements' => 'Реклама',
     'Answers' => 'Уголок ветеринара',
+=======
+    'Fields with <span class="required">*</span> are required.' => '<span class="required">*</span> Обязательные поля.',
+    '<span style="color:red;">Warning: Direct changes!</span>' => '<span style="color:red;">Осторожно: изменения вносятся сразу!</span>',
+    'Advertisements' => 'Реклама',
+>>>>>>> origin/master
     'Config' => 'Настройки',
     'Config updated.' => 'Настройки сохранены',
 );

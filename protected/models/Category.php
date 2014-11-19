@@ -41,7 +41,11 @@ class Category extends CActiveRecord
             array('name, icon', 'length', 'max' => 255),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
+<<<<<<< HEAD
             array('id, name, icon, fields', 'safe', 'on' => 'search'),
+=======
+            array('id, name, icon', 'safe', 'on' => 'search'),
+>>>>>>> origin/master
         );
     }
 
@@ -56,6 +60,7 @@ class Category extends CActiveRecord
             'bulletins' => array(self::HAS_MANY, 'Bulletin', 'category_id'),
         );
     }
+<<<<<<< HEAD
 	
 	// Формирование поля items для виджета Cmenu для Меню Категории
 	public function menuItems($cat_id){
@@ -82,6 +87,8 @@ class Category extends CActiveRecord
 
 		return $catMenuItems;
 	}
+=======
+>>>>>>> origin/master
 
     /**
      * @return array customized attribute labels (name=>label)
@@ -92,7 +99,10 @@ class Category extends CActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'icon' => 'Icon',
+<<<<<<< HEAD
 			'fields' => 'Дополнительные поля',
+=======
+>>>>>>> origin/master
         );
     }
 
@@ -110,12 +120,16 @@ class Category extends CActiveRecord
         $criteria->compare('id', $this->id);
         $criteria->compare('name', $this->name, true);
         $criteria->compare('icon', $this->icon, true);
+<<<<<<< HEAD
 		$criteria->compare('fields', $this->fields, true);
+=======
+>>>>>>> origin/master
 
         return new CActiveDataProvider($this, array(
                 'criteria' => $criteria,
             ));
     }
+<<<<<<< HEAD
 	
 	public function fieldsSave(){
 		$fields=Array();
@@ -128,6 +142,8 @@ class Category extends CActiveRecord
 				
 		$this->fields=json_encode($fields);
 	}
+=======
+>>>>>>> origin/master
 
     public function behaviors()
     {

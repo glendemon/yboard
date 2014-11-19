@@ -19,8 +19,11 @@ return array(
     'Youtube' => 'Bидео',
     'Send a mail to the author' => 'Отправить письмо автору',
     'You successfully add question.' => 'Вы успешно задали вопрос.',
+<<<<<<< HEAD
     'Answers' => 'Уголок ветеринара',
     'Text answer' => 'Вопрос',
+=======
+>>>>>>> origin/master
     'Banner' => 'Баннер',
     'Description' => 'Описание',
     'Order' => 'Порядок',
@@ -29,6 +32,7 @@ return array(
     'Contact' => 'Контакты',
     'Reply' => 'Ответить',
     'Ask' => 'Задать вопрос',
+<<<<<<< HEAD
 	'Bulletin' => 'Объявления',
 	'Advertisment' => 'Рекламные блоки',
 	
@@ -49,6 +53,8 @@ return array(
     'Gallery' => 'Фотографии',
     'Youtube' => 'Bидео',
     'Send a mail to the author' => 'Отправить письмо автору',
+=======
+>>>>>>> origin/master
 );
 
 

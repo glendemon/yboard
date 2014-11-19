@@ -3,8 +3,11 @@
 class DefaultController extends Controller
 {
 	
+<<<<<<< HEAD
 	public $layout='//main-template';
 	
+=======
+>>>>>>> origin/master
 	/**
 	 * Lists all models.
 	 */

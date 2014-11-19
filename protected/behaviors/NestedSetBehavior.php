@@ -546,11 +546,16 @@ class NestedSetBehavior extends CActiveRecordBehavior
 	{
 		if($this->_ignoreEvent)
 			return true;
+<<<<<<< HEAD
 		/*
 		else
 			throw new CDbException(Yii::t('yiiext','You should not use CActiveRecord::save() method when NestedSetBehavior attached.'));
 		 * 
 		 */
+=======
+		else
+			throw new CDbException(Yii::t('yiiext','You should not use CActiveRecord::save() method when NestedSetBehavior attached.'));
+>>>>>>> origin/master
 	}
 
 	/**

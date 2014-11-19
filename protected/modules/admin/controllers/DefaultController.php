@@ -6,7 +6,11 @@ class DefaultController extends BackendController
 	 * @var string the default layout for the controller view. Defaults to '//layouts/column1',
 	 * meaning using a single column layout. See 'protected/views/layouts/column1.php'.
 	 */
+<<<<<<< HEAD
 	public $layout='/admin-template';
+=======
+	public $layout='/layouts/column1';
+>>>>>>> origin/master
 	/**
 	 * @var array context menu items. This property will be assigned to {@link CMenu::items}.
 	 */
@@ -20,7 +24,11 @@ class DefaultController extends BackendController
 
 	public function actionIndex()
 	{
+<<<<<<< HEAD
 		$this->render('index');
+=======
+		$this->forward('category/index');
+>>>>>>> origin/master
 	}
 
 	public function actionConfig()

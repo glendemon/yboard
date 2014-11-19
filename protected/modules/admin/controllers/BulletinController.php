@@ -6,8 +6,12 @@ class BulletinController extends BackendController
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
+<<<<<<< HEAD
 	public $layout='/admin-template';
 	public $title='Обьявления';
+=======
+	public $layout='/layouts/column2';
+>>>>>>> origin/master
 
 	/**
 	 * Displays a particular model.
@@ -99,12 +103,17 @@ class BulletinController extends BackendController
 	{
 		$model=new Bulletin('search');
 		$model->unsetAttributes();  // clear any default values
+<<<<<<< HEAD
 		/*
 		if(isset($_GET['Bulletin']))
 			$model->attributes=$_GET['Bulletin'];
 		 * 
 		 */
 		$model->name='xcd';
+=======
+		if(isset($_GET['Bulletin']))
+			$model->attributes=$_GET['Bulletin'];
+>>>>>>> origin/master
 
 		$this->render('admin',array(
 			'model'=>$model,

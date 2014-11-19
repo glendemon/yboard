@@ -3,7 +3,11 @@
 class AdminController extends Controller
 {
 	public $defaultAction = 'admin';
+<<<<<<< HEAD
 	public $layout='//main-template';
+=======
+	public $layout='//layouts/column2';
+>>>>>>> origin/master
 	
 	private $_model;
 

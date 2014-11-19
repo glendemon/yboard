@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 assets/*
 !assets/.gitignore
 protected/runtime/*
@@ -54,3 +55,13 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+=======
+assets/*
+!assets/.gitignore
+protected/runtime/*
+!protected/runtime/.gitignore
+protected/data/*.db
+themes/classic/views/
+nbproject/*
+.svn/*
+>>>>>>> origin/master
