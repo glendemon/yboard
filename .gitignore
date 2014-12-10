@@ -7,7 +7,6 @@ protected/data/*.db
 themes/classic/views/
 gallery/*
 yii_framework/*
-framework/*
 images/*
 
 # =========================

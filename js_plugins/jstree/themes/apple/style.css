@@ -3,12 +3,8 @@
  * Supported features: dots/no-dots, icons/no-icons, focused, loading
  * Supported plugins: ui (hovered, clicked), checkbox, contextmenu, search
  */
-<<<<<<< HEAD
 .jstree-apple > ul {  }
-=======
 
-.jstree-apple > ul { background:url("bg.jpg") left top repeat; }
->>>>>>> origin/master
 .jstree-apple li, 
 .jstree-apple ins { background-image:url("d.png"); background-repeat:no-repeat; background-color:transparent; }
 .jstree-apple li { background-position:-90px 0; background-repeat:repeat-y;  }

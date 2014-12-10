@@ -3,11 +3,9 @@
 class ProfileController extends Controller
 {
 	public $defaultAction = 'profile';
-<<<<<<< HEAD
+
 	public $layout='//main-template';
-=======
-	public $layout='//layouts/column2';
->>>>>>> origin/master
+
 
 	/**
 	 * @var CActiveRecord the currently loaded data model instance.
@@ -18,10 +16,7 @@ class ProfileController extends Controller
 	 */
 	public function actionProfile()
 	{
-<<<<<<< HEAD
-				
-=======
->>>>>>> origin/master
+
 		$model = $this->loadUser();
 	    $this->render('profile',array(
 	    	'model'=>$model,
