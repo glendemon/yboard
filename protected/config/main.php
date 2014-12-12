@@ -89,9 +89,9 @@ return array(
 			/*
             'transportType' => 'smtp',
             'transportOptions' => array(
-                'host' => 'smtp.mail.ru',
-                'username' => 'tovis.net@mail.ru',
-                'password' => 'relife4679',
+                'host' => 'smtp.gmail.com',
+                'username' => 'yboard@gmail.com',
+                'password' => 'password',
                 'port' => '465',
                 'encryption'=>'ntls',
             ),
