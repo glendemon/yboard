@@ -19,6 +19,7 @@ class Controller extends CController
 
 	public $settings=array();
 	public $banners=array();
+	public $categories=array();
 	public $title="";
 
 	public function __construct($id, $module = null)
@@ -26,6 +27,7 @@ class Controller extends CController
 		parent::__construct($id, $module);
 		$this->settings = include_once Yii::getPathOfAlias('application.config.settings').'.php';
 		$this->banners = include_once Yii::getPathOfAlias('application.config.banners').'.php';
+		$this->categories = $command = Yii::app()->db->createCommand('SELECT * FROM category')->queryAll();
 	}
 	
 	public function getBanner($var){

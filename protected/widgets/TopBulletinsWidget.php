@@ -25,7 +25,8 @@ class TopBulletinsWidget extends CWidget
     {
         $ids = Yii::app()->config->get('top');
         $criteria = new CDbCriteria();
-        $criteria->addInCondition("id", $ids);
+		$criteria->limit=10;
+		$criteria->order='id desc';
         return Bulletin::model()->findAll($criteria);
     }
 

@@ -8,6 +8,10 @@
  * Show dropdown list with categories.
  *
  * @author Victor Demin <mail@vdemin.com>
+ * 
+ * Вудалить
+ * 
+ * 
  */
 class BulletinCategoryWidget extends CWidget
 {
@@ -33,7 +37,8 @@ class BulletinCategoryWidget extends CWidget
         $categories = array();
         foreach ($categoriesTree as $category)
         {
-            $categories[$category->name] = CHtml::listData($category->children()->findAll(), 'id', 'name');
+            //$categories[$category->name] = CHtml::listData($category->children()->findAll(), 'id', 'name');
+			$categories[$category->id] = $category->name;
         }
         return $categories;
     }

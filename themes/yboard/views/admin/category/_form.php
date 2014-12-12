@@ -44,7 +44,7 @@ $val_success_message = ($model->isNewRecord) ?
 	var new_field_id=1;
 	
 	function addFiled(){
-		$('#fields-list').append('<div class="controls"><input type="text" id="Category_fields_price_&quot;name&quot;" name="Category[fields][\'fn_'+new_field_id+'\'][\'name\']" maxlength="128" size="60" value="Цена">			<select id="Category_fields_price_&quot;type&quot;" name="Category[fields][\'fn_'+new_field_id+'\'][\'type\']"><option value="0">text</option><option value="1">checkbox</option></select></div>');
+		$('#fields-list').append('<div class="controls"><input type="text" id="Category_fields_'+new_field_id+'_name" name="Category[fields][\'fn_'+new_field_id+'\'][\'name\']" maxlength="128" size="60" value="">			<select id="Category_fields_price_&quot;type&quot;" name="Category[fields][\'fn_'+new_field_id+'\'][\'type\']"><option value="0">text</option><option value="1">checkbox</option></select></div>');
 		new_field_id++;
 	}
 </script>	
@@ -105,10 +105,9 @@ $val_success_message = ($model->isNewRecord) ?
                value="<?php echo Yii::app()->request->csrfToken; ?>"/>
         <input type="hidden" name= "parent_id" value="<?php echo !empty($_POST['parent_id']) ? $_POST['parent_id'] : ''; ?>"  />
 		
-		<? 
 		
-		if(sizeof($model->fields)>0) { ?>
 		<div class="control-group" id="fields-list">
+			<?		if(sizeof($model->fields)>0) { ?>
 			<?php echo $form->labelEx($model, 'fields', array('class' => 'control-label')); 
 		foreach($model->fields as $fn=>$fl){ ?>
             <div class="controls">
@@ -117,10 +116,10 @@ $val_success_message = ($model->isNewRecord) ?
 				
                 <p class="help-block"><?php echo $form->error($model, 'fields'); ?></p>
             </div>
-        
+        <? } ?>
 		<? }?>
 		</div>	
-		<? } ?>
+
 		<a href='javascript:addFiled()'>Добавить дополнительное поле</a>
 
 <?php if (!$model->isNewRecord): ?>

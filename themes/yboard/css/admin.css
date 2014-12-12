@@ -53,7 +53,7 @@
 
 .page-body #sidebar li{
 	display: inline-block;
-	margin-left:10px;
+	margin-right:10px;
 }
 
 .page-body #sidebar ul.submenu {
@@ -65,6 +65,7 @@
 .page-body #sidebar ul{
 	margin:0px;
 	padding:0px;
+	margin-bottom:20px;
 }
 .page-body #sidebar{
 	padding:0px;

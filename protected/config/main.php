@@ -115,7 +115,7 @@ return array(
             'showScriptName' => false,
             'rules' => array(
                 '' => 'site/index',
-                '<id:\d+>' => 'site/bulletin',
+                '<id:\d+>' => 'bulletin/view',
                 'category/<cat_id:\d+>' => 'site/category',
                 'category/<action:\w+>/' => 'admin/category/<action>',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',

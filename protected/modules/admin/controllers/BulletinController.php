@@ -107,7 +107,7 @@ class BulletinController extends BackendController
 			$model->attributes=$_GET['Bulletin'];
 		 * 
 		 */
-		$model->name='xcd';
+		//$model->name='xcd';
 
 
 		$this->render('admin',array(

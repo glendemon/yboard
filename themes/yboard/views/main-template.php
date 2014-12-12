@@ -32,7 +32,7 @@
                     array(
                         'class' => 'bootstrap.widgets.TbMenu',
                         'items' => array(
-                            array('label' => 'Добавить объявление', 'url' => array('/site/create')),
+                            array('label' => 'Добавить объявление', 'url' => array('/bulletin/create')),
                             array('label' => 'Правила работы', 'url' => array('/site/page', 'view' => 'about')),
                             array('label' => 'Обратная связь', 'url' => array('/site/contact')),
                             array('url' => Yii::app()->getModule('user')->loginUrl, 'label' => Yii::app()->getModule('user')->t("Login"), 'visible' => Yii::app()->user->isGuest),

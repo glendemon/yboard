@@ -87,6 +87,7 @@ class Bulletin extends CActiveRecord
             'youtube_id' => Yii::t('bulletin', 'Youtube'),
             'created_at' => Yii::t('bulletin', 'Created At'),
             'updated_at' => Yii::t('bulletin', 'Updated At'),
+			'fields' => 'Характеристики',
         );
     }
 
