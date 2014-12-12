@@ -59,8 +59,24 @@ class Category extends CActiveRecord
     }
 	
 	// Формирование поля items для виджета Cmenu для Меню Категории
-	public function menuItems($cat_id){
+	public function menuItems($cat_id=0){
 		$catlist=self::model()->findAll("level='1'");
+		if($cat_id!=0){ 
+			$curent_cat=self::model()->findAll("id='".$cat_id."'");
+			
+			//var_dump($curent_cat);
+			/*
+			$fff=$curent_cat->children()->findAll();
+			
+			foreach($fff as $f)
+				var_dump($f);
+			 *
+			 */
+			
+		} else {
+			
+		}
+				
 		$catMenuItems=Array();
 		foreach($catlist as $cat){
 			$catItem=Array();
@@ -68,7 +84,7 @@ class Category extends CActiveRecord
 			$catItem['url']=array("/category/".$cat->id);
 			//Вывод подкатегории для выбраной категории
 			if($cat->id==$cat_id){
-				$subCat=self::model()->findAll("lft>'".$cat->lft."' and rgt<'".$cat->rgt."' and level='".($cat->level+1)."'");
+				$subCat=self::model()->findAll("lft>'".$cat->lft."' and rgt<'".$cat->rgt."' and root='".$cat->root."' and level='".($cat->level+1)."'");
 				$subItem=array();
 				if(sizeof($subCat)>0){
 					foreach($subCat as $scat){
@@ -148,7 +164,7 @@ class Category extends CActiveRecord
 
     public function countBulletins()
     {
-        $count = Yii::app()->countBulletins->count($this->id);
+        $count = Yii::app()->Board->count($this->id);
         if ($this->isRoot())
         {
             $descendants=$this->children()->findAll();

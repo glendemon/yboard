@@ -1,6 +1,6 @@
 <?php
 
-class BulletinController extends Controller
+class AdvertsController extends BaseController
 {
 
 	
@@ -11,7 +11,7 @@ class BulletinController extends Controller
 		return array(
             'create' => 'application.controllers.site.CreateAction' ,
             //'importUsers' => 'application.controllers.site.ImportUsersAction' ,
-            //'importBulletins' => 'application.controllers.site.ImportBulletinsAction' ,
+            //'importAdvertss' => 'application.controllers.site.ImportAdvertssAction' ,
 			// captcha action renders the CAPTCHA image displayed on the contact page
 			'captcha'=>array(
 				'class'=>'CCaptchaAction',
@@ -43,7 +43,7 @@ class BulletinController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user
-				'actions'=>array('importUsers','importBulletins'),
+				'actions'=>array('importUsers','importAdvertss'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -116,9 +116,16 @@ class BulletinController extends Controller
 	 */
 	public function actionIndex()
 	{
-        $roots=Category::model()->roots()->findAll();
+		
+		$dataProvider=new CActiveDataProvider('Adverts',array(
+			'criteria'=>array(
+				'limit'=>'10',
+				'order'=>'id DESC',
+			))
+		);
+
 		$this->render('index',array(
-			'roots'=>$roots,
+			'data'=>$dataProvider,
 		));
 	}
 
@@ -142,14 +149,14 @@ class BulletinController extends Controller
 	 */
 	public function actionCreate(){
 		
-		$model=new Bulletin;
+		$model=new Adverts;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Bulletin']))
+		if(isset($_POST['Adverts']))
 		{
-			$model->attributes = $_POST['Bulletin'];
+			$model->attributes = $_POST['Adverts'];
             $model->user_id = Yii::app()->user->id;
 			$model->fields=serialize($_POST['Fields']);
 
@@ -157,12 +164,12 @@ class BulletinController extends Controller
 			if($model->save())
             {
                 $video = CUploadedFile::getInstances($model, 'youtube_id');
-                YoutubeHelper::processBulletin($model, $video);
+                YoutubeHelper::processAdverts($model, $video);
 
                 $images = CUploadedFile::getInstancesByName('images');
                 // proceed if the images have been set
                 ImagesHelper::processImages($model, $images);
-				$this->controller->redirect(array('site/bulletin','id'=>$model->id));
+				$this->redirect(array('bulletin/view','id'=>$model->id));
             }
 		}
 
@@ -173,11 +180,11 @@ class BulletinController extends Controller
 
 	/**
      * Show bulletin.
-     * @param int $id Bulletin's id
+     * @param int $id Adverts's id
      */
     public function actionView($id)
     {
-        $model = $this->loadBulletin($id);
+        $model = $this->loadAdverts($id);
         $model->views++;
         $model->disableBehavior('CTimestampBehavior');
         $model->save();
@@ -193,7 +200,7 @@ class BulletinController extends Controller
      */
     public function actionCategory($cat_id)
     {
-        $dataProvider=new CActiveDataProvider('Bulletin', array(
+        $dataProvider=new CActiveDataProvider('Adverts', array(
             'criteria'=>array(
                 'select'=>'*, IFNULL(updated_at, created_at) as sort',
                 'condition'=>'category_id = :id',
@@ -228,9 +235,9 @@ class BulletinController extends Controller
 	 * @return User the loaded model
 	 * @throws CHttpException
 	 */
-	public function loadBulletin($id)
+	public function loadAdverts($id)
 	{
-		$model=Bulletin::model()->findByPk($id);
+		$model=Adverts::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -282,7 +289,7 @@ class BulletinController extends Controller
 	}
 	
 	public function actionSearch($searchStr=""){
-		$model=new Bulletin('search');
+		$model=new Adverts('search');
 				
 		$model->unsetAttributes();  // clear any default values
 		$model->name=$searchStr;

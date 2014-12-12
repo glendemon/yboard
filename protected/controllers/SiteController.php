@@ -1,6 +1,6 @@
 <?php
 
-class SiteController extends Controller
+class SiteController extends BaseController
 {
 	/**
 	 * Declares class-based actions.
@@ -84,8 +84,13 @@ class SiteController extends Controller
 	public function actionIndex()
 	{
         $roots=Category::model()->roots()->findAll();
+		$criteria = new CDbCriteria();
+		$criteria->limit=10;
+		$criteria->order='id desc';
+        $IndexAdv = Adverts::model()->findAll($criteria);
 		$this->render('index',array(
 			'roots'=>$roots,
+			'IndexAdv'=>$IndexAdv,
 		));
 	}
 
@@ -132,13 +137,10 @@ class SiteController extends Controller
 		$this->render('contact',array('model'=>$model, 'user'=>$user));
 	}
 
-    /**
-     * Show bulletin.
-     * @param int $id Bulletin's id
-     */
-    public function actionBulletin($id)
+
+    public function actionView($id)
     {
-        $model = $this->loadBulletin($id);
+        $model = $this->loadAdvert($id);
         $model->views++;
         $model->disableBehavior('CTimestampBehavior');
         $model->save();
@@ -147,13 +149,10 @@ class SiteController extends Controller
 		));
     }
 
-    /**
-     * Show category.
-     * @param int $id Category's id
-     */
+
     public function actionCategory($cat_id)
     {
-        $dataProvider=new CActiveDataProvider('Bulletin', array(
+        $dataProvider=new CActiveDataProvider('Adverts', array(
             'criteria'=>array(
                 'select'=>'*, IFNULL(updated_at, created_at) as sort',
                 'condition'=>'category_id = :id',
@@ -168,6 +167,8 @@ class SiteController extends Controller
 		));
 
     }
+
+	 /**/
 
     /**
      * Show Advertisement.
@@ -188,9 +189,9 @@ class SiteController extends Controller
 	 * @return User the loaded model
 	 * @throws CHttpException
 	 */
-	public function loadBulletin($id)
+	public function loadAdvert($id)
 	{
-		$model=Bulletin::model()->findByPk($id);
+		$model=loadAdvert::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -242,7 +243,7 @@ class SiteController extends Controller
 	}
 	
 	public function actionSearch($searchStr=""){
-		$model=new Bulletin('search');
+		$model=new Advert('search');
 				
 		$model->unsetAttributes();  // clear any default values
 		$model->name=$searchStr;

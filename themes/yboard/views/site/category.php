@@ -9,9 +9,7 @@ if ($model->parent)
 $this->breadcrumbs[] = CHtml::encode($model->name);
 ?>
 
-<?php if ($model->children()->count()): ?>
-    <?php $this->widget('application.widgets.SubcategoryWidget', array('category' => $model)); ?>
-<?php else: ?>
+
 <div class="btn btn-block disabled"> <h4><?php echo CHtml::encode($model->name); ?></h4></div>
   
 
@@ -19,4 +17,3 @@ $this->breadcrumbs[] = CHtml::encode($model->name);
         'dataProvider'=>$dataProvider,
         'itemView'=>'_view',
     )); ?>
-<?php endif; ?>

@@ -70,7 +70,7 @@ return array(
         'cache'=>array(
            'class'=>'system.caching.CFileCache',
         ),
-        'countBulletins'=>array('class'=>'CountBulletins'),
+        'Board'=>array('class'=>'Board'),
         'evenness'=>array('class'=>'Evenness'),
         'bootstrap'=>array(
             'class'=>'bootstrap.components.Bootstrap',

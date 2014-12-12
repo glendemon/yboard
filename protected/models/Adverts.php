@@ -12,7 +12,7 @@
  * @property integer $views
  * @property string $text
  */
-class Bulletin extends CActiveRecord
+class Adverts extends CActiveRecord
 {
 
     const TYPE_DEMAND = 0;
@@ -33,7 +33,7 @@ class Bulletin extends CActiveRecord
      */
     public function tableName()
     {
-        return 'bulletin';
+        return 'adverts';
     }
 
     /**
