@@ -32,7 +32,7 @@
                     array(
                         'class' => 'bootstrap.widgets.TbMenu',
                         'items' => array(
-                            array('label' => 'Объявления', 'url' => array('/bulletin')),
+                            array('label' => 'Объявления', 'url' => array('/adverts')),
 							array('label' => '+', 'url' => array('/bulletin/create')),
 							array('label' => 'Организации', 'url' => array('/profile')),
 							array('label' => '+', 'url' => array('/profile/create')),

@@ -33,12 +33,12 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
         </thead>
         <tbody>
 
-			<tr class="<?php echo Yii::app()->evenness->next(); ?>">
+			<tr class="">
                 <td><?php echo CHtml::encode($model->getAttributeLabel('text')); ?>:</td>
                 <td><?php echo CHtml::encode($model->text); ?></td>
             </tr>
 			<? if (sizeof($model->fields)>0) { ?>
-			<tr class="<?php echo Yii::app()->evenness->next(); ?>">
+			<tr class="">
                 <td><?php echo CHtml::encode($model->getAttributeLabel('fields')); ?>:</td>
                 <td><?php 
 				
@@ -55,12 +55,12 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
             </tr>
 			<? } ?>
 
-            <tr class="<?php echo Yii::app()->evenness->next(); ?>">
+            <tr class="">
                 <td><?php echo CHtml::encode($model->getAttributeLabel('youtube_id')); ?>:</td>
                 <td><?php $model->youtube_id ? $this->widget('ext.Yiitube', array('v' => $model->youtube_id, 'size' => 'small')) : ''; ?></td>
             </tr>
             
-            <tr class="<?php echo Yii::app()->evenness->next(); ?>">
+            <tr class="">
                 <td><?php echo CHtml::encode($model->getAttributeLabel('gallery_id')); ?>:</td>
                 <td>
                     <?php $this->widget('application.widgets.ShowImagesWidget', array('bulletin' => $model)); ?>

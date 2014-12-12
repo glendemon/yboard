@@ -1,6 +1,6 @@
 <?php
 
-class SiteController extends BaseController
+class SiteController extends Controller
 {
 	/**
 	 * Declares class-based actions.
@@ -150,37 +150,6 @@ class SiteController extends BaseController
     }
 
 
-    public function actionCategory($cat_id)
-    {
-        $dataProvider=new CActiveDataProvider('Adverts', array(
-            'criteria'=>array(
-                'select'=>'*, IFNULL(updated_at, created_at) as sort',
-                'condition'=>'category_id = :id',
-                'order' => 'sort DESC',
-                'params'=>array(':id'=>(int)$cat_id),
-            ),
-        ));
-		$this->render('category', array(
-			'model'=>$this->loadCategory($cat_id),
-
-            'dataProvider'=>$dataProvider,
-		));
-
-    }
-
-	 /**/
-
-    /**
-     * Show Advertisement.
-     * @param int $id Advertisement's id
-     */
-    public function actionAdvertisement($id)
-    {
-        $model = $this->loadAdvertisement($id);
-		$this->render('advertisement', array(
-			'model'=>$model,
-		));
-    }
 
     /**
 	 * Returns the data model based on the primary key given in the GET variable.
@@ -212,20 +181,6 @@ class SiteController extends BaseController
 		return $model;
 	}
 
-	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer $id the ID of the model to be loaded
-	 * @return User the loaded model
-	 * @throws CHttpException
-	 */
-	public function loadAdvertisement($id)
-	{
-		$model=Advertisement::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
-		return $model;
-	}
 
     /**
 	 * Returns the data model based on the primary key given in the GET variable.
@@ -242,19 +197,5 @@ class SiteController extends BaseController
 		return $model;
 	}
 	
-	public function actionSearch($searchStr=""){
-		$model=new Advert('search');
-				
-		$model->unsetAttributes();  // clear any default values
-		$model->name=$searchStr;
-		$model->text=$searchStr;
-		
-
-		
-		$this->render('search',array(
-			'model'=>$model,
-		));
-
-	}
 
 }

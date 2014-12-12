@@ -3,26 +3,31 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/AppServ/www/yboard/protected/extensions/ImagesHelper.php</file>
-            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/site/bulletin.php</file>
             <file>file:/D:/AppServ/www/yboard/protected/widgets/BulletinCategoryWidget.php</file>
-            <file>file:/D:/AppServ/www/yboard/protected/controllers/BulletinController.php</file>
-            <file>file:/D:/AppServ/www/yboard/protected/extensions/gallerymanager/models/Gallery.php</file>
-            <file>file:/D:/AppServ/www/yboard/protected/config/main.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/controllers/MessagesController.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/adverts/index.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/controllers/ReviewsController.php</file>
             <file>file:/D:/AppServ/www/yboard/protected/controllers/SiteController.php</file>
-            <file>file:/D:/AppServ/www/yboard/protected/widgets/BulletinTypeWidget.php</file>
-            <file>file:/D:/AppServ/www/yboard/protected/widgets/views/bulletinTypeWidget.php</file>
-            <file>file:/D:/AppServ/www/yboard/protected/widgets/views/bulletinCategoryWidget.php</file>
-            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/site/index.php</file>
-            <file>file:/D:/AppServ/www/yboard/protected/components/BaseController.php</file>
-            <file>file:/D:/AppServ/www/yboard/protected/components/Controller.php</file>
-            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/site/create.php</file>
-            <file>file:/D:/AppServ/www/yboard/protected/modules/admin/controllers/BulletinController.php</file>
-            <file>file:/D:/AppServ/www/yboard/protected/widgets/TopBulletinsWidget.php</file>
-            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/site/_form.php</file>
-            <file>file:/D:/AppServ/www/yboard/protected/controllers/site/CreateAction.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/controllers/AdvertsController.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/site/advertisement.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/controllers/CompanyController.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/company/_view.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/main-template.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/company/index.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/components/UserIdentity.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/adverts/category.php</file>
             <file>file:/D:/AppServ/www/yboard/protected/models/Category.php</file>
-            <file>file:/D:/AppServ/www/yboard/protected/behaviors/NestedSetBehavior.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/adverts/view.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/config/main.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/adverts/_view.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/models/Adverts.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/site/search.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/components/Board.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/modules/user/models/Profile.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/site/index.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/widgets/views/bulletinCategoryWidget.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/components/Controller.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/controllers/UsersController.php</file>
         </group>
     </open-files>
 </project-private>

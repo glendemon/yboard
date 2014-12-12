@@ -116,7 +116,7 @@ return array(
             'rules' => array(
                 '' => 'site/index',
                 '<id:\d+>' => 'bulletin/view',
-                'category/<cat_id:\d+>' => 'site/category',
+                'category/<cat_id:\d+>' => 'adverts/category',
                 'category/<action:\w+>/' => 'admin/category/<action>',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',

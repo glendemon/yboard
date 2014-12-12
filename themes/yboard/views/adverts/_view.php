@@ -22,7 +22,7 @@
 			} ?>
 	</div>
 	<div style='margin-left:160px'>
-		<div><?php echo CHtml::link(CHtml::encode($data->name), array('site/bulletin', 'id' => $data->id)); ?></div>
+		<div><?php echo CHtml::link(CHtml::encode($data->name), array('adverts/view', 'id' => $data->id)); ?></div>
 		<div><?php echo CHtml::encode($data->text); ?></div>
 		<div>
 			<?php echo $data->itemAlias('type', $data->type); ?> 

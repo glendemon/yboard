@@ -1,6 +1,6 @@
 <?php
 
-class AdvertsController extends BaseController
+class AdvertsController extends Controller
 {
 
 	
@@ -200,6 +200,7 @@ class AdvertsController extends BaseController
      */
     public function actionCategory($cat_id)
     {
+				
         $dataProvider=new CActiveDataProvider('Adverts', array(
             'criteria'=>array(
                 'select'=>'*, IFNULL(updated_at, created_at) as sort',

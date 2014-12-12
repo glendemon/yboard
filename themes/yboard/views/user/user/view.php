@@ -16,6 +16,7 @@ $this->menu=array(
 			'username',
 	);
 	
+	/*
 	$profileFields=ProfileField::model()->forAll()->sort()->findAll();
 	if ($profileFields) {
 		foreach($profileFields as $field) {
@@ -27,6 +28,8 @@ $this->menu=array(
 				));
 		}
 	}
+	 * 
+	 */
 	array_push($attributes,
 		'create_at',
 		array(
