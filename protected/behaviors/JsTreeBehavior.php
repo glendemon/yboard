@@ -149,6 +149,7 @@ class JsTreeBehavior extends CBehavior
         //Figure out if we are updating a Model or creating a new one.
         if (isset($_POST['update_id'])) $model = $this->loadModel($_POST['update_id']);
         else $model = new $this->modelClassName;
+
         $this->owner->renderPartial($this->form_alias_path, array(
                 'model' => $model,
                 'parent_id' => !empty($_POST['parent_id']) ? $_POST['parent_id'] : '',
@@ -311,6 +312,8 @@ class JsTreeBehavior extends CBehavior
             echo CHtml::openTag('a', array('href' => '#'));
             echo CHtml::encode($category->getAttribute($this->label_property));
             echo CHtml::closeTag('a');
+			echo "<div class='catActions'><a href='".Yii::app()->createUrl("category/update",array('id'=>$category->primaryKey))."'><i class='fa fa-pencil'></i></a></div>";
+
 
             $level = $category->level;
         }

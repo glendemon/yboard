@@ -15,6 +15,18 @@ class CreateAction extends CAction
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
+
+	private function getFormAditionalFields(){
+		$fields="";
+		if(sizeof($_POST['Fields'])>0){
+			foreach($_POST['Fields'] as $fn=>$fv) {
+				if($fields!=="") $fileds.="|";
+				$fields.=$fn."=".$fv;
+			}
+		}
+		return $fields;
+	}
+
 	public function run()
 	{
 		$model=new Bulletin;
@@ -26,6 +38,8 @@ class CreateAction extends CAction
 		{
 			$model->attributes = $_POST['Bulletin'];
             $model->user_id = Yii::app()->user->id;
+			$model->fields=$this->getFormAditionalFields();
+
 
 			if($model->save())
             {
@@ -45,5 +59,3 @@ class CreateAction extends CAction
 	}
 
 }
-
-?>

@@ -9,5 +9,7 @@
 
 		<?php echo $form->labelEx($model,'category_id'); ?>
         <?php echo CHtml::activeDropDownList($model,'category_id', $categories,
-            array('empty' => Yii::t('bulletin', 'Choose category'))); ?>
+
+            array('empty' => Yii::t('bulletin', 'Choose category'),'onchange'=>'loadFields()')); ?>
+
 		<?php echo $form->error($model,'category_id'); ?>

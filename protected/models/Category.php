@@ -41,7 +41,8 @@ class Category extends CActiveRecord
             array('name, icon', 'length', 'max' => 255),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, name, icon', 'safe', 'on' => 'search'),
+            array('id, name, icon, fields', 'safe', 'on' => 'search'),
+
         );
     }
 
@@ -56,6 +57,32 @@ class Category extends CActiveRecord
             'bulletins' => array(self::HAS_MANY, 'Bulletin', 'category_id'),
         );
     }
+	
+	// Формирование поля items для виджета Cmenu для Меню Категории
+	public function menuItems($cat_id){
+		$catlist=self::model()->findAll("level='1'");
+		$catMenuItems=Array();
+		foreach($catlist as $cat){
+			$catItem=Array();
+			$catItem['label']=$cat->name;
+			$catItem['url']=array("/category/".$cat->id);
+			//Вывод подкатегории для выбраной категории
+			if($cat->id==$cat_id){
+				$subCat=self::model()->findAll("lft>'".$cat->lft."' and rgt<'".$cat->rgt."' and level='".($cat->level+1)."'");
+				$subItem=array();
+				if(sizeof($subCat)>0){
+					foreach($subCat as $scat){
+						$subItem['label']=$scat->name;
+						$subItem['url']=array("/category/".$scat->id);
+						$catItem['items'][]=$subItem;
+					}
+				}
+			}
+			$catMenuItems[]=$catItem;
+		}
+
+		return $catMenuItems;
+	}
 
     /**
      * @return array customized attribute labels (name=>label)
@@ -66,6 +93,8 @@ class Category extends CActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'icon' => 'Icon',
+			'fields' => 'Дополнительные поля',
+
         );
     }
 
@@ -83,11 +112,26 @@ class Category extends CActiveRecord
         $criteria->compare('id', $this->id);
         $criteria->compare('name', $this->name, true);
         $criteria->compare('icon', $this->icon, true);
+		$criteria->compare('fields', $this->fields, true);
+
 
         return new CActiveDataProvider($this, array(
                 'criteria' => $criteria,
             ));
     }
+	
+	public function fieldsSave(){
+		$fields=Array();
+		foreach($_POST['Category']['fields'] as $fn=>$fd){
+			if(preg_match('#fn_[0-9]+#is',$fn))
+				$fields[Translit::latin($fd['name'])]=$fd;
+			else
+				$fields[$fn]=$fd;
+		}
+				
+		$this->fields=json_encode($fields);
+	}
+
 
     public function behaviors()
     {

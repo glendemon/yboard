@@ -7,7 +7,10 @@ class CategoryController extends BackendController
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
-    public $layout = '/layouts/column2';
+
+    public $layout = '/admin-template';
+	public $title='Категории';
+
 
     /**
      * Displays a particular model.
@@ -58,9 +61,14 @@ class CategoryController extends BackendController
         if (isset($_POST['Category']))
         {
             $model->attributes = $_POST['Category'];
+
+			$model->fieldsSave();
+
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
+
+		$model->fields=  json_decode($model->fields);
 
         $this->render('update', array(
             'model' => $model,
@@ -140,8 +148,8 @@ class CategoryController extends BackendController
         return array(
             'jsTreeBehavior' => array('class' => 'application.behaviors.JsTreeBehavior',
                 'modelClassName' => 'Category',
-                'form_alias_path' => 'admin.views.category._form',
-                'view_alias_path' => 'admin.views.category.view',
+                'form_alias_path' => '_form',
+                'view_alias_path' => 'view',
                 'label_property' => 'name',
                 'rel_property' => 'name'
             )

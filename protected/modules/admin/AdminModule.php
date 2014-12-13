@@ -11,7 +11,8 @@ class AdminModule extends CWebModule
 		$this->setImport(array(
 			'admin.models.*',
 			'admin.components.*',
-            'admin.controllers.BackendController',
+            'admin.controllers.*',
+
 		));
 	}
 

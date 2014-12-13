@@ -13,10 +13,15 @@ class ConfigForm extends CFormModel
 {
     public $top;
 
+    public $answer;
+
+
     public function rules()
     {
         return array(
-            array('top', 'safe'),
+            array('top, answer', 'safe'),
+            array('increase_views', 'numerical', 'integerOnly'=>true),
+
         );
     }
 
@@ -24,6 +29,8 @@ class ConfigForm extends CFormModel
     {
         return array(
             'top' => Yii::t('main', 'Top'),
+            'answer' => Yii::t('main', 'Answers'),
+
         );
     }
 

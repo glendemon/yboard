@@ -107,13 +107,16 @@ return array(
             'rules' => array(
                 '' => 'site/index',
                 '<id:\d+>' => 'site/bulletin',
-                'category/<id:\d+>' => 'site/category',
+                'category/<cat_id:\d+>' => 'site/category',
                 'category/<action:\w+>/' => 'admin/category/<action>',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ),
         ),
+
+		/*
+
         'db' => array(
             'connectionString' => 'sqlite:' . dirname(__FILE__) . '/../data/testdrive.db',
             'tablePrefix' => '',
@@ -121,22 +124,25 @@ return array(
 //            'enableParamLogging' => true,
             'queryCacheID' => 'cache',
         ),
+		 * 
+		 */
         // uncomment the following to use a MySQL database
-        /*
-          'db'=>array(
-          'connectionString' => 'mysql:host=localhost;dbname=testdrive',
+        'db'=>array(
+          'connectionString' => 'mysql:host=localhost;dbname=yboard',
           'emulatePrepare' => true,
           'username' => 'root',
-          'password' => '',
+          'password' => '123456',
           'charset' => 'utf8',
+		  'tablePrefix' => '',
           ),
-         */
+
         'errorHandler' => array(
             // use 'site/error' action to display errors
             'errorAction' => 'site/error',
         ),
         'log' => array(
             'class' => 'CLogRouter',
+			'enabled'=>YII_DEBUG,
             'routes' => array(
                 array(
                     'class' => 'CFileLogRoute',
@@ -144,6 +150,10 @@ return array(
 //                    'class'=>'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
 //                    'ipFilters'=>array('127.0.0.1','192.168.1.3'),
                 ),
+				array(
+					'class'=>'application.extensions.yii-debug-toolbar.YiiDebugToolbarRoute',
+					'ipFilters'=>array('127.0.0.1','192.168.1.215'),
+				),
             // uncomment the following to show log messages on web pages
             /*
               array(
@@ -159,4 +169,6 @@ return array(
         // this is used in contact page
         'adminEmail' => 'webmaster@example.com',
     ),
+	'theme' => "yboard",
+
 );
