@@ -123,6 +123,8 @@ class Adverts extends CActiveRecord
         $criteria->compare('type', $this->type);
         $criteria->compare('views', $this->views);
         $criteria->compare('text', $this->text, true);
+		//$criteria->select="id, name, users.id ";
+		$criteria->order='id desc';
 
         return new CActiveDataProvider($this, array(
                 'criteria' => $criteria,

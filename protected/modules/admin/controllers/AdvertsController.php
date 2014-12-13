@@ -86,7 +86,7 @@ class AdvertsController extends BackendController
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
+	public function actionIndex2()
 	{
 		$dataProvider=new CActiveDataProvider('Adverts');
 		$this->render('index',array(
@@ -97,20 +97,14 @@ class AdvertsController extends BackendController
 	/**
 	 * Manages all models.
 	 */
-	public function actionAdmin()
+	public function actionIndex()
 	{
-		$model=new Adverts('search');
+		$model=new Adverts();
 		$model->unsetAttributes();  // clear any default values
 
-		/*
-		if(isset($_GET['Adverts']))
-			$model->attributes=$_GET['Adverts'];
-		 * 
-		 */
-		//$model->name='xcd';
-
-
-		$this->render('admin',array(
+		//$model->getData();
+		
+		$this->render('index',array(
 			'model'=>$model,
 		));
 	}

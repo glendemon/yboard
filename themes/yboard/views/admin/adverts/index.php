@@ -1,50 +1,79 @@
 <?php
 /* @var $this BulletinController */
-/* @var $dataProvider CActiveDataProvider */
+/* @var $model Bulletin */
 
 $this->breadcrumbs = array(
-    AdminModule::t('Bulletins'),
+    AdminModule::t('Bulletins') => array('index'),
+    AdminModule::t('Manage'),
 );
 
 $this->menu = array(
+    array('label' => AdminModule::t('List Bulletin'), 'icon' => 'icon-list', 'url' => array('index')),
     array('label' => AdminModule::t('Create Bulletin'), 'icon' => 'icon-plus', 'url' => array('create')),
-    array('label' => AdminModule::t('Manage Bulletin'), 'icon' => 'icon-folder-open', 'url' => array('admin')),
 );
+
+Yii::app()->clientScript->registerScript('search', "
+$('.search-button').click(function(){
+	$('.search-form').toggle();
+	return false;
+});
+$('.search-form form').submit(function(){
+	$('#bulletin-grid').yiiGridView('update', {
+		data: $(this).serialize()
+	});
+	return false;
+});
+");
 ?>
 
-<h1><?php echo AdminModule::t('Bulletins'); ?></h1>
+<h1><?php echo AdminModule::t('Manage Bulletins'); ?></h1>
 
-<table>
-	
-<tr class="alert-info">
-	<th>
-	<td><?php echo CHtml::encode($data->getAttributeLabel('id')); ?></td>
-	<td><b><?php echo CHtml::encode($data->getAttributeLabel('name')); ?>:</b>
-		<?php echo CHtml::encode($data->name); ?>
-	</td>
+<p>
+    You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
+    or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
+</p>
 
-	<td><b><?php echo CHtml::encode($data->getAttributeLabel('user_id')); ?>:</b>
-		<?php echo CHtml::encode($data->user_id); ?>
-	</td>
+<?php echo CHtml::link('Advanced Search', '#', array('class' => 'search-button')); ?>
+<div class="search-form" style="display:none">
+    <?php
+    $this->renderPartial('_search', array(
+        'model' => $model,
+    ));
+    ?>
+</div><!-- search-form -->
 
-	<td><b><?php echo CHtml::encode($data->getAttributeLabel('category_id')); ?>:</b>
-		<?php echo CHtml::encode($data->category_id); ?>
-	</td>
-
-	<td><b><?php echo CHtml::encode($data->getAttributeLabel('type')); ?>:</b>
-		<?php echo CHtml::encode($data->type); ?>
-	</td>
-
-	<td><b><?php echo CHtml::encode($data->getAttributeLabel('views')); ?>:</b>
-		<?php echo CHtml::encode($data->views); ?>
-	</td>
-	<td><b><?php echo CHtml::encode($data->getAttributeLabel('text')); ?>:</b>
-		<?php echo CHtml::encode($data->text); ?>
-	</td>
-</th>
 <?php
-$this->widget('bootstrap.widgets.TbListView', array(
-    'dataProvider' => $dataProvider,
-    'itemView' => '_view',
+$this->widget('bootstrap.widgets.TbGridView', array(
+    'type' => 'striped bordered condensed',
+    'id' => 'bulletin-grid',
+    'dataProvider' => $model->search(),
+    'filter' => $model,
+    'columns' => array(
+		array(            // display 'create_time' using an expression
+            'class'=>'CLinkColumn',
+			'header'=>'name',
+			'labelExpression'=>'$data->name',
+			'urlExpression'=>'Yii::app()->createUrl("/admin/adverts/view",array("id"=>$data->id))',
+        ),
+		array(            // display 'create_time' using an expression
+            'class'=>'CLinkColumn',
+			'header'=>'user_id',
+			'labelExpression'=>'$data->user->username',
+			'urlExpression'=>'Yii::app()->createUrl("/user/view",array("id"=>$data->id))',
+        ),
+		array(
+			'name'=>'category_id',
+			'value'=>'$data->category->name',
+		),
+        'type',
+        'views',
+        /*
+          'text',
+         */
+        array(
+            'class' => 'bootstrap.widgets.TbButtonColumn',
+            'htmlOptions' => array('style' => 'width: 50px'),
+        ),
+    ),
 ));
 ?>

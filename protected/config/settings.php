@@ -7,5 +7,5 @@
  */
 
 return array(
-	'fileds_type'=>array('text','checkbox'),	
+	'fileds_type'=>array('text','checkbox'),	// Типы полей 
 );

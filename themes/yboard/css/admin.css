@@ -82,3 +82,11 @@
 	height:auto;
 	line-height: normal;
 }
+
+div.navbar .navbar-brand{
+	padding-top:11px; padding-left:30px;
+}
+
+body input{
+	height:auto !important;
+}
