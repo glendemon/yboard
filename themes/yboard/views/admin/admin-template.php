@@ -88,10 +88,8 @@ Purchase: http://wrapbootstrap.com
             <div class="navbar-container">
                 <!-- Navbar Barnd -->
                 <div class="navbar-header pull-left">
-                    <a href="#" class="navbar-brand">
-                        <small>
-                            <img src="<?php echo Yii::app()->theme->baseUrl; ?>/img/logo.png" alt="">
-                        </small>
+                    <a href="<?php echo Yii::app()->theme->baseUrl; ?>/admin/" class="navbar-brand">
+                        Yboard
                     </a>
                 </div>
                 <!-- /Navbar Barnd -->
@@ -428,7 +426,7 @@ has come over the horizon and is reaching the general populous
             $this->widget('zii.widgets.CMenu', 
                     array(
                         'items' => array(
-                            array('label' => '<i class="menu-icon glyphicon glyphicon-home"></i>Меню сайта<i class="menu-expand"></i>', 'url' => '#', 
+                            array('label' => '<i class="menu-icon glyphicon glyphicon-home"></i>Основное меню<i class="menu-expand"></i>', 'url' => '#', 
                                 "items"=>array(
                                         array('label' => '<i class="menu-icon glyphicon glyphicon-home"></i>Главная страница', 'url' => array('/site/index')),
                                         array('label' => 'Добавить объявление', 'url' => array('/site/create')),
@@ -442,11 +440,9 @@ has come over the horizon and is reaching the general populous
                                     ),
                                 'linkOptions'=>array('class'=>'menu-dropdown'),
                             ),
-							array('label' => "Реклама", 'url' => array('/admin/advertisement')),
-							array('label' => "Баннерные блоки", 'url' => array('/admin/banners')),
-							array('label' => Yii::t('main', 'Bulletin'), 'url' => array('/admin/bulletin')),
+							array('label' => Yii::t('main', 'Bulletin'), 'url' => array('/admin/adverts')),
 							array('label' => 'Категории', 'url' => array('/admin/category')),
-							array('label' => 'Галереи', 'url' => array('/admin/gallery')),
+							array('label' => "Баннерные блоки", 'url' => array('/admin/banners')),
                         ),
                         'htmlOptions' => array('class'=>'nav sidebar-menu'),
                         'encodeLabel' => FALSE,
