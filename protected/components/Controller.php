@@ -16,6 +16,11 @@
  *
  */
 
+ 
+// Define a path alias for the Bootstrap extension as it's used internally.
+// In this example we assume that you unzipped the extension under protected/extensions.
+Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
+
 class Controller extends CController
 
 {
@@ -45,10 +50,16 @@ class Controller extends CController
 
 	public function __construct($id, $module = null)
 	{
+			
 		parent::__construct($id, $module);
-		$this->settings = include_once Yii::getPathOfAlias('application.config.settings').'.php';
-		$this->banners = include_once Yii::getPathOfAlias('application.config.banners').'.php';
-		$this->categories = $command = Yii::app()->db->createCommand('SELECT * FROM category')->queryAll();
+		if(isset(Yii::app()->components['db'])){
+			$this->settings = include_once Yii::getPathOfAlias('application.config.settings').'.php';
+			$this->banners = include_once Yii::getPathOfAlias('application.config.banners').'.php';
+			$this->categories = $command = Yii::app()->db->createCommand('SELECT * FROM category')->queryAll();
+		} elseif(Yii::app()->getRequest()->getPathInfo()!=="site/install") {
+			
+			$this->forward('site/install');
+		}
 	}
 	
 	public function getBanner($var){

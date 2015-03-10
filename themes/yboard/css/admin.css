@@ -90,3 +90,23 @@ div.navbar .navbar-brand{
 body input{
 	height:auto !important;
 }
+
+.operations li{
+	background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.42857;
+    margin: 0;
+    padding: 6px 12px;
+    position: relative;
+    text-align: center;
+    transition: all 0.15s ease 0s;
+    vertical-align: middle;
+    white-space: nowrap;
+}

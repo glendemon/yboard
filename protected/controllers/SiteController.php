@@ -71,9 +71,12 @@ class SiteController extends Controller
 				'actions'=>array('importUsers','importBulletins'),
 				'users'=>array('admin'),
 			),
+			/*
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
+			 * 
+			 */
 		);
 	}
 
@@ -92,6 +95,56 @@ class SiteController extends Controller
 			'roots'=>$roots,
 			'IndexAdv'=>$IndexAdv,
 		));
+	}
+	
+	public function actionInstall(){
+		global $CONFIG;
+		$this->layout="/install-layout";
+		
+		$db_error=false;
+		
+		if(!isset(Yii::app()->components['db'])){
+			
+			$model=new InstallForm;
+
+			
+			if(isset($_POST['InstallForm']))
+			{
+				
+				//mysql_server, mysql_login, mysql_password, mysql_db_name, site_name
+				
+				
+				$server=trim(stripslashes($_POST['InstallForm']['mysql_server']));
+				$username=trim(stripslashes($_POST['InstallForm']['mysql_login']));
+				$password=trim(stripslashes($_POST['InstallForm']['mysql_password']));
+				$db_name=trim(stripslashes($_POST['InstallForm']['mysql_db_name']));
+				
+				@mysql_connect($server,$username,$password) or $db_error = mysql_error();
+				@mysql_select_db($db_name) or $db_error = mysql_error();
+				
+				if(!$db_error) {
+					$config_data= require $CONFIG;
+					
+					$config_data['components']['db'] = array(
+						'connectionString' => 'mysql:host='.$server.';dbname='.$db_name,
+						'emulatePrepare' => true,
+						'username' => $username,
+						'password' => $password,
+						'charset' => 'utf8',
+						'tablePrefix' => '',
+					);
+					
+					$config_data['name']=trim(stripslashes($_POST['InstallForm']['site_name']));
+					
+					file_put_contents($CONFIG, "<? return ".var_export($config_data, true)." ?>");
+
+					$this->redirect('site/index');
+				}
+				
+			}
+			
+			$this->render('install',array('model'=>$model, 'db_error'=>$db_error));
+		}
 	}
 
     /**
@@ -199,3 +252,5 @@ class SiteController extends Controller
 	
 
 }
+
+?>

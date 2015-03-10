@@ -28,59 +28,9 @@
    </div>
  </div>
 </div>
- <div id="search_strip">
-<form name='search_form' action='<?=Yii::app()->createUrl('/site/search')?>'>
-		<input type='text' name='searchStr' style='width:678px;' /><input type='submit' value='Поиск' class='btn' />
-</form>
- </div>
 <div id='content'>
 <div id="body_area">
-  <div class="left">
-    <div class="left_menu_area">
-		Категории
-      <div align="right">
-		  	<?php
-            $this->widget('zii.widgets.CMenu', 
-                    array(
-                        'items' => Category::menuItems(intval($_GET['cat_id'])),
-                        'htmlOptions' => array('class'=>'nav sidebar-menu'),
-                        'encodeLabel' => FALSE,
-                        'submenuHtmlOptions'=>array('class'=>'submenu'),
-                    )
-            );
-            ?>
-	  </div>
-    </div>
-  </div>
-  <div class="midarea">
-	 <?php if (isset($this->breadcrumbs)): ?>
-					<?php
-					$this->widget('bootstrap.widgets.TbBreadcrumbs', array(
-						'links' => $this->breadcrumbs,
-					));
-					?><!-- breadcrumbs -->
-				<?php endif; ?>
-
-				<?php echo $content; ?>
-
-  </div>
-  <div class="right">
-	
-	<div>
-	  <?php
-		  $this->widget('zii.widgets.CMenu', array(
-			  'items' => array(
-						  array('url' => Yii::app()->getModule('user')->loginUrl, 'label' => Yii::app()->getModule('user')->t("Login"), 'visible' => Yii::app()->user->isGuest),
-						  array('url' => Yii::app()->getModule('user')->registrationUrl, 'label' => Yii::app()->getModule('user')->t("Register"), 'visible' => Yii::app()->user->isGuest),
-						  array('url' => Yii::app()->getModule('user')->profileUrl, 'label' => Yii::app()->getModule('user')->t("Profile"), 'visible' => !Yii::app()->user->isGuest),
-						  array('url' => Yii::app()->getModule('user')->logoutUrl, 'label' => Yii::app()->getModule('user')->t("Logout") . ' (' . Yii::app()->user->name . ')', 'visible' => !Yii::app()->user->isGuest),
-					  ),
-		  ));
-		  ?>  
-	</div>
-	<?=$this->getBanner('right')?>
-
-  </div>
+	<?php echo $content; ?>
 	<br style='clear:both' />
 </div>
 </div>

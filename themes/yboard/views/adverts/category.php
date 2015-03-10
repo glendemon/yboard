@@ -9,12 +9,8 @@ if ($model->parent)
 $this->breadcrumbs[] = CHtml::encode($model->name);
 ?>
 
-
-<div class="btn btn-block disabled"> <h4><?php echo CHtml::encode($model->name); ?></h4></div>
-  
-
-    <?php $this->widget('bootstrap.widgets.TbListView', array(
-        'dataProvider'=>$dataProvider,
-        'itemView'=>'_view',
-    )); ?>
+<?php $this->widget('bootstrap.widgets.TbListView', array(
+	'dataProvider'=>$dataProvider,
+	'itemView'=>'_view',
+)); ?>
 

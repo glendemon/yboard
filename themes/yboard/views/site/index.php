@@ -74,15 +74,15 @@ if ($this->beginCache('index', array(
     <tbody>
         <?php foreach ($IndexAdv as $model): ?>
         <tr>
-            <td><?php echo $model->itemAlias('type', $model->type); ?></td>
-            <td><?php echo Yii::app()->dateFormatter->formatDateTime($model->created_at); ?></td>
-            <td><?php echo CHtml::link(CHtml::encode($model->category->name), array('site/category', 'id'=>$model->category->id)); ?></td>
-            <td>
+			<td>
                 <?php if ($model->getPhoto()): ?>
                 <img src="<?php echo $model->getPhoto()->getPreview(); ?>" width="150" alt="<?php echo CHtml::encode($model->name) ?>" />
                 <?php endif; ?>
             </td>
-            <td><?php echo CHtml::link(CHtml::encode($model->name), array('site/bulletin', 'id'=>$model->id)); ?></td>
+            <td><?php echo CHtml::link(CHtml::encode($model->category->name), array('/adverts/category', 'cat_id'=>$model->category->id)); ?></td>
+            <td><?php echo CHtml::link(CHtml::encode($model->name), array('/adverts/view', 'id'=>$model->id)); ?></td>
+            <td><?php echo Yii::app()->dateFormatter->formatDateTime($model->created_at); ?></td>
+			<td><?php echo $model->itemAlias('type', $model->type); ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>

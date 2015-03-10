@@ -7,7 +7,7 @@
 <script> 
 function loadFields(t){
 	$('#Bulletin_category_id').val($(t).val());
-	$.get("<?=Yii::app()->baseUrl?>/bulletin/getfields/cat_id/"+$(t).val(),function(data){
+	$.get("<?=Yii::app()->baseUrl?>/adverts/getfields/cat_id/"+$(t).val(),function(data){
 
 		if(data.indexOf('fields_list')!==-1) 
 			$("#bulletin_form").show();

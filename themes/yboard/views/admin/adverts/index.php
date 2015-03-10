@@ -8,8 +8,8 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
-    array('label' => AdminModule::t('List Bulletin'), 'icon' => 'icon-list', 'url' => array('index')),
-    array('label' => AdminModule::t('Create Bulletin'), 'icon' => 'icon-plus', 'url' => array('create')),
+    array('label' => AdminModule::t('List Bulletin'), 'icon' => 'icon-list', 'url' => array('index'),"itemOptions"=>array('class'=>'btn')),
+    array('label' => AdminModule::t('Create Bulletin'), 'icon' => 'icon-plus', 'url' => array('create') ,"itemOptions"=>array('class'=>'btn')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
