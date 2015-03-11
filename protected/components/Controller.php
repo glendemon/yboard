@@ -32,7 +32,7 @@ class Controller extends CController
 	 */
 
 	public $breadcrumbs=array();
-    private $_behaviorIDs = array();
+        private $_behaviorIDs = array();
 	public $layout='//main-template';
 
 
@@ -50,6 +50,8 @@ class Controller extends CController
 
 	public function __construct($id, $module = null)
 	{
+            
+                // var_dump($this->route);
 			
 		parent::__construct($id, $module);
 		if(isset(Yii::app()->components['db'])){
@@ -58,7 +60,7 @@ class Controller extends CController
 			$this->categories = $command = Yii::app()->db->createCommand('SELECT * FROM category')->queryAll();
 		} elseif(Yii::app()->getRequest()->getPathInfo()!=="site/install") {
 			
-			$this->forward('site/install');
+			$this->redirect(Yii::app()->baseUrl.'/site/install');
 		}
 	}
 	

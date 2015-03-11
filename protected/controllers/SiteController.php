@@ -38,24 +38,21 @@ class SiteController extends Controller
 	}
 	
 	public function actionGetfields($cat_id){
-		$model= Category::model()->findByPk($cat_id);
-		
-		$fields=json_decode($model->fields);
+            $model= Category::model()->findByPk($cat_id);
 
-		if(sizeof($fields)>0)
-		foreach($fields as $f_iden=>$fv){ ?>
-			<div class="controls">
-				<label for='Fields[<?=$f_iden?>]'><?=$fv->name?></label><input type="text" id="Fields[<?=$f_iden?>]" name="Fields[<?=$f_iden?>]" >
-			</div>	
-		<? }
+            $fields=json_decode($model->fields);
+
+            if(sizeof($fields)>0){
+            foreach($fields as $f_iden=>$fv){ 
+                ?><div class="controls">
+                        <label for='Fields[<?=$f_iden?>]'><?=$fv->name?></label>
+                        <input type="text" id="Fields[<?=$f_iden?>]" name="Fields[<?=$f_iden?>]" >
+                    </div><? 
+            }}
+
 	}
 
-
-	/**
-	 * Specifies the access control rules.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
-	 */
+        
 	public function accessRules()
 	{
 		return array(
@@ -98,53 +95,51 @@ class SiteController extends Controller
 	}
 	
 	public function actionInstall(){
-		global $CONFIG;
-		$this->layout="/install-layout";
-		
-		$db_error=false;
-		
-		if(!isset(Yii::app()->components['db'])){
-			
-			$model=new InstallForm;
+            global $CONFIG;
+            $this->layout="/install-layout";
+            $db_error=false;
 
-			
-			if(isset($_POST['InstallForm']))
-			{
-				
-				//mysql_server, mysql_login, mysql_password, mysql_db_name, site_name
-				
-				
-				$server=trim(stripslashes($_POST['InstallForm']['mysql_server']));
-				$username=trim(stripslashes($_POST['InstallForm']['mysql_login']));
-				$password=trim(stripslashes($_POST['InstallForm']['mysql_password']));
-				$db_name=trim(stripslashes($_POST['InstallForm']['mysql_db_name']));
-				
-				@mysql_connect($server,$username,$password) or $db_error = mysql_error();
-				@mysql_select_db($db_name) or $db_error = mysql_error();
-				
-				if(!$db_error) {
-					$config_data= require $CONFIG;
-					
-					$config_data['components']['db'] = array(
-						'connectionString' => 'mysql:host='.$server.';dbname='.$db_name,
-						'emulatePrepare' => true,
-						'username' => $username,
-						'password' => $password,
-						'charset' => 'utf8',
-						'tablePrefix' => '',
-					);
-					
-					$config_data['name']=trim(stripslashes($_POST['InstallForm']['site_name']));
-					
-					file_put_contents($CONFIG, "<? return ".var_export($config_data, true)." ?>");
+            if(!isset(Yii::app()->components['db'])){
+                    $model=new InstallForm;
+                    if(isset($_POST['InstallForm']))
+                    {
 
-					$this->redirect('site/index');
-				}
-				
-			}
-			
-			$this->render('install',array('model'=>$model, 'db_error'=>$db_error));
-		}
+                        $server=trim(stripslashes($_POST['InstallForm']['mysql_server']));
+                        $username=trim(stripslashes($_POST['InstallForm']['mysql_login']));
+                        $password=trim(stripslashes($_POST['InstallForm']['mysql_password']));
+                        $db_name=trim(stripslashes($_POST['InstallForm']['mysql_db_name']));
+
+                        $db_con=@mysqli_connect($server,$username,$password) or $db_error = mysqli_error();
+                        @mysqli_select_db($db_con,$db_name) or $db_error = mysqli_error($db_con);
+
+                        if(!$db_error) {
+                            $config_data= require $CONFIG;
+                            
+                            $dump_file=file_get_contents(Yii::getPathOfAlias('application.data.install').'.sql');
+                            
+                            mysqli_multi_query($db_con,$dump_file) or $db_error = mysqli_error($db_con);
+                                                       
+                            if(!$db_error) {
+                            
+                                $config_data['components']['db'] = array(
+                                        'connectionString' => 'mysql:host='.$server.';dbname='.$db_name,
+                                        'emulatePrepare' => true,
+                                        'username' => $username,
+                                        'password' => $password,
+                                        'charset' => 'utf8',
+                                        'tablePrefix' => '',
+                                );
+                                $config_data['name']=trim(stripslashes($_POST['InstallForm']['site_name']));
+
+                                file_put_contents($CONFIG, "<? return ".var_export($config_data, true)." ?>");
+
+                                $this->redirect(Yii::app()->createUrl('site/index'));
+                            }
+                            
+                        }		
+                    }
+                    $this->render('install',array('model'=>$model, 'db_error'=>$db_error));
+            }
 	}
 
     /**
@@ -154,12 +149,16 @@ class SiteController extends Controller
 	{
 		if($error=Yii::app()->errorHandler->error)
 		{
-			if(Yii::app()->request->isAjaxRequest)
-				echo $error['message'];
-			else
-				$this->render('error', $error);
+                    if(Yii::app()->request->isAjaxRequest)
+                        echo $error['message'];
+                    else
+                        $this->render('error', $error);
 		}
 	}
+        
+        public function actionAbout(){
+            $this->render('pages/about');
+        }
 
 	/**
 	 * Displays the contact page
@@ -253,4 +252,4 @@ class SiteController extends Controller
 
 }
 
-?>
+

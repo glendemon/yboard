@@ -9,7 +9,7 @@
  *
  * @author Victor Demin <mail@vdemin.com>
  */
-class BackendController extends BaseController
+class BackendController extends Controller
 {
 	/**
 	 * @return array action filters

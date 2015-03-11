@@ -16,6 +16,9 @@ class Category extends CActiveRecord
      * @param string $className active record class name.
      * @return Category the static model class
      */
+    public $catTree;
+    
+    
     public static function model($className = __CLASS__)
     {
         return parent::model($className);
@@ -60,25 +63,64 @@ class Category extends CActiveRecord
 	
 	// Формирование поля items для виджета Cmenu для Меню Категории
 	public function menuItems($cat_id=0){
-		$catlist=self::model()->findAll("level='1'");
+		
 		if($cat_id!=0){ 
-			$curent_cat=self::model()->findAll("id='".$cat_id."'");
-			
-			//var_dump($curent_cat);
-			/*
-			$fff=$curent_cat->children()->findAll();
-			
-			foreach($fff as $f)
-				var_dump($f);
-			 *
-			 */
+                    $curent_cat=self::model()->findByPk($cat_id);
+
+                    //var_dump($curent_cat);
+                    /*
+                    $fff=$curent_cat->children()->findAll();
+
+                    foreach($fff as $f)
+                            var_dump($f);
+                     *
+                     */
+
+                   $this->catTree=self::model()->findAll(
+                    array(
+                        'condition'=>
+                        "level='1' "
+                        . "or (lft<'".$curent_cat->lft."' and root='".$curent_cat->root."' and level<'".$curent_cat->level."' )  "
+                        . "or id='".$curent_cat->id."' "
+                        . "or (root='".$curent_cat->root."' and level='".$curent_cat->level."') "
+                        . "or ( lft>'".$curent_cat->lft."' and rgt<'".$curent_cat->rgt."' and root='".$curent_cat->root."' and level='".($curent_cat->level+1)."')"
+                        ,
+                        'order'=>'root, lft',
+                        )
+                    );
 			
 		} else {
-			
+                    $this->catTree=self::model()->findAll("level='1'");
 		}
+                
+                /*
+                var_dump($curent_cat->lft);
+                var_dump("level='1' or (lft<'".$curent_cat->lft."' and root='".$curent_cat->root."') or id='".$curent_cat->id."'");*/
+                
+                
 				
-		$catMenuItems=Array();
+		
+                
+                
+                //$this->catTree=$catlist;
+                
+                
+                /*
+                foreach($catlist as $cat){
+                    var_dump($cat->name);
+                }
+                 * */
+                 
+                
+                
+                $catMenuItems=Array();
+                $catMenuItems=$this->catRecursive();
+                
+                /*
 		foreach($catlist as $cat){
+                    
+                    if($cat->level==1) {
+                    
 			$catItem=Array();
 			$catItem['label']=$cat->name;
 			$catItem['url']=array("/category/".$cat->id);
@@ -96,9 +138,34 @@ class Category extends CActiveRecord
 			}
 			$catMenuItems[]=$catItem;
 		}
+                 * 
+                 */
+                
+                //var_dump($catMenuItems);
 
 		return $catMenuItems;
 	}
+        
+        
+    public function catRecursive($root=0, $level=1,$lft=0,$rgt=0){
+               $ret_cats=array();
+               $catItem=Array();
+                foreach($this->catTree as $cat) 
+                    if(($cat->level==$level and $cat->lft>$lft and $cat->rgt<$rgt and $cat->root==$root) 
+                            or ($root==0 and $cat->level==1)){
+			$catItem['label']=$cat->name;
+			$catItem['url']=array("/category/".$cat->id);
+                        
+                        if(($cat->lft+1)<$cat->rgt)
+                            $catItem['items']=$this->catRecursive($cat->root,$cat->level+1,$cat->lft,$cat->rgt);
+                        else
+                            unset($catItem['items']);
+                       
+                        $ret_cats[]=$catItem;
+                    }
+               
+              return  $ret_cats;
+    }
 
     /**
      * @return array customized attribute labels (name=>label)

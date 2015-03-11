@@ -1,7 +1,7 @@
 <? return array (
   'basePath' => 'D:\\AppServ\\www\\yboard\\protected\\config\\..',
   'language' => 'ru',
-  'name' => 'xdsfsdfs sdf',
+  'name' => 'Yboard 2',
   'theme' => 'yboard',
   'preload' => 
   array (
@@ -15,7 +15,7 @@
     3 => 'application.modules.user.*',
     4 => 'application.modules.user.models.*',
     5 => 'application.modules.user.components.*',
-    6 => 'application.extensions.*',
+    //6 => 'application.extensions.*',
     7 => 'application.extensions.yii-mail.*',
     8 => 'application.extensions.gallerymanager.*',
     9 => 'application.extensions.gallerymanager.models.*',

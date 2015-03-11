@@ -20,10 +20,10 @@
 			<a href="<?=Yii::app()->createUrl("/user")?>" class="general">Пользователи</a>
 	    </div>
 	    <div class='info'>
-			<a href="<?=Yii::app()->createUrl("/site/page")?>" class="general">Правила работы</a> 
+			<a href="<?=Yii::app()->createUrl("/site/about")?>" class="general">Правила работы</a> 
 	    </div>
 	    <div class="works">
-			<a href="<?=Yii::app()->createUrl("/site/contacts")?>" class="general">Контакты</a>
+			<a href="<?=Yii::app()->createUrl("/site/contact")?>" class="general">Контакты</a>
 		</div>
    </div>
  </div>
@@ -40,14 +40,19 @@
 		Категории
       <div align="right">
 		  	<?php
+                        
+                        $catTreeGenerator=new Category();
+                        //$catTreeGenerator->menuItems(intval($_GET['cat_id']));
+                        
             $this->widget('zii.widgets.CMenu', 
                     array(
-                        'items' => Category::menuItems(intval($_GET['cat_id'])),
+                        'items' => $catTreeGenerator->menuItems(intval($_GET['cat_id'])),
                         'htmlOptions' => array('class'=>'nav sidebar-menu'),
                         'encodeLabel' => FALSE,
                         'submenuHtmlOptions'=>array('class'=>'submenu'),
                     )
             );
+
             ?>
 	  </div>
     </div>

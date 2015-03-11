@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/site/install.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/models/InstallForm.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/config/main.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/controllers/SiteController.php</file>
+            <file>file:/D:/AppServ/www/yboard/index.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/site/contact.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/components/Board.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/components/Controller.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/models/ContactForm.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/config/main_dev.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/install-layout.php</file>
+            <file>file:/D:/AppServ/www/yboard/themes/yboard/views/main-template.php</file>
+            <file>file:/D:/AppServ/www/yboard/protected/components/UserIdentity.php</file>
+        </group>
+    </open-files>
+</project-private>

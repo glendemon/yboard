@@ -3,12 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Мар 10 2015 г., 14:49
+-- Время создания: Мар 10 2015 г., 15:38
 -- Версия сервера: 5.0.51b-community-nt-log
 -- Версия PHP: 5.2.6
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
