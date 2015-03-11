@@ -29,7 +29,7 @@
  </div>
 </div>
  <div id="search_strip">
-<form name='search_form' action='<?=Yii::app()->createUrl('/site/search')?>'>
+<form name='search_form' action='<?=Yii::app()->createUrl('/adverts/search')?>'>
 		<input type='text' name='searchStr' style='width:678px;' /><input type='submit' value='Поиск' class='btn' />
 </form>
  </div>
@@ -65,6 +65,8 @@
 					));
 					?><!-- breadcrumbs -->
 				<?php endif; ?>
+                                        
+
 
 				<?php echo $content; ?>
 

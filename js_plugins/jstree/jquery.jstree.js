@@ -1119,6 +1119,10 @@
 				this.__callback({ "obj" : obj });
 			},
 			select_node : function (obj, check, e) {
+                                if($(obj).hasClass('js_go')) {
+                                    window.location=$(obj).attr('href');
+                                    return false;
+                                }
 				obj = this._get_node(obj);
 				if(obj == -1 || !obj || !obj.length) { return false; }
 				var s = this._get_settings().ui,

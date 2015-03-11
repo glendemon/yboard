@@ -1,5 +1,4 @@
 <? return array (
-  'basePath' => 'D:\\AppServ\\www\\yboard\\protected\\config\\..',
   'language' => 'ru',
   'name' => 'Yboard 2',
   'theme' => 'yboard',
@@ -15,7 +14,6 @@
     3 => 'application.modules.user.*',
     4 => 'application.modules.user.models.*',
     5 => 'application.modules.user.components.*',
-    //6 => 'application.extensions.*',
     7 => 'application.extensions.yii-mail.*',
     8 => 'application.extensions.gallerymanager.*',
     9 => 'application.extensions.gallerymanager.models.*',
@@ -124,31 +122,31 @@
     array (
       'errorAction' => 'site/error',
     ),
-    'log' => 
-    array (
-      'class' => 'CLogRouter',
-      'enabled' => true,
-      'routes' => 
-      array (
-        0 => 
-        array (
-          'class' => 'CFileLogRoute',
-          'levels' => 'error, warning',
-        ),
-        1 => 
-        array (
-          'class' => 'application.extensions.yii-debug-toolbar.YiiDebugToolbarRoute',
-          'ipFilters' => 
-          array (
-            0 => '127.0.0.1',
-            1 => '192.168.1.215',
+    'log' => array(
+        'class' => 'CLogRouter',
+                    'enabled'=>YII_DEBUG,
+        'routes' => array(
+            array(
+                'class' => 'CFileLogRoute',
+                'levels' => 'error, warning',
+    //                    'class'=>'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
+    //                    'ipFilters'=>array('127.0.0.1','192.168.1.3'),
+            ),
+                            array(
+                                    'class'=>'application.extensions.yii-debug-toolbar.YiiDebugToolbarRoute',
+                                    'ipFilters'=>array('127.0.0.1','192.168.1.215'),
+                            ),
+        // uncomment the following to show log messages on web pages
+        /*
+          array(
+          'class'=>'CWebLogRoute',
           ),
+         */
         ),
-      ),
     ),
     'db' => 
     array (
-      'connectionString' => 'mysql:host=localhost;dbname=yboard',
+      'connectionString' => 'mysql:host=localhost;dbname=yboard2',
       'emulatePrepare' => true,
       'username' => 'root',
       'password' => '123456',
@@ -158,6 +156,7 @@
   ),
   'params' => 
   array (
-    'adminEmail' => 'webmaster@example.com',
+    'adminEmail' => 'mazer@mail.ru',
+    'installed' => 'no',
   ),
 ) ?>

@@ -10,7 +10,7 @@ class SiteController extends Controller
 
 	public function actions()
 	{
-		return array(
+            return array(
             'create' => 'application.controllers.site.CreateAction' ,
             //'importUsers' => 'application.controllers.site.ImportUsersAction' ,
             //'importBulletins' => 'application.controllers.site.ImportBulletinsAction' ,
@@ -55,26 +55,21 @@ class SiteController extends Controller
         
 	public function accessRules()
 	{
-		return array(
-			array('allow',  // allow all users to perform actions
-				'actions'=>array('index','error','contact','bulletin','category','captcha','page','advertisement','getfields','search'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user
-				'actions'=>array('create'),
-				'users'=>array('@'),
-			),
-			array('allow', // allow admin user
-				'actions'=>array('importUsers','importBulletins'),
-				'users'=>array('admin'),
-			),
-			/*
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),
-			 * 
-			 */
-		);
+            return array(
+                    array('allow',  // allow all users to perform actions
+                            'actions'=>array('index','error','contact','bulletin','category','captcha','page','advertisement','getfields','search'),
+                            'users'=>array('*'),
+                    ),
+                    array('allow', // allow authenticated user
+                            'actions'=>array('create'),
+                            'users'=>array('@'),
+                    ),
+                    array('allow', // allow admin user
+                            'actions'=>array('importUsers','importBulletins'),
+                            'users'=>array('admin'),
+                    ),
+
+            );
 	}
 
 	/**
@@ -103,24 +98,38 @@ class SiteController extends Controller
                     $model=new InstallForm;
                     if(isset($_POST['InstallForm']))
                     {
-
+                        $model->attributes=$_POST['InstallForm'];
+                        
+                        // данныве Mysql 
                         $server=trim(stripslashes($_POST['InstallForm']['mysql_server']));
                         $username=trim(stripslashes($_POST['InstallForm']['mysql_login']));
                         $password=trim(stripslashes($_POST['InstallForm']['mysql_password']));
                         $db_name=trim(stripslashes($_POST['InstallForm']['mysql_db_name']));
+                        
+                        // данные пользователя                     
+                        if(!$model->validate() or $model->userpass!==$model->userpass2 ) {
+                            $db_error = "Данные пользователя неправльные";
+                        }
 
                         $db_con=@mysqli_connect($server,$username,$password) or $db_error = mysqli_error();
                         @mysqli_select_db($db_con,$db_name) or $db_error = mysqli_error($db_con);
-
+                        
                         if(!$db_error) {
                             $config_data= require $CONFIG;
                             
                             $dump_file=file_get_contents(Yii::getPathOfAlias('application.data.install').'.sql');
                             
+                            // Сохранение данных о пользователе 
+                            $dump_file.=" INSERT INTO `users` 
+                                    (`username`, `password`, `email`, `activkey`, `superuser`, `status`)     VALUES "
+                                    ."('".$model->username."', '".UserModule::encrypting($model->userpass)."', "
+                                    . "'".$model->useremail."', '".UserModule::encrypting(microtime().$model->userpass)."',"
+                                    . " 1, 1);";
+                            
                             mysqli_multi_query($db_con,$dump_file) or $db_error = mysqli_error($db_con);
                                                        
                             if(!$db_error) {
-                            
+                                // Заполнение конфигурации
                                 $config_data['components']['db'] = array(
                                         'connectionString' => 'mysql:host='.$server.';dbname='.$db_name,
                                         'emulatePrepare' => true,
@@ -130,13 +139,16 @@ class SiteController extends Controller
                                         'tablePrefix' => '',
                                 );
                                 $config_data['name']=trim(stripslashes($_POST['InstallForm']['site_name']));
+                                $config_data['params']['adminEmail']=$model->useremail;
+                                $config_data['params']['installed']="yes";
 
+                                //Сохранение конфигурации
                                 file_put_contents($CONFIG, "<? return ".var_export($config_data, true)." ?>");
 
                                 $this->redirect(Yii::app()->createUrl('site/index'));
                             }
                             
-                        }		
+                        }
                     }
                     $this->render('install',array('model'=>$model, 'db_error'=>$db_error));
             }

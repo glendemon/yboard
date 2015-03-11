@@ -8,7 +8,7 @@ return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'language' => 'ru',
     'name' => 'YBoard',
-    'theme'=>'classic',
+    'theme'=>'yboard',
     // preloading 'log' component
     'preload' => array('log'),
     // autoloading model and component classes
@@ -19,7 +19,7 @@ return array(
         'application.modules.user.*',
         'application.modules.user.models.*',
         'application.modules.user.components.*',
-        'application.extensions.*',
+        //'application.extensions.*',
         'application.extensions.yii-mail.*',
         'application.extensions.gallerymanager.*',
         'application.extensions.gallerymanager.models.*',
@@ -140,7 +140,7 @@ return array(
           'username' => 'root',
           'password' => '123456',
           'charset' => 'utf8',
-		  'tablePrefix' => '',
+	  'tablePrefix' => '',
           ),
 
         'errorHandler' => array(
@@ -175,7 +175,7 @@ return array(
     'params' => array(
         // this is used in contact page
         'adminEmail' => 'webmaster@example.com',
+        'installed' => 'yes',
     ),
-	'theme' => "yboard",
 
 );

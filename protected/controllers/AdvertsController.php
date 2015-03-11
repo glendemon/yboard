@@ -89,7 +89,7 @@ class AdvertsController extends Controller
 			
 		} else {
 			// Вывод дочерних категории
-			$subcat= Yii::app()->db->createCommand('select id,name  from category  where root='.$model->root.' and lft>'.$model->lft.' and rgt<'.$model->rgt.' ')->query();
+			$subcat= Yii::app()->db->createCommand('select id,name  from category  where root='.$model->root.' and lft>'.$model->lft.' and rgt<'.$model->rgt.' and level='.($model->level+1).' ')->query();
 			
 			
 			
@@ -297,10 +297,19 @@ class AdvertsController extends Controller
 		$model->text=$searchStr;
 		
 
-		
-		$this->render('search',array(
-			'model'=>$model,
+                /*
+                $this->render('admin',array(
+			'model'=>$model->search(),
 		));
+                 */
+		
+
+		$this->render('index',array(
+			'data'=>$model->search(),
+                    //'data'=>$dataProvider
+		));
+
+
 
 	}
 
