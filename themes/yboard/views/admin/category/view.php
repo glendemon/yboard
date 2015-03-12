@@ -14,21 +14,22 @@
 -->
 <?php
 $this->breadcrumbs = array(
-    AdminModule::t('Categories') => array('index'),
+    Yii::t('lang','Categories') => array('index'),
     $model->name => array('view', 'id' => $model->id),
-    AdminModule::t('View'),
+    Yii::t('lang','View Category'),
 );
 
 $this->menu = array(
-    array('label' => AdminModule::t('List Category'), 'icon' => 'icon-list', 'url' => array('index')),
-    array('label' => AdminModule::t('Manage Category'), 'icon' => 'icon-folder-open', 'url' => array('admin'))
-);
+    array('label' => Yii::t('lang','List Category'), 'icon' => 'icon-list', 'url' => array('index')),
+    array('label' => Yii::t('lang','Manage Category'), 'icon' => 'icon-folder-open', 'url' => array('admin')),
+    array('label' => Yii::t('lang','Redact Category'), 'icon' => 'icon-folder-open', 'url' => array('update', 'id'=>$model->id)),
+    );
 ?>
 
 
 <div class="page-header">
-    <h1><?php echo $model->name; ?>    </h1>
-    <h2><?php echo Yii::t('global', 'Details') ?></h2>
+    <h2> <?php echo Yii::t('lang','Category').'  "'. $model->name.'"'; ?>    </h2>
+
 
 
 
@@ -40,9 +41,12 @@ $this->menu = array(
         //modify attributes according to your model
         'attributes' => array(
             'id',
+            /*
             'root',
             'lft',
             'rgt',
+             * 
+             */
             'level',
             'name',
             'icon',

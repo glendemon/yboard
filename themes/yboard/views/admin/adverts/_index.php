@@ -3,16 +3,16 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs = array(
-    AdminModule::t('Bulletins'),
+    Yii::t('lang','Bulletins'),
 );
 
 $this->menu = array(
-    array('label' => AdminModule::t('Create Bulletin'), 'icon' => 'icon-plus', 'url' => array('create')),
-    array('label' => AdminModule::t('Manage Bulletin'), 'icon' => 'icon-folder-open', 'url' => array('admin')),
+    array('label' => Yii::t('lang','Create Bulletin'), 'icon' => 'icon-plus', 'url' => array('create')),
+    array('label' => Yii::t('lang','Manage Bulletin'), 'icon' => 'icon-folder-open', 'url' => array('admin')),
 );
 ?>
 
-<h1><?php echo AdminModule::t('Bulletins'); ?></h1>
+<h1><?php echo Yii::t('lang','Bulletins'); ?></h1>
 
 <table>
 	

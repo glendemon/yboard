@@ -24,7 +24,7 @@ class AdminModule extends CWebModule
 			// you may place customized code here
             Yii::app()->widgetFactory->widgets['CBreadcrumbs'] = 
                     Yii::app()->widgetFactory->widgets['TbBreadcrumbs'] = 
-                    array('homeLink'=>CHtml::link(AdminModule::t('Home'), array('/admin')));
+                    array('homeLink'=>CHtml::link(Yii::t('lang','Home'), array('/admin')));
 
 			return true;
 		}
@@ -39,10 +39,16 @@ class AdminModule extends CWebModule
 	 * @return string
 	 */
 	public static function t($str='',$params=array(),$dic='admin') {
-		if (Yii::t("AdminModule", $str)==$str)
-		    return Yii::t("AdminModule.".$dic, $str, $params);
-        else
-            return Yii::t("AdminModule", $str, $params);
-	}
+            return Yii::t('lang',$str);
 
+            // переделано для работы только с одним файлом языка
+            /*
+            if (Yii::t("AdminModule", $str)==$str)
+                return Yii::t("AdminModule.".$dic, $str, $params);
+            else
+                return Yii::t("AdminModule", $str, $params);
+            * 
+            */
+	}
+ 
 }

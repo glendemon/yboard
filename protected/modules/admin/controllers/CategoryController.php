@@ -30,13 +30,22 @@ class CategoryController extends BackendController
     public function actionCreate()
     {
         $model = new Category;
-
+        $model->detachBehavior("NestedSetBehavior");
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
+        
+        // Создаем корневую директорию 
+        $last_root= Yii::app()->db->createCommand("select root from category order by root desc limit 1")->queryScalar();
+        
 
         if (isset($_POST['Category']))
         {
+              
             $model->attributes = $_POST['Category'];
+            $model->lft=1;
+            $model->rgt=2;
+            $model->level=1;
+            $model->root=$last_root+1;
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
@@ -54,6 +63,7 @@ class CategoryController extends BackendController
     public function actionUpdate($id)
     {
         $model = $this->loadModel($id);
+        $model->detachBehavior("NestedSetBehavior");
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
@@ -82,7 +92,9 @@ class CategoryController extends BackendController
      */
     public function actionDelete($id)
     {
-        $this->loadModel($id)->delete();
+        $cat_model=$this->loadModel($id);
+        $cat_model->detachBehavior("NestedSetBehavior");
+        $cat_model->delete();
 
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if (!isset($_GET['ajax']))

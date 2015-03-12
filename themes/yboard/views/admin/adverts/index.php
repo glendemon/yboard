@@ -3,13 +3,13 @@
 /* @var $model Bulletin */
 
 $this->breadcrumbs = array(
-    AdminModule::t('Bulletins') => array('index'),
-    AdminModule::t('Manage'),
+    Yii::t('lang','Bulletins') => array('index'),
+    Yii::t('lang','Manage'),
 );
 
 $this->menu = array(
-    array('label' => AdminModule::t('List Bulletin'), 'icon' => 'icon-list', 'url' => array('index'),"itemOptions"=>array('class'=>'btn')),
-    array('label' => AdminModule::t('Create Bulletin'), 'icon' => 'icon-plus', 'url' => array('create') ,"itemOptions"=>array('class'=>'btn')),
+    array('label' => Yii::t('lang','List Bulletin'), 'icon' => 'icon-list', 'url' => array('index'),"itemOptions"=>array('class'=>'btn')),
+    array('label' => Yii::t('lang','Create Bulletin'), 'icon' => 'icon-plus', 'url' => array('create') ,"itemOptions"=>array('class'=>'btn')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1><?php echo AdminModule::t('Manage Bulletins'); ?></h1>
+<h1><?php echo Yii::t('lang','Manage Bulletins'); ?></h1>
 
 <p>
     You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>

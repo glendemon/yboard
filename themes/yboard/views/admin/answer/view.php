@@ -3,20 +3,20 @@
 /* @var $model Answer */
 
 $this->breadcrumbs = array(
-    AdminModule::t('Answers') => array('index'),
+    Yii::t('lang','Answers') => array('index'),
     $model->id,
 );
 
 $this->menu = array(
-    array('label' => AdminModule::t('List Answer'), 'icon' => 'icon-list', 'url' => array('index')),
-    array('label' => AdminModule::t('Create Answer'), 'icon' => 'icon-plus', 'url' => array('create')),
-    array('label' => AdminModule::t('Update Answer'), 'icon' => 'icon-refresh', 'url' => array('update', 'id' => $model->id)),
-    array('label' => AdminModule::t('Delete Answer'), 'icon' => 'icon-minus', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
-    array('label' => AdminModule::t('Manage Answer'), 'icon' => 'icon-folder-open', 'url' => array('admin')),
+    array('label' => Yii::t('lang','List Answer'), 'icon' => 'icon-list', 'url' => array('index')),
+    array('label' => Yii::t('lang','Create Answer'), 'icon' => 'icon-plus', 'url' => array('create')),
+    array('label' => Yii::t('lang','Update Answer'), 'icon' => 'icon-refresh', 'url' => array('update', 'id' => $model->id)),
+    array('label' => Yii::t('lang','Delete Answer'), 'icon' => 'icon-minus', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
+    array('label' => Yii::t('lang','Manage Answer'), 'icon' => 'icon-folder-open', 'url' => array('admin')),
 );
 ?>
 
-<h1><?php echo AdminModule::t('View Answer'); ?> #<?php echo $model->id; ?></h1>
+<h1><?php echo Yii::t('lang','View Answer'); ?> #<?php echo $model->id; ?></h1>
 
 <?php
 $this->widget('bootstrap.widgets.TbDetailView', array(

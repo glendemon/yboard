@@ -39,9 +39,12 @@ class MessagesController extends Controller
 				'actions'=>array('admin','delete'),
 				'users'=>array('admin'),
 			),
+                        /*
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
+                         * 
+                         */
 		);
 	}
 
@@ -60,22 +63,31 @@ class MessagesController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($id)
 	{
 		$model=new Messages;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
+                
+                //var_dump(Yii::app()->request->getPost('Messages'));
 
-		if(isset($_POST['Messages']))
+		if(Yii::app()->request->getPost('Messages'))
 		{
-			$model->attributes=$_POST['Messages'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			$model->attributes=Yii::app()->request->getPost('Messages');
+                        $model->receiver_id=$id;
+                        $model->sender_id=Yii::app()->user->id;
+                        $model->send_date=date('Y-m-d H:i:s'); //тупо но не нашел быстрого решения
+                        
+			if($model->validate()){
+                            $model->save();
+                            $this->redirect(array('view','id'=>$model->id));
+                        }
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+                        'receiver'=>$id,
 		));
 	}
 
@@ -122,7 +134,11 @@ class MessagesController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Messages');
+		$dataProvider=new CActiveDataProvider('Messages',array(
+                    'criteria'=>array(
+                        'condition'=>'sender_id="'.Yii::app()->user->id.'" or receiver_id="'.Yii::app()->user->id.'"'
+                        )
+                ));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));

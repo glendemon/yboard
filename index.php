@@ -5,9 +5,6 @@ header("Content-Type: text/html; charset=UTF-8");
 $yii=dirname(__FILE__).'/yii_framework/yii.php';
 
 
-
-
-
 if($_COOKIE['YII_DEBUG']==="yes") {
 
 	// remove the following lines when in production mode
@@ -19,13 +16,6 @@ if($_COOKIE['YII_DEBUG']==="yes") {
 	$CONFIG=dirname(__FILE__).'/protected/config/main.php';
 }
 
-// После установки этот блок можно удалить
-/*
-$config_data = require $CONFIG;
-
-if($config_data[''])
-
-*/
 
 require_once($yii);
 Yii::createWebApplication($CONFIG)->run();

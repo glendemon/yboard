@@ -60,6 +60,12 @@ body
     min-width: 1200px;
 }
 
+canvas {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 20px;
+}
+
 #header
 {
 	margin: 0;

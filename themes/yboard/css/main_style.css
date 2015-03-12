@@ -33,6 +33,11 @@ ul {
     padding-left: 20px;
     text-align: left;
 }
+
+textarea.wide{
+    width:100%;
+}
+
 .breadcrumb {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
     border-bottom: 1px dashed #b9d7d4;

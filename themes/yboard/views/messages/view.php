@@ -16,9 +16,17 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Messages #<?php echo $model->id; ?></h1>
+<div> <?=t('View Messages')?> <?php echo $model->id; ?></div>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
+<div style='border:1px solid #ccc; border-radius: 5px; padding:5px; '>
+    <div> <?=$model->sender->username?>:   </div>
+    <div style='padding:20px;'> <?=$model->message?>  </div>
+    <div style='text-align:right; font-size:10px; font-style:italic; '> <?=$model->send_date?> </div>
+</div>
+
+<?php 
+/*
+$this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id',
@@ -28,4 +36,9 @@ $this->menu=array(
 		'send_date',
 		'read_date',
 	),
-)); ?>
+)); 
+ * 
+ */
+
+
+?>

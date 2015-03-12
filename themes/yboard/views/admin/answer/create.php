@@ -3,16 +3,16 @@
 /* @var $model Answer */
 
 $this->breadcrumbs = array(
-    AdminModule::t('Answers') => array('index'),
-    AdminModule::t('Create'),
+    Yii::t('lang','Answers') => array('index'),
+    Yii::t('lang','Create'),
 );
 
 $this->menu = array(
-    array('label' => AdminModule::t('List Answer'), 'icon' => 'icon-list', 'url' => array('index')),
-    array('label' => AdminModule::t('Manage Answer'), 'icon' => 'icon-folder-open', 'url' => array('admin')),
+    array('label' => Yii::t('lang','List Answer'), 'icon' => 'icon-list', 'url' => array('index')),
+    array('label' => Yii::t('lang','Manage Answer'), 'icon' => 'icon-folder-open', 'url' => array('admin')),
 );
 ?>
 
-<h1><?php echo AdminModule::t('Create Answer'); ?></h1>
+<h1><?php echo Yii::t('lang','Create Answer'); ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model' => $model)); ?>

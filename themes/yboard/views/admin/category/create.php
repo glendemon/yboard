@@ -3,16 +3,16 @@
 /* @var $model Category */
 
 $this->breadcrumbs = array(
-    AdminModule::t('Categories') => array('index'),
-    AdminModule::t('Create'),
+    Yii::t('lang','Categories') => array('index'),
+    Yii::t('lang','Create'),
 );
 
 $this->menu = array(
-    array('label' => AdminModule::t('List Category'), 'icon' => 'icon-list', 'url' => array('index')),
-    array('label' => AdminModule::t('Manage Category'), 'icon' => 'icon-folder-open', 'url' => array('admin')),
+    array('label' => Yii::t('lang','List Category'), 'icon' => 'icon-list', 'url' => array('index')),
+    array('label' => Yii::t('lang','Manage Category'), 'icon' => 'icon-folder-open', 'url' => array('admin')),
 );
 ?>
 
-<h1><?php echo AdminModule::t('Create Category'); ?></h1>
+<h1><?php echo Yii::t('lang','Create Category'); ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model' => $model)); ?>

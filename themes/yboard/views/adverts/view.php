@@ -37,12 +37,13 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
                 <td><?php echo CHtml::encode($model->getAttributeLabel('text')); ?>:</td>
                 <td><?php echo CHtml::encode($model->text); ?></td>
             </tr>
-			<? if (sizeof($model->fields)>0) { ?>
+			<? if (sizeof($model->fields)>0 and is_array($model->fields)) { ?>
 			<tr class="">
                 <td><?php echo CHtml::encode($model->getAttributeLabel('fields')); ?>:</td>
                 <td><?php 
+
 				
-				
+                                if(is_array($model->fields))
 				foreach($model->fields as $f_name=>$field) {
 					
 					echo $f_name." - ".$field."<br/>";

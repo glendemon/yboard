@@ -21,6 +21,10 @@
 // In this example we assume that you unzipped the extension under protected/extensions.
 Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
 
+function t($str,$dict='lang'){
+    return Yii::t($dict,$str);
+}
+
 class Controller extends CController
 
 {

@@ -151,10 +151,16 @@ class UserModule extends CWebModule
 	 * @return string
 	 */
 	public static function t($str='',$params=array(),$dic='user') {
+             return Yii::t('lang',$str);
+            
+                // переделано для работы только с одним файлом языка
+             /*
 		if (Yii::t("UserModule", $str)==$str)
 		    return Yii::t("UserModule.".$dic, $str, $params);
-        else
-            return Yii::t("UserModule", $str, $params);
+                else
+                    return Yii::t("UserModule", $str, $params);
+              * 
+              */
 	}
 
 	/**

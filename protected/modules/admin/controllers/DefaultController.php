@@ -22,8 +22,58 @@ class DefaultController extends BackendController
 
 	public function actionIndex()
 	{
+                $registrations=Yii::app()->db->createCommand("select count(*) as num, DATE_FORMAT(create_at, '%d %b') as data "
+                        . "from users group by DATE_FORMAT(create_at, '%Y %m %d') limit 7 ")->queryAll();
+                $adverts=Yii::app()->db->createCommand("select count(*) as num, DATE_FORMAT(created_at, '%d %b') as data "
+                        . "from adverts group by day(created_at) limit 7")->queryAll();
+                $messages=Yii::app()->db->createCommand("select count(*) as num, DATE_FORMAT(send_date, '%d %b') as data "
+                        . "from messages group by day(send_date) limit 7")->queryAll();
+                
+                //var_dump($messages->getData());
+                
+                $this->title="Панель администратора";
+                
+                $chart[0]['data']="";
+                $chart[0]['label']="";
+                foreach($registrations as $mes) {
+                    if($chart[0]['data']!=="") $chart[0]['data'].=",";
+                        $chart[0]['data'].=$mes['num'];
+                    if($chart[0]['label']!=="") $chart[0]['label'].=",";
+                        $chart[0]['label'].='"'.$mes['data'].'"';
+                } 
+                $chart[0]['data']="[".$chart[0]['data']."]";
+                $chart[0]['label']="[".$chart[0]['label']."]";
+                
+                
+                $chart[1]['data']="";
+                $chart[1]['label']="";
+                foreach($adverts as $mes) {
+                    if($chart[1]['data']!=="") $chart[1]['data'].=",";
+                        $chart[1]['data'].=$mes['num'];
 
-		$this->render('index');
+                    if($chart[1]['label']!=="") $chart[1]['label'].=",";
+                        $chart[1]['label'].='"'.$mes['data'].'"';
+                } 
+                $chart[1]['data']="[".$chart[1]['data']."]";
+                $chart[1]['label']="[".$chart[1]['label']."]";
+
+
+                $chart[2]['data']="";
+                $chart[2]['label']="";
+                foreach($messages as $mes) {
+                    if($chart[2]['data']!=="") $chart[2]['data'].=",";
+                        $chart[2]['data'].=$mes['num'];
+
+                    if($chart[2]['label']!=="") $chart[2]['label'].=",";
+                        $chart[2]['label'].='"'.$mes['data'].'"';
+                } 
+                $chart[2]['data']="[".$chart[2]['data']."]";
+                $chart[2]['label']="[".$chart[2]['label']."]";
+            
+                
+		$this->render('index', array(
+                    'chart'=>$chart,
+                ));
 
 	}
 
@@ -44,7 +94,7 @@ class DefaultController extends BackendController
             {
 				Yii::app()->config->set($attr, $val);
             }
-            Yii::app()->user->setFlash('success', AdminModule::t('Config updated.'));
+            Yii::app()->user->setFlash('success', Yii::t('lang','Config updated.'));
             $this->redirect(array('config'));
 		}
 

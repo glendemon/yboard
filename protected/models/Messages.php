@@ -39,8 +39,9 @@ class Messages extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('sender_id, receiver_id, message, send_date, read_date', 'required'),
+			array('sender_id, receiver_id, message, send_date', 'required'),
 			array('sender_id, receiver_id', 'numerical', 'integerOnly'=>true),
+                        array('message', 'length', 'max'=>3000, 'min' => 3),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, sender_id, receiver_id, message, send_date, read_date', 'safe', 'on'=>'search'),
@@ -55,6 +56,8 @@ class Messages extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'sender' => array(self::BELONGS_TO, 'User', 'sender_id'),
+                    'receiver' => array(self::BELONGS_TO, 'User', 'receiver_id'),
 		);
 	}
 
@@ -64,12 +67,12 @@ class Messages extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'sender_id' => 'Sender',
-			'receiver_id' => 'Receiver',
-			'message' => 'Message',
-			'send_date' => 'Send Date',
-			'read_date' => 'Read Date',
+			'id' => t('ID'),
+			'sender_id' => t('Sender'),
+			'receiver_id' => t('Receiver'),
+			'message' => t('Message'),
+			'send_date' => t('Send Date'),
+			'read_date' => t('Read Date'),
 		);
 	}
 

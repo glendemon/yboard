@@ -8,7 +8,7 @@ $this->menu=array(
     array('label'=>UserModule::t('List User'), 'icon'=>'icon-list', 'url'=>array('index')),
 );
 ?>
-<h1><?php echo UserModule::t('View User').' "'.$model->username.'"'; ?></h1>
+<h3><?php echo UserModule::t('View User').' "'.$model->username.'"'; ?></h3>
 <?php 
 
 // For all users
@@ -46,4 +46,4 @@ $this->menu=array(
 ?>
 
 
-<a href=''> Отправить сообщение </a>
+<a href='<?=Yii::app()->createUrl('messages/create',array('id'=>$model->id))?>'> Отправить сообщение </a>

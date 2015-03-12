@@ -157,7 +157,8 @@ class AdvertsController extends Controller
 		if(isset($_POST['Adverts']))
 		{
 			$model->attributes = $_POST['Adverts'];
-            $model->user_id = Yii::app()->user->id;
+                        $model->user_id = Yii::app()->user->id;
+                        $model->created_at=date("Y-m-d H:i:s");
 			$model->fields=serialize($_POST['Fields']);
 
 

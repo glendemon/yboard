@@ -105,7 +105,7 @@ Purchase: http://wrapbootstrap.com
                                     ),
                                 'linkOptions'=>array('class'=>'menu-dropdown'),
                             ),
-							array('label' => "Панель", 'url' => array('/admin')),
+							array('label' => "Панель администратора", 'url' => array('/admin')),
 							array('label' => Yii::t('main', 'Bulletin').'<i class="menu-expand"></i>', 'url' => "#",
 								'items'=>array(
 									array('label' => "Управление", 'url' => array('/admin/adverts/index')),

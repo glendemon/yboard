@@ -33,14 +33,14 @@ class InstallForm extends CFormModel
 
             array('useremail', 'email'),
             array('username', 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u',
-                'message' => UserModule::t("Incorrect symbols (A-z0-9).")
+                'message' => Yii::t('lang',"Incorrect symbols (A-z0-9).")
             ),
-            //array('useremail', 'unique', 'message' => UserModule::t("This user's email address already exists.")),
+            //array('useremail', 'unique', 'message' => Yii::t('lang',"This user's email address already exists.")),
             array('username', 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u',
-                'message' => UserModule::t("Incorrect symbols (A-z0-9).")
+                'message' => Yii::t('lang',"Incorrect symbols (A-z0-9).")
             ),
             array('userpass', 'compare', 'compareAttribute'=>'userpass2', 
-                'message' => UserModule::t("Retype Password is incorrect.")
+                'message' => Yii::t('lang',"Retype Password is incorrect.")
             )
         );
     }
