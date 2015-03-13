@@ -8,7 +8,7 @@ $this->menu=array(
     array('label'=>UserModule::t('List User'), 'icon'=>'icon-list', 'url'=>array('index')),
 );
 ?>
-<h1><?php echo UserModule::t('View User').' "'.$model->username.'"'; ?></h1>
+<h3><?php echo UserModule::t('View User').' "'.$model->username.'"'; ?></h3>
 <?php 
 
 // For all users
@@ -16,6 +16,7 @@ $this->menu=array(
 			'username',
 	);
 	
+	/*
 	$profileFields=ProfileField::model()->forAll()->sort()->findAll();
 	if ($profileFields) {
 		foreach($profileFields as $field) {
@@ -27,6 +28,8 @@ $this->menu=array(
 				));
 		}
 	}
+	 * 
+	 */
 	array_push($attributes,
 		'create_at',
 		array(
@@ -41,3 +44,6 @@ $this->menu=array(
 	));
 
 ?>
+
+
+<a href='<?=Yii::app()->createUrl('messages/create',array('id'=>$model->id))?>'> Отправить сообщение </a>

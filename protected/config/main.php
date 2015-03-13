@@ -1,174 +1,162 @@
-<?php
-// Define a path alias for the Bootstrap extension as it's used internally.
-// In this example we assume that you unzipped the extension under protected/extensions.
-Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
-// uncomment the following to define a path alias
-// Yii::setPathOfAlias('local','path/to/local-folder');
-// This is the main Web application configuration. Any writable
-// CWebApplication properties can be configured here.
-return array(
-    'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-    'language' => 'ru',
-    'name' => 'YBoard',
-    'theme'=>'classic',
-    // preloading 'log' component
-    'preload' => array('log'),
-    // autoloading model and component classes
-    'import' => array(
-        'application.models.*',
-        'application.components.*',
-        'application.modules.admin.*',
-        'application.modules.user.*',
-        'application.modules.user.models.*',
-        'application.modules.user.components.*',
-        'application.extensions.*',
-        'application.extensions.yii-mail.*',
-        'application.extensions.gallerymanager.*',
-        'application.extensions.gallerymanager.models.*',
+<? return array (
+  'language' => 'ru',
+  'name' => 'Yboard 2',
+  'theme' => 'yboard',
+  'preload' => 
+  array (
+    0 => 'log',
+  ),
+  'import' => 
+  array (
+    0 => 'application.models.*',
+    1 => 'application.components.*',
+    2 => 'application.modules.admin.*',
+    3 => 'application.modules.user.*',
+    4 => 'application.modules.user.models.*',
+    5 => 'application.modules.user.components.*',
+    7 => 'application.extensions.yii-mail.*',
+    8 => 'application.extensions.gallerymanager.*',
+    9 => 'application.extensions.gallerymanager.models.*',
+  ),
+  'modules' => 
+  array (
+    'gii' => 
+    array (
+      'class' => 'system.gii.GiiModule',
+      'password' => 'qwerty',
     ),
-    'modules' => array(
-        // uncomment the following to enable the Gii tool
-//        'gii' => array(
-//            'class' => 'system.gii.GiiModule',
-//            'password' => 'qwerty',
-//            // If removed, Gii defaults to localhost only. Edit carefully to taste.
-//            'ipFilters' => array('127.0.0.1', '::1', '192.168.1.3'),
-//        ),
-        'user' => array(
-            # encrypting method (php hash function)
-            'hash' => 'md5',
-            # send activation email
-            'sendActivationMail' => true,
-            # allow access for non-activated users
-            'loginNotActiv' => false,
-            # activate user on registration (only sendActivationMail = false)
-            'activeAfterRegister' => false,
-            # automatically login from registration
-            'autoLogin' => true,
-            # registration path
-            'registrationUrl' => array('/user/registration'),
-            # recovery password path
-            'recoveryUrl' => array('/user/recovery'),
-            # login form path
-            'loginUrl' => array('/user/login'),
-            # page after login
-            'returnUrl' => array('/user/profile'),
-            # page after logout
-            'returnLogoutUrl' => array('/user/login'),
-        ),
-        'admin',
+    'user' => 
+    array (
+      'hash' => 'md5',
+      'sendActivationMail' => true,
+      'loginNotActiv' => false,
+      'activeAfterRegister' => false,
+      'autoLogin' => true,
+      'registrationUrl' => 
+      array (
+        0 => '/user/registration',
+      ),
+      'recoveryUrl' => 
+      array (
+        0 => '/user/recovery',
+      ),
+      'loginUrl' => 
+      array (
+        0 => '/user/login',
+      ),
+      'returnUrl' => 
+      array (
+        0 => '/user/profile',
+      ),
+      'returnLogoutUrl' => 
+      array (
+        0 => '/user/login',
+      ),
     ),
-    // application components
-    'components' => array(
-        'user' => array(
-            // enable cookie-based authentication
-            'class' => 'WebUser',
-            'allowAutoLogin' => true,
-            'loginUrl' => array('/user/login'),
-        ),
-        'cache'=>array(
-           'class'=>'system.caching.CFileCache',
-        ),
-        'countBulletins'=>array('class'=>'CountBulletins'),
-        'evenness'=>array('class'=>'Evenness'),
-        'bootstrap'=>array(
-            'class'=>'bootstrap.components.Bootstrap',
-        ),
-        'image'=>array(
-            'class'=>'application.extensions.image.CImageComponent',
-            // GD or ImageMagick
-            'driver'=>'GD',
-            // ImageMagick setup path
-            //'params'=>array('directory'=>'D:/Program Files/ImageMagick-6.4.8-Q16'),
-        ),
-        'mail' => array(
-            'class' => 'ext.yii-mail.YiiMail',
-			'transportType' => 'php',
-//            'transportType' => 'smtp',
-//            'transportOptions' => array(
-//                'host' => 'smtp.gmail.com',
-//                'username' => 'username@gmail.com',
-//                'password' => 'password',
-//                'port' => '465',
-//                'encryption'=>'tls',
-//            ),
-            'viewPath' => 'application.views.mail',
-            'logging' => true,
-            'dryRun' => false
-        ),
-        'config' => array(
-           'class' => 'application.extensions.EConfig',
-           'strictMode' => false,
-        ),
-        // uncomment the following to enable URLs in path-format
-        'urlManager' => array(
-            'urlFormat' => 'path',
-            'showScriptName' => false,
-            'rules' => array(
-                '' => 'site/index',
-                '<id:\d+>' => 'site/bulletin',
-                'category/<cat_id:\d+>' => 'site/category',
-                'category/<action:\w+>/' => 'admin/category/<action>',
-                '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+    0 => 'admin',
+  ),
+  'components' => 
+  array (
+    'user' => 
+    array (
+      'class' => 'WebUser',
+      'allowAutoLogin' => true,
+      'loginUrl' => 
+      array (
+        0 => '/user/login',
+      ),
+    ),
+    'cache' => 
+    array (
+      'class' => 'system.caching.CFileCache',
+    ),
+    'Board' => 
+    array (
+      'class' => 'Board',
+    ),
+    'evenness' => 
+    array (
+      'class' => 'Evenness',
+    ),
+    'bootstrap' => 
+    array (
+      'class' => 'bootstrap.components.Bootstrap',
+    ),
+    'image' => 
+    array (
+      'class' => 'application.extensions.image.CImageComponent',
+      'driver' => 'GD',
+    ),
+    'mail' => 
+    array (
+      'class' => 'ext.yii-mail.YiiMail',
+      'transportType' => 'php',
+      'viewPath' => 'themes.views.mail',
+    ),
+    'email' => 
+    array (
+      'class' => 'application.extensions.email.Email',
+      'delivery' => 'php',
+    ),
+    'config' => 
+    array (
+      'class' => 'application.extensions.EConfig',
+      'strictMode' => false,
+    ),
+    'urlManager' => 
+    array (
+      'urlFormat' => 'path',
+      'showScriptName' => false,
+      'rules' => 
+      array (
+        '' => 'site/index',
+        '<id:\\d+>' => 'bulletin/view',
+        'category/<cat_id:\\d+>' => 'adverts/category',
+        'category/<action:\\w+>/' => 'admin/category/<action>',
+        '<controller:\\w+>/<id:\\d+>' => '<controller>/view',
+        '<controller:\\w+>/<action:\\w+>/<id:\\d+>' => '<controller>/<action>',
+        '<controller:\\w+>/<action:\\w+>' => '<controller>/<action>',
+      ),
+    ),
+    'errorHandler' => 
+    array (
+      'errorAction' => 'site/error',
+    ),
+    'log' => array(
+        'class' => 'CLogRouter',
+                    'enabled'=>YII_DEBUG,
+        'routes' => array(
+            array(
+                'class' => 'CFileLogRoute',
+                'levels' => 'error, warning',
+    //                    'class'=>'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
+    //                    'ipFilters'=>array('127.0.0.1','192.168.1.3'),
             ),
-        ),
-
-		/*
-
-        'db' => array(
-            'connectionString' => 'sqlite:' . dirname(__FILE__) . '/../data/testdrive.db',
-            'tablePrefix' => '',
-//            'enableProfiling' => true,
-//            'enableParamLogging' => true,
-            'queryCacheID' => 'cache',
-        ),
-		 * 
-		 */
-        // uncomment the following to use a MySQL database
-        'db'=>array(
-          'connectionString' => 'mysql:host=localhost;dbname=yboard',
-          'emulatePrepare' => true,
-          'username' => 'root',
-          'password' => '123456',
-          'charset' => 'utf8',
-		  'tablePrefix' => '',
+                            array(
+                                    'class'=>'application.extensions.yii-debug-toolbar.YiiDebugToolbarRoute',
+                                    'ipFilters'=>array('127.0.0.1','192.168.1.215'),
+                            ),
+        // uncomment the following to show log messages on web pages
+        /*
+          array(
+          'class'=>'CWebLogRoute',
           ),
-
-        'errorHandler' => array(
-            // use 'site/error' action to display errors
-            'errorAction' => 'site/error',
-        ),
-        'log' => array(
-            'class' => 'CLogRouter',
-			'enabled'=>YII_DEBUG,
-            'routes' => array(
-                array(
-                    'class' => 'CFileLogRoute',
-                    'levels' => 'error, warning',
-//                    'class'=>'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
-//                    'ipFilters'=>array('127.0.0.1','192.168.1.3'),
-                ),
-				array(
-					'class'=>'application.extensions.yii-debug-toolbar.YiiDebugToolbarRoute',
-					'ipFilters'=>array('127.0.0.1','192.168.1.215'),
-				),
-            // uncomment the following to show log messages on web pages
-            /*
-              array(
-              'class'=>'CWebLogRoute',
-              ),
-             */
-            ),
+         */
         ),
     ),
-    // application-level parameters that can be accessed
-    // using Yii::app()->params['paramName']
-    'params' => array(
-        // this is used in contact page
-        'adminEmail' => 'webmaster@example.com',
+    'db' => 
+    array (
+      'connectionString' => 'mysql:host=localhost;dbname=yboard2',
+      'emulatePrepare' => true,
+      'username' => 'root',
+      'password' => '123456',
+      'charset' => 'utf8',
+      'tablePrefix' => '',
     ),
-	'theme' => "yboard",
-
-);
+  ),
+  'params' => 
+  array (
+    'adminEmail' => 'mazer@mail.ru',
+    'installed' => 'no',
+  ),
+) ?>

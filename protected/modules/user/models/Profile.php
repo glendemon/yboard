@@ -42,6 +42,7 @@ class Profile extends UActiveRecord
 			$decimal = array();
 			$rules = array();
 			
+			/*
 			$model=$this->getFields();
 			
 			foreach ($model as $field) {
@@ -90,6 +91,8 @@ class Profile extends UActiveRecord
 				}
 			}
 			
+			/**/
+			
 			array_push($rules,array(implode(',',$required), 'required'));
 			array_push($rules,array(implode(',',$numerical), 'numerical', 'integerOnly'=>true));
 			array_push($rules,array(implode(',',$float), 'type', 'type'=>'float'));
@@ -121,11 +124,13 @@ class Profile extends UActiveRecord
 		$labels = array(
 			'user_id' => UserModule::t('User ID'),
 		);
+		
+		/*
 		$model=$this->getFields();
 		
 		foreach ($model as $field)
 			$labels[$field->varname] = ((Yii::app()->getModule('user')->fieldsMessage)?UserModule::t($field->title,array(),Yii::app()->getModule('user')->fieldsMessage):UserModule::t($field->title));
-			
+			*/
 		return $labels;
 	}
 	
@@ -151,24 +156,32 @@ class Profile extends UActiveRecord
 	
 	public function widgetAttributes() {
 		$data = array();
+		/*
 		$model=$this->getFields();
 		
 		foreach ($model as $field) {
 			if ($field->widget) $data[$field->varname]=$field->widget;
 		}
+		 * 
+		 */
 		return $data;
+
 	}
 	
 	public function widgetParams($fieldName) {
 		$data = array();
+		/*
 		$model=$this->getFields();
 		
 		foreach ($model as $field) {
 			if ($field->widget) $data[$field->varname]=$field->widgetparams;
 		}
 		return $data[$fieldName];
+		 * 
+		 */
 	}
 	
+	/*
 	public function getFields() {
 		if ($this->regMode) {
 			if (!$this->_modelReg)
@@ -180,4 +193,6 @@ class Profile extends UActiveRecord
 			return $this->_model;
 		}
 	}
+	 * 
+	 */
 }

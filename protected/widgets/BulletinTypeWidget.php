@@ -8,6 +8,9 @@
  * Show radiobuttons to choose bulletin's type.
  *
  * @author Victor Demin <mail@vdemin.com>
+ * 
+ * Вудалить
+ * 
  */
 class BulletinTypeWidget extends CWidget
 {

@@ -16,6 +16,7 @@ class CreateAction extends CAction
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 
+	// Не нужено в Yii можно сохранять масив в поле mysql автоматом 
 	private function getFormAditionalFields(){
 		$fields="";
 		if(sizeof($_POST['Fields'])>0){
@@ -38,7 +39,7 @@ class CreateAction extends CAction
 		{
 			$model->attributes = $_POST['Bulletin'];
             $model->user_id = Yii::app()->user->id;
-			$model->fields=$this->getFormAditionalFields();
+			$model->fields=serialize($_POST['Fields']);
 
 
 			if($model->save())

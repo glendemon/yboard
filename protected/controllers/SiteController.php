@@ -10,7 +10,7 @@ class SiteController extends Controller
 
 	public function actions()
 	{
-		return array(
+            return array(
             'create' => 'application.controllers.site.CreateAction' ,
             //'importUsers' => 'application.controllers.site.ImportUsersAction' ,
             //'importBulletins' => 'application.controllers.site.ImportBulletinsAction' ,
@@ -38,43 +38,38 @@ class SiteController extends Controller
 	}
 	
 	public function actionGetfields($cat_id){
-		$model= Category::model()->findByPk($cat_id);
-		
-		$fields=json_decode($model->fields);
+            $model= Category::model()->findByPk($cat_id);
 
-		if(sizeof($fields)>0)
-		foreach($fields as $f_iden=>$fv){ ?>
-			<div class="controls">
-				<label for='Fields[<?=$f_iden?>]'><?=$fv->name?></label><input type="text" id="Fields[<?=$f_iden?>]" name="Fields[<?=$f_iden?>]" >
-			</div>	
-		<? }
+            $fields=json_decode($model->fields);
+
+            if(sizeof($fields)>0){
+            foreach($fields as $f_iden=>$fv){ 
+                ?><div class="controls">
+                        <label for='Fields[<?=$f_iden?>]'><?=$fv->name?></label>
+                        <input type="text" id="Fields[<?=$f_iden?>]" name="Fields[<?=$f_iden?>]" >
+                    </div><? 
+            }}
+
 	}
 
-
-	/**
-	 * Specifies the access control rules.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
-	 */
+        
 	public function accessRules()
 	{
-		return array(
-			array('allow',  // allow all users to perform actions
-				'actions'=>array('index','error','contact','bulletin','category','captcha','page','advertisement','getfields','search'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user
-				'actions'=>array('create'),
-				'users'=>array('@'),
-			),
-			array('allow', // allow admin user
-				'actions'=>array('importUsers','importBulletins'),
-				'users'=>array('admin'),
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),
-		);
+            return array(
+                    array('allow',  // allow all users to perform actions
+                            'actions'=>array('index','error','contact','bulletin','category','captcha','page','advertisement','getfields','search'),
+                            'users'=>array('*'),
+                    ),
+                    array('allow', // allow authenticated user
+                            'actions'=>array('create'),
+                            'users'=>array('@'),
+                    ),
+                    array('allow', // allow admin user
+                            'actions'=>array('importUsers','importBulletins'),
+                            'users'=>array('admin'),
+                    ),
+
+            );
 	}
 
 	/**
@@ -84,9 +79,79 @@ class SiteController extends Controller
 	public function actionIndex()
 	{
         $roots=Category::model()->roots()->findAll();
+		$criteria = new CDbCriteria();
+		$criteria->limit=10;
+		$criteria->order='id desc';
+        $IndexAdv = Adverts::model()->findAll($criteria);
 		$this->render('index',array(
 			'roots'=>$roots,
+			'IndexAdv'=>$IndexAdv,
 		));
+	}
+	
+	public function actionInstall(){
+            global $CONFIG;
+            $this->layout="/install-layout";
+            $db_error=false;
+
+            if(!isset(Yii::app()->components['db'])){
+                    $model=new InstallForm;
+                    if(isset($_POST['InstallForm']))
+                    {
+                        $model->attributes=$_POST['InstallForm'];
+                        
+                        // данныве Mysql 
+                        $server=trim(stripslashes($_POST['InstallForm']['mysql_server']));
+                        $username=trim(stripslashes($_POST['InstallForm']['mysql_login']));
+                        $password=trim(stripslashes($_POST['InstallForm']['mysql_password']));
+                        $db_name=trim(stripslashes($_POST['InstallForm']['mysql_db_name']));
+                        
+                        // данные пользователя                     
+                        if(!$model->validate() or $model->userpass!==$model->userpass2 ) {
+                            $db_error = "Данные пользователя неправльные";
+                        }
+
+                        $db_con=@mysqli_connect($server,$username,$password) or $db_error = mysqli_error();
+                        @mysqli_select_db($db_con,$db_name) or $db_error = mysqli_error($db_con);
+                        
+                        if(!$db_error) {
+                            $config_data= require $CONFIG;
+                            
+                            $dump_file=file_get_contents(Yii::getPathOfAlias('application.data.install').'.sql');
+                            
+                            // Сохранение данных о пользователе 
+                            $dump_file.=" INSERT INTO `users` 
+                                    (`username`, `password`, `email`, `activkey`, `superuser`, `status`)     VALUES "
+                                    ."('".$model->username."', '".UserModule::encrypting($model->userpass)."', "
+                                    . "'".$model->useremail."', '".UserModule::encrypting(microtime().$model->userpass)."',"
+                                    . " 1, 1);";
+                            
+                            mysqli_multi_query($db_con,$dump_file) or $db_error = mysqli_error($db_con);
+                                                       
+                            if(!$db_error) {
+                                // Заполнение конфигурации
+                                $config_data['components']['db'] = array(
+                                        'connectionString' => 'mysql:host='.$server.';dbname='.$db_name,
+                                        'emulatePrepare' => true,
+                                        'username' => $username,
+                                        'password' => $password,
+                                        'charset' => 'utf8',
+                                        'tablePrefix' => '',
+                                );
+                                $config_data['name']=trim(stripslashes($_POST['InstallForm']['site_name']));
+                                $config_data['params']['adminEmail']=$model->useremail;
+                                $config_data['params']['installed']="yes";
+
+                                //Сохранение конфигурации
+                                file_put_contents($CONFIG, "<? return ".var_export($config_data, true)." ?>");
+
+                                $this->redirect(Yii::app()->createUrl('site/index'));
+                            }
+                            
+                        }
+                    }
+                    $this->render('install',array('model'=>$model, 'db_error'=>$db_error));
+            }
 	}
 
     /**
@@ -96,12 +161,16 @@ class SiteController extends Controller
 	{
 		if($error=Yii::app()->errorHandler->error)
 		{
-			if(Yii::app()->request->isAjaxRequest)
-				echo $error['message'];
-			else
-				$this->render('error', $error);
+                    if(Yii::app()->request->isAjaxRequest)
+                        echo $error['message'];
+                    else
+                        $this->render('error', $error);
 		}
 	}
+        
+        public function actionAbout(){
+            $this->render('pages/about');
+        }
 
 	/**
 	 * Displays the contact page
@@ -132,13 +201,10 @@ class SiteController extends Controller
 		$this->render('contact',array('model'=>$model, 'user'=>$user));
 	}
 
-    /**
-     * Show bulletin.
-     * @param int $id Bulletin's id
-     */
-    public function actionBulletin($id)
+
+    public function actionView($id)
     {
-        $model = $this->loadBulletin($id);
+        $model = $this->loadAdvert($id);
         $model->views++;
         $model->disableBehavior('CTimestampBehavior');
         $model->save();
@@ -147,39 +213,7 @@ class SiteController extends Controller
 		));
     }
 
-    /**
-     * Show category.
-     * @param int $id Category's id
-     */
-    public function actionCategory($cat_id)
-    {
-        $dataProvider=new CActiveDataProvider('Bulletin', array(
-            'criteria'=>array(
-                'select'=>'*, IFNULL(updated_at, created_at) as sort',
-                'condition'=>'category_id = :id',
-                'order' => 'sort DESC',
-                'params'=>array(':id'=>(int)$cat_id),
-            ),
-        ));
-		$this->render('category', array(
-			'model'=>$this->loadCategory($cat_id),
 
-            'dataProvider'=>$dataProvider,
-		));
-
-    }
-
-    /**
-     * Show Advertisement.
-     * @param int $id Advertisement's id
-     */
-    public function actionAdvertisement($id)
-    {
-        $model = $this->loadAdvertisement($id);
-		$this->render('advertisement', array(
-			'model'=>$model,
-		));
-    }
 
     /**
 	 * Returns the data model based on the primary key given in the GET variable.
@@ -188,9 +222,9 @@ class SiteController extends Controller
 	 * @return User the loaded model
 	 * @throws CHttpException
 	 */
-	public function loadBulletin($id)
+	public function loadAdvert($id)
 	{
-		$model=Bulletin::model()->findByPk($id);
+		$model=loadAdvert::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -211,20 +245,6 @@ class SiteController extends Controller
 		return $model;
 	}
 
-	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer $id the ID of the model to be loaded
-	 * @return User the loaded model
-	 * @throws CHttpException
-	 */
-	public function loadAdvertisement($id)
-	{
-		$model=Advertisement::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
-		return $model;
-	}
 
     /**
 	 * Returns the data model based on the primary key given in the GET variable.
@@ -241,19 +261,7 @@ class SiteController extends Controller
 		return $model;
 	}
 	
-	public function actionSearch($searchStr=""){
-		$model=new Bulletin('search');
-				
-		$model->unsetAttributes();  // clear any default values
-		$model->name=$searchStr;
-		$model->text=$searchStr;
-		
-
-		
-		$this->render('search',array(
-			'model'=>$model,
-		));
-
-	}
 
 }
+
+

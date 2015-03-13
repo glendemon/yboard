@@ -1,0 +1,22 @@
+div.emailDebug {
+	border: black 1px solid;
+	padding: 9px;
+}
+div.emailDebug h2 {
+	margin: 2px 0 0 0;
+	padding: 0;
+}
+div.emailDebug p {
+	margin: 5px 0 0 0;
+	padding: 0;
+}
+div.emailDebug h3 {
+	margin: 20px 0 7px 0;
+	border-bottom: black 1px solid;
+	padding: 0;
+}
+div.emailDebug .emailMessage {
+	margin: 10px;
+	border: #999 1px solid;
+	padding: 10px;
+}
