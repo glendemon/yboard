@@ -35,7 +35,7 @@ class AdvertsController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform actions
-				'actions'=>array('index','error','view','contact','bulletin','category','captcha','page','advertisement','getfields','search'),
+				'actions'=>array('index','error','view','contact','bulletin','category','captcha','page','advertisement','getfields','search','user'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user
@@ -46,9 +46,12 @@ class AdvertsController extends Controller
 				'actions'=>array('importUsers','importAdvertss'),
 				'users'=>array('admin'),
 			),
+                        /*
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
+                         * 
+                         */
 		);
 	}
 
@@ -194,27 +197,27 @@ class AdvertsController extends Controller
 			'model'=>$model,
 		));
     }
-
+    
     /**
      * Show category.
-     * @param int $id Category's id
+     * @param int $id User's id
      */
-    public function actionCategory($cat_id)
+    public function actionUser($id)
     {
 				
         $dataProvider=new CActiveDataProvider('Adverts', array(
             'criteria'=>array(
                 'select'=>'*, IFNULL(updated_at, created_at) as sort',
-                'condition'=>'category_id = :id',
+                'condition'=>'user_id = :id',
                 'order' => 'sort DESC',
-                'params'=>array(':id'=>(int)$cat_id),
+                'params'=>array(':id'=>(int)$id),
             ),
         ));
-		$this->render('category', array(
-			'model'=>$this->loadCategory($cat_id),
-
-            'dataProvider'=>$dataProvider,
-		));
+        
+        $this->render('index', array(
+            //'model'=>$this->loadCategory($cat_id),
+            'data'=>$dataProvider,
+        ));
 
     }
 

@@ -23,7 +23,7 @@ class UloginController extends Controller
             }
             else {
 
-                $this->render('error');
+                $this->render('error', array('errors'=>$ulogin->errors));
             }
         }
         else {

@@ -22,6 +22,9 @@ class UloginUserIdentity implements IUserIdentity
         , ':network' => $uloginModel->network
         );
         $user = User::model()->find($criteria);
+        
+        
+        //die ("fffffffffff");
 
         if (null !== $user) {
             $this->id = $user->id;
@@ -33,8 +36,16 @@ class UloginUserIdentity implements IUserIdentity
             $user->network = $uloginModel->network;
             $user->email = $uloginModel->email;
             $user->full_name = $uloginModel->full_name;
+            $user->username = $uloginModel->full_name;
+            $user->password = md5($uloginModel->identity);
+            $user->create_at = date("Y-m-d H:i:s");
+            
             $user->save();
-
+            
+            if(sizeof($user->erros)>0){
+                return false;
+            }
+            
             $this->id = $user->id;
             $this->name = $user->full_name;
         }

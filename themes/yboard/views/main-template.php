@@ -85,8 +85,12 @@
                         'label' => t("Register"), 
                         'visible' => Yii::app()->user->isGuest
                     ),
-                    array('url' => Yii::app()->getModule('user')->profileUrl, 
+                    array('url' => Yii::app()->createUrl('user/'.Yii::app()->user->id), 
                         'label' => t("Profile"), 
+                        'visible' => !Yii::app()->user->isGuest
+                    ),
+                    array('url' => Yii::app()->createUrl('adverts/user', array('id'=>Yii::app()->user->id)), 
+                        'label' => t("Мои объявления"), 
                         'visible' => !Yii::app()->user->isGuest
                     ),
                     array('url' => Yii::app()->createUrl("messages"), 
@@ -94,7 +98,7 @@
                         'visible' => !Yii::app()->user->isGuest
                     ),
                     array('url' => Yii::app()->getModule('user')->logoutUrl, 
-                        'label' => t("Logout") . ' (' . Yii::app()->user->name . ')', 
+                        'label' => t("Logout") . ' (' . Yii::app()->user->username . ')', 
                         'visible' => !Yii::app()->user->isGuest
                     ),
                 ),

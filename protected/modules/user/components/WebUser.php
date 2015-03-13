@@ -40,7 +40,7 @@ class WebUser extends CWebUser
                                                 'username'=>$user->username,
                                                 'create_at'=>$user->create_at,
                                                 'lastvisit_at'=>$user->lastvisit_at,
-                                           ),$user->profile->getAttributes());
+                                           ),$user->profile?$user->profile->getAttributes():array());
         foreach ($userAttributes as $attrName=>$attrValue) {
             $this->setState($attrName,$attrValue);
         }
