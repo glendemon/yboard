@@ -18,7 +18,7 @@ $this->breadcrumbs=array(
             'closeText'=>'&times;', // close link text - if set to false, no close link is displayed
         )); ?>
 
-    <p class="note"><?php echo AdminModule::t('Fields with <span class="required">*</span> are required.'); ?></p>
+    <p class="note"><?php echo Yii::t('lang','Fields with <span class="required">*</span> are required.'); ?></p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -45,7 +45,7 @@ $this->breadcrumbs=array(
 	</div>
 
     <div class="row buttons">
-		<?php echo CHtml::submitButton(AdminModule::t('Save')); ?>
+		<?php echo CHtml::submitButton(Yii::t('lang','Save')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

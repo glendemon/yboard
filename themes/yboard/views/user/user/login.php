@@ -76,4 +76,12 @@ $form = new CForm(array(
         ),
     ),
         ), $model);
+
+
+  $this->widget('user.components.UloginWidget', array(
+    'params'=>array(
+        'redirect'=>Yii::app()->baseUrl.'/index.php?r=user/ulogin/login' //Адрес, на который ulogin будет редиректить браузер клиента. Он должен соответствовать контроллеру ulogin и действию login
+    )
+)); 
+
 ?>

@@ -3,13 +3,13 @@
 /* @var $model Answer */
 
 $this->breadcrumbs = array(
-    AdminModule::t('Answers') => array('index'),
-    AdminModule::t('Manage'),
+    Yii::t('lang','Answers') => array('index'),
+    Yii::t('lang','Manage'),
 );
 
 $this->menu = array(
-    array('label' => AdminModule::t('List Answer'), 'icon'=>'icon-list', 'url' => array('index')),
-    array('label' => AdminModule::t('Create Answer'), 'icon'=>'icon-plus', 'url' => array('create')),
+    array('label' => Yii::t('lang','List Answer'), 'icon'=>'icon-list', 'url' => array('index')),
+    array('label' => Yii::t('lang','Create Answer'), 'icon'=>'icon-plus', 'url' => array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1><?php AdminModule::t('Manage Answers'); ?></h1>
+<h1><?php Yii::t('lang','Manage Answers'); ?></h1>
 
 <p>
     You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
