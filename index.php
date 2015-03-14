@@ -17,5 +17,7 @@ if($_COOKIE['YII_DEBUG']==="yes") {
 }
 
 
+
+
 require_once($yii);
 Yii::createWebApplication($CONFIG)->run();
