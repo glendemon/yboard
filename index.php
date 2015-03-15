@@ -2,7 +2,7 @@
 
 header("Content-Type: text/html; charset=UTF-8");
 // change the following paths if necessary
-$yii=dirname(__FILE__).'/yii_framework/yii.php';
+$yii=dirname(__FILE__).'/framework/yii.php';
 
 
 if($_COOKIE['YII_DEBUG']==="yes") {
