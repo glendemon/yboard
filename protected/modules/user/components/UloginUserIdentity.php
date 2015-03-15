@@ -42,9 +42,12 @@ class UloginUserIdentity implements IUserIdentity
             
             $user->save();
             
+            /*
             if(sizeof($user->erros)>0){
                 return false;
             }
+             * 
+             */
             
             $this->id = $user->id;
             $this->name = $user->full_name;

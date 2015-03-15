@@ -13,10 +13,9 @@ if($_COOKIE['YII_DEBUG']==="yes") {
 	$CONFIG=dirname(__FILE__).'/protected/config/main_dev.php';
 } else {
 	$CONFIG=dirname(__FILE__).'/protected/config/main.php';
+        error_reporting(E_WARNING);
+        ini_set("display_errors",0);
 }
-
-
-
 
 require_once($yii);
 Yii::createWebApplication($CONFIG)->run();

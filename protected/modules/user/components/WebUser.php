@@ -2,6 +2,8 @@
 
 class WebUser extends CWebUser
 {
+    
+    public $username;
 
     public function getRole()
     {

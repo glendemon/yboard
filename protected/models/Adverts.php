@@ -45,7 +45,7 @@ class Adverts extends CActiveRecord
         // will receive user inputs.
         return array(
             array('name, user_id, category_id, text', 'required'),
-            array('user_id, category_id, gallery_id views', 'numerical', 'integerOnly' => true),
+            array('user_id, category_id, gallery_id, views', 'numerical', 'integerOnly' => true),
             array('name', 'length', 'max' => 255),
             array('type', 'safe'),
             array('created_at, updated_at', 'default', 'setOnEmpty'=>true, 'value'=>null),
