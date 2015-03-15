@@ -93,19 +93,23 @@ class SiteController extends Controller
             global $CONFIG;
             $this->layout="/install-layout";
             $db_error=false;
+            $model=new InstallForm;
 
             if(!isset(Yii::app()->components['db'])){
-                    $model=new InstallForm;
+                    
                     if(isset($_POST['InstallForm']))
                     {
                         $model->attributes=$_POST['InstallForm'];
+                        
+                        var_dump($model->username);
+                        var_dump($_POST['InstallForm']);
                         
                         // данныве Mysql 
                         $server=trim(stripslashes($_POST['InstallForm']['mysql_server']));
                         $username=trim(stripslashes($_POST['InstallForm']['mysql_login']));
                         $password=trim(stripslashes($_POST['InstallForm']['mysql_password']));
                         $db_name=trim(stripslashes($_POST['InstallForm']['mysql_db_name']));
-                        
+                                                
                         // данные пользователя                     
                         if(!$model->validate() or $model->userpass!==$model->userpass2 ) {
                             $db_error = "Данные пользователя неправльные";
@@ -159,6 +163,7 @@ class SiteController extends Controller
 	 */
 	public function actionError()
 	{
+            $this->layout="/install-layout";
 		if($error=Yii::app()->errorHandler->error)
 		{
                     if(Yii::app()->request->isAjaxRequest)
