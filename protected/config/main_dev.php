@@ -136,6 +136,7 @@ return array(
 		 * 
 		 */
         // uncomment the following to use a MySQL database
+        /*
         'db'=>array(
           'connectionString' => 'mysql:host=localhost;dbname=yboard',
           'emulatePrepare' => true,
@@ -144,6 +145,8 @@ return array(
           'charset' => 'utf8',
 	  'tablePrefix' => '',
           ),
+         * 
+         */
 
         'errorHandler' => array(
             // use 'site/error' action to display errors
@@ -177,7 +180,7 @@ return array(
     'params' => array(
         // this is used in contact page
         'adminEmail' => 'webmaster@example.com',
-        'installed' => 'yes',
+        'installed' => 'no',
     ),
 
 );
