@@ -101,9 +101,6 @@ class SiteController extends Controller
                     {
                         $model->attributes=$_POST['InstallForm'];
                         
-                        var_dump($model->username);
-                        var_dump($_POST['InstallForm']);
-                        
                         // данныве Mysql 
                         $server=trim(stripslashes($_POST['InstallForm']['mysql_server']));
                         $username=trim(stripslashes($_POST['InstallForm']['mysql_login']));
