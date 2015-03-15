@@ -19,7 +19,6 @@ framework/*
 
 assets/*
 !assets/.gitignore
-protected/runtime/*
 !protected/runtime/.gitignore
 protected/data/*.db
 themes/classic/views/
