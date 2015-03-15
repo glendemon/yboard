@@ -66,11 +66,17 @@ class Controller extends CController
 		if(Yii::app()->params['installed']==="yes"){
 			$this->settings = include_once Yii::getPathOfAlias('application.config.settings').'.php';
 			$this->banners = include_once Yii::getPathOfAlias('application.config.banners').'.php';
-			$this->categories = $command = Yii::app()->db->createCommand('SELECT * FROM category')->queryAll();
+			$this->categories = $command = Yii::app()->db->createCommand('SELECT * FROM category')
+                                ->queryAll();
+                        
 		} elseif(Yii::app()->getRequest()->getPathInfo()!=="site/install") {
 			$this->redirect(Yii::app()->baseUrl.'/site/install');
 		}
 	}
+        
+        public function getCategories(){
+            // поставить кэширование запроса и обработку fields 
+        }
 	
 	public function getBanner($var){
 		$debug="";

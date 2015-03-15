@@ -35,13 +35,11 @@ function loadFields(t){
 		
 		
 		?>
-		
 
-		<?=CHtml::activeHiddenField($model,'category_id')?>
 		<?php echo $form->labelEx($model,'category_id'); ?>
         <?php echo CHtml::dropDownList('category_id',0, CHtml::listData(Category::model()->roots()->findAll(),"id","name"),
 
-            array('empty' => Yii::t('bulletin', 'Choose category'),'onchange'=>'loadFields(this)')); ?>
+            array('empty' => t('Choose category'),'onchange'=>'loadFields(this)')); ?>
 
 		<?php echo $form->error($model,'category_id'); ?>
 		<div class='ajax-div'></div>
@@ -64,7 +62,7 @@ function loadFields(t){
 	<div class="row">
 		<?php echo $form->labelEx($model,'type'); ?>
 		<?php echo CHtml::activeRadioButtonList($model,'type',
-			array(Yii::t('bulletin','Demand'), Yii::t('bulletin','Offer')),
+			array(t('Demand'), t('Offer')),
 			array('labelOptions'=>array('style'=>'display:inline'), 'separator'=>' ')
 			); ?>
 		<?php echo $form->error($model,'type'); ?>
@@ -86,7 +84,7 @@ function loadFields(t){
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'youtube_id'); ?>
-		<?php echo $form->fileField($model, 'youtube_id'); ?>
+		<?php echo $form->textField($model, 'youtube_id'); ?>
 		<?php echo $form->error($model, 'youtube_id'); ?>
 	</div>
 

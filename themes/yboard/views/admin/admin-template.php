@@ -94,9 +94,9 @@ Purchase: http://wrapbootstrap.com
                             array('label' => '<i class="menu-icon glyphicon glyphicon-home"></i>Основное меню<i class="menu-expand"></i>', 'url' => '#', 
                                 "items"=>array(
                                         array('label' => '<i class="menu-icon glyphicon glyphicon-home"></i>Главная страница', 'url' => array('/site/index')),
-                                        array('label' => 'Добавить объявление', 'url' => array('/site/create')),
+                                        array('label' => 'Добавить объявление', 'url' => array('/adverts/create')),
                                         array('label' => 'Правила работы', 'url' => array('/site/page', 'view' => 'about')),
-                                        array('label' => Yii::t('main', 'Answers'), 'url' => array('/answer/index')),
+                                        array('label' => t( 'Answers'), 'url' => array('/answer/index')),
                                         array('label' => 'Обратная связь', 'url' => array('/site/contact')),
                                         array('url' => Yii::app()->getModule('user')->loginUrl, 'label' => Yii::app()->getModule('user')->t("Login"), 'visible' => Yii::app()->user->isGuest),
                                         array('url' => Yii::app()->getModule('user')->registrationUrl, 'label' => Yii::app()->getModule('user')->t("Register"), 'visible' => Yii::app()->user->isGuest),
@@ -106,7 +106,7 @@ Purchase: http://wrapbootstrap.com
                                 'linkOptions'=>array('class'=>'menu-dropdown'),
                             ),
 							array('label' => "Панель администратора", 'url' => array('/admin')),
-							array('label' => Yii::t('main', 'Bulletin').'<i class="menu-expand"></i>', 'url' => "#",
+							array('label' => t( 'Bulletin').'<i class="menu-expand"></i>', 'url' => "#",
 								'items'=>array(
 									array('label' => "Управление", 'url' => array('/admin/adverts/index')),
 									array('label' => "Добавить объявление", 'url' => array('/admin/adverts/create')),

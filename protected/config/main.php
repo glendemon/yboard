@@ -113,7 +113,7 @@ return array(
             'showScriptName' => false,
             'rules' => array(
                 '' => 'site/index',
-                '<id:\d+>' => 'bulletin/view',
+                '<id:\d+>' => 'adverts/view',
                 'category/<cat_id:\d+>' => 'adverts/category',
                 'category/<action:\w+>/' => 'admin/category/<action>',
                 'user/<user_id:\d+>/' => 'user/user/view/id/<user_id>',

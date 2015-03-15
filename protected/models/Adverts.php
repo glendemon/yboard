@@ -76,17 +76,17 @@ class Adverts extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'id' => Yii::t('lang', 'ID'),
-            'name' => Yii::t('lang', 'Name'),
-            'user_id' => Yii::t('lang', 'User'),
-            'category_id' => Yii::t('lang', 'Category'),
-            'type' => Yii::t('lang', 'Type'),
-            'views' => Yii::t('lang', 'Views'),
-            'text' => Yii::t('lang', 'Text'),
-            'gallery_id' => Yii::t('lang', 'Gallery'),
-            'youtube_id' => Yii::t('lang', 'Youtube'),
-            'created_at' => Yii::t('lang', 'Created At'),
-            'updated_at' => Yii::t('lang', 'Updated At'),
+            'id' => t( 'ID'),
+            'name' => t( 'Name'),
+            'user_id' => t( 'User'),
+            'category_id' => t( 'Category'),
+            'type' => t( 'Type'),
+            'views' => t( 'Views'),
+            'text' => t( 'Text'),
+            'gallery_id' => t( 'Gallery'),
+            'youtube_id' => t( 'Youtube'),
+            'created_at' => t( 'Created At'),
+            'updated_at' => t( 'Updated At'),
 			'fields' => 'Характеристики',
         );
     }
@@ -95,8 +95,8 @@ class Adverts extends CActiveRecord
     {
         $_items = array(
             'type' => array(
-                self::TYPE_DEMAND => Yii::t('lang', 'Demand'),
-                self::TYPE_OFFER => Yii::t('lang', 'Offer'),
+                self::TYPE_DEMAND => t( 'Demand'),
+                self::TYPE_OFFER => t( 'Offer'),
             ),
         );
         if (isset($code))

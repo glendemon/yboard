@@ -56,10 +56,12 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
             </tr>
 			<? } ?>
 
+            <? if($model->youtube_id!=="") { ?>
             <tr class="">
                 <td><?php echo CHtml::encode($model->getAttributeLabel('youtube_id')); ?>:</td>
                 <td><?php $model->youtube_id ? $this->widget('ext.Yiitube', array('v' => $model->youtube_id, 'size' => 'small')) : ''; ?></td>
             </tr>
+            <? } ?>
             
             <tr class="">
                 <td><?php echo CHtml::encode($model->getAttributeLabel('gallery_id')); ?>:</td>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Мар 13 2015 г., 10:23
+-- Время создания: Мар 15 2015 г., 10:48
 -- Версия сервера: 5.0.51b-community-nt-log
 -- Версия PHP: 5.2.6
 
@@ -31,16 +31,16 @@ CREATE TABLE IF NOT EXISTS `adverts` (
   `name` varchar(121) default NULL,
   `user_id` int(1) default NULL,
   `category_id` int(2) default NULL,
-  `type` int(1) default NULL,
-  `views` int(1) default NULL,
+  `type` int(1) default '1',
+  `views` int(1) default '0',
   `text` varchar(1822) default NULL,
   `fields` varchar(1000) NOT NULL,
   `created_at` datetime default NULL,
   `updated_at` datetime default NULL,
-  `gallery_id` int(3) default NULL,
-  `youtube_id` varchar(10) default NULL,
+  `gallery_id` int(3) default '0',
+  `youtube_id` varchar(50) default '',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=407 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=411 ;
 
 --
 -- Дамп данных таблицы `adverts`
@@ -56,13 +56,9 @@ INSERT INTO `adverts` (`id`, `name`, `user_id`, `category_id`, `type`, `views`, 
 (397, 'Волнистые попугаи(разного возраста)', 2, 20, 1, 1, 'Продаю волнистых попугаев своего разведения. Птенцам от 35 дней,так же есть птички разного возраста и окраса. Покупая птицу вы берете ответственность на всю жизнь,я вам гарантирую здоровую активную птицу способную к приручению и обучению разговаривать. тел 89629093432', '', '2015-03-08 00:00:00', '0000-00-00 00:00:00', 729, ''),
 (398, 'Iron eagle DD50', 2, 16, 1, 0, 'Продаю чепер, двигатель Suzuki 125cc , механика,максимальная скорость 130км/ч , очень жалко отдавать но срочно нужны деньги. не требует регистрации в ГИБДД !!! (Торг на месте)', '', '2015-03-08 00:00:00', '0000-00-00 00:00:00', 730, ''),
 (399, 'аквариумные рыбки', 2, 21, 1, 5, 'Самый большой ассортимент аквариумных рыбок, беспозвоночных, амфибий (ширпотреб). Обновление прайса еженедельно. Прайс отправляю по запросу. Условия, вопросы, консультации - по телефону. Отправка из Харькова', '', '2015-03-08 00:00:00', '0000-00-00 00:00:00', 732, ''),
-(400, 'xcvxcv', 1, 7, NULL, 5, 'xcvxcv', '', '2015-03-08 00:00:00', NULL, 733, NULL),
-(401, 'xzczxczxc', 1, 7, NULL, 7, 'zxczxczxc', '', '2015-03-08 00:00:00', NULL, 734, NULL),
-(402, 'cvxcvx', 1, 8, 0, 1, 'cvxcvxcvxcvxcvxcv', '', '2015-03-03 00:00:00', NULL, 735, NULL),
-(403, 'sdfsdfsfd', 1, 7, 0, 3, 'xcvxcvxcvxcvxcvx', 'Array', '2015-03-01 00:00:00', NULL, 736, NULL),
-(404, 'sdfsdfsdfsdf', 1, 7, 0, 16, 'ываыва ыва ыва ыва ыва ыва ыва ', 'a:3:{s:5:"price";s:9:"dsfsdfsdf";s:3:"tra";s:9:"sdfsdfsdf";s:7:"_empty_";s:12:"sdfsdfsdfsdf";}', '2015-03-08 00:00:00', NULL, 737, NULL),
-(405, 'Хочу работать ', 1, 8, 1, 1, 'Хочу работать Хочу работать Хочу работать Хочу работать Хочу работать Хочу работать Хочу работать Хочу работать Хочу работать Хочу работать Хочу работать ', 'N;', '2015-03-05 00:00:00', '0000-00-00 00:00:00', 739, NULL),
-(406, 'Хочу работать ', 1, 8, 1, 8, 'Хочу работать Хочу работать Хочу работать Хочу работать Хочу работать Хочу работать Хочу работать Хочу работать Хочу работать Хочу работать Хочу работать ', 'N;', '2015-03-08 00:00:00', '0000-00-00 00:00:00', 741, NULL);
+(409, 'Продаю Ferrari', 1, 6, 1, 1, 'Продаю Ferrari', 'a:1:{s:5:"price";s:3:"200";}', '2015-03-15 10:38:10', '2015-03-15 10:38:10', 746, NULL),
+(410, 'Продаю Ferrari', 1, 6, 1, 4, 'Продаю Ferrari', 'a:1:{s:5:"price";s:3:"200";}', '2015-03-15 10:38:38', '2015-03-15 10:38:38', 748, NULL),
+(408, 'Услуги парикмахера ', 1, 6, 1, 7, 'Парикмахер на дому или в салоне. Для торжест свадеб, вечерние прически ', 'a:1:{s:5:"price";s:0:"200";}', '2015-03-15 10:29:31', '2015-03-15 10:29:31', 744, NULL);
 
 -- --------------------------------------------------------
 
@@ -88,34 +84,34 @@ CREATE TABLE IF NOT EXISTS `category` (
 
 INSERT INTO `category` (`id`, `name`, `icon`, `fields`, `root`, `lft`, `rgt`, `level`) VALUES
 (1, 'Работа и бизнес', '', '{"price":{"name":"sdfsdf","type":"0"},"tra":{"name":"sdfsdf","type":"0"},"_empty_":{"name":"vxcvxcv","type":"0"}}', 88, 1, 10, 1),
-(2, 'Недвижимость', '', '{"price":{"name":"sdfsdf","type":"0"},"tra":{"name":"sdfsdf","type":"0"},"_empty_":{"name":"vxcvxcv","type":"0"}}', 89, 1, 10, 1),
-(3, 'Транспорт', '', '', 90, 1, 10, 1),
-(4, 'Животные', '', '', 91, 1, 12, 1),
-(5, 'Разное', '', '', 92, 1, 2, 1),
-(6, 'Услуги', '', '', 93, 1, 2, 1),
+(2, 'Недвижимость', '', '{"price":{"name":"\\u041a\\u043e\\u043b\\u0438\\u0447\\u0435\\u0441\\u0442\\u0432\\u043e \\u043a\\u043e\\u043c\\u043d\\u0430\\u0442","type":"1"},"tra":{"name":"\\u042d\\u0442\\u0430\\u0436\\u043d\\u043e\\u0441\\u0442\\u044c \\u0437\\u0434\\u0430\\u043d\\u0438\\u044f","type":"0"},"_empty_":{"name":"\\u042d\\u0442\\u0430\\u0436","type":"0"}}', 89, 1, 10, 1),
+(3, 'Транспорт', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 90, 1, 10, 1),
+(4, 'Животные', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 91, 1, 12, 1),
+(5, 'Разное', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 92, 1, 2, 1),
+(6, 'Услуги', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 93, 1, 2, 1),
 (7, 'Вакансии', '', '{"price":{"name":"\\u0421\\u0442\\u0430\\u0436","type":"0"},"tra":{"name":"\\u0413\\u0440\\u0430\\u0444\\u0438\\u043a","type":"0"},"_empty_":{"name":"\\u041e\\u0431\\u0440\\u0430\\u0437\\u043e\\u0432\\u0430\\u043d\\u0438\\u0435","type":"0"}}', 88, 6, 7, 2),
-(8, 'Ищут работу', '', '', 88, 8, 9, 2),
-(9, 'Курсы, образование', '', '', 88, 2, 5, 2),
-(10, 'Квартиры', '', '', 89, 2, 3, 2),
-(11, 'Офисы', '', '', 89, 4, 5, 2),
-(12, 'Земля и участки', '', '', 89, 6, 7, 2),
-(13, 'Гаражи', '', '', 89, 8, 9, 2),
-(14, 'Легковые авто', '', '', 90, 2, 3, 2),
-(15, 'Грузовые автомобили', '', '', 90, 6, 7, 2),
-(16, 'Мото транспорт', '', '', 90, 4, 5, 2),
-(17, 'Велосипеды', '', '', 90, 8, 9, 2),
-(18, 'Грызуны', '', '', 91, 2, 3, 2),
-(19, 'Кошки', '', '', 91, 6, 7, 2),
-(20, 'Птицы', '', '', 91, 4, 5, 2),
-(21, 'Рыбы', '', '', 91, 8, 9, 2),
-(22, 'Собаки', '', '', 91, 10, 11, 2),
-(27, 'Детский мир', '', '', 97, 1, 2, 1),
-(24, 'Телефоны и связь', '', '', 95, 1, 2, 1),
-(25, 'Компьютеры и оргтехника', '', '', 96, 1, 2, 1),
-(26, 'Одежда и обувь', '', '', 94, 1, 2, 1),
-(28, 'Спорт, здоровье, красота', '', '', 98, 1, 2, 1),
-(29, 'Все для дома и офиса', '', '', 99, 1, 2, 1),
-(30, ' Знакомства и поздравления', '', '', 100, 1, 2, 1);
+(8, 'Ищут работу', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 88, 8, 9, 2),
+(9, 'Курсы, образование', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 88, 2, 5, 2),
+(10, 'Квартиры', '', '{"price":{"name":"\\u041a\\u043e\\u043b\\u0438\\u0447\\u0435\\u0441\\u0442\\u0432\\u043e \\u043a\\u043e\\u043c\\u043d\\u0430\\u0442","type":"1"},"tra":{"name":"\\u042d\\u0442\\u0430\\u0436\\u043d\\u043e\\u0441\\u0442\\u044c \\u0437\\u0434\\u0430\\u043d\\u0438\\u044f","type":"0"},"_empty_":{"name":"\\u042d\\u0442\\u0430\\u0436","type":"0"}}', 89, 2, 3, 2),
+(11, 'Офисы', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 89, 4, 5, 2),
+(12, 'Земля и участки', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 89, 6, 7, 2),
+(13, 'Гаражи', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 89, 8, 9, 2),
+(14, 'Легковые авто', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 90, 2, 3, 2),
+(15, 'Грузовые автомобили', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 90, 6, 7, 2),
+(16, 'Мото транспорт', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 90, 4, 5, 2),
+(17, 'Велосипеды', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 90, 8, 9, 2),
+(18, 'Грызуны', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 91, 2, 3, 2),
+(19, 'Кошки', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 91, 6, 7, 2),
+(20, 'Птицы', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 91, 4, 5, 2),
+(21, 'Рыбы', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 91, 8, 9, 2),
+(22, 'Собаки', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 91, 10, 11, 2),
+(27, 'Детский мир', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 97, 1, 2, 1),
+(24, 'Телефоны и связь', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 95, 1, 2, 1),
+(25, 'Компьютеры и оргтехника', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 96, 1, 2, 1),
+(26, 'Одежда и обувь', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 94, 1, 2, 1),
+(28, 'Спорт, здоровье, красота', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 98, 1, 2, 1),
+(29, 'Все для дома и офиса', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 99, 1, 2, 1),
+(30, ' Знакомства и поздравления', '', '{"price":{"name":"\\u0426\\u0435\\u043d\\u0430","type":"0"}}', 100, 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -158,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `gallery` (
   `name` int(1) default NULL,
   `description` int(1) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=742 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=749 ;
 
 --
 -- Дамп данных таблицы `gallery`
@@ -183,7 +179,14 @@ INSERT INTO `gallery` (`id`, `versions_data`, `name`, `description`) VALUES
 (738, 'a:2:{s:5:"small";a:1:{s:15:"centeredpreview";a:2:{i:0;i:98;i:1;i:98;}}s:6:"medium";a:1:{s:6:"resize";a:2:{i:0;i:800;i:1;N;}}}', 0, 0),
 (739, 'a:2:{s:5:"small";a:1:{s:6:"resize";a:2:{i:0;i:150;i:1;N;}}s:6:"medium";a:1:{s:6:"resize";a:2:{i:0;i:800;i:1;N;}}}', 0, 0),
 (740, 'a:2:{s:5:"small";a:1:{s:15:"centeredpreview";a:2:{i:0;i:98;i:1;i:98;}}s:6:"medium";a:1:{s:6:"resize";a:2:{i:0;i:800;i:1;N;}}}', 0, 0),
-(741, 'a:2:{s:5:"small";a:1:{s:6:"resize";a:2:{i:0;i:150;i:1;N;}}s:6:"medium";a:1:{s:6:"resize";a:2:{i:0;i:800;i:1;N;}}}', 0, 0);
+(741, 'a:2:{s:5:"small";a:1:{s:6:"resize";a:2:{i:0;i:150;i:1;N;}}s:6:"medium";a:1:{s:6:"resize";a:2:{i:0;i:800;i:1;N;}}}', 0, 0),
+(742, 'a:2:{s:5:"small";a:1:{s:15:"centeredpreview";a:2:{i:0;i:98;i:1;i:98;}}s:6:"medium";a:1:{s:6:"resize";a:2:{i:0;i:800;i:1;N;}}}', 0, 0),
+(743, 'a:2:{s:5:"small";a:1:{s:15:"centeredpreview";a:2:{i:0;i:98;i:1;i:98;}}s:6:"medium";a:1:{s:6:"resize";a:2:{i:0;i:800;i:1;N;}}}', 0, 0),
+(744, 'a:2:{s:5:"small";a:1:{s:6:"resize";a:2:{i:0;i:150;i:1;N;}}s:6:"medium";a:1:{s:6:"resize";a:2:{i:0;i:800;i:1;N;}}}', 0, 0),
+(745, 'a:2:{s:5:"small";a:1:{s:15:"centeredpreview";a:2:{i:0;i:98;i:1;i:98;}}s:6:"medium";a:1:{s:6:"resize";a:2:{i:0;i:800;i:1;N;}}}', 0, 0),
+(746, 'a:2:{s:5:"small";a:1:{s:6:"resize";a:2:{i:0;i:150;i:1;N;}}s:6:"medium";a:1:{s:6:"resize";a:2:{i:0;i:800;i:1;N;}}}', 0, 0),
+(747, 'a:2:{s:5:"small";a:1:{s:15:"centeredpreview";a:2:{i:0;i:98;i:1;i:98;}}s:6:"medium";a:1:{s:6:"resize";a:2:{i:0;i:800;i:1;N;}}}', 0, 0),
+(748, 'a:2:{s:5:"small";a:1:{s:6:"resize";a:2:{i:0;i:150;i:1;N;}}s:6:"medium";a:1:{s:6:"resize";a:2:{i:0;i:800;i:1;N;}}}', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -199,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `gallery_photo` (
   `description` varchar(10) default NULL,
   `file_name` varchar(7) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=344 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=347 ;
 
 --
 -- Дамп данных таблицы `gallery_photo`
@@ -215,7 +218,10 @@ INSERT INTO `gallery_photo` (`id`, `gallery_id`, `rank`, `name`, `description`, 
 (340, 739, 340, '', '', '5.Диало'),
 (341, 741, 341, '', '', '07.jpg'),
 (342, 741, 342, '', '', '2.jpg'),
-(343, 741, 343, '', '', '5.Диало');
+(343, 741, 343, '', '', '5.Диало'),
+(344, 744, 344, '', '', '258_par'),
+(345, 746, 345, '', '', '1347962'),
+(346, 748, 346, '', '', '1347962');
 
 -- --------------------------------------------------------
 
@@ -304,16 +310,88 @@ CREATE TABLE IF NOT EXISTS `users` (
   `network` varchar(100) NOT NULL,
   `full_name` varchar(150) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=77 ;
 
 --
 -- Дамп данных таблицы `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `activkey`, `superuser`, `status`, `create_at`, `lastvisit_at`, `identity`, `network`, `full_name`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', 'c902179e0e5f1f39858c661a146c6586', 1, 1, '2013-03-04 14:46:10', '2015-03-11 02:18:05', '', '', ''),
+(1, 'yboard', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', 'c902179e0e5f1f39858c661a146c6586', 1, 1, '2013-03-04 14:46:10', '2015-03-15 10:02:11', '', '', ''),
 (2, 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', 'demo@example.com', 'a512641e3a3df1caf3bab2f132794b9a', 0, 1, '2013-07-24 23:52:29', '2013-07-25 00:21:05', '', '', ''),
-(3, 'Макси', 'b8cfd36c855f1b040196e95e000922cd', 'wzcc@mail.ru', NULL, NULL, NULL, NULL, NULL, 'http://vk.com/id6035846', 'vkontakte', 'Максим Углов');
+(4, 'vovik', NULL, ' vov4ik703@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(5, 'kweshkva', NULL, ' kwesh-kva@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(6, 'romanov', NULL, ' romanov160@mail.ru', NULL, NULL, 1, '2015-01-14 12:00:00', NULL, '', '', ''),
+(7, 'conmackein', NULL, ' conmackein@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(8, 'der', NULL, ' der.77@mail.ru', NULL, NULL, 1, '2015-02-15 12:00:00', NULL, '', '', ''),
+(9, 'karnaval', NULL, ' karnaval0@mail.ru', NULL, NULL, 1, '2015-03-14 12:00:00', NULL, '', '', ''),
+(10, 'ivanvanivan', NULL, ' ivan_van_ivan93@mail', NULL, NULL, 1, '2014-09-14 12:00:00', NULL, '', '', ''),
+(11, 'vic', NULL, ' vic17@bk.ru', NULL, NULL, 1, '2015-02-15 12:00:00', NULL, '', '', ''),
+(12, 'ots', NULL, ' ots84@mail.ru', NULL, NULL, 1, '2015-02-16 12:00:00', NULL, '', '', ''),
+(13, 'dindinkoko', NULL, ' dindinkoko@mail.ru', NULL, NULL, 1, '2015-02-17 12:00:00', NULL, '', '', ''),
+(14, 'elvinbaik', NULL, ' elvin-baik@mail.ru', NULL, NULL, 1, '2015-02-18 12:00:00', NULL, '', '', ''),
+(15, 'masterboks', NULL, ' masterboks@mail.ru', NULL, NULL, 1, '2015-02-19 12:00:00', NULL, '', '', ''),
+(16, 'jojboy', NULL, ' jojboy@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(17, 'cgiirc', NULL, ' cgiirc@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(18, 'serityuk', NULL, ' serityuk@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(19, 'lehakvon', NULL, ' lehakvon@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(20, 'agst', NULL, ' 123ag@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(21, 'ivanroscan', NULL, ' ivanroscan@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(22, 'tcosum', NULL, ' tco99sum@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(23, 'rich', NULL, ' rich-3366@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(24, 'pudgido', NULL, ' pudgido@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(25, 'vkontakteshur', NULL, ' vkontakteshur12@mail', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(26, 'fomik', NULL, ' fomik777@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(27, 'pasha', NULL, ' pasha.91@inbox.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(28, 'gjyznjq', NULL, ' gjyznjq@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(29, 'royak', NULL, ' royak75@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(30, 'snaas', NULL, ' snaas@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(31, 'zheniamonstr', NULL, ' zheniamonstr@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(32, 'maxrimar', NULL, ' max-rimar@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(33, 'andrykovan', NULL, ' andrykov_an@list.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(34, 'sumka', NULL, ' sumka74@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(35, 'benzin', NULL, ' benzin53@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(36, 'prnlbnt', NULL, ' prnlbnt@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(37, 'simon', NULL, ' simon31@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(38, 'kyborg', NULL, ' kyborg1@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(39, 'combinik', NULL, ' combinik@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(40, 'pety', NULL, ' pety899@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(41, 'ma', NULL, ' ma8484@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(42, 'vekamera', NULL, ' vekamera@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(43, 'vasa', NULL, ' vasa-93-00@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(44, 'lively', NULL, ' lively10@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(45, 'kirilliypatenkov', NULL, ' kirilliypatenkov@mai', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(46, 'hoksix', NULL, ' hoksix@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(47, 'sash', NULL, ' sash_88@inbox.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(48, 'ruskvartet', NULL, ' ruskvartet@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(49, 'iloveyoukris', NULL, ' i_love_you-kris@mail', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(50, 'yurec', NULL, ' yurec_-89@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(51, 'uwemobzfjkmxm', NULL, ' uwemobzfjkmxm@mail.r', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(52, 'tngvlks', NULL, ' tngvlks@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(53, 'qrbwzhpcfo', NULL, ' qrbwzhpcfo@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(54, 'elzomnzimm', NULL, ' elzomnzimm@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(55, 'udzhznuoqphwcsh', NULL, ' udzhznuoqphwcsh@mail', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(56, 'ryabov', NULL, 'ryabov.83@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(57, 'nbv5', NULL, 'n.nbv5@yandex.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(58, 'GAVNIUK', NULL, 'bahtin221078@yandex.r', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(59, 'noynoy', NULL, 'sifard@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(60, 'Krima01', NULL, 'dimamovers@yahoo.ca', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(61, 'Histnik', NULL, 'histnik@inbox.lv', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(62, 'nt68', NULL, 'niktan1@bigmir.net', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(63, 'waldecir', NULL, 'waldecirnicolete@yaho', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(64, 'magenta', NULL, 'polo.777@inbox.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(65, 'ROBSONe', NULL, 'robsone@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(66, 'maelname', NULL, 'silva.ru@list.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(67, 'pozitive189', NULL, 'check-inonline@yandex', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(68, 'Lubawa', NULL, 'fcsci.28@bk.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(69, 'galina', NULL, 'repchenko2005@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(70, 'sanny_ok', NULL, 'aleks_andrr@ukr.net', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(71, 'aleks34970', NULL, 'nahodkadona@yandex.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(72, 'NEKURIM', NULL, 'nekurim@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(73, 'summer2012', NULL, 'koreanmen1980@gmail.c', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(74, 'bloodbastard', NULL, 'pasha_bes_balt@mail.r', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(75, 'lindamor', NULL, '4aokakao@gmail.com', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', ''),
+(76, 'tatiana', NULL, 'wzccsdfsdfsdf@mail.ru', NULL, NULL, 1, '2015-02-14 12:00:00', NULL, '', '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

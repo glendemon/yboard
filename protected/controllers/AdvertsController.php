@@ -2,8 +2,6 @@
 
 class AdvertsController extends Controller
 {
-
-	
 	public $layout='/main-template';
 
 	public function actions()
@@ -13,15 +11,10 @@ class AdvertsController extends Controller
             //'importUsers' => 'application.controllers.site.ImportUsersAction' ,
             //'importAdvertss' => 'application.controllers.site.ImportAdvertssAction' ,
 			// captcha action renders the CAPTCHA image displayed on the contact page
-			'captcha'=>array(
-				'class'=>'CCaptchaAction',
-				'backColor'=>0xFFFFFF,
-			),
+			'captcha'=>array('class'=>'CCaptchaAction','backColor'=>0xFFFFFF, ),
 			// page action renders "static" pages stored under 'protected/views/site/pages'
 			// They can be accessed via: index.php?r=site/page&view=FileName
-			'page'=>array(
-				'class'=>'CViewAction',
-			),
+			'page'=>array('class'=>'CViewAction',),
 		);
 	}
 	
@@ -34,16 +27,17 @@ class AdvertsController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform actions
+                        // allow all users to perform actions
+			array('allow',  
 				'actions'=>array('index','error','view','contact','bulletin','category','captcha','page','advertisement','getfields','search','user'),
 				'users'=>array('*'),
 			),
-			array('allow', // allow authenticated user
-				'actions'=>array('create'),
+                        // allow authenticated user
+			array('allow', 	'actions'=>array('create'),
 				'users'=>array('@'),
 			),
-			array('allow', // allow admin user
-				'actions'=>array('importUsers','importAdvertss'),
+                        // allow admin user
+			array('allow', 'actions'=>array('importUsers','importAdvertss'),
 				'users'=>array('admin'),
 			),
                         /*
@@ -89,6 +83,9 @@ class AdvertsController extends Controller
 			<? }
 			
 			echo "</div>";
+                        
+                        echo '<input type="hidden" class="error" value="'.$cat_id.'" '
+                                . 'id="Adverts_category_id" name="Adverts[category_id]">';
 			
 		} else {
 			// Вывод дочерних категории
@@ -104,7 +101,7 @@ class AdvertsController extends Controller
 				
 			};
 			
-			echo CHtml::dropDownList('subcat_'.$cat_id,0,$drop_cats,array('empty' => Yii::t('bulletin', 'Choose category'),'onchange'=>'loadFields(this)'));
+			echo CHtml::dropDownList('subcat_'.$cat_id,0,$drop_cats,array('empty' => t('Choose category'),'onchange'=>'loadFields(this)'));
 			
 			return; 
 		}
@@ -168,12 +165,12 @@ class AdvertsController extends Controller
 			if($model->save())
             {
                 $video = CUploadedFile::getInstances($model, 'youtube_id');
-                YoutubeHelper::processAdverts($model, $video);
+                //YoutubeHelper::processAdverts($model, $video);
 
                 $images = CUploadedFile::getInstancesByName('images');
                 // proceed if the images have been set
                 ImagesHelper::processImages($model, $images);
-				$this->redirect(array('bulletin/view','id'=>$model->id));
+				$this->redirect(array('adverts/view','id'=>$model->id));
             }
 		}
 
@@ -196,6 +193,29 @@ class AdvertsController extends Controller
 		$this->render('view', array(
 			'model'=>$model,
 		));
+    }
+    
+        /**
+     * Show category.
+     * @param int $cat_id Category's id
+     */
+    public function actionCategory($cat_id)
+    {
+				
+        $dataProvider=new CActiveDataProvider('Adverts', array(
+            'criteria'=>array(
+                'select'=>'*, IFNULL(updated_at, created_at) as sort',
+                'condition'=>'category_id = :id',
+                'order' => 'sort DESC',
+                'params'=>array(':id'=>(int)$cat_id),
+            ),
+        ));
+		$this->render('category', array(
+			'model'=>$this->loadCategory($cat_id),
+
+            'dataProvider'=>$dataProvider,
+		));
+
     }
     
     /**

@@ -45,6 +45,10 @@ class WebUser extends CWebUser
             $this->setState($attrName,$attrValue);
         }
     }
+    
+    public function getUsername($id=0){
+        return $this->username;
+    }
 
     public function model($id=0) {
         return Yii::app()->getModule('user')->user($id);
