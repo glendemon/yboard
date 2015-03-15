@@ -17,6 +17,13 @@ local.properties
 .loadpath
 framework/*
 
+assets/*
+!assets/.gitignore
+protected/runtime/*
+!protected/runtime/.gitignore
+protected/data/*.db
+themes/classic/views/
+
 # External tool builders
 .externalToolBuilders/
 
