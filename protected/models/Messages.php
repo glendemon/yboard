@@ -9,7 +9,7 @@
  * @property integer $receiver_id
  * @property string $message
  * @property string $send_date
- * @property string $read_date
+ * @property boolean $read
  */
 class Messages extends CActiveRecord
 {
@@ -44,7 +44,7 @@ class Messages extends CActiveRecord
                         array('message', 'length', 'max'=>3000, 'min' => 3),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, sender_id, receiver_id, message, send_date, read_date', 'safe', 'on'=>'search'),
+			array('id, sender_id, receiver_id, message, send_date, read', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -72,7 +72,7 @@ class Messages extends CActiveRecord
 			'receiver_id' => t('Receiver'),
 			'message' => t('Message'),
 			'send_date' => t('Send Date'),
-			'read_date' => t('Read Date'),
+			'read' => t('Read'),
 		);
 	}
 

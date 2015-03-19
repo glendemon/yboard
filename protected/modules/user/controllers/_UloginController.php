@@ -10,14 +10,6 @@ class UloginController extends Controller
             $ulogin->setAttributes($_POST);
             $ulogin->getAuthData();
                 
-            //die("ddd");
-            
-            /*
-            if ($ulogin->validate())
-                die("fff");
-             * 
-             */
-                
             if ($ulogin->validate() && $ulogin->login()) {
                 $this->redirect(Yii::app()->user->returnUrl);
             }

@@ -26,6 +26,11 @@ h1 {
     text-decoration: none;
     width: 540px;
 }
+
+h3{
+    font-size:16px;
+}
+
 ul {
     color: #9ca27e;
     line-height: 25px;
@@ -109,7 +114,40 @@ table.roots{
     text-transform: lowercase;
     width: 130px;
 }
-.menu_area {
+
+
+// Сообщения 
+a.send_mail{
+    border: 1px solid #b9d7d4;
+    border-radius: 5px;
+    color: #406a9d;
+    display: block;
+    height: 27px;
+    margin: 5px auto 0;
+    padding: 5px 0 0 10px;
+    width: 200px;
+}
+
+div.mes_list{
+    border-bottom:1px solid #C3D2DC;
+    padding:5px;
+}
+
+div.mes_dialog{
+    border-top:1px solid #C3D2DC;
+    padding:5px;
+}
+
+div.dialog{
+    border-radius:5px;
+    border:1px solid #C3D2DC;
+    padding:5px;  
+    margin-top:10px;
+}
+
+
+// Меню 
+.menu_area{
     float: left;
     margin: 20px 0 0;
     padding: 0;
@@ -265,7 +303,6 @@ table.roots{
     font-size: 12px;
     font-style: normal;
     font-variant: normal;
-    font-weight: bold;
     line-height: normal;
     margin: 0 auto;
     padding: 15px 0;

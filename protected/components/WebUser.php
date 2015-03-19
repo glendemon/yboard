@@ -3,7 +3,7 @@
 class WebUser extends CWebUser
 {
     
-    public $username;
+    //public $username="gggg";
 
     public function getRole()
     {
@@ -36,13 +36,13 @@ class WebUser extends CWebUser
 	}
 
     public function updateSession() {
-        $user = Yii::app()->getModule('user')->user($this->id);
-        $userAttributes = CMap::mergeArray(array(
-                                                'email'=>$user->email,
-                                                'username'=>$user->username,
-                                                'create_at'=>$user->create_at,
-                                                'lastvisit_at'=>$user->lastvisit_at,
-                                           ),$user->profile?$user->profile->getAttributes():array());
+        $user = User::model()->findByPk($this->id);
+        $userAttributes = array(
+            'email'=>$user->email,
+            'username'=>$user->username,
+            'create_at'=>$user->create_at,
+            'lastvisit_at'=>$user->lastvisit_at,
+        );
         foreach ($userAttributes as $attrName=>$attrValue) {
             $this->setState($attrName,$attrValue);
         }
@@ -53,7 +53,7 @@ class WebUser extends CWebUser
     }
 
     public function model($id=0) {
-        return Yii::app()->getModule('user')->user($id);
+        return User::model()->findByPk($id);
     }
 
     public function user($id=0) {
@@ -61,15 +61,19 @@ class WebUser extends CWebUser
     }
 
     public function getUserByName($username) {
-        return Yii::app()->getModule('user')->getUserByName($username);
+        //return Yii::app()->getModule('user')->getUserByName($username);
+        return "Not defined function";
     }
 
     public function getAdmins() {
-        return Yii::app()->getModule('user')->getAdmins();
+        
+        //return Yii::app()->getModule('user')->getAdmins();
+        return "Not defined function";
     }
 
     public function isAdmin() {
-        return Yii::app()->getModule('user')->isAdmin();
+        //return Yii::app()->getModule('user')->isAdmin();
+        return "Not defined function";
     }
 
 }

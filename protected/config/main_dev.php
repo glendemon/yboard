@@ -33,6 +33,7 @@ return array(
            //'ipFilters' => array('127.0.0.1', '::1', '192.168.1.3'),
         ),
 		/**/
+        /*
         'user' => array(
             # encrypting method (php hash function)
             'hash' => 'md5',
@@ -55,6 +56,8 @@ return array(
             # page after logout
             'returnLogoutUrl' => array('/user/login'),
         ),
+         * 
+         */
         'admin',
     ),
     // application components
@@ -98,11 +101,11 @@ return array(
             //'logging' => true,
             //'dryRun' => false
         ),
-		 'email'=>array(
-			'class'=>'application.extensions.email.Email',
-			'delivery'=>'php', //Will use the php mailing function.  
-			//May also be set to 'debug' to instead dump the contents of the email into the view
-		),
+        'email'=>array(
+               'class'=>'application.extensions.email.Email',
+               'delivery'=>'php', //Will use the php mailing function.  
+               //May also be set to 'debug' to instead dump the contents of the email into the view
+       ),
         'config' => array(
            'class' => 'application.extensions.EConfig',
            'strictMode' => false,
@@ -115,8 +118,10 @@ return array(
                 '' => 'site/index',
                 '<id:\d+>' => 'adverts/view',
                 'category/<cat_id:\d+>' => 'adverts/category',
+                'logout' => 'login/logout',
+                'site/category/<cat_id:\d+>' => 'adverts/category/cat_id/<cat_id>',
                 'category/<action:\w+>/' => 'admin/category/<action>',
-                'user/<user_id:\d+>/' => 'user/user/view/id/<user_id>',
+                'user/<user_id:\d+>/' => 'user/view/id/<user_id>',
                 // 'category/<action:\w+>/<param:\w+>/<id:\d+>' => 'admin/category/<action>/<param>/<id>',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',

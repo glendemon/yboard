@@ -4,7 +4,7 @@ class UloginUserIdentity implements IUserIdentity
 {
 
     private $id;
-    private $name;
+    private $username;
     private $isAuthenticated = false;
     private $states = array();
 
@@ -28,7 +28,10 @@ class UloginUserIdentity implements IUserIdentity
 
         if (null !== $user) {
             $this->id = $user->id;
-            $this->name = $user->full_name;
+            if($user->full_name)
+                $this->username = $user->full_name;
+            elseif($user->username)
+                $this->username = $user->username;
         }
         else {
             $user = new User();

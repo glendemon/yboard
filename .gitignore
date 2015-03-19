@@ -223,4 +223,5 @@ pip-log.txt
 .mr.developer.cfg
 /.gitattributes
 /.gitignore
-/nbproject/private/
+nbproject/*
+nbproject/project.properties

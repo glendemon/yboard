@@ -29,11 +29,38 @@ class LoginController extends Controller
 		} else
 			$this->redirect(Yii::app()->controller->module->returnUrl);
 	}
+        
+        public function actionUlogin() {
+
+            if (isset($_POST['token'])) {
+                $ulogin = new UloginModel();
+                $ulogin->setAttributes($_POST);
+                $ulogin->getAuthData();
+
+                if ($ulogin->validate() && $ulogin->login()) {
+                    $this->redirect(Yii::app()->user->returnUrl);
+                }
+                else {
+
+                    $this->render('error', array('errors'=>$ulogin->errors));
+                }
+            }
+            else {
+
+                $this->redirect(Yii::app()->homeUrl, true);
+            }
+        }
 	
 	private function lastViset() {
 		$lastVisit = User::model()->notsafe()->findByPk(Yii::app()->user->id);
 		$lastVisit->lastvisit = time();
 		$lastVisit->save();
 	}
+        
+        public function actionLogout()
+        {
+            Yii::app()->user->logout();
+            $this->redirect(Yii::app()->homeUrl);
+        }
 
 }

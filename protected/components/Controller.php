@@ -72,6 +72,8 @@ class Controller extends CController
 		} elseif(Yii::app()->getRequest()->getPathInfo()!=="site/install") {
 			$this->redirect(Yii::app()->baseUrl.'/site/install');
 		}
+                
+                
 	}
         
         public function getCategories(){

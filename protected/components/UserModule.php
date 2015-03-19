@@ -8,7 +8,7 @@
  * @version $Id: UserModule.php 132 2011-10-30 10:45:01Z mishamx $
  */
 
-class UserModule extends CWebModule
+class UserModule extends CComponent
 {
 	/**
 	 * @var int
@@ -96,8 +96,9 @@ class UserModule extends CWebModule
 	public $tableProfiles = '{{profiles}}';
 	public $tableProfileFields = '{{profiles_fields}}';
 
+        
     public $defaultScope = array(
-            'with'=>array('profile'),
+            // 'with'=>array('profile'),
     );
 
 	static private $_user;
@@ -144,30 +145,12 @@ class UserModule extends CWebModule
 			return false;
 	}
 
-	/**
-	 * @param $str
-	 * @param $params
-	 * @param $dic
-	 * @return string
-	 */
-	public static function t($str='',$params=array(),$dic='user') {
-             return Yii::t('lang',$str);
-            
-                // переделано для работы только с одним файлом языка
-             /*
-		if (Yii::t("UserModule", $str)==$str)
-		    return Yii::t("UserModule.".$dic, $str, $params);
-                else
-                    return Yii::t("UserModule", $str, $params);
-              * 
-              */
-	}
 
 	/**
 	 * @return hash string.
 	 */
 	public static function encrypting($string="") {
-		$hash = Yii::app()->getModule('user')->hash;
+		$hash = UserModule::hash;
 		if ($hash=="md5")
 			return md5($string);
 		if ($hash=="sha1")
@@ -247,13 +230,15 @@ class UserModule extends CWebModule
 	 * @return user object or false
 	 */
 	public static function user($id=0,$clearCache=false) {
-        if (!$id&&!Yii::app()->user->isGuest)
-            $id = Yii::app()->user->id;
-		if ($id) {
-            if (!isset(self::$_users[$id])||$clearCache)
-                self::$_users[$id] = User::model()->with(array('profile'))->findbyPk($id);
-			return self::$_users[$id];
-        } else return false;
+            if (!$id&&!Yii::app()->user->isGuest) {
+                $id = Yii::app()->user->id;
+            }
+            if ($id) {
+                if (!isset(self::$_users[$id])||$clearCache) {
+                    self::$_users[$id] = User::model()->findbyPk($id);
+                }
+                return self::$_users[$id];
+            } else return false;
 	}
 
 	/**
