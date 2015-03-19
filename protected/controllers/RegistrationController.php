@@ -21,12 +21,13 @@ class RegistrationController extends Controller {
      */
     public function actionRegistration() {
         $model = new RegistrationForm;
-        $profile = new Profile;
-        $profile->regMode = true;
+
 
         // ajax validator
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'registration-form') {
-            echo UActiveForm::validate(array($model, $profile));
+            //echo UActiveForm::validate(array($model, $profile));
+            $model->validate();
+            $model->getErrors();
             Yii::app()->end();
         }
 
@@ -35,8 +36,8 @@ class RegistrationController extends Controller {
         } else {
             if (isset($_POST['RegistrationForm'])) {
                 $model->attributes = $_POST['RegistrationForm'];
-                $profile->attributes = ((isset($_POST['Profile']) ? $_POST['Profile'] : array()));
-                if ($model->validate() && $profile->validate()) {
+                //$profile->attributes = ((isset($_POST['Profile']) ? $_POST['Profile'] : array()));
+                if ($model->validate()) {
                     $soucePassword = $model->password;
                     $model->activkey = UserModule::encrypting(microtime() . $model->password);
                     $model->password = UserModule::encrypting($model->password);
@@ -45,11 +46,11 @@ class RegistrationController extends Controller {
                     $model->status = ((Yii::app()->controller->module->activeAfterRegister) ? User::STATUS_ACTIVE : User::STATUS_NOACTIVE);
 
                     if ($model->save()) {
-                        $profile->user_id = $model->id;
-                        $profile->save();
+                        //$profile->user_id = $model->id;
+                        //$profile->save();
                         if (Yii::app()->controller->module->sendActivationMail) {
                             $activation_url = $this->createAbsoluteUrl('/user/activation/activation', array("activkey" => $model->activkey, "email" => $model->email));
-                            UserModule::sendMail($model->email, UserModule::t("You registered from {site_name}", array('{site_name}' => Yii::app()->name)), UserModule::t("Please activate you account go to {activation_url}", array('{activation_url}' => $activation_url, '{username}' => $model->username, '{password}' => $model->password, '{site_name}' => Yii::app()->name)));
+                            UserModule::sendMail($model->email, t("You registered from {site_name}", array('{site_name}' => Yii::app()->name)), t("Please activate you account go to {activation_url}", array('{activation_url}' => $activation_url, '{username}' => $model->username, '{password}' => $model->password, '{site_name}' => Yii::app()->name)));
                         }
 
                         if ((Yii::app()->controller->module->loginNotActiv || (Yii::app()->controller->module->activeAfterRegister && Yii::app()->controller->module->sendActivationMail == false)) && Yii::app()->controller->module->autoLogin) {
@@ -59,21 +60,22 @@ class RegistrationController extends Controller {
                             $this->redirect(Yii::app()->controller->module->returnUrl);
                         } else {
                             if (!Yii::app()->controller->module->activeAfterRegister && !Yii::app()->controller->module->sendActivationMail) {
-                                Yii::app()->user->setFlash('registration', UserModule::t("Thank you for your registration. Contact Admin to activate your account."));
+                                Yii::app()->user->setFlash('registration', t("Thank you for your registration. Contact Admin to activate your account."));
                             } elseif (Yii::app()->controller->module->activeAfterRegister && Yii::app()->controller->module->sendActivationMail == false) {
-                                Yii::app()->user->setFlash('registration', UserModule::t("Thank you for your registration. Please {{login}}.", array('{{login}}' => CHtml::link(UserModule::t('Login'), Yii::app()->controller->module->loginUrl))));
+                                Yii::app()->user->setFlash('registration', t("Thank you for your registration. Please {{login}}.", array('{{login}}' => CHtml::link(t('Login'), Yii::app()->controller->module->loginUrl))));
                             } elseif (Yii::app()->controller->module->loginNotActiv) {
-                                Yii::app()->user->setFlash('registration', UserModule::t("Thank you for your registration. Please check your email or login."));
+                                Yii::app()->user->setFlash('registration', t("Thank you for your registration. Please check your email or login."));
                             } else {
-                                Yii::app()->user->setFlash('registration', UserModule::t("Thank you for your registration. Please check your email."));
+                                Yii::app()->user->setFlash('registration', t("Thank you for your registration. Please check your email."));
                             }
                             $this->refresh();
                         }
                     }
-                } else
-                    $profile->validate();
+                }  // else
+                    //$profile->validate();
             }
-            $this->render('/user/registration', array('model' => $model, 'profile' => $profile));
+            $this->render('/user/registration', array('model' => $model ));
+
         }
     }
 

@@ -98,7 +98,7 @@
                         'label' => t("Messages"), 
                         'visible' => !Yii::app()->user->isGuest
                     ),
-                    array('url' => Yii::app()->createUrl('user/logout'), 
+                    array('url' => Yii::app()->createUrl('logout'), 
                         'label' => t("Logout") . ' (' . Yii::app()->user->username . ')', 
                         'visible' => !Yii::app()->user->isGuest
                     ),

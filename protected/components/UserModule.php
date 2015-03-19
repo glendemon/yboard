@@ -150,7 +150,9 @@ class UserModule extends CComponent
 	 * @return hash string.
 	 */
 	public static function encrypting($string="") {
-		$hash = UserModule::hash;
+		//$hash = UserModule::hash;
+                $hash='md5';
+            
 		if ($hash=="md5")
 			return md5($string);
 		if ($hash=="sha1")
@@ -166,8 +168,10 @@ class UserModule extends CComponent
 	public static function doCaptcha($place = '') {
 		if(!extension_loaded('gd'))
 			return false;
-		if (in_array($place, Yii::app()->getModule('user')->captcha))
-			return Yii::app()->getModule('user')->captcha[$place];
+                if(is_array($place)) {
+                    if ($place!=='' and in_array($place, Yii::app()->getModule('user')->captcha))
+                            return Yii::app()->getModule('user')->captcha[$place];
+                }
 		return false;
 	}
 

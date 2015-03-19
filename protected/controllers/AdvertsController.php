@@ -288,7 +288,7 @@ class AdvertsController extends Controller {
      * @throws CHttpException
      */
     public function loadUser($id) {
-        $model = Yii::app()->getModule('user')->user($id);
+        $model = User::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;

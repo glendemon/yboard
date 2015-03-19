@@ -12,12 +12,12 @@ class UserChangePassword extends CFormModel {
 	public function rules() {
 		return Yii::app()->controller->id == 'recovery' ? array(
 			array('password, verifyPassword', 'required'),
-			array('password, verifyPassword', 'length', 'max'=>128, 'min' => 4,'message' => UserModule::t("Incorrect password (minimal length 4 symbols).")),
-			array('verifyPassword', 'compare', 'compareAttribute'=>'password', 'message' => UserModule::t("Retype Password is incorrect.")),
+			array('password, verifyPassword', 'length', 'max'=>128, 'min' => 4,'message' => t("Incorrect password (minimal length 4 symbols).")),
+			array('verifyPassword', 'compare', 'compareAttribute'=>'password', 'message' => t("Retype Password is incorrect.")),
 		) : array(
 			array('oldPassword, password, verifyPassword', 'required'),
-			array('oldPassword, password, verifyPassword', 'length', 'max'=>128, 'min' => 4,'message' => UserModule::t("Incorrect password (minimal length 4 symbols).")),
-			array('verifyPassword', 'compare', 'compareAttribute'=>'password', 'message' => UserModule::t("Retype Password is incorrect.")),
+			array('oldPassword, password, verifyPassword', 'length', 'max'=>128, 'min' => 4,'message' => t("Incorrect password (minimal length 4 symbols).")),
+			array('verifyPassword', 'compare', 'compareAttribute'=>'password', 'message' => t("Retype Password is incorrect.")),
 			array('oldPassword', 'verifyOldPassword'),
 		);
 	}
@@ -28,9 +28,9 @@ class UserChangePassword extends CFormModel {
 	public function attributeLabels()
 	{
 		return array(
-			'oldPassword'=>UserModule::t("Old Password"),
-			'password'=>UserModule::t("password"),
-			'verifyPassword'=>UserModule::t("Retype Password"),
+			'oldPassword'=>t("Old Password"),
+			'password'=>t("password"),
+			'verifyPassword'=>t("Retype Password"),
 		);
 	}
 	
@@ -40,6 +40,6 @@ class UserChangePassword extends CFormModel {
 	 public function verifyOldPassword($attribute, $params)
 	 {
 		 if (User::model()->notsafe()->findByPk(Yii::app()->user->id)->password != Yii::app()->getModule('user')->encrypting($this->$attribute))
-			 $this->addError($attribute, UserModule::t("Old Password is incorrect."));
+			 $this->addError($attribute, t("Old Password is incorrect."));
 	 }
 }

@@ -39,11 +39,11 @@ class ImportUsersAction extends CAction
             $profile=new Profile;
 
 			$model->attributes=$userArray;
-			$model->activkey=Yii::app()->getModule('user')->encrypting(microtime().$model->password);
+			$model->activkey=UserModule::encrypting(microtime().$model->password);
 			$profile->attributes=$profileArray;
 			$profile->user_id=0;
 			if($model->validate()&&$profile->validate()) {
-				$model->password=Yii::app()->getModule('user')->encrypting($model->password);
+				$model->password=UserModue::encrypting($model->password);
 				if($model->save()) {
 					$profile->user_id=$model->id;
 					$profile->save();

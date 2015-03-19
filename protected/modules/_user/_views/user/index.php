@@ -3,7 +3,7 @@ $this->breadcrumbs = array(
     t("Users"),
 );
 if (UserModule::isAdmin()) {
-    $this->layout = '//main-template';
+    $this->layout = '//layouts/column2';
     $this->menu = array(
         array('label' => t('Manage Users'), 'icon' => 'icon-folder-open', 'url' => array('/user/admin')),
         array('label' => t('Manage Profile Field'), 'icon' => 'icon-list-alt', 'url' => array('profileField/admin')),
