@@ -121,8 +121,9 @@ return array(
     'Registration date' => 'Дата регистрации',
     'username' => 'Имя пользователя',
     'Logout' => 'Выход',
-    'login' => 'Вход',
+    'Login' => 'Вход',
     'Register' => 'Регистрация',
+    'lastvisit_at' => 'Последнее посещение',
     // Сообщения
     'Write messages to' => 'Написать сообщение для ',
     'Sender' => 'Отправитель ',

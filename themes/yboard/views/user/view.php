@@ -46,4 +46,4 @@ $this->menu=array(
 ?>
 
 
-<a class='send_mail btn' href='<?=Yii::app()->createUrl('messages/create',array('id'=>$model->id))?>'> Отправить сообщение </a>
+<a class='send_mail btn' style='margin:5px auto 0px' href='<?=Yii::app()->createUrl('messages/create',array('id'=>$model->id))?>'> Отправить сообщение </a>
