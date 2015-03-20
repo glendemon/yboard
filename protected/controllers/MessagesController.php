@@ -27,12 +27,8 @@ class MessagesController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','index','view'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -58,6 +54,27 @@ class MessagesController extends Controller
 			'model'=>$this->loadModel($id),
 		));
 	}
+        
+        public function actionDialog($user)
+	{
+            $model=new Messages;
+            
+            $dataProvider=new CActiveDataProvider('Messages',array(
+                'criteria'=>array(
+                    'condition'=>' (sender_id="'.$user.'" and receiver_id="'.Yii::app()->user->id.'" ) '
+                    . 'or (sender_id="'.Yii::app()->user->id.'" and receiver_id="'.$user.'" )'
+                    )
+            ));
+            
+            $userData=User::model()->findByPk($user);
+
+            $this->render('dialog',array(
+                'dataProvider'=>$dataProvider,
+                'userData'=>$userData,
+                'model'=>$model,
+            ));
+	}
+
 
 	/**
 	 * Creates a new model.
@@ -81,7 +98,7 @@ class MessagesController extends Controller
                         
 			if($model->validate()){
                             $model->save();
-                            $this->redirect(array('view','id'=>$model->id));
+                            $this->redirect(array('messages/dialog','user'=>$id));
                         }
 		}
 
@@ -130,18 +147,39 @@ class MessagesController extends Controller
 	}
 
 	/**
-	 * Lists all models.
+	 * Вывод пользователей с которыми ведется переписка
+         * для текущего пользователя
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Messages',array(
-                    'criteria'=>array(
-                        'condition'=>'sender_id="'.Yii::app()->user->id.'" or receiver_id="'.Yii::app()->user->id.'"'
-                        )
-                ));
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+
+            // --- Переделать в более подходящий вид
+            $command=Yii::app()->db->
+            createCommand('SELECT max(messages.send_date) as last_date, '
+            . 'count(distinct messages.id) as count_mes, users.username, '
+            . 'if(receiver_id="'.Yii::app()->user->id.'",sender_id,receiver_id) as interlocutor '
+            . 'FROM messages left join users on users.id=sender_id or '
+            . 'users.id=receiver_id and users.id!="'.Yii::app()->user->id.'" '
+            . 'where sender_id="'.Yii::app()->user->id.'" or '
+            . 'receiver_id="'.Yii::app()->user->id.'" group by interlocutor');
+
+            $mesData=$command->queryAll();
+
+            $dataProvider=new CArrayDataProvider($mesData, array(
+                'id'=>'interlocutor',
+                'sort'=>array(
+                    'attributes'=>array(
+                         'interlocutor'
+                    ),
+                ),
+                'pagination'=>array(
+                    'pageSize'=>10,
+                ),
+            ));
+
+            $this->render('index',array(
+                    'dataProvider'=>$dataProvider,
+            ));
 	}
 
 	/**

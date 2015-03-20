@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/main_style.css" rel="stylesheet" type="text/css" />
 <?php Yii::app()->bootstrap->register(); ?>
@@ -42,7 +43,7 @@
 		  	<?php
                         
                         $catTreeGenerator=new Category();
-                        //$catTreeGenerator->menuItems(intval($_GET['cat_id']));
+                        $catTreeGenerator->menuItems(0);
                         
             $this->widget('zii.widgets.CMenu', 
                     array(
@@ -59,29 +60,29 @@
   </div>
   <div class="midarea">
 	 <?php if (isset($this->breadcrumbs)): ?>
-					<?php
-					$this->widget('bootstrap.widgets.TbBreadcrumbs', array(
-						'links' => $this->breadcrumbs,
-					));
-					?><!-- breadcrumbs -->
-				<?php endif; ?>
+                <?php
+                $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
+                        'links' => $this->breadcrumbs,
+                ));
+                ?><!-- breadcrumbs -->
+        <?php endif; ?>
                                         
 
 
-				<?php echo $content; ?>
+        <?php echo $content; ?>
 
   </div>
   <div class="right">
-	
 	<div>
 	  <?php
+          
             $this->widget('zii.widgets.CMenu', array(
                 'items' => array(
-                    array('url' => Yii::app()->getModule('user')->loginUrl, 
+                    array('url' => Yii::app()->createUrl("login"), 
                         'label' => t("Login"), 
                         'visible' => Yii::app()->user->isGuest
                     ),
-                    array('url' => Yii::app()->getModule('user')->registrationUrl, 
+                    array('url' => Yii::app()->createUrl("registration"), 
                         'label' => t("Register"), 
                         'visible' => Yii::app()->user->isGuest
                     ),
@@ -97,7 +98,7 @@
                         'label' => t("Messages"), 
                         'visible' => !Yii::app()->user->isGuest
                     ),
-                    array('url' => Yii::app()->getModule('user')->logoutUrl, 
+                    array('url' => Yii::app()->createUrl('logout'), 
                         'label' => t("Logout") . ' (' . Yii::app()->user->username . ')', 
                         'visible' => !Yii::app()->user->isGuest
                     ),
