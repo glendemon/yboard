@@ -25,23 +25,34 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','update'),
+				'actions'=>array('index','view'),
 				'users'=>array('*'),
+			),
+                        array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('update'),
+				'expression'=>'Yii::app()->user->id == Yii::app()->request->getParam("id")',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
-	}	
+	}
 
 	/**
 	 * Displays a particular model.
 	 */
-	public function actionView()
-	{
-		$model = $this->loadModel();
+	public function actionView($id)
+	{   
+            $mes_model=new Messages();
+            
+            //$model=User::model()->findByPk($id);
+            
+            //echo Yii::app()->request->getParam('id');
+            
+		$model = $this->loadUser($id);
 		$this->render('view',array(
 			'model'=>$model,
+                        'mes_model'=>$mes_model,
 		));
 	}
 
@@ -88,11 +99,21 @@ class UserController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Messages']))
+		if(isset($_POST['User']))
 		{
-			$model->attributes=$_POST['Messages'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			$model->attributes=$_POST['User'];
+                        if(!$model->status)
+                            $model->status=1;
+                        if(!$model->superuser)
+                            $model->superuser=0;
+                        
+                        $model->validate();
+                        
+			if($model->save()) {
+                            $this->redirect(array('view','id'=>$model->id));
+                        } else {
+                            var_dump($model->getErrors());
+                        }
 		}
 
 		$this->render('update',array(

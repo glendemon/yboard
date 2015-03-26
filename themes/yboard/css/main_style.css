@@ -10,7 +10,7 @@ body {
     padding: 0;
 }
 div, h1, h2, h3, h4, p, form, label, input, textarea, img, span {
-    margin: 0;
+    margin-bottom: 5px;
     padding: 0;
 }
 a {
@@ -115,8 +115,16 @@ table.roots{
     width: 130px;
 }
 
+/* Объявления */
+.items div.advertList .redact{
+    float:right;
+}
+.items div.advertList{
+    padding:3px;
+    min-height: 60px;
+    box-shadow:none;
+}
 
-// Сообщения 
 a.send_mail{
     border: 1px solid #b9d7d4;
     border-radius: 5px;
@@ -145,8 +153,45 @@ div.dialog{
     margin-top:10px;
 }
 
+dd {
+    margin-left: 200px;
+}
+dt{
+    float: left;
+    width: 200px;
+}
 
-// Меню 
+/* Просмотр объявления */
+.advert_full .title{
+    font-size:25px;
+}
+.advert_full .date i{
+    margin-right:3px;
+}
+.advert_full .date span{
+    padding:3px 20px;
+}
+.advert_full .date{
+    background:#F8FBE6;
+    height:25px;
+    border-top:1px dashed #b9d7d4;
+    border-bottom:1px dashed #b9d7d4;
+    padding-top:10px;
+}
+
+
+/* Меню */
+
+#genMenu ul{
+    margin:0px;
+}
+#genMenu li i{
+    padding-right:4px;
+}
+#genMenu li{
+    list-style-type: none;
+    padding:4px 0;
+}
 .menu_area{
     float: left;
     margin: 20px 0 0;
@@ -300,7 +345,7 @@ div.dialog{
 #body_area {
     clear: both;
     font-family: Tahoma;
-    font-size: 12px;
+    font-size: 14px;
     font-style: normal;
     font-variant: normal;
     line-height: normal;

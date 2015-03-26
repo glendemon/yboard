@@ -2,10 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
 <title><?php echo CHtml::encode($this->pageTitle); ?></title>
-<link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/main_style.css" rel="stylesheet" type="text/css" />
+<script> baseUrl='<?=Yii::app()->baseUrl?>'; </script>
+
 <?php Yii::app()->bootstrap->register(); ?>
+<script src="<?php echo Yii::app()->baseUrl; ?>/js_plugins/yboard.js" ></script>
+<link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/main_style.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -73,36 +76,41 @@
 
   </div>
   <div class="right">
-	<div>
+	<div id='genMenu'>
 	  <?php
           
             $this->widget('zii.widgets.CMenu', array(
                 'items' => array(
                     array('url' => Yii::app()->createUrl("login"), 
-                        'label' => t("Login"), 
+                        'label' => "<i class='fa fa-sign-in'></i>".t("Login"), 
                         'visible' => Yii::app()->user->isGuest
                     ),
                     array('url' => Yii::app()->createUrl("registration"), 
-                        'label' => t("Register"), 
+                        'label' => "<i class='fa fa-user-plus'></i>".t("Register"), 
                         'visible' => Yii::app()->user->isGuest
                     ),
                     array('url' => Yii::app()->createUrl('user/'.Yii::app()->user->id), 
-                        'label' => t("Profile"), 
+                        'label' => "<i class='fa fa-user'></i>".t("Profile"), 
                         'visible' => !Yii::app()->user->isGuest
                     ),
                     array('url' => Yii::app()->createUrl('adverts/user', array('id'=>Yii::app()->user->id)), 
-                        'label' => t("Мои объявления"), 
+                        'label' => "<i class='fa fa-bullhorn'></i>".t("My adverts"), 
+                        'visible' => !Yii::app()->user->isGuest
+                    ),
+                    array('url' => Yii::app()->createUrl('adverts/favorites'), 
+                        'label' => "<i class='fa fa-bookmark-o'></i>".t("Favorites advert"), 
                         'visible' => !Yii::app()->user->isGuest
                     ),
                     array('url' => Yii::app()->createUrl("messages"), 
-                        'label' => t("Messages"), 
+                        'label' => "<i class='fa fa-comment-o'></i>".t("Messages"), 
                         'visible' => !Yii::app()->user->isGuest
                     ),
                     array('url' => Yii::app()->createUrl('logout'), 
-                        'label' => t("Logout") . ' (' . Yii::app()->user->username . ')', 
+                        'label' => "<i class='fa fa-sign-out'></i>".t("Logout") . ' (' . Yii::app()->user->username . ')', 
                         'visible' => !Yii::app()->user->isGuest
                     ),
                 ),
+                'encodeLabel' => false,
             ));
 		  ?>  
 	</div>

@@ -3,7 +3,7 @@ header("Content-Type: text/html; charset=UTF-8");
 
 
 
-if($_COOKIE['YII_DEBUG']==="yes") {
+if($_COOKIE['YII_DEBUG']==="true") {
     // Подключение параметров для режима отладки 
 	$yii=dirname(__FILE__).'/../framework/yii.php';
 	defined('YII_DEBUG') or define('YII_DEBUG',true);
@@ -11,6 +11,7 @@ if($_COOKIE['YII_DEBUG']==="yes") {
 	$CONFIG=dirname(__FILE__).'/protected/config/main_dev.php';
         error_reporting(E_ALL^E_NOTICE);
         ini_set("display_errors",1);
+                
 } else {
     // Подключение стандартных параметров
 	$yii=dirname(__FILE__).'/framework/yii.php';

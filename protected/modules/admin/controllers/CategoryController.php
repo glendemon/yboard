@@ -72,7 +72,7 @@ class CategoryController extends BackendController
         {
             $model->attributes = $_POST['Category'];
 
-			$model->fieldsSave();
+            $model->fieldsSave();
 
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));

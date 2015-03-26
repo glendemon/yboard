@@ -45,7 +45,7 @@ return array(
         'cache' => array(
             'class' => 'system.caching.CFileCache',
         ),
-        'Board' => array('class' => 'Board'),
+        //'Board' => array('class' => 'Board'),
         'evenness' => array('class' => 'Evenness'),
         'bootstrap' => array(
             'class' => 'bootstrap.components.Bootstrap',
@@ -115,29 +115,21 @@ return array(
             // use 'site/error' action to display errors
             'errorAction' => 'site/error',
         ),
-        'log' => array(
-            'class' => 'CLogRouter',
-            'enabled' => YII_DEBUG,
-            'routes' => array(
-                array(
-                    'class' => 'CFileLogRoute',
-                    'levels' => 'error, warning',
-//                    'class'=>'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
-//                    'ipFilters'=>array('127.0.0.1','192.168.1.3'),
-                ),
-                array(
-                    'class' => 'application.extensions.yii-debug-toolbar.YiiDebugToolbarRoute',
-                    'ipFilters' => array('127.0.0.1', '192.168.1.215'),
-                ),
-                // uncomment the following to show log messages on web pages
-                /*
-                array(
-                    'class' => 'CWebLogRoute',
-                ),
-                 * 
-                 */
-            ),
-        ),
+		'log'=>array(
+			'class'=>'CLogRouter',
+			'enabled'=>YII_DEBUG,
+			'routes'=>array(
+
+				array(
+					'class'=>'CFileLogRoute',
+					'levels'=>'error, warning',
+				),
+				array(
+					'class'=>'application.extensions.yii-debug-toolbar.YiiDebugToolbarRoute',
+					'ipFilters'=>array('127.0.0.1','192.168.1.215'),
+				),
+			),
+		),
     ),
     // application-level parameters that can be accessed
     // using Yii::app()->params['paramName']

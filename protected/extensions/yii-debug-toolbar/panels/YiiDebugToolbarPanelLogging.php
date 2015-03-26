@@ -19,6 +19,8 @@
  */
 class YiiDebugToolbarPanelLogging extends YiiDebugToolbarPanel
 {
+	public $i = 'j';
+	
     /**
      * Message count.
      *
@@ -46,7 +48,7 @@ class YiiDebugToolbarPanelLogging extends YiiDebugToolbarPanel
      */
     public function getMenuSubTitle()
     {
-        return YiiDebug::t('{n} message|{n} messages', array($this->countMessages));
+        return $this->countMessages;
     }
 
     /**

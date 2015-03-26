@@ -87,7 +87,7 @@ class Adverts extends CActiveRecord
             'youtube_id' => t( 'Youtube'),
             'created_at' => t( 'Created At'),
             'updated_at' => t( 'Updated At'),
-			'fields' => 'Характеристики',
+            'fields' => 'Характеристики',
         );
     }
 

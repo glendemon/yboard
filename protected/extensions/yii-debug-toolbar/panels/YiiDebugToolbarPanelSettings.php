@@ -19,6 +19,8 @@
  */
 class YiiDebugToolbarPanelSettings extends YiiDebugToolbarPanel
 {
+	public $i = 'k';
+	
     public function getMenuTitle()
     {
         return YiiDebug::t('Settings');
@@ -26,9 +28,7 @@ class YiiDebugToolbarPanelSettings extends YiiDebugToolbarPanel
 
     public function getMenuSubTitle()
     {
-        return 'YII_DEBUG ' . CHtml::tag( 'span', array(
-                    'style'=>sprintf('color:%s;',YII_DEBUG ? 'red':'green')
-                ), YII_DEBUG ? YiiDebug::t('ON') : YiiDebug::t('OFF'));
+        return 'YII_DEBUG ' . (YII_DEBUG ? YiiDebug::t('ON') : YiiDebug::t('OFF'));
     }
 
     public function getTitle()
@@ -38,7 +38,7 @@ class YiiDebugToolbarPanelSettings extends YiiDebugToolbarPanel
 
     public function getSubTitle()
     {
-        return sprintf('(%s)', get_class(Yii::app()));
+        return '';
     }
 
     public function init()
@@ -68,6 +68,7 @@ class YiiDebugToolbarPanelSettings extends YiiDebugToolbarPanel
 
     public function run()
     {
+
         $this->render('settings', array(
             'application' => $this->getApplicationData(),
             'params' => $this->getApplicationParams(),
@@ -80,10 +81,12 @@ class YiiDebugToolbarPanelSettings extends YiiDebugToolbarPanel
     private function prepareData($data)
     {
         $result = array();
-        foreach ($data as $key=>$value)
-        {
-            if (is_object($value))
-            {
+        $skip = array(); 
+        foreach ($data as $key => $value){
+            if (in_array($key, $skip))
+                continue;
+            
+            if (is_object($value)){
                 $value = array_merge(array(
                     'class' => get_class($value)
                 ), get_object_vars($value));

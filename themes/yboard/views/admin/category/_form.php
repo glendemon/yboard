@@ -44,9 +44,13 @@ $val_success_message = ($model->isNewRecord) ?
 	var new_field_id=1;
 	
 	function addFiled(){
-		$('#fields-list').append('<div class="controls"><input type="text" id="Category_fields_'+new_field_id+'_name" name="Category[fields][\'fn_'+new_field_id+'\'][\'name\']" maxlength="128" size="60" value="">			<select id="Category_fields_price_&quot;type&quot;" name="Category[fields][\'fn_'+new_field_id+'\'][\'type\']"><option value="0">text</option><option value="1">checkbox</option></select></div>');
+		$('#fields-list').append('<div class="controls"><input type="text" id="Category_fields_'+new_field_id+'_name" name="Category[fields][fn_'+new_field_id+'][name]" maxlength="128" size="60" value="">			<select id="Category_fields_price_&quot;type&quot;" name="Category[fields][fn_'+new_field_id+'][type]"><option value="0">text</option><option value="1">checkbox</option><option value="2">select</option></select><input type="text" id="Category_fields_'+new_field_id+'_atr" name="Category[fields][fn_'+new_field_id+'][atr]" maxlength="128" size="60" value=""><a href="javascript:void(0);" onclick="delField(this);"><i class="fa fa-times"></i></a></div>');
 		new_field_id++;
 	}
+        
+        function delField(t){
+            $(t).parent().remove();
+        }
 </script>	
 
 <div id="ajax-form" class='form'>
@@ -103,24 +107,53 @@ $val_success_message = ($model->isNewRecord) ?
 
         <input type="hidden" name="YII_CSRF_TOKEN"
                value="<?php echo Yii::app()->request->csrfToken; ?>"/>
-        <input type="hidden" name= "parent_id" value="<?php echo !empty($_POST['parent_id']) ? $_POST['parent_id'] : ''; ?>"  />
+        <input type="hidden" name= "parent_id" value="<?php 
+            echo !empty($_POST['parent_id']) ? $_POST['parent_id'] : ''; 
+        ?>"  />
 		
 		
-		<div class="control-group" id="fields-list">
-			<?		if(sizeof($model->fields)>0) { ?>
-			<?php echo $form->labelEx($model, 'fields', array('class' => 'control-label')); 
-		foreach($model->fields as $fn=>$fl){ ?>
-            <div class="controls">
-            <?php echo $form->textField($model, 'fields['.$fn.'][name]', array('value' => !empty($_POST['fields'][$fn]['name']) ? $_POST['fields'][$fn]['name'] : $fl->name, 'size' => 60, 'maxlength' => 128)); ?>
-			<?php echo $form->dropDownList($model, 'fields['.$fn.'][type]',$this->settings['fileds_type']); ?>
-				
-                <p class="help-block"><?php echo $form->error($model, 'fields'); ?></p>
-            </div>
-        <? } ?>
-		<? }?>
-		</div>	
+            <div class="control-group" id="fields-list">
 
-		<a href='javascript:addFiled()'>Добавить дополнительное поле</a>
+
+
+            <?if(sizeof($model->fields)>0) { 
+                echo $form->labelEx($model, 'fields', array('class' => 'control-label')); 
+                echo "Название, тип и артибуты. Для select "
+                . "атрибут это значения через запятую, для checkbox - "
+                . "если есть надпись значит checkbox по умолчанию выделен";
+                foreach($model->fields as $fn=>$fl){ ?>
+                <div class="controls">
+                <?php echo $form->textField($model, 'fields['.$fn.'][name]', 
+                        array(
+                            'value' => !empty($_POST['fields'][$fn]['name']) 
+                            ? $_POST['fields'][$fn]['name'] : $fl->name, 
+                            'size' => 60, 'maxlength' => 128)); 
+                            $selected=array();
+                            $selected[$fl->type]= Array ( 'selected' => 'selected' );
+
+                    echo $form->dropDownList($model, 
+                        'fields['.$fn.'][type]',$this->settings['fileds_type'],
+                            array('options'=>$selected));
+
+                    echo $form->textField($model, 'fields['.$fn.'][atr]', 
+                        array(
+                            'value' => !empty($_POST['fields'][$fn]['atr']) 
+                            ? $_POST['fields'][$fn]['atr'] : $fl->atr, 
+                            'size' => 60, 'maxlength' => 128)); 
+
+                    echo  "<a href='javascript:void(0);' onclick='delField(this);'"
+                    . "><i class='fa fa-times'></i></a>";
+
+                    ?>
+
+
+                        <p class="help-block"><?php echo $form->error($model, 'fields'); ?></p>
+                </div>
+                <? } 
+            }?>
+            </div>	
+
+		<a href='javascript:addFiled()'><i class='fa fa-plus-circle'></i>Добавить дополнительное поле</a>
 
 <?php if (!$model->isNewRecord): ?>
             <input type="hidden" name="update_id"

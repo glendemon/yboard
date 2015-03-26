@@ -113,6 +113,8 @@ return array(
     'Choose category' => 'Выберите категорию',
     'Gallery' => 'Фотографии',
     'Youtube' => 'Bидео',
+    'Favorites advert' => 'Избраные обьявления',
+    'My adverts' => 'Мои обьявления',
     
     // Пользователи
     'Send a mail to the author' => 'Отправить письмо автору',
@@ -136,6 +138,7 @@ return array(
     'View Messages' => 'Просмотр сообщения',
     'Read' => 'Прочитанно',
     'Dialog' => 'Диалог',
+    // Работа с датами
     'dates' => array(
         'Январь',	'Янв',	
         'Февраль',	'Фев',	

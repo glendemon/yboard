@@ -6,26 +6,29 @@ $colors=array(
     CLogger::LEVEL_ERROR=>'#FFC0CB',
 );
 ?>
-<table id="yii-debug-toolbar-log">
-    <thead>
-        <tr>
-            <th class="collapsible collapsed al-l" rel="#yii-debug-toolbar-log .details">
-                <?php echo YiiDebug::t('Message (details)')?></th>
-            <th nowrap="nowrap"><?php echo YiiDebug::t('Level')?></th>
-            <th nowrap="nowrap" class="al-l"><?php echo YiiDebug::t('Category')?></th>
-            <th nowrap="nowrap"><?php echo YiiDebug::t('Time')?></th>
-        </tr>
-    </thead>
-    <tbody>
-    <?php foreach($logs as $id=>$entry): ?>
-        <tr class="<?php echo ($id%2?'odd':'even') ?>"
-            <?php if(isset($colors[$entry[1]])) : ?>style=" background:<?php echo $colors[$entry[1]]?>"<?php endif;?>>
-            <td width="100%" onclick="jQuery('.details', this).toggleClass('hidden');">
-                <?php echo YiiDebugViewHelper::splitLinesInBlocks($entry[0]) ?></td>
-            <td nowrap="nowrap" class="al-c"><?php echo $entry[1]?></td>
-            <td nowrap="nowrap"><?php echo $entry[2] ?></td>
-            <td nowrap="nowrap" class="al-c"><?php echo date('H:i:s.',$entry[3]).sprintf('%06d',(int)(($entry[3]-(int)$entry[3])*1000000));?></td>
-        </tr>
-    <?php endforeach; ?>
-    </tbody>
-</table>
+
+<div data-ydtb-panel-data="<?php echo $this->id ?>">
+    <div>
+        <table data-ydtb-data-table>
+            <thead>
+                <tr>
+                    <th><?php echo YiiDebug::t('Message (details)')?></th>
+                    <th><?php echo YiiDebug::t('Level')?></th>
+                    <th><?php echo YiiDebug::t('Category')?></th>
+                    <th><?php echo YiiDebug::t('Time')?></th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach($logs as $id=>$entry): ?>
+                <tr>
+                    <td data-ydtb-data-type="varchar"><?php echo nl2br($entry[0]) ?></td>
+                    <td data-ydtb-data-type="char"><?php echo $entry[1]; ?></td>
+                    <td data-ydtb-data-type="char"><?php echo $entry[2] ?></td>
+                    <td data-ydtb-data-type="number"><?php echo date('H:i:s.',$entry[3]).sprintf('%06d',(int)(($entry[3]-(int)$entry[3])*1000000));?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+

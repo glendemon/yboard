@@ -64,8 +64,8 @@ class Category extends CActiveRecord
 	// Формирование поля items для виджета Cmenu для Меню Категории
 	public function menuItems($cat_id=0){
 		
-		if($cat_id!=0){ 
-                    $curent_cat=self::model()->findByPk($cat_id);
+		if($cat_id!=0){
+                    $curent_cat= Yii::app()->params['categories'][intval($cat_id)];
 
                     //var_dump($curent_cat);
                     /*
@@ -80,10 +80,10 @@ class Category extends CActiveRecord
                     array(
                         'condition'=>
                         "level='1' "
-                        . "or (lft<'".$curent_cat->lft."' and root='".$curent_cat->root."' and level<'".$curent_cat->level."' )  "
-                        . "or id='".$curent_cat->id."' "
-                        . "or (root='".$curent_cat->root."' and level='".$curent_cat->level."') "
-                        . "or ( lft>'".$curent_cat->lft."' and rgt<'".$curent_cat->rgt."' and root='".$curent_cat->root."' and level='".($curent_cat->level+1)."')"
+                        . "or (lft<'".$curent_cat['lft']."' and root='".$curent_cat['root']."' and level<'".$curent_cat['level']."' )  "
+                        . "or id='".$curent_cat['id']."' "
+                        . "or (root='".$curent_cat['root']."' and level='".$curent_cat['level']."') "
+                        . "or ( lft>'".$curent_cat['lft']."' and rgt<'".$curent_cat['rgt']."' and root='".$curent_cat['root']."' and level='".($curent_cat['level']+1)."')"
                         ,
                         'order'=>'root, lft',
                         )
@@ -166,6 +166,29 @@ class Category extends CActiveRecord
                
               return  $ret_cats;
     }
+    
+    static function getCategories(){
+            // поставить кэширование запроса и обработку fields 
+            $categories = Yii::app()->db->createCommand('SELECT * FROM category')
+                                ->queryAll();
+
+        
+            $ret_cat=Array();
+            foreach($categories as $n=>$cat) {
+                $ret_cat[$cat['id']]=$cat;
+                $ret_cat[$cat['id']]['fields']=json_decode($cat['fields'], true);
+            }
+            
+            $cat_count = Yii::app()->db->createCommand()
+            ->select('category_id, COUNT(*) count')
+            ->from(Adverts::model()->tableName())
+            ->group('category_id')
+            ->query();
+            foreach($cat_count as $row)
+                $ret_cat[$row['category_id']]['count'] = $row['count'];
+
+            return $ret_cat;
+        }
 
     /**
      * @return array customized attribute labels (name=>label)
@@ -231,7 +254,7 @@ class Category extends CActiveRecord
 
     public function countBulletins()
     {
-        $count = Yii::app()->Board->count($this->id);
+        $count = Yii::app()->params['categories'][$this->id]['count'];
         if ($this->isRoot())
         {
             $descendants=$this->children()->findAll();

@@ -18,6 +18,8 @@ class PeopleDate extends CWidget
                 $string=strtotime($string);
             }
             
+            $ar=date("Y-m-d",$string);
+            
             // выводим время в формате "сколько прошло"
             if($string > time()-self::FORMAT_SELECT_TIME and $string<time())
                 return  self::getTimeAgo($string);
@@ -27,9 +29,12 @@ class PeopleDate extends CWidget
 	           $_win_to   = array ('%#d', '%H:%M:%S', '%m/%d/%y');
 	           $format = str_replace($_win_from, $_win_to, $format);
 	    }
+            
+            $ar=date( $format,$string);
+            $ar=date( $format,$string);
  	    
  	    if($string != '') {
-	        $out = strftime($format, strtotime($string));
+	        $out = strftime($format, $string);
 	    } else {
 	        $out = '';
 	    }

@@ -1,5 +1,5 @@
 <?php if (!empty($callstack)) :?>
-<table id="yii-debug-toolbar-sql-callstack" class="tabscontent">
+<table data-ydtb-data-table>
     <thead>
         <tr>
             <th>#</th>
@@ -9,18 +9,16 @@
     </thead>
     <tbody>
         <?php foreach($callstack as $id=>$entry):?>
-        <tr class="<?php echo ($id%2?'odd':'even') ?><?php echo ($entry[1]>$this->timeLimit?' warning':'') ?>">
-            <td class="text-right"><?php echo $id; ?></td>
-            <td width="100%"><?php echo $entry[0]; ?></td>
-            <td nowrap="nowrap">
-            <?php echo sprintf('%0.6F',$entry[1]); ?>
-            </td>
+        <tr class="<?php echo ($entry[1]>$this->timeLimit ? ' warning':'') ?>">
+            <td data-ydtb-data-type="number"><?php echo $id; ?></td>
+            <td data-ydtb-data-type="varchar"><?php echo $entry[0]; ?></td>
+            <td data-ydtb-data-type="number"><?php echo sprintf('%0.6F',$entry[1]); ?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>
 </table>
 <?php else : ?>
-<p id="yii-debug-toolbar-sql-callstack" class="tabscontent">
+<p>
     <?php echo Yii::t('yii-debug-toolbar','No SQL queries were recorded during this request or profiling the SQL is DISABLED.')?>
 </p>
 <?php endif; ?>

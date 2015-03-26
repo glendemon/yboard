@@ -1,71 +1,90 @@
-<h4 class="collapsible"><?php echo YiiDebug::t('Application Properties')?></h4>
-<table>
-    <thead>
-        <tr>
-            <th width="180"><?php echo YiiDebug::t('Property')?></th>
-            <th><?php echo YiiDebug::t('Value')?></th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php $c=0; foreach ($application as $key=>$value) : ?>
-        <tr class="<?php echo ($c%2?'odd':'even') ?>">
-            <th><?php echo $key; ?></th>
-            <td><?php echo $this->dump($value); ?></td>
-        </tr>
-        <?php ++$c; endforeach;?>
-    </tbody>
-</table>
-
-<h4 class="collapsible"><?php echo YiiDebug::t('Modules')?></h4>
-<table>
-    <thead>
-        <tr>
-            <th width="180"><?php echo YiiDebug::t('Module ID')?></th>
-            <th><?php echo YiiDebug::t('Configuration')?></th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php $c=0; foreach ($modules as $key=>$value) : ?>
-        <tr class="<?php echo ($c%2?'odd':'even') ?>">
-            <th><?php echo $key; ?></th>
-            <td><?php echo $this->dump($value); ?></td>
-        </tr>
-        <?php ++$c; endforeach;?>
-    </tbody>
-</table>
-
-<h4 class="collapsible"><?php echo YiiDebug::t('Application Params')?></h4>
-<table>
-    <thead>
-        <tr>
-            <th width="180"><?php echo YiiDebug::t('Name')?></th>
-            <th><?php echo YiiDebug::t('Value')?></th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php $c=0; foreach ($params as $key=>$value) : ?>
-        <tr class="<?php echo ($c%2?'odd':'even') ?>">
-            <th><?php echo $key; ?></th>
-            <td><?php echo $this->dump($value); ?></td>
-        </tr>
-        <?php ++$c; endforeach;?>
-    </tbody>
-</table>
-
-<h4 class="collapsible"><?php echo YiiDebug::t('Components')?></h4>
-<table>
-    <thead>
-        <tr>
-            <th width="180"><?php echo YiiDebug::t('Component ID')?></th>
-            <th><?php echo YiiDebug::t('Configuration')?></th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php $c=0; foreach ($components as $key=>$value) : ?>
-        <tr class="<?php echo ($c%2?'odd':'even') ?>">
-            <th><?php echo $key; ?></th>
-            <td><?php echo $this->dump($value); ?></td>
-        </tr>
-        <?php ++$c; endforeach;?>
-    </tbody>
-</table>
+<div data-ydtb-panel-data="<?php echo $this->id ?>">
+    <div>
+        <div data-ydtb-accordion="<?php echo $this->id?>">
+            <div data-ydtb-accordion-group="collapsed">
+                <div data-ydtb-accordion-heading="" data-ydtb-data-size="<?php echo count($application)?>">
+                    <i data-ydtb-icon="s"></i>
+                    <span><?php echo YiiDebug::t('Application Properties')?></span>
+                    <i data-ydtb-icon="q"></i>
+                    <i data-ydtb-icon="t"></i>
+                    <div class="clear clearfix"></div>
+                </div>
+                <div data-ydtb-accordion-body="">
+                    <table data-ydtb-data-table="fixed">
+                        <tbody>
+                            <?php foreach ($application as $key=>$value) : ?>
+                            <tr>
+                                <th><?php echo $key; ?></th>
+                                <td><?php echo $this->dump($value); ?></td>
+                            </tr>
+                            <?php endforeach;?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div data-ydtb-accordion-group="collapsed">
+                <div data-ydtb-accordion-heading="">
+                    <i data-ydtb-icon="s"></i>
+                    <span><?php echo YiiDebug::t('Modules')?></span>
+                    <i data-ydtb-icon="q"></i>
+                    <i data-ydtb-icon="t"></i>
+                    <div class="clear clearfix"></div>
+                </div>
+                <div data-ydtb-accordion-body="">
+                    <table data-ydtb-data-table="fixed">
+                        <tbody>
+                            <?php foreach ($modules as $key=>$value) : ?>
+                            <tr>
+                                <th><?php echo $key; ?></th>
+                                <td><?php echo $this->dump($value); ?></td>
+                            </tr>
+                            <?php endforeach;?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div data-ydtb-accordion-group="collapsed">
+                <div data-ydtb-accordion-heading="" data-ydtb-data-size="<?php echo count($params)?>">
+                    <i data-ydtb-icon="s"></i>
+                    <span><?php echo YiiDebug::t('Application Params')?></span>
+                    <i data-ydtb-icon="q"></i>
+                    <i data-ydtb-icon="t"></i>
+                    <div class="clear clearfix"></div>
+                </div>
+                <div data-ydtb-accordion-body="">
+                    <table data-ydtb-data-table="fixed">
+                        <tbody>
+                            <?php foreach ($params as $key=>$value) : ?>
+                            <tr>
+                                <th><?php echo $key; ?></th>
+                                <td><?php echo $this->dump($value); ?></td>
+                            </tr>
+                            <?php endforeach;?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div data-ydtb-accordion-group="collapsed">
+                <div data-ydtb-accordion-heading="" data-ydtb-data-size="<?php echo count($components)?>">
+                    <i data-ydtb-icon="s"></i>
+                    <span><?php echo YiiDebug::t('Components')?></span>
+                    <i data-ydtb-icon="q"></i>
+                    <i data-ydtb-icon="t"></i>
+                    <div class="clear clearfix"></div>
+                </div>
+                <div data-ydtb-accordion-body="">
+                    <table data-ydtb-data-table="fixed">
+                        <tbody>
+                            <?php foreach ($components as $key => $value) : ?>
+                            <tr>
+                                <th><?php echo $key; ?></th>
+                                <td><?php echo $this->dump($value); ?></td>
+                            </tr>
+                            <?php endforeach;?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
