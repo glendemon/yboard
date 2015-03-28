@@ -67,6 +67,14 @@ function loadFields(t){
 			); ?>
 		<?php echo $form->error($model,'type'); ?>
 	</div>
+    
+    
+        <div class="row">
+		<?php echo $form->labelEx($model,'price'); ?>
+		<?php echo $form->textField($model,'price'); ?>
+                <?php echo CHtml::dropDownList('currency',0, $this->settings['currency']); ?>
+		<?php echo $form->error($model,'price'); ?>
+	</div>
 
 	<div class="row">
 			<?php echo $form->labelEx($model, 'gallery_id'); ?>

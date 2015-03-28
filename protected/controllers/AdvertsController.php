@@ -26,7 +26,7 @@ class AdvertsController extends Controller {
         return array(
             // allow all users to perform actions
             array('allow',
-                'actions' => array('index', 'error', 'view', 'contact', 'bulletin', 'category', 'captcha', 'page', 'advertisement', 'getfields', 'search', 'user'),
+                'actions' => array('index', 'error', 'view', 'favorites' , 'contact', 'bulletin', 'category', 'captcha', 'page', 'advertisement', 'getfields', 'search', 'user'),
                 'users' => array('*'),
             ),
             // allow authenticated user
@@ -44,6 +44,44 @@ class AdvertsController extends Controller {
                  * 
                  */
         );
+    }
+    
+    public function actionSetFavorites($id){
+        $model = Favorites::model()->find(" user_id='".Yii::app()->user->id
+                ."' and obj_id='".$id."' and obj_type='0'");
+        if($model) {
+            $model->delete();
+            echo 'false';
+        } else {
+            $model = New Favorites();
+            $model->user_id=Yii::app()->user->id;
+            $model->obj_id=$id;
+            $model->obj_type=0;            
+            $model->save();
+            echo 'true';
+        }
+    }
+    
+    public function actionFavorites(){
+        
+        $dataProvider = new CActiveDataProvider('Adverts', array(
+            'criteria' => array(
+                'select' => 't.*, IFNULL(updated_at, created_at) as sort',
+                'condition' => 't.user_id = "'.(int) Yii::app()->user->id.'"',
+                'order' => 'sort DESC',
+                //'params' => array(':uid' =>  ),
+                'join' => 'inner join users on users.id=favorites.user_id ',
+                'join' => 'inner join favorites on t.id=favorites.obj_id ',
+            ),
+        ));
+         
+
+        $this->render('index', array(
+            'data' => $dataProvider,
+        ));
+
+        
+        //echo "ddddddddddd";
     }
 
     /**
@@ -76,7 +114,15 @@ class AdvertsController extends Controller {
                     ?>
                     <div class="controls">
                         <label for='Fields[<?= $f_iden ?>]'><?= $fv->name ?></label>
+                    <? if($fv->type == 1 ) { ?>
+                        <input type="checkbox" id="Fields[<?= $f_iden ?>]" name="Fields[<?= $f_iden ?>]" <? ($fv->atr?"checked='checked'":"") ?> >
+                    <?} elseif($fv->type == 2 ) { 
+                        echo CHtml::dropDownList("Fields[".$f_iden."]", array()
+                                ,explode(",",$fv->atr));
+                        
+                     } else{ ?>
                         <input type="text" id="Fields[<?= $f_iden ?>]" name="Fields[<?= $f_iden ?>]" >
+                    <? } ?>
                     </div>	
 
                 <?
@@ -105,6 +151,25 @@ class AdvertsController extends Controller {
 
             return;
         }
+    }
+    
+    public function actionUpdate($id)
+    {
+            $model=$this->loadAdverts($id);
+
+            // Uncomment the following line if AJAX validation is needed
+            // $this->performAjaxValidation($model);
+
+            if(isset($_POST['Reviews']))
+            {
+                    $model->attributes=$_POST['Reviews'];
+                    if($model->save())
+                            $this->redirect(array('view','id'=>$model->id));
+            }
+
+            $this->render('update',array(
+                    'model'=>$model,
+            ));
     }
 
     /**
@@ -176,6 +241,7 @@ class AdvertsController extends Controller {
      * @param int $id Adverts's id
      */
     public function actionView($id) {
+        $mes_model=new Messages();
         $model = $this->loadAdverts($id);
         $model->views++;
         $model->disableBehavior('CTimestampBehavior');
@@ -183,6 +249,7 @@ class AdvertsController extends Controller {
         $model->fields = unserialize($model->fields);
         $this->render('view', array(
             'model' => $model,
+            'mes_model' => $mes_model,
         ));
     }
 

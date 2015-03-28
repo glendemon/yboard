@@ -19,6 +19,8 @@
  */
 class YiiDebugToolbarPanelRequest extends YiiDebugToolbarPanel
 {
+	public $i = 'o';
+	
     /**
      * {@inheritdoc}
      */

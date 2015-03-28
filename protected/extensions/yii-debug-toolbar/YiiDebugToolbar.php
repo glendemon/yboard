@@ -22,13 +22,6 @@ Yii::import('yii-debug-toolbar.widgets.*');
 class YiiDebugToolbar extends CWidget
 {
     /**
-     * CSS File.
-     *
-     * @var string
-     */
-    public $cssFile;
-
-    /**
      * The URL of assets.
      *
      * @var string
@@ -41,7 +34,7 @@ class YiiDebugToolbar extends CWidget
      * @var array
      */
     private $_panels;
-    
+
     /**
      * Setup toolbar panels.
      *
@@ -75,10 +68,12 @@ class YiiDebugToolbar extends CWidget
      */
     public function getAssetsUrl()
     {
-        if (null === $this->_assetsUrl && 'cli' !== php_sapi_name())
+        if (null === $this->_assetsUrl && 'cli' !== php_sapi_name()) {
+            $linkAssets = Yii::app()->getAssetManager()->linkAssets;
             $this->_assetsUrl = Yii::app()
                 ->getAssetManager()
-                ->publish(dirname(__FILE__) . '/assets', false, -1, YII_DEBUG);
+                ->publish(dirname(__FILE__) . '/assets', false, -1, YII_DEBUG and !$linkAssets);
+        }
         return $this->_assetsUrl;
     }
 
@@ -103,8 +98,7 @@ class YiiDebugToolbar extends CWidget
      */
     public function init()
     {
-        if (false === ($this->owner instanceof CLogRoute))
-        {
+        if (false === ($this->owner instanceof CLogRoute)) {
             throw new CException(YiiDebug::t('YiiDebugToolbar owner must be instance of CLogRoute'));
         }
 
@@ -117,7 +111,7 @@ class YiiDebugToolbar extends CWidget
      */
     public function run()
     {
-        $this->render('yii_debug_toolbar', array(
+        $this->render('main', array(
             'panels' => $this->getPanels()
         ));
     }
@@ -129,18 +123,13 @@ class YiiDebugToolbar extends CWidget
      */
     private function registerClientScripts()
     {
-        $cs = Yii::app()->getClientScript();
-        $cs->registerCoreScript('jquery');
-        $cs->registerCoreScript('cookie');
+        $cs = Yii::app()->getClientScript()
+	        	->registerCoreScript('jquery');
+        
+        $cs->registerCssFile($this->assetsUrl . '/main_old.css');
+        $cs->registerCssFile($this->assetsUrl . '/main.css');
 
-        if (false !== $this->cssFile)
-        {
-            if (null === $this->cssFile)
-                $this->cssFile = $this->assetsUrl . '/yii.debugtoolbar.css';
-            $cs->registerCssFile($this->cssFile);
-        }
-
-        $cs->registerScriptFile($this->assetsUrl . '/yii.debugtoolbar.js',
+        $cs->registerScriptFile($this->assetsUrl . '/main.js',
                 CClientScript::POS_END);
 
         return $this;
@@ -153,31 +142,27 @@ class YiiDebugToolbar extends CWidget
      */
     private function createPanels()
     {
-        foreach ($this->getPanels() as $id => $config)
-        {
-            if (!is_object($config))
-            {
-                if (is_string($config))
-                {
+        foreach ($this->getPanels() as $id => $config) {
+            if (!is_object($config)) {
+                if (is_string($config)) {
                     $config = array('class' => $config);
                 }
-                if(is_array($config))
-                {
-                    isset($config['class']) || $config['class'] = $id;
-                    if (isset($config['enabled']) && false === $config['enabled'])
-                    {
+                
+                if(is_array($config)) {
+                    if (is_array($config) && !isset($config['class'])) {
+					    $config['class'] = $id;
+				    }
+				
+                    if (isset($config['enabled']) && false === $config['enabled']) {
                         unset($this->_panels[$id]);
                         continue;
-                    }
-                    else if (isset($config['enabled']) && true === $config['enabled'])
-                    {
+                    } else if (isset($config['enabled']) && true === $config['enabled']) {
                         unset($config['enabled']);
                     }
                 }
                 $panel = Yii::createComponent($config, $this);
 
-                if (false === ($panel instanceof YiiDebugToolbarPanelInterface))
-                {
+                if (false === ($panel instanceof YiiDebugToolbarPanelInterface)) {
                     throw new CException(Yii::t('yii-debug-toolbar',
                             'The %class% class must be compatible with YiiDebugToolbarPanelInterface', array(
                                 '%class%' => get_class($panel)

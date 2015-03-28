@@ -1,4 +1,5 @@
 <?php
+
 /**
  * YiiDebugToolbarResourceUsage class file.
  *
@@ -16,16 +17,13 @@
  */
 class YiiDebugToolbarResourceUsage extends CWidget
 {
-    public $title = 'Resource Usage';
 
     public $htmlOptions = array();
-
     private $_loadTime;
 
     public function getLoadTime()
     {
-        if (null === $this->_loadTime)
-        {
+        if (null === $this->_loadTime) {
             $this->_loadTime = $this->owner->owner->getLoadTime();
         }
         return $this->_loadTime;
@@ -41,36 +39,37 @@ class YiiDebugToolbarResourceUsage extends CWidget
      */
     public function run()
     {
-        $resources =  array(
-            YiiDebug::t('Page Load Time')    =>  sprintf('%0.6F s.',$this->getLoadTime()),
-            YiiDebug::t('Elapsed Time')      =>  sprintf('%0.6F s.',$this->getRequestLoadTime()),
-            YiiDebug::t('Memory Usage')      =>  number_format(Yii::getLogger()->getMemoryUsage()/1024) . ' KB',
-            YiiDebug::t('Memory Peak Usage') => function_exists('memory_get_peak_usage') ? number_format(memory_get_peak_usage()/1024) . ' KB' : 'N/A',
+
+        $data = array();
+
+        $data[] = array(
+            'i' => 'b',
+            'value' => sprintf('%0.4F', $this->getLoadTime()),
+            'unit' => 'seconds'
         );
 
-        if (function_exists('mb_strlen') && isset($_SESSION))
-        {
-            try {
-                $resources[YiiDebug::t('Session Size')] = sprintf('%0.3F KB' ,mb_strlen(serialize($_SESSION))/1024);
-            } catch (Exception $e) {
-                $resources[YiiDebug::t('Session Size')] = 'Unknown';
-            }
+        $data[] = array(
+            'i' => 'a',
+            'value' => sprintf('%0.4F', $this->getRequestLoadTime()),
+            'unit' => 'seconds'
+        );
+
+        $memoryUsage = number_format(Yii::getLogger()->getMemoryUsage() / 1024 / 1024, 2);
+
+        if (function_exists('memory_get_peak_usage')) {
+            $memoryUsage .= '/' . number_format(memory_get_peak_usage() / 1024 / 1024, 2);
         }
 
+        $data[] = array(
+            'i' => 'p',
+            'value' => $memoryUsage,
+            'unit' => 'megabytes'
+        );
 
-        echo CHtml::openTag('div', $this->htmlOptions);
 
-        echo CHtml::tag('h1', array(), $this->title);
-
-        echo CHtml::openTag('ul', array('class'=>'data'));
-        foreach ($resources as $key=>$value)
-        {
-            echo CHtml::openTag('li');
-            echo CHtml::tag('label', array(), $key);
-            echo CHtml::tag('span', array(), $value);
-            echo CHtml::closeTag('li');
-        }
-        echo CHtml::closeTag('ul');
-        echo CHtml::closeTag('div');
+        $this->render('resources', array(
+            'data' => $data
+        ));
     }
+
 }

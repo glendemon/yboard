@@ -18,6 +18,8 @@
  */
 class YiiDebugToolbarPanelSql extends YiiDebugToolbarPanel
 {
+	public $i = 'i';
+	
     /**
      * If true, the sql query in the list will use syntax highlighting.
      * 
@@ -41,12 +43,9 @@ class YiiDebugToolbarPanelSql extends YiiDebugToolbarPanel
     {
         parent::__construct($owner);
 
-        try
-        {
+        try {
             Yii::app()->db;
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             $this->_dbConnections = false;
         }
     }
@@ -110,10 +109,9 @@ class YiiDebugToolbarPanelSql extends YiiDebugToolbarPanel
      */
     public function getMenuSubTitle($f=4)
     {
-        if (false !== $this->_dbConnections)
-        {
-            $st = Yii::app()->db->getStats();
-            return YiiDebug::t('{n} query in {s} s.|{n} queries in {s} s.', array($st[0], '{s}'=>vsprintf('%0.'.$f.'F', $st[1])));
+        if (false !== $this->_dbConnections) {
+        	list ($count, $time) = Yii::app()->db->getStats();
+        	return $count . ($count > 0 ? ('/'. vsprintf('%0.'.$f.'F', $time) . 's') : '');
         }
         return YiiDebug::t('No active connections');
     }
@@ -154,13 +152,11 @@ class YiiDebugToolbarPanelSql extends YiiDebugToolbarPanel
      */
     public function run()
     {
-        if (false === $this->_dbConnections)
-        {
+        if (false === $this->_dbConnections) {
             return;
         }
 
         $logs = $this->filterLogs();
-
         $this->render('sql', array(
             'connections'       => $this->getDbConnections(),
             'connectionsCount'  => $this->getDbConnectionsCount(),
