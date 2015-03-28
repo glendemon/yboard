@@ -98,11 +98,17 @@ class User extends CActiveRecord {
                 'setOnEmpty' => true, 'on' => 'insert'),
             array('username, email, superuser, status', 'required'),
             array('superuser, status', 'numerical', 'integerOnly' => true),
+            array('location, contacts, skype', 'type', 'type'=>'string'),
+            array('lastvisit_at, birthday, create_at', 'date','format'=>array('yyyy-MM-dd','yyyy-MM-dd hh:mm:ss')),
+            array('phone', 'match','pattern'=>'/^[-\+0-9 ]+$/'),
+            
             array('id, username, password, email, activkey, '
                 . 'create_at, birthday, location, phone, skype, '
                 . 'contacts, lastvisit_at, superuser, status', 'safe', 'on'=>'search'),
         );
     }
+
+    
 
     /**
      * @return array relational rules.

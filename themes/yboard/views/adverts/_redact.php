@@ -33,6 +33,13 @@
 		<?php echo $form->textArea($model,'text'); ?>
 		<?php echo $form->error($model,'text'); ?>
 	</div>
+        
+        <div class="row">
+		<?php echo $form->labelEx($model,'price'); ?>
+		<?php echo $form->textField($model,'price'); ?>
+                <?php echo CHtml::dropDownList('currency',0, $this->settings['currency']); ?>
+		<?php echo $form->error($model,'price'); ?>
+	</div>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>

@@ -126,7 +126,7 @@ return array(
 				),
 				array(
 					'class'=>'application.extensions.yii-debug-toolbar.YiiDebugToolbarRoute',
-					'ipFilters'=>array('127.0.0.1','192.168.1.215'),
+					'ipFilters'=>array('*'),
 				),
 			),
 		),
@@ -138,4 +138,5 @@ return array(
         'adminEmail' => 'webmaster@example.com',
         'installed' => 'yes',
     ),
+
 );

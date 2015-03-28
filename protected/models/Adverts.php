@@ -52,7 +52,7 @@ class Adverts extends CActiveRecord
             array('youtube_id', 'file', 'types'=>'mov, mpeg4, avi, wmv, mpegps, flv, 3gpp, webm', 'allowEmpty' => true),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, name, user_id, category_id, type, views, text', 'safe', 'on' => 'search'),
+            array('id, name, user_id, category_id, type, views, text, price, currency', 'safe', 'on' => 'search'),
         );
     }
 
@@ -87,7 +87,8 @@ class Adverts extends CActiveRecord
             'youtube_id' => t( 'Youtube'),
             'created_at' => t( 'Created At'),
             'updated_at' => t( 'Updated At'),
-            'fields' => 'Характеристики',
+            'fields' => t('Fields'),
+            'price' => t('Price'),
         );
     }
 

@@ -1,8 +1,6 @@
 <?php
 header("Content-Type: text/html; charset=UTF-8");
 
-
-
 if($_COOKIE['YII_DEBUG']==="true") {
     // Подключение параметров для режима отладки 
 	$yii=dirname(__FILE__).'/../framework/yii.php';

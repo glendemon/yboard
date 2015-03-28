@@ -51,6 +51,7 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
 
             <? } ?>
     </div>
+    <div class='price'><?=t('Price')?> - <?=$model->price?>(<?=$model->currency?>) </div>
     <div>
         <?php echo $this->renderPartial('/messages/_form', array(
             'model'=>$mes_model, 
