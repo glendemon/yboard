@@ -32,6 +32,10 @@ class UserController extends Controller
 				'actions'=>array('update'),
 				'expression'=>'Yii::app()->user->id == Yii::app()->request->getParam("id")',
 			),
+                        array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('*'),
+				'expression'=>'Yii::app()->user->isAdmin()',
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -120,6 +124,19 @@ class UserController extends Controller
 			'model'=>$model,
 		));
 	}
+        
+        public function actionBan($id){
+            $model=$this->loadModel($id);
+            $model->status=USER::STATUS_BANNED;
+            $model->update(array('status'));
+            
+            //$adv_model = new Adverts();
+            $adv_model = Adverts::model()->find("user_id = :id ",array(':id'=>intval($id)));
+            if($adv_model){
+                $adv_model->delete();
+            }
+            $this->redirect(array('/'));
+        }
 
 
 	/**

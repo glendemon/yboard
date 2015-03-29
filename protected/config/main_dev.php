@@ -23,6 +23,7 @@ return array(
         'application.extensions.yii-mail.*',
         'application.extensions.gallerymanager.*',
         'application.extensions.gallerymanager.models.*',
+        'application.extensions.nestedset.*',
     ),
     'modules' => array(
         // uncomment the following to enable the Gii tool
@@ -33,6 +34,7 @@ return array(
         //'ipFilters' => array('127.0.0.1', '::1', '192.168.1.3'),
         ),
         'admin',
+        'cms',
     ),
     // application components
     'components' => array(
@@ -113,23 +115,24 @@ return array(
         ),
         'errorHandler' => array(
             // use 'site/error' action to display errors
-            'errorAction' => 'site/error',
+            'class'=>'application.modules.cms.components.CmsHandler',
+            //'errorAction' => 'site/error',
         ),
-		'log'=>array(
-			'class'=>'CLogRouter',
-			'enabled'=>YII_DEBUG,
-			'routes'=>array(
+        'log'=>array(
+                'class'=>'CLogRouter',
+                'enabled'=>YII_DEBUG,
+                'routes'=>array(
 
-				array(
-					'class'=>'CFileLogRoute',
-					'levels'=>'error, warning',
-				),
-				array(
-					'class'=>'application.extensions.yii-debug-toolbar.YiiDebugToolbarRoute',
-					'ipFilters'=>array('*'),
-				),
-			),
-		),
+                        array(
+                                'class'=>'CFileLogRoute',
+                                'levels'=>'error, warning',
+                        ),
+                        array(
+                                'class'=>'application.extensions.yii-debug-toolbar.YiiDebugToolbarRoute',
+                                'ipFilters'=>array('*'),
+                        ),
+                ),
+        ),
     ),
     // application-level parameters that can be accessed
     // using Yii::app()->params['paramName']
