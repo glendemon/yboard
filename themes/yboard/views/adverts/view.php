@@ -18,9 +18,12 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
         </div>
     </div>
     <div class='date'>
-        <span><i class='fa fa-user'></i><?=$model->user->username?></span>  
+        <span><a href='<? echo Yii::app()->createUrl('user/view', array('id'=>$model->user->id) )?>'><i class='fa fa-user'></i><?=$model->user->username?></a></span>  
         <span><i class='fa fa-clock-o'></i><?=PeopleDate::format($model->created_at)?></span> 
         <span><i class='fa fa-eye'></i><?=$model->views?></span>
+        <div style='float:right; margin-top:-6px; '> 
+            <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script><div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="link" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir"></div>
+        </div>
     </div>
     <div>
         <?php $this->widget('application.widgets.ShowImagesWidget', array('bulletin' => $model)); ?>
@@ -52,11 +55,19 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
             <? } ?>
     </div>
     <div class='price'><?=t('Price')?> - <?=$model->price?>(<?=$model->currency?>) </div>
+    <div> 
+        <span> Контакты : </span>
+        <?=$model->user->phone?>
+        <?=$model->user->email?>
+        <?=$model->user->skype?>
+    </div>
+    <? if(Yii::app()->user->id != $model->user->id){ ?>
     <div>
         <?php echo $this->renderPartial('/messages/_form', array(
             'model'=>$mes_model, 
             'receiver'=>$data->user->id)
         ); ?>
     </div>
+    <? } ?>
     
 </div>

@@ -262,9 +262,17 @@ class AdvertsController extends Controller {
         $dataProvider = new CActiveDataProvider('Adverts', array(
             'criteria' => array(
                 'select' => '*, IFNULL(updated_at, created_at) as sort',
-                'condition' => 'category_id = :id',
+                'condition' => 't.category_id = :id or (category.lft > :cat_lft '
+                . 'and category.rgt< :cat_rgt and category.root = :cat_root)',
                 'order' => 'sort DESC',
-                'params' => array(':id' => (int) $cat_id),
+                'params' => array(
+                    ':id' => (int) $cat_id,
+                    ':cat_lft' => Yii::app()->params['categories'][$cat_id]['lft'],
+                    ':cat_rgt' => Yii::app()->params['categories'][$cat_id]['rgt'],
+                    ':cat_root' => Yii::app()->params['categories'][$cat_id]['root'],
+                    ':cat_root' => Yii::app()->params['categories'][$cat_id]['root'],
+                ),
+                'join' => 'inner join category on category.id=t.category_id ',
             ),
         ));
         $this->render('category', array(
