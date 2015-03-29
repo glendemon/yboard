@@ -1,3 +1,5 @@
+Options +FollowSymLinks
+IndexIgnore */*
 RewriteEngine on
 
 ## Completely hide some files and directories.

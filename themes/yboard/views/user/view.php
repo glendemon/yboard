@@ -40,12 +40,12 @@ $attributes = array(
     <? if (Yii::app()->user->id == Yii::app()->request->getParam("id")) { ?>
         <a href='<? echo Yii::app()->createUrl('user/update', array('id' => $model->id)) ?>'> Редактировать </a>
     <? } ?>
-    <? if (Yii::app()->user->isAdmin()) { ?>
+    <? if (Yii::app()->user->isAdmin() and Yii::app()->user->id != $model->id ) { ?>
         <a href='<? echo Yii::app()->createUrl('user/ban', array('id' => $model->id)) ?>'> Заблокировать </a>
     <? } ?>
     <div> 
-        <a href='<? echo Yii::app()->createUrl("adverts/user", array('id' => $model->id)) ?>'> <?= t('Объявления') ?> </a> 
-        | <a href='<? echo Yii::app()->createUrl("user/view", array('id' => $model->id)) ?>'> <?= t('Личные банные') ?> </a> 
+        <a href='<? echo Yii::app()->createUrl("adverts/user", array('id' => $model->id)) ?>'> <?= t('Adverts') ?> </a> 
+        | <a href='<? echo Yii::app()->createUrl("user/view", array('id' => $model->id)) ?>'> <?= t('Personal dates') ?> </a> 
     </div>
 </div>
 <div> 
