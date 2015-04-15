@@ -4,7 +4,7 @@ header("Content-Type: text/html; charset=UTF-8");
 if($_COOKIE['YII_DEBUG']==="true") {
     // Подключение параметров для режима отладки 
 	$yii=dirname(__FILE__).'/../framework/yii.php';
-	defined('YII_DEBUG') or define('YII_DEBUG',true);
+	//defined('YII_DEBUG') or define('YII_DEBUG',true);
 	defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
 	$CONFIG=dirname(__FILE__).'/protected/config/main_dev.php';
         error_reporting(E_ALL^E_NOTICE);

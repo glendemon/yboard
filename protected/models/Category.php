@@ -87,7 +87,9 @@ class Category extends CActiveRecord {
     public function catRecursive($root = 0, $level = 1, $lft = 0, $rgt = 0) {
         $ret_cats = array();
         $catItem = Array();
-        foreach ($this->catTree as $cat) if (($cat->level == $level and $cat->lft > $lft and $cat->rgt < $rgt and $cat->root == $root)
+        foreach ($this->catTree as $cat){ 
+            if (($cat->level == $level and $cat->lft > $lft 
+                    and $cat->rgt < $rgt and $cat->root == $root)
                     or ( $root == 0 and $cat->level == 1)) {
                 $catItem['label'] = $cat->name;
                 $catItem['url'] = array("/category/" . $cat->id);
@@ -99,6 +101,7 @@ class Category extends CActiveRecord {
 
                 $ret_cats[] = $catItem;
             }
+        }
 
         return $ret_cats;
     }
@@ -160,6 +163,13 @@ class Category extends CActiveRecord {
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));
+    }
+    
+    public function scopes()
+    {
+        return array(
+            'sitemap'=>array('select'=>'id',  'order'=>'id ASC'),
+        );
     }
 
     public function fieldsSave() {

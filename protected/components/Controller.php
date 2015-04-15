@@ -114,11 +114,7 @@ class Controller extends CController {
         return "<div class='pblock " . $var . "' align='center'>"
                 . $debug . $banner_code
                 . "</div>";
-        /*
-          else
-          return $debug;
-         * 
-         */
+
     }
 
     public function createAction($actionID) {

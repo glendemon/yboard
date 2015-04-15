@@ -35,6 +35,7 @@ return array(
         ),
         'admin',
         'cms',
+        //'sitemap',
     ),
     // application components
     'components' => array(
@@ -92,6 +93,7 @@ return array(
             'showScriptName' => false,
             'rules' => array(
                 '' => 'site/index',
+                'sitemap.xml'=>'site/sitemapxml',
                 '<id:\d+>' => 'adverts/view/id/<id>',
                 'category/<cat_id:\d+>' => 'adverts/category',
                 'logout' => 'login/logout',

@@ -131,6 +131,13 @@ class Adverts extends CActiveRecord
                 'criteria' => $criteria,
             ));
     }
+    
+    public function scopes()
+    {
+        return array(
+            'sitemap'=>array('select'=>'id', 'condition'=>'created_at <= NOW()', 'order'=>'created_at ASC'),
+        );
+    }
 
     public function behaviors()
     {
