@@ -277,6 +277,9 @@ class AdvertsController extends Controller {
                 'join' => 'inner join category on category.id=t.category_id ',
             ),
         ));
+        
+        $this->meta['vars']['cat_name']  =  Yii::app()->params['categories'][$cat_id]['name'];
+        
         $this->render('category', array(
             'model' => $this->loadCategory($cat_id),
             'dataProvider' => $dataProvider,

@@ -3,7 +3,9 @@
     <head>
         <?php Yii::app()->bootstrap->register(); ?>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+        <title><?php echo $this->meta_title(); ?></title>
+        <meta name="description" content="<?php echo $this->meta_description(); ?>" />
+
         <script> baseUrl = '<?= Yii::app()->baseUrl ?>';</script>
 
         

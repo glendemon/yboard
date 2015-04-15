@@ -18,6 +18,18 @@ $this->breadcrumbs = array(
 <p><?php echo t("Please fill out the following form with your login credentials:"); ?></p>
 
 <div class="form well">
+    <h3><?=t('Social networks authorisation :')?></h3>
+    <?
+    $this->widget('application.widgets.UloginWidget', array(
+        'params' => array(
+            'redirect' => Yii::app()->baseUrl . '/index.php?r=login/ulogin' //Адрес, на который ulogin будет редиректить браузер клиента. Он должен соответствовать контроллеру ulogin и действию login
+        )
+    ));
+    ?>
+    
+    <hr/>
+
+
     <?php echo CHtml::beginForm(); ?>
 
     <p class="note"><?php echo t('Fields with <span class="required">*</span> are required.'); ?></p>
@@ -75,12 +87,4 @@ $form = new CForm(array(
         ),
     ),
         ), $model);
-
-
-  $this->widget('application.widgets.UloginWidget', array(
-    'params'=>array(
-        'redirect'=>Yii::app()->baseUrl.'/index.php?r=login/ulogin' //Адрес, на который ulogin будет редиректить браузер клиента. Он должен соответствовать контроллеру ulogin и действию login
-    )
-)); 
-
 ?>

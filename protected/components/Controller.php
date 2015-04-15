@@ -42,6 +42,9 @@ class Controller extends CController
 
 
 	public $menu=array();
+        
+        // данные для генерации мета данных title, description, keywords
+        public $meta = array();
 
 	public $settings=array();
 	public $banners=array();
@@ -74,6 +77,7 @@ class Controller extends CController
 			$this->redirect(Yii::app()->baseUrl.'/site/install');
 		}
                 
+                $this->meta=$this->settings['meta'];
                 
 	}
         
@@ -112,6 +116,36 @@ class Controller extends CController
     {
         $this->_behaviorIDs[] = $name;
         parent::attachBehavior($name, $behavior);
+    }
+    
+    
+    public function meta_title() {
+        
+        $title=$this->subMetaVars($this->meta['title']);
+        return $title;
+        
+    }
+    
+    public function meta_description() {
+        $description=$this->subMetaVars($this->meta['description']);
+        return $description;
+    }
+    
+    public function subMetaVars($str){
+        
+        if(strpos($str,"<")!==false){
+            preg_match_all("~<([-_0-9a-z]+)>~is",$str,$m_v);
+            foreach($m_v[1] as $v) {
+                if(isset($this->meta['vars'][$v])) {
+                    $str=str_replace("<".$v.">",$this->meta['vars'][$v],$str);
+                } else {
+                    $str=preg_replace("~[^\.]*<".$v.">[^\.]*\.~is","",$str);
+                }
+            }
+        }
+        
+        return $str;
+        
     }
 
 

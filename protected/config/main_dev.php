@@ -42,7 +42,7 @@ return array(
             // enable cookie-based authentication
             'class' => 'WebUser',
             'allowAutoLogin' => true,
-            'loginUrl' => array('/user/login'),
+            'loginUrl' => array('/login'),
         ),
         'cache' => array(
             'class' => 'system.caching.CFileCache',
@@ -116,8 +116,8 @@ return array(
         ),
         'errorHandler' => array(
             // use 'site/error' action to display errors
-            //'class'=>'application.modules.cms.components.CmsHandler',
-            'errorAction' => 'site/error',
+            'class'=>'application.modules.cms.components.CmsHandler',
+            //'errorAction' => 'site/error',
         ),
         'log'=>array(
                 'class'=>'CLogRouter',
