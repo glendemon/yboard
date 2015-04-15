@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-BeyondAdmin - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.2.0
-Version: 1.0.0
-Purchase: http://wrapbootstrap.com
--->
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- Head -->
 	<head>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
@@ -29,9 +24,7 @@ Purchase: http://wrapbootstrap.com
     <!--Fonts-->
     <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/admin.css" rel="stylesheet" type="text/css" />
 
-    <!--Beyond styles-->
-    <link  type="text/css" rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/beyond.min.css" />
-    <link id="beyond-link" type="text/css" rel="stylesheet" />
+    <link  type="text/css" rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/admin_theme.css" />
     <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/demo.css" rel="stylesheet" />
     <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/typicons.css" rel="stylesheet" />
     <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/animate.css" rel="stylesheet" />

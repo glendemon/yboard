@@ -95,6 +95,7 @@ return array(
                 '<id:\d+>' => 'adverts/view/id/<id>',
                 'category/<cat_id:\d+>' => 'adverts/category',
                 'logout' => 'login/logout',
+                '/banner_show' => '/admin/banners/show',
                 'site/category/<cat_id:\d+>' => 'adverts/category/cat_id/<cat_id>',
                 'cat_fields/<cat_id:\d+>' => 'adverts/getfields/cat_id/<cat_id>', //  !ошибка если ajax обращается к длинному запросу. не идет запрос 
                 'category/<action:\w+>/' => 'admin/category/<action>',
