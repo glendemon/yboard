@@ -57,7 +57,7 @@ class Category extends CActiveRecord
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'bulletins' => array(self::HAS_MANY, 'Bulletin', 'category_id'),
+            'bulletins' => array(self::HAS_MANY, 'Adverts', 'category_id'),
         );
     }
 	
@@ -196,10 +196,10 @@ class Category extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'id' => 'ID',
-            'name' => 'Name',
-            'icon' => 'Icon',
-			'fields' => 'Дополнительные поля',
+            'id'     => 'ID',
+            'name'   => 'Name',
+            'icon'   => 'Icon',
+            'fields' => 'Дополнительные поля',
 
         );
     }
@@ -243,11 +243,11 @@ class Category extends CActiveRecord
     {
         return array(
             'NestedSetBehavior' => array(
-                'class' => 'application.behaviors.NestedSetBehavior',
-                'leftAttribute' => 'lft',
+                'class'          => 'application.behaviors.NestedSetBehavior',
+                'leftAttribute'  => 'lft',
                 'rightAttribute' => 'rgt',
                 'levelAttribute' => 'level',
-                'hasManyRoots' => true
+                'hasManyRoots'   => true
             ),
         );
     }

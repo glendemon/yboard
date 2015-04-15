@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This is the model class for table "bulletin".
+ * This is the model class for table "adverts".
  *
  * The followings are the available columns in table 'bulletin':
  * @property integer $id

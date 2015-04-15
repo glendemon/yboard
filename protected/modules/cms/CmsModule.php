@@ -2,7 +2,7 @@
 
 class CmsModule extends CWebModule
 {   
-    public $defaultLayout="//admin/admin-template";
+    public $defaultLayout="//main-template";
     public $defaultController='//main-template';
     public $ignoredLayoutsMask = "/^main/"; //regexp to ignore main layouts (main.php etc.)
     

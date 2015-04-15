@@ -4,19 +4,6 @@
 /* @var $form CActiveForm */
 /* @var $categories array */
 ?>
-<script> 
-function loadFields(t){
-	$('#Bulletin_category_id').val($(t).val());
-	$.get("<?=Yii::app()->baseUrl?>/adverts/getfields/cat_id/"+$(t).val(),function(data){
-
-		if(data.indexOf('fields_list')!==-1) 
-			$("#bulletin_form").show();
-		else
-			$("#bulletin_form").hide();
-		$(t).parent().find('div.ajax-div').html("<div>"+data+"<div class='ajax-div'></div></div>");
-	})
-}
-</script>
 <div class="form well">
 
     <?php
@@ -35,7 +22,7 @@ function loadFields(t){
 		
 		
 		?>
-
+                <?=CHtml::activeHiddenField($model,'category_id')?>
 		<?php echo $form->labelEx($model,'category_id'); ?>
         <?php echo CHtml::dropDownList('category_id',0, CHtml::listData(Category::model()->roots()->findAll(),"id","name"),
 

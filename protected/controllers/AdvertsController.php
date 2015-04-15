@@ -241,6 +241,8 @@ class AdvertsController extends Controller {
      * @param int $id Adverts's id
      */
     public function actionView($id) {
+
+        // Модель для моментального сообщения со страницы просмотра объявления
         $mes_model=new Messages();
         $model = $this->loadAdverts($id);
         $model->views++;
@@ -261,7 +263,7 @@ class AdvertsController extends Controller {
 
         $dataProvider = new CActiveDataProvider('Adverts', array(
             'criteria' => array(
-                'select' => '*, IFNULL(updated_at, created_at) as sort',
+                'select' => 't.*, IFNULL(updated_at, created_at) as sort',
                 'condition' => 't.category_id = :id or (category.lft > :cat_lft '
                 . 'and category.rgt< :cat_rgt and category.root = :cat_root)',
                 'order' => 'sort DESC',
@@ -322,8 +324,10 @@ class AdvertsController extends Controller {
      */
     public function loadAdverts($id) {
         $model = Adverts::model()->findByPk($id);
-        if ($model === null)
+        if ($model === null) {
             throw new CHttpException(404, 'The requested page does not exist.');
+        }
+        
         return $model;
     }
 

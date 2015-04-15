@@ -1,7 +1,9 @@
 <?
-/* @var $this BulletinController */
-/* @var $data Bulletin */
+/* @var $this AdvertsController */
+/* @var $data Adverts */
 ?>
+
+
 <div class="well advertList">
     <div style='float:left; width: 95px; height: 60px; overflow:hidden;'>
         <? if ($data->gallery && $data->gallery->galleryPhotos) { ?>
@@ -10,7 +12,7 @@
                 'target' => '.fancybox',
                 'config' => array(),
                     )
-            );
+            );           
             ?>
             <? foreach ($data->gallery->galleryPhotos as $model) { ?>
                 <a href="<? echo $model->getUrl(); ?>" class="fancybox" rel="<? echo CHtml::encode($data->id) ?>">
