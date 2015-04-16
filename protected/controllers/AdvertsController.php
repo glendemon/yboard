@@ -380,20 +380,29 @@ class AdvertsController extends Controller {
         $model = new Adverts('search');
 
         $model->unsetAttributes();  // clear any default values
-        $model->name = $searchStr;
-        $model->text = $searchStr;
-
+        //$model->attributes=$_POST;
+        
+        if($searchStr) {
+            $model->name = $searchStr;
+            $model->text = $searchStr;
+        }
+        $model->category_id = Yii::app()->request->getParam("cat_id");
+        //$model->category_id = Yii::app()->request->getParam("category");
+        
 
         /*
           $this->render('admin',array(
           'model'=>$model->search(),
           ));
          */
+        $dataProvider=$model->search();
+        
+        //var_dump($dataProvider->criteria);
 
 
         $this->render('index', array(
-            'data' => $model->search(),
-                //'data'=>$dataProvider
+            //'data' => $model->search(),
+            'data'=>$dataProvider,
         ));
     }
 

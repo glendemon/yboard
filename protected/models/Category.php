@@ -116,6 +116,11 @@ class Category extends CActiveRecord {
         foreach ($categories as $n => $cat) {
             $ret_cat[$cat['id']] = $cat;
             $ret_cat[$cat['id']]['fields'] = json_decode($cat['fields'], true);
+            foreach($ret_cat[$cat['id']]['fields'] as $f_n=>$field) {
+                if($field['type']==2){
+                    $ret_cat[$cat['id']]['fields'][$f_n]['atr']=explode(",",$field['atr']);
+                }
+            }
         }
 
         $cat_count = Yii::app()->db->createCommand()

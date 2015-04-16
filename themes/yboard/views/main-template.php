@@ -22,7 +22,9 @@
                 <div class="menu_area">
                     <div class='ideas'>
                         <a href="<?= Yii::app()->createUrl("/adverts") ?>" class="general">Объявления</a> 
-                        <a href='<?= Yii::app()->createUrl("/adverts/create") ?>' class="menu_text"><i class='fa fa-plus'></i>добавить</a>
+                        <a href='<?= Yii::app()->createUrl("/adverts/create") ?>' class="menu_text">
+                            <i class='fa fa-plus'></i>добавить
+                        </a>
                     </div>
                     <div class='links'>
                         <a href="<?= Yii::app()->createUrl("/user") ?>" class="general">Пользователи</a>
@@ -38,7 +40,9 @@
         </div>
         <div id="search_strip">
             <form name='search_form' action='<?= Yii::app()->createUrl('/adverts/search') ?>'>
-                <input type='text' name='searchStr' style='width:678px;' /><input type='submit' value='Поиск' class='btn' />
+                <input type='text' name='searchStr' style='width:658px;' 
+                       value='<?=Yii::app()->request->getParam("searchStr")?>' />
+                <input type='submit' value='Поиск' class='btn' />
             </form>
         </div>
         <div id='content'>
@@ -114,7 +118,10 @@
                     ));
                     ?>  
                     </div>
-                        <?= $this->getBanner('right') ?>
+                    <div>
+                       <? $this->widget('application.widgets.AdvancedSearch'); ?>
+                    </div>
+                        <?= $this->getBanner('right_adv') ?>
 
                 </div>
                 <br style='clear:both' />

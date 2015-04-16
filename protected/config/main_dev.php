@@ -35,7 +35,6 @@ return array(
         ),
         'admin',
         'cms',
-        //'sitemap',
     ),
     // application components
     'components' => array(
@@ -93,7 +92,7 @@ return array(
             'showScriptName' => false,
             'rules' => array(
                 '' => 'site/index',
-                'sitemap.xml'=>'site/sitemapxml',
+                'sitemap.xml' => 'site/sitemapxml',
                 '<id:\d+>' => 'adverts/view/id/<id>',
                 'category/<cat_id:\d+>' => 'adverts/category',
                 'logout' => 'login/logout',
@@ -119,23 +118,22 @@ return array(
         ),
         'errorHandler' => array(
             // use 'site/error' action to display errors
-            'class'=>'application.modules.cms.components.CmsHandler',
-            //'errorAction' => 'site/error',
+            'class' => 'application.modules.cms.components.CmsHandler',
+        //'errorAction' => 'site/error',
         ),
-        'log'=>array(
-                'class'=>'CLogRouter',
-                'enabled'=>YII_DEBUG,
-                'routes'=>array(
-
-                        array(
-                                'class'=>'CFileLogRoute',
-                                'levels'=>'error, warning',
-                        ),
-                        array(
-                                'class'=>'application.extensions.yii-debug-toolbar.YiiDebugToolbarRoute',
-                                'ipFilters'=>array('*'),
-                        ),
+        'log' => array(
+            'class' => 'CLogRouter',
+            'enabled' => YII_DEBUG,
+            'routes' => array(
+                array(
+                    'class' => 'CFileLogRoute',
+                    'levels' => 'error, warning',
                 ),
+                array(
+                    'class' => 'application.extensions.yii-debug-toolbar.YiiDebugToolbarRoute',
+                    'ipFilters' => array('*'),
+                ),
+            ),
         ),
     ),
     // application-level parameters that can be accessed
@@ -145,5 +143,4 @@ return array(
         'adminEmail' => 'webmaster@example.com',
         'installed' => 'yes',
     ),
-
 );
