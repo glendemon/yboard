@@ -120,7 +120,7 @@ class SiteController extends Controller {
         $db_error = false;
         $model = new InstallForm;
 
-        if (!isset(Yii::app()->components['db'])) {
+        if (Yii::app()->params['installed']!=="yes") {
 
             if (isset($_POST['InstallForm'])) {
                 $model->attributes = $_POST['InstallForm'];
