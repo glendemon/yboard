@@ -42,7 +42,7 @@ return array(
             // enable cookie-based authentication
             'class' => 'WebUser',
             'allowAutoLogin' => true,
-            'loginUrl' => array('/user/login'),
+            'loginUrl' => array('/login'),
         ),
         'cache' => array(
             'class' => 'system.caching.CFileCache',
@@ -92,10 +92,13 @@ return array(
             'showScriptName' => false,
             'rules' => array(
                 '' => 'site/index',
-                '<id:\d+>' => 'adverts/view',
+                'sitemap.xml' => 'site/sitemapxml',
+                '<id:\d+>' => 'adverts/view/id/<id>',
                 'category/<cat_id:\d+>' => 'adverts/category',
                 'logout' => 'login/logout',
+                '/banner_show' => '/admin/banners/show',
                 'site/category/<cat_id:\d+>' => 'adverts/category/cat_id/<cat_id>',
+                'cat_fields/<cat_id:\d+>' => 'adverts/getfields/cat_id/<cat_id>', //  !ошибка если ajax обращается к длинному запросу. не идет запрос 
                 'category/<action:\w+>/' => 'admin/category/<action>',
                 'user/<user_id:\d+>/' => 'user/view/id/<user_id>',
                 // 'category/<action:\w+>/<param:\w+>/<id:\d+>' => 'admin/category/<action>/<param>/<id>',
@@ -115,23 +118,22 @@ return array(
         ),
         'errorHandler' => array(
             // use 'site/error' action to display errors
-            'class'=>'application.modules.cms.components.CmsHandler',
-            //'errorAction' => 'site/error',
+            'class' => 'application.modules.cms.components.CmsHandler',
+        //'errorAction' => 'site/error',
         ),
-        'log'=>array(
-                'class'=>'CLogRouter',
-                'enabled'=>YII_DEBUG,
-                'routes'=>array(
-
-                        array(
-                                'class'=>'CFileLogRoute',
-                                'levels'=>'error, warning',
-                        ),
-                        array(
-                                'class'=>'application.extensions.yii-debug-toolbar.YiiDebugToolbarRoute',
-                                'ipFilters'=>array('*'),
-                        ),
+        'log' => array(
+            'class' => 'CLogRouter',
+            'enabled' => YII_DEBUG,
+            'routes' => array(
+                array(
+                    'class' => 'CFileLogRoute',
+                    'levels' => 'error, warning',
                 ),
+                array(
+                    'class' => 'application.extensions.yii-debug-toolbar.YiiDebugToolbarRoute',
+                    'ipFilters' => array('*'),
+                ),
+            ),
         ),
     ),
     // application-level parameters that can be accessed
@@ -141,5 +143,4 @@ return array(
         'adminEmail' => 'webmaster@example.com',
         'installed' => 'no',
     ),
-
 );

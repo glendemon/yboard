@@ -67,7 +67,7 @@ class advancedSearch extends CWidget
         }
         
         echo "<input type='hidden' name='searchStr' value='".Yii::app()->request->getParam('searchStr')."' /> ";
-        echo "<input type='submit' value='Поиск' /> ";
+        echo "<input type='submit' class='btn' value='Поиск' /> ";
         echo "</form>";
         
      }

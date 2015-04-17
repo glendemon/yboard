@@ -118,6 +118,7 @@ return array(
     'Fields' => "Характеристики",
     'Price' => "Цена",
     'Currency' => "Валюта",
+    'Redact advert' => "Редактировать объявление",
     
     // Пользователи
     'Send a mail to the author' => 'Отправить письмо автору',
