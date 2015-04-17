@@ -225,4 +225,3 @@ pip-log.txt
 /.gitignore
 nbproject/*
 nbproject/project.properties
-protected/runtime/*
