@@ -95,7 +95,7 @@ class ConfigForm extends CFormModel
      *
      * @return array
      */
-    public function getAttributes()
+    public function getAttributes($names = NULL)
     {
         $this->attributesRecursive($this->_config, $output);
         return $output;

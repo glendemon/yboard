@@ -7,7 +7,7 @@ $this->breadcrumbs = array_merge(array(
 ), $path,array('View'));
 
 $this->menu=array(
-	array('label'=>t('Update').$model->name, 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>t('Update')." \"".$model->name."\"", 'url'=>array('update', 'id'=>$model->id)),
 	array('label'=>t('Delete'), 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?'),'visible'=>$model->id!=1),
 	array('label'=>t('Manage pages'), 'url'=>array('admin','parent_id'=>$model->parent_id ? $model->parent_id : 1)),
 );

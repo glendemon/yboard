@@ -1,10 +1,11 @@
 <?php
 
 class CmsHandler extends Controller
-{
-	public $errorAction;
+{   
+    public $errorAction;
     public $breadcrumbs=array();
     private $error;
+    public $layout='//main-template';
 
 	function __construct()
 	{
@@ -55,9 +56,7 @@ class CmsHandler extends Controller
     
     function processCms($page)
     {
-        
-        $this->layout='//main-template';
-        
+
         $user = Yii::app()->user;
         
         if ($page->access_level==Cms::AUTH_ONLY && $user->getIsGuest()){
@@ -98,9 +97,9 @@ class CmsHandler extends Controller
                 break;
 		}
         
-        $section = $page->section ? '/'.$page->section : '/cms/default';
+            $section = $page->section ? '//'.$page->section : '//cms/default';
         
-		$this->render($section, array('page'=>$page,'content'=>$content));
+            $this->render($section, array('page'=>$page,'content'=>$content));
         
 	}
     

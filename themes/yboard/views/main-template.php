@@ -1,14 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
+        <?php Yii::app()->bootstrap->register(); ?>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+        <title><?php echo $this->meta_title(); ?></title>
+        <meta name="description" content="<?php echo $this->meta_description(); ?>" />
+
         <script> baseUrl = '<?= Yii::app()->baseUrl ?>';</script>
 
-        <?php Yii::app()->bootstrap->register(); ?>
+        
         <script src="<?php echo Yii::app()->baseUrl; ?>/js_plugins/yboard.js" ></script>
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/main_style.css" rel="stylesheet" type="text/css" />
-        <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+        
     </head>
 
     <body>
@@ -18,7 +22,9 @@
                 <div class="menu_area">
                     <div class='ideas'>
                         <a href="<?= Yii::app()->createUrl("/adverts") ?>" class="general">Объявления</a> 
-                        <a href='<?= Yii::app()->createUrl("/adverts/create") ?>' class="menu_text"><i class='fa fa-plus'></i>добавить</a>
+                        <a href='<?= Yii::app()->createUrl("/adverts/create") ?>' class="menu_text">
+                            <i class='fa fa-plus'></i>добавить
+                        </a>
                     </div>
                     <div class='links'>
                         <a href="<?= Yii::app()->createUrl("/user") ?>" class="general">Пользователи</a>
@@ -34,7 +40,9 @@
         </div>
         <div id="search_strip">
             <form name='search_form' action='<?= Yii::app()->createUrl('/adverts/search') ?>'>
-                <input type='text' name='searchStr' style='width:678px;' /><input type='submit' value='Поиск' class='btn' />
+                <input type='text' name='searchStr' style='width:658px;' 
+                       value='<?=Yii::app()->request->getParam("searchStr")?>' />
+                <input type='submit' value='Поиск' class='btn' />
             </form>
         </div>
         <div id='content'>
@@ -110,7 +118,10 @@
                     ));
                     ?>  
                     </div>
-                        <?= $this->getBanner('right') ?>
+                    <div>
+                       <? $this->widget('application.widgets.AdvancedSearch'); ?>
+                    </div>
+                        <?= $this->getBanner('right_adv') ?>
 
                 </div>
                 <br style='clear:both' />

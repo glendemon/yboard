@@ -104,6 +104,39 @@ $val_success_message = ($model->isNewRecord) ?
                 <p class="help-block"><?php echo $form->error($model, 'icon'); ?></p>
             </div>
         </div>
+        
+                <div class="control-group">
+
+            <div class="controls">
+            <?php echo $form->labelEx($model, 'meta_title', array('class' => 'control-label')); ?>
+            <?php echo $form->textField($model, 'meta_title', array(
+                'value' => !empty($_POST['meta_title']) ? $_POST['meta_title'] : $model->meta_title, 
+                'class' => 'span4', 'size' => 100, 'maxlength' => 200)); ?>
+                <p class="help-block"><?php echo $form->error($model, 'meta_title'); ?></p>
+            </div>
+            <div class="controls">
+            <?php echo $form->labelEx($model, 'meta_descr', array('class' => 'control-label')); ?>
+            <?php echo $form->textArea($model, 'meta_descr', array(
+                'value' => !empty($_POST['meta_descr']) ? $_POST['meta_descr'] : $model->meta_descr, 
+                'class' => 'span4', 'cols' => 100, 'maxlength' => 200)); ?>
+                <p class="help-block"><?php echo $form->error($model, 'meta_descr'); ?></p>
+            </div>
+            <div class="controls">
+                <?php echo $form->labelEx($model, 'meta_key', array('class' => 'control-label')); ?>
+            <?php echo $form->textField($model, 'meta_key', array(
+                'value' => !empty($_POST['meta_title']) ? $_POST['meta_key'] : $model->meta_key, 
+                'class' => 'span4', 'size' => 100, 'maxlength' => 200)); ?>
+                <p class="help-block"><?php echo $form->error($model, 'meta_key'); ?></p>
+            </div>
+            <div class="controls">
+                <?php echo $form->labelEx($model, 'description', array('class' => 'control-label')); ?>
+            <?php echo $form->textArea($model, 'description', array(
+                'value' => !empty($_POST['description']) ? $_POST['description'] : $model->description, 
+                'class' => 'span4', 'cols' => 100, 'maxlength' => 200)); ?>
+                <p class="help-block"><?php echo $form->error($model, 'description'); ?></p>
+            </div>
+        </div>
+        
 
         <input type="hidden" name="YII_CSRF_TOKEN"
                value="<?php echo Yii::app()->request->csrfToken; ?>"/>
@@ -119,7 +152,7 @@ $val_success_message = ($model->isNewRecord) ?
             <?if(sizeof($model->fields)>0) { 
                 echo $form->labelEx($model, 'fields', array('class' => 'control-label')); 
                 echo "Название, тип и артибуты. Для select "
-                . "атрибут это значения через запятую, для checkbox - "
+                . "атрибут это значения через запятую, <br/> для checkbox - "
                 . "если есть надпись значит checkbox по умолчанию выделен";
                 foreach($model->fields as $fn=>$fl){ ?>
                 <div class="controls">

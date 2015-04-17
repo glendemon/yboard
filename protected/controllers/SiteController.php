@@ -12,7 +12,7 @@ class SiteController extends Controller {
      * 
      */
     public $layout = '/main-template';
-
+    
     public function actions() {
         return array(
             // Дублирование, метода "создание объявления" удален
@@ -24,7 +24,33 @@ class SiteController extends Controller {
             'page' => array(
                 'class' => 'CViewAction',
             ),
+            'sitemap'=>array(
+                'class'=>'ext.sitemap.ESitemapAction',
+                'importListMethod'=>'getBaseSitePageList',
+                'classConfig'=>array(
+                    array('baseModel'=>'Adverts',
+                          'route'=>'/adverts/view',
+                          'params'=>array('id'=>'id')),   
+                    array('baseModel'=>'Category',
+                          'route'=>'/adverts/category',
+                          'params'=>array('cat_id'=>'id')),  
+                ),              
+            ),
+            'sitemapxml'=>array(
+                'class'=>'ext.sitemap.ESitemapXMLAction',
+                'classConfig'=>array(
+                    array('baseModel'=>'Adverts',
+                          'route'=>'/adverts/view',
+                          'params'=>array('id'=>'id')),
+                    array('baseModel'=>'Category',
+                          'route'=>'/adverts/category',
+                          'params'=>array('cat_id'=>'id')),   
+                ),
+                //'bypassLogs'=>true, // if using yii debug toolbar enable this line
+                'importListMethod'=>'getBaseSitePageList',
+            ),   
         );
+        
     }
 
     /**
@@ -156,7 +182,7 @@ class SiteController extends Controller {
      * This is the action to handle external exceptions.
      */
     public function actionError() {
-        $this->layout = "/install-layout";
+        //$this->layout = "/install-layout";
         if ($error = Yii::app()->errorHandler->error) {
             if (Yii::app()->request->isAjaxRequest)
                 echo $error['message'];
@@ -245,6 +271,33 @@ class SiteController extends Controller {
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
+    }
+    
+     public function getBaseSitePageList(){
+ 
+        $list = array(
+                    array(
+                        'loc'=>Yii::app()->createAbsoluteUrl('/'),
+                        'frequency'=>'weekly',
+                        'priority'=>'1',
+                        ),
+                    array(
+                        'loc'=>Yii::app()->createAbsoluteUrl('/site/contact'),
+                        'frequency'=>'yearly',
+                        'priority'=>'0.8',
+                        ),
+                    array(
+                        'loc'=>Yii::app()->createAbsoluteUrl('/site/page', array('view'=>'about')),
+                        'frequency'=>'monthly',
+                        'priority'=>'0.8',
+                        ),
+                    array(
+                        'loc'=>Yii::app()->createAbsoluteUrl('/site/page', array('view'=>'privacy')),
+                        'frequency'=>'yearly',
+                        'priority'=>'0.3',
+                        ),
+                );
+        return $list;
     }
 
 }

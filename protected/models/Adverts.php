@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This is the model class for table "bulletin".
+ * This is the model class for table "adverts".
  *
  * The followings are the available columns in table 'bulletin':
  * @property integer $id
@@ -120,7 +120,16 @@ class Adverts extends CActiveRecord
         $criteria->compare('id', $this->id);
         $criteria->compare('name', $this->name, true);
         $criteria->compare('user_id', $this->user_id);
-        $criteria->compare('category_id', $this->category_id);
+        
+        //$criteria->compare('category_id', $this->category_id);
+        $criteria->addCondition('t.category_id = "'.$this->category_id.'" '
+                . 'or (category.lft > "'.Yii::app()->params['categories'][$this->category_id]['lft'].'" '
+                . 'and category.rgt< "'.Yii::app()->params['categories'][$this->category_id]['rgt'].'"'
+                . ' and category.root = "'.Yii::app()->params['categories'][$this->category_id]['root'].'")');
+        
+        
+        $criteria->join='inner join category on category.id=t.category_id';
+        
         $criteria->compare('type', $this->type);
         $criteria->compare('views', $this->views);
         $criteria->compare('text', $this->text, true);
@@ -130,6 +139,13 @@ class Adverts extends CActiveRecord
         return new CActiveDataProvider($this, array(
                 'criteria' => $criteria,
             ));
+    }
+    
+    public function scopes()
+    {
+        return array(
+            'sitemap'=>array('select'=>'id', 'condition'=>'created_at <= NOW()', 'order'=>'created_at ASC'),
+        );
     }
 
     public function behaviors()

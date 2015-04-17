@@ -118,6 +118,7 @@ return array(
     'Fields' => "Характеристики",
     'Price' => "Цена",
     'Currency' => "Валюта",
+    'Redact advert' => "Редактировать объявление",
     
     // Пользователи
     'Send a mail to the author' => 'Отправить письмо автору',
@@ -131,6 +132,7 @@ return array(
     'lastvisit_at' => 'Последнее посещение',
     'List User' => 'Список пользователей',
     'Last visit' => 'Был на сайте',
+    'Social networks authorisation :' => 'Авторизуйтесь с помощью социальных сетей:',
     // Страницы 
     'Lft' => 'левый',
     'Rgt' => 'правый',

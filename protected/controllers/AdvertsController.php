@@ -241,6 +241,8 @@ class AdvertsController extends Controller {
      * @param int $id Adverts's id
      */
     public function actionView($id) {
+
+        // Модель для моментального сообщения со страницы просмотра объявления
         $mes_model=new Messages();
         $model = $this->loadAdverts($id);
         $model->views++;
@@ -261,7 +263,7 @@ class AdvertsController extends Controller {
 
         $dataProvider = new CActiveDataProvider('Adverts', array(
             'criteria' => array(
-                'select' => '*, IFNULL(updated_at, created_at) as sort',
+                'select' => 't.*, IFNULL(updated_at, created_at) as sort',
                 'condition' => 't.category_id = :id or (category.lft > :cat_lft '
                 . 'and category.rgt< :cat_rgt and category.root = :cat_root)',
                 'order' => 'sort DESC',
@@ -275,6 +277,9 @@ class AdvertsController extends Controller {
                 'join' => 'inner join category on category.id=t.category_id ',
             ),
         ));
+        
+        $this->meta['vars']['cat_name']  =  Yii::app()->params['categories'][$cat_id]['name'];
+        
         $this->render('category', array(
             'model' => $this->loadCategory($cat_id),
             'dataProvider' => $dataProvider,
@@ -322,8 +327,10 @@ class AdvertsController extends Controller {
      */
     public function loadAdverts($id) {
         $model = Adverts::model()->findByPk($id);
-        if ($model === null)
+        if ($model === null) {
             throw new CHttpException(404, 'The requested page does not exist.');
+        }
+        
         return $model;
     }
 
@@ -373,20 +380,29 @@ class AdvertsController extends Controller {
         $model = new Adverts('search');
 
         $model->unsetAttributes();  // clear any default values
-        $model->name = $searchStr;
-        $model->text = $searchStr;
-
+        //$model->attributes=$_POST;
+        
+        if($searchStr) {
+            $model->name = $searchStr;
+            $model->text = $searchStr;
+        }
+        $model->category_id = Yii::app()->request->getParam("cat_id");
+        //$model->category_id = Yii::app()->request->getParam("category");
+        
 
         /*
           $this->render('admin',array(
           'model'=>$model->search(),
           ));
          */
+        $dataProvider=$model->search();
+        
+        //var_dump($dataProvider->criteria);
 
 
         $this->render('index', array(
-            'data' => $model->search(),
-                //'data'=>$dataProvider
+            //'data' => $model->search(),
+            'data'=>$dataProvider,
         ));
     }
 
