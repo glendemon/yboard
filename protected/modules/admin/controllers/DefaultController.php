@@ -76,6 +76,10 @@ class DefaultController extends BackendController
                 ));
 
 	}
+        
+        public function actionHelp() {
+            $this->render('help');
+        }
 
 	public function actionConfig()
 	{

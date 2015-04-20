@@ -39,6 +39,14 @@ ul {
     text-align: left;
 }
 
+label {
+    margin:0px;    
+}
+
+input[type="radio"]{
+    margin:0px;
+}
+
 textarea.wide{
     width:100%;
 }
@@ -123,6 +131,22 @@ table.roots{
     padding:3px;
     min-height: 60px;
     box-shadow:none;
+}
+
+.articleList{
+    border-top: 1px dashed #b9d7d4;
+    border-bottom:1px dashed #b9d7d4;
+    padding:20px 0;
+    margin:10px 0;
+}
+
+.price_converter{
+    border: 1px dashed #c6ddda;
+    display: none;
+    margin: 5px 20px 10px 120px;
+    padding: 10px;
+    width: 300px;
+    background:rgba(248, 251, 230, 0.52);
 }
 
 a.send_mail{

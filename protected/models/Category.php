@@ -66,10 +66,12 @@ class Category extends CActiveRecord {
                     array(
                         'condition' =>
                         "level='1' "
-                        . "or (lft<'" . $curent_cat['lft'] . "' and root='" . $curent_cat['root'] . "' and level<'" . $curent_cat['level'] . "' )  "
+                        . "or (lft<'" . $curent_cat['lft'] . "' and root='" 
+                        . $curent_cat['root'] . "' and level<'" . $curent_cat['level'] . "' )  "
                         . "or id='" . $curent_cat['id'] . "' "
                         . "or (root='" . $curent_cat['root'] . "' and level='" . $curent_cat['level'] . "') "
-                        . "or ( lft>'" . $curent_cat['lft'] . "' and rgt<'" . $curent_cat['rgt'] . "' and root='" . $curent_cat['root'] . "' and level='" . ($curent_cat['level'] + 1) . "')"
+                        . "or ( lft>'" . $curent_cat['lft'] . "' and rgt<'" . $curent_cat['rgt'] 
+                        . "' and root='" . $curent_cat['root'] . "' and level='" . ($curent_cat['level'] + 1) . "')"
                         ,
                         'order' => 'root, lft',
                     )
@@ -116,9 +118,11 @@ class Category extends CActiveRecord {
         foreach ($categories as $n => $cat) {
             $ret_cat[$cat['id']] = $cat;
             $ret_cat[$cat['id']]['fields'] = json_decode($cat['fields'], true);
-            foreach($ret_cat[$cat['id']]['fields'] as $f_n=>$field) {
-                if($field['type']==2){
-                    $ret_cat[$cat['id']]['fields'][$f_n]['atr']=explode(",",$field['atr']);
+            if(is_array($ret_cat[$cat['id']]['fields'])){
+                foreach($ret_cat[$cat['id']]['fields'] as $f_n=>$field) {
+                    if($field['type']==2){
+                        $ret_cat[$cat['id']]['fields'][$f_n]['atr']=explode(",",$field['atr']);
+                    }
                 }
             }
         }

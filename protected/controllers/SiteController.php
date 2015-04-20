@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Контролер сайта включающий отдельные возможности 
  * Процедура установки 
@@ -12,7 +13,7 @@ class SiteController extends Controller {
      * 
      */
     public $layout = '/main-template';
-    
+
     public function actions() {
         return array(
             // Дублирование, метода "создание объявления" удален
@@ -24,33 +25,32 @@ class SiteController extends Controller {
             'page' => array(
                 'class' => 'CViewAction',
             ),
-            'sitemap'=>array(
-                'class'=>'ext.sitemap.ESitemapAction',
-                'importListMethod'=>'getBaseSitePageList',
-                'classConfig'=>array(
-                    array('baseModel'=>'Adverts',
-                          'route'=>'/adverts/view',
-                          'params'=>array('id'=>'id')),   
-                    array('baseModel'=>'Category',
-                          'route'=>'/adverts/category',
-                          'params'=>array('cat_id'=>'id')),  
-                ),              
+            'sitemap' => array(
+                'class' => 'ext.sitemap.ESitemapAction',
+                'importListMethod' => 'getBaseSitePageList',
+                'classConfig' => array(
+                    array('baseModel' => 'Adverts',
+                        'route' => '/adverts/view',
+                        'params' => array('id' => 'id')),
+                    array('baseModel' => 'Category',
+                        'route' => '/adverts/category',
+                        'params' => array('cat_id' => 'id')),
+                ),
             ),
-            'sitemapxml'=>array(
-                'class'=>'ext.sitemap.ESitemapXMLAction',
-                'classConfig'=>array(
-                    array('baseModel'=>'Adverts',
-                          'route'=>'/adverts/view',
-                          'params'=>array('id'=>'id')),
-                    array('baseModel'=>'Category',
-                          'route'=>'/adverts/category',
-                          'params'=>array('cat_id'=>'id')),   
+            'sitemapxml' => array(
+                'class' => 'ext.sitemap.ESitemapXMLAction',
+                'classConfig' => array(
+                    array('baseModel' => 'Adverts',
+                        'route' => '/adverts/view',
+                        'params' => array('id' => 'id')),
+                    array('baseModel' => 'Category',
+                        'route' => '/adverts/category',
+                        'params' => array('cat_id' => 'id')),
                 ),
                 //'bypassLogs'=>true, // if using yii debug toolbar enable this line
-                'importListMethod'=>'getBaseSitePageList',
-            ),   
+                'importListMethod' => 'getBaseSitePageList',
+            ),
         );
-        
     }
 
     /**
@@ -61,6 +61,7 @@ class SiteController extends Controller {
             'accessControl', // perform access control for CRUD operations
         );
     }
+
     /**
      * Получения списка дополнительных полей для категории 
      * используется при созданий объявления
@@ -120,7 +121,7 @@ class SiteController extends Controller {
         $db_error = false;
         $model = new InstallForm;
 
-        if (Yii::app()->params['installed']!=="yes") {
+        if (Yii::app()->params['installed'] !== "yes") {
 
             if (isset($_POST['InstallForm'])) {
                 $model->attributes = $_POST['InstallForm'];
@@ -164,12 +165,15 @@ class SiteController extends Controller {
                             'tablePrefix' => '',
                         );
                         $config_data['name'] = trim(stripslashes($_POST['InstallForm']['site_name']));
-                        $config_data['params']['adminEmail'] = $model->useremail;
-                        $config_data['params']['installed'] = "yes";
-
-                        //Сохранение конфигурации
+                        //Сохранение конфигурации 
                         file_put_contents($CONFIG, "<? return " . var_export($config_data, true) . " ?>");
-
+                        
+                        // Сохранение настроек
+                        $settings = new ConfigForm(Yii::getPathOfAlias('application.config.settings').".php");
+                        $settings->updateParam('adminEmail',$model->useremail);
+                        $settings->updateParam('installed','yes');
+                        $settings->saveToFile();
+                        
                         $this->redirect(Yii::app()->createUrl('site/index'));
                     }
                 }
@@ -193,6 +197,27 @@ class SiteController extends Controller {
 
     public function actionAbout() {
         $this->render('pages/about');
+    }
+
+    public function actionGeoIp() {
+
+        //Yii::import('ext.sypexgeo.Sypexgeo');
+
+        $geo = new Sypexgeo();
+
+        // get by remote IP
+        $geo->get('85.250.187.241');                // also returned geo data as array
+        echo $geo->ip, '<br>';
+        echo $geo->ipAsLong, '<br>';
+        var_dump($geo->country);
+        echo '<br>';
+        var_dump($geo->region);
+        echo '<br>';
+        var_dump($geo->city);
+        echo '<br>';
+
+        // get by custom IP
+        //$geo->get('212.42.76.252');
     }
 
     /**
@@ -272,33 +297,32 @@ class SiteController extends Controller {
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
     }
-    
-     public function getBaseSitePageList(){
- 
+
+    public function getBaseSitePageList() {
+
         $list = array(
-                    array(
-                        'loc'=>Yii::app()->createAbsoluteUrl('/'),
-                        'frequency'=>'weekly',
-                        'priority'=>'1',
-                        ),
-                    array(
-                        'loc'=>Yii::app()->createAbsoluteUrl('/site/contact'),
-                        'frequency'=>'yearly',
-                        'priority'=>'0.8',
-                        ),
-                    array(
-                        'loc'=>Yii::app()->createAbsoluteUrl('/site/page', array('view'=>'about')),
-                        'frequency'=>'monthly',
-                        'priority'=>'0.8',
-                        ),
-                    array(
-                        'loc'=>Yii::app()->createAbsoluteUrl('/site/page', array('view'=>'privacy')),
-                        'frequency'=>'yearly',
-                        'priority'=>'0.3',
-                        ),
-                );
+            array(
+                'loc' => Yii::app()->createAbsoluteUrl('/'),
+                'frequency' => 'weekly',
+                'priority' => '1',
+            ),
+            array(
+                'loc' => Yii::app()->createAbsoluteUrl('/site/contact'),
+                'frequency' => 'yearly',
+                'priority' => '0.8',
+            ),
+            array(
+                'loc' => Yii::app()->createAbsoluteUrl('/site/page', array('view' => 'about')),
+                'frequency' => 'monthly',
+                'priority' => '0.8',
+            ),
+            array(
+                'loc' => Yii::app()->createAbsoluteUrl('/site/page', array('view' => 'privacy')),
+                'frequency' => 'yearly',
+                'priority' => '0.3',
+            ),
+        );
         return $list;
     }
 
 }
-

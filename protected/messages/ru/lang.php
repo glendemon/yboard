@@ -56,6 +56,8 @@ return array(
     'Text' => 'Текст объявления',
     'Created At' => 'Дата опубликования',
     'Updated At' => 'Обновлен',
+    'Location' => 'Местоположение',
+    'Not set' => 'Не укзана',
     'Fields with <span class="required">*</span> are required.' => 
     '<span class="required">*</span> Обязательные поля.',
     'Demand' => '<span class="demand">Cпрос</span>',

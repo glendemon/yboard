@@ -59,6 +59,7 @@ class advancedSearch extends CWidget
                 echo "<input type='checkbox' name='fields[$f_id]' /> ".$field['name']."<br/>";
             } elseif ($field['type']==="2") {
                 echo $field['name']."<select name='fields[$f_id]'> ";
+                echo "<option value=''></option>";
                 foreach($field['atr'] as $a_n=>$atr) {
                     echo "<option value='$a_n'>$atr</option>";
                 }
@@ -66,6 +67,7 @@ class advancedSearch extends CWidget
             } 
         }
         
+        echo "<br/>";
         echo "<input type='hidden' name='searchStr' value='".Yii::app()->request->getParam('searchStr')."' /> ";
         echo "<input type='submit' class='btn' value='Поиск' /> ";
         echo "</form>";

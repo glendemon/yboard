@@ -10,6 +10,8 @@ class User extends CActiveRecord {
     
     public $full_name;
     public $skype;
+    
+    const USERS_PROCESSING=10;
 
     /**
      * The followings are the available columns in table 'users':
@@ -122,6 +124,15 @@ class User extends CActiveRecord {
          * 
          */
         return array();
+    }
+    
+    static function usersPage($page=0){
+        $criteria=new CDbCriteria();
+        $criteria->compare('status',USER::STATUS_ACTIVE);
+        $criteria->limit = self::USERS_PROCESSING;
+        $criteria->offset = self::USERS_PROCESSING*$users_pagem;
+
+        return self::model()->findAll($criteria);
     }
 
     /**

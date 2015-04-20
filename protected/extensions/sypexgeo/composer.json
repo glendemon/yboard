@@ -1,0 +1,30 @@
+{
+    "name": "jisoft/yii2-sypexgeo",
+    "description": "Yii2 extension for Sypex Geo API (http://sypexgeo.net)",
+    "type": "yii2-extension",
+    "keywords": ["yii2","sypexgeo","geo","geolocation","geoip"],
+    "homepage": "https://github.com/JiSoft/yii2-sypexgeo",
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "zapimir",
+            "email": "zapimir@zapimir.net"
+        },
+        {
+            "name": "BINOVATOR",
+            "email": "info@sypex.net"
+        },
+        {
+            "name": "jisoft",
+            "email": "jisoft.dn@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "jisoft\\sypexgeo\\": ""
+        }
+    }
+}

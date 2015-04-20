@@ -44,7 +44,7 @@ $val_success_message = ($model->isNewRecord) ?
 	var new_field_id=1;
 	
 	function addFiled(){
-		$('#fields-list').append('<div class="controls"><input type="text" id="Category_fields_'+new_field_id+'_name" name="Category[fields][fn_'+new_field_id+'][name]" maxlength="128" size="60" value="">			<select id="Category_fields_price_&quot;type&quot;" name="Category[fields][fn_'+new_field_id+'][type]"><option value="0">text</option><option value="1">checkbox</option><option value="2">select</option></select><input type="text" id="Category_fields_'+new_field_id+'_atr" name="Category[fields][fn_'+new_field_id+'][atr]" maxlength="128" size="60" value=""><a href="javascript:void(0);" onclick="delField(this);"><i class="fa fa-times"></i></a></div>');
+		$('#fields-list').append('<div class="controls"><input type="text"  id="Category_fields_'+new_field_id+'_name" name="Category[fields][fn_'+new_field_id+'][name]" maxlength="128" size="60" value="">			<select id="Category_fields_price_&quot;type&quot;" name="Category[fields][fn_'+new_field_id+'][type]"><option value="0">text</option><option value="1">checkbox</option><option value="2">select</option></select><input type="text" id="Category_fields_'+new_field_id+'_atr" name="Category[fields][fn_'+new_field_id+'][atr]" maxlength="128" size="60" value=""><a href="javascript:void(0);" onclick="delField(this);"><i class="fa fa-times"></i></a></div>');
 		new_field_id++;
 	}
         

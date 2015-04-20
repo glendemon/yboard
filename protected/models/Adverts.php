@@ -45,8 +45,9 @@ class Adverts extends CActiveRecord
         // will receive user inputs.
         return array(
             array('name, user_id, category_id, text', 'required'),
-            array('user_id, category_id, gallery_id, views', 'numerical', 'integerOnly' => true),
+            array('user_id, category_id, gallery_id, views, location, currency', 'numerical', 'integerOnly' => true),
             array('name', 'length', 'max' => 255),
+            array('price', 'type', 'type' => 'float'),
             array('type', 'safe'),
             array('created_at, updated_at', 'default', 'setOnEmpty'=>true, 'value'=>null),
             array('youtube_id', 'file', 'types'=>'mov, mpeg4, avi, wmv, mpegps, flv, 3gpp, webm', 'allowEmpty' => true),
@@ -89,6 +90,7 @@ class Adverts extends CActiveRecord
             'updated_at' => t( 'Updated At'),
             'fields' => t('Fields'),
             'price' => t('Price'),
+            'location' => t('Location'),
         );
     }
 
@@ -123,18 +125,22 @@ class Adverts extends CActiveRecord
         
         //$criteria->compare('category_id', $this->category_id);
         $criteria->addCondition('t.category_id = "'.$this->category_id.'" '
-                . 'or (category.lft > "'.Yii::app()->params['categories'][$this->category_id]['lft'].'" '
-                . 'and category.rgt< "'.Yii::app()->params['categories'][$this->category_id]['rgt'].'"'
-                . ' and category.root = "'.Yii::app()->params['categories'][$this->category_id]['root'].'")');
-        
+        . ' or (category.lft > "'.Yii::app()->params['categories'][$this->category_id]['lft'].'"'
+        . ' and category.rgt< "'.Yii::app()->params['categories'][$this->category_id]['rgt'].'"'
+        . ' and category.root = "'.Yii::app()->params['categories'][$this->category_id]['root'].'")');
+                
+        if($this->fields) {
+            $criteria->addCondition(" t.fields regexp '".$this->fields."' ");
+        }
         
         $criteria->join='inner join category on category.id=t.category_id';
         
         $criteria->compare('type', $this->type);
         $criteria->compare('views', $this->views);
         $criteria->compare('text', $this->text, true);
-		//$criteria->select="id, name, users.id ";
-		$criteria->order='id desc';
+	
+	$criteria->order = 'id desc';
+        $criteria->limit = Yii::app()->params['adv_on_page'];
 
         return new CActiveDataProvider($this, array(
                 'criteria' => $criteria,

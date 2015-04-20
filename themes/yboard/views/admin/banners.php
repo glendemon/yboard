@@ -110,7 +110,7 @@
 
 </script>
 <div align='center' class='add_code_form'>
-    
+    <a href='<?=Yii::app()->createUrl("/admin/default/help")?>#banners'> Инструкция </a>
 <form method='post' name='insert_ads_form' action='<?= Yii::app()->createUrl('admin/banners') ?>' 
       style='display:none' id='ads_code_redactor' align='center'>
     <h4>Добавление кода для блока</h4>
