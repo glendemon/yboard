@@ -18,11 +18,16 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
         </div>
     </div>
     <div class='date'>
-        <span><a href='<? echo Yii::app()->createUrl('user/view', array('id'=>$model->user->id) )?>'><i class='fa fa-user'></i><?=$model->user->username?></a></span>  
+        <span><a href='<? echo Yii::app()->createUrl('user/view', 
+                array('id'=>$model->user->id) )?>'>
+                <i class='fa fa-user'></i><?=$model->user->username?>
+            </a></span>  
         <span><i class='fa fa-clock-o'></i><?=PeopleDate::format($model->created_at)?></span> 
         <span><i class='fa fa-eye'></i><?=$model->views?></span>
         <div style='float:right; margin-top:-6px; '> 
-            <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script><div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="link" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir"></div>
+            <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
+            <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="link" 
+                 data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir"></div>
         </div>
     </div>
     <div>
@@ -38,9 +43,7 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
     <div class='attributes'>
 
          <? 
-         
-         
-         
+
          if (sizeof($model->fields) > 0 and is_array($model->fields)) { ?>
             <?php
                 if (is_array($model->fields))
@@ -54,12 +57,26 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
 
             <? } ?>
     </div>
-    <div class='price'><?=t('Price')?> - <?=$model->price?>(<?=$model->currency?>) </div>
+    <div class='price'><?=t('Price')?> - 
+        <? if($model->price) { ?>
+        <?=$model->price?> ( <?=Yii::app()->params['currency'][$model->currency]?> ) 
+        <a href='javascript:void(0);' onclick='show_converter()' > открыть конвертор </a>
+        <div class='price_converter'><?
+            foreach(Yii::app()->params['currency'] as $cn=>$cur){
+                printf("%.2f",$model->price/Yii::app()->params['exchange'][$model->currency]*Yii::app()->params['exchange'][$cn]);
+                echo " ".$cur." | ";
+            }
+        ?></div>
+        <? } else {
+            echo "<i>".t('Not set')."</i>";
+        }?>
+    </div>
+    
     <div> 
-        <span> Контакты : </span>
-        <?=$model->user->phone?>
-        <?=$model->user->email?>
-        <?=$model->user->skype?>
+        <span> Контакты : </span> <br/>
+        <?=$model->user->phone?> <br/>
+        <?=$model->user->email?> <br/>
+        <?=$model->user->skype?> 
     </div>
     <? if(Yii::app()->user->id != $model->user->id){ ?>
     <div>

@@ -32,7 +32,8 @@
         <div>
             <? echo CHtml::link(CHtml::encode($data->name), array('adverts/view', 'id' => $data->id)); ?>
             <? if ($data->user_id == Yii::app()->user->id) { ?>
-                <a href='<?= Yii::app()->createUrl('adverts/update', array('id' => $data->id)) ?>' class='redact'> редактировать </a>
+                <a href='<?= Yii::app()->createUrl('adverts/update', 
+                    array('id' => $data->id)) ?>' class='redact'> редактировать </a>
             <? } ?>
         </div>
         <div><? echo CHtml::encode($data->text); ?></div>

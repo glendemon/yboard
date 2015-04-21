@@ -122,6 +122,10 @@
                        <? $this->widget('application.widgets.AdvancedSearch'); ?>
                     </div>
                         <?= $this->getBanner('right_adv') ?>
+                    <div class='articleList'> 
+                        <? $this->widget('application.widgets.articleList'); ?>
+                    </div>    
+                    
 
                 </div>
                 <br style='clear:both' />

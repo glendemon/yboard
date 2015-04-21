@@ -107,8 +107,6 @@ class CmsController extends Controller {
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }
-        
-        var_dump($this->layout);
 
         $this->render('update', array(
             'model' => $model,

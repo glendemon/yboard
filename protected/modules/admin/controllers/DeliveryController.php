@@ -14,6 +14,10 @@ class DeliveryController extends BackendController
 	 */
 	public $layout='/admin-template';
 	public $title="Рассылка";
+        public $error;
+
+	
+
 
 	/**
 	 * Deletes a particular model.
@@ -27,12 +31,39 @@ class DeliveryController extends BackendController
 	
 	public function actionIndex()
 	{ 
-		if($_SERVER['REQUEST_METHOD']==="POST" or true){
+		if($_SERVER['REQUEST_METHOD']==="POST"){
 			
-			//Yii::app()->email->send("wzcc@mail.ru","test","test");
-			
+                    $email = Yii::app()->email;
+                    $t_validator = new textValidator();
+                    
+                    $messages="";
+                    
+                    $email->subject = Yii::app()->request->getParam('email_theme');
+                    $email->message = Yii::app()->request->getParam('email_body');
+                    
+                    if(   $t_validator->validate_str($email->subject,"html")
+                    and   $t_validator->validate_str($email->message,"html")) {
+
+                        if(Yii::app()->request->getParam('users_page')) {
+                            $users_page=intval(Yii::app()->request->getParam('users_page'));
+                        } else {
+                            $users_page=0;
+                        }
+                                                
+                        $user_list = User::usersPage($users_page);
+                                                
+                        foreach($user_list as $us) {
+                            $email->to = $us->email;
+                            $messages .= "Отправленно сообщение на ". $email->to."<br/>";
+                            $email->send();
+                        }
+
+                    } else {
+                        $this->error="Входные данные содержат недопустимые символы";
+                    }
+
 		}
-		$this->render('/delivery');
+		$this->render('/delivery', array('messages' => $messages));
 
 	}
 

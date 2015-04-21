@@ -29,6 +29,7 @@
     <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/typicons.css" rel="stylesheet" />
     <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/animate.css" rel="stylesheet" />
     <link id="skin-link" href="" rel="stylesheet" type="text/css" />
+    <script src="<?php echo Yii::app()->baseUrl; ?>/js_plugins/yboard.js" ></script>
 
     <!--Skin Script: Place this script in head to load scripts for skins and rtl support-->
 
@@ -124,7 +125,9 @@
                             array('label' => 'Категории', 'url' => array('/admin/category')),
                             array('label' => t("Pages"), 'url' => array('/cms/cms')),
                             array('label' => "Баннерные блоки", 'url' => array('/admin/banners')),
+                            array('label' => "Почтовая рассылка", 'url' => array('/admin/delivery')),
                             array('label' => "Настройки", 'url' => array('/admin/settings')),
+                            array('label' => "Помощь", 'url' => array('/admin/default/help')),
                         ),
                         'htmlOptions' => array('class'=>'nav sidebar-menu'),
                         'encodeLabel' => FALSE,

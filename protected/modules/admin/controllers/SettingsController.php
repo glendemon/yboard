@@ -18,26 +18,11 @@ class SettingsController extends BackendController {
 
         if (isset($_POST['config'])) {
 
-            foreach ($_POST['config'] as $n => $v) {
-                foreach ($v as $n1 => $v1) {
-                    if (trim($v1) === "") {
-                        unset($_POST['config'][$n][$n1]);
-                    }
-                }
-
-                if (sizeof($InitConf[$n]) >= sizeof($_POST['config'][$n]))
-                    $InitConf[$n] = $_POST['config'][$n];
-            }
+            $model->updateConfig($_POST['config']);
 
             if ($model->validate()) {
 
-                $conf_str = var_export($InitConf, true);
-                $atr = $model->getAtribute();
-                foreach ($atr as $n => $v) {
-                    $conf_str = preg_replace("#([^\n\r]*" . $n . "[^\n\r]*)[\n\r]#is", "\\1//" . $v . "\n", $conf_str);
-                }
-
-                file_put_contents(Yii::getPathOfAlias('application.config.settings') . '.php', "<? \n return " . $conf_str . " \n ?>");
+                $model->saveToFile();
 
                 $this->refresh();
             }

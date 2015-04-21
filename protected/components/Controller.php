@@ -55,7 +55,7 @@ class Controller extends CController {
         //var_dump();
 
         if (Yii::app()->params['installed'] === "yes") {
-            $this->settings = include_once Yii::getPathOfAlias('application.config.settings') . '.php';
+            $this->settings = require Yii::getPathOfAlias('application.config.settings') . '.php';
             $this->banners = include_once Yii::getPathOfAlias('application.config.banners') . '.php';
             //$this->categories = $this->getCategories();
 
@@ -63,8 +63,8 @@ class Controller extends CController {
         } elseif (Yii::app()->getRequest()->getPathInfo() !== "site/install") {
             $this->redirect(Yii::app()->baseUrl . '/site/install');
         }
-
-        $this->meta = $this->settings['meta'];
+        $this->meta = Yii::app()->params['meta'];
+        $this->meta['vars']['site_name'] = Yii::app()->name;
     }
 
     public function getBanner($var) {
@@ -151,7 +151,10 @@ class Controller extends CController {
             foreach ($m_v[1] as $v) {
                 if (isset($this->meta['vars'][$v])) {
                     $str = str_replace("<" . $v . ">", $this->meta['vars'][$v], $str);
+                    $str = str_replace("]", "", $str);
+                    $str = str_replace("[", "", $str);
                 } else {
+                    $str = preg_replace("~\[" . $v . "[^\[]]*\]~is", "", $str);
                     $str = preg_replace("~[^\.]*<" . $v . ">[^\.]*\.~is", "", $str);
                 }
             }

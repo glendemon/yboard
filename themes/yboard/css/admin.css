@@ -71,6 +71,21 @@
 	padding:0px;
 }
 
+.admin-settings{
+    padding-left:20px;
+    font-size:12px;
+}
+
+fieldset.config-block span{
+    width:150px;
+    display:inline-block;
+}
+
+fieldset.config-block input{
+    width:300px;
+    display:inline-block;
+}
+
 .jstree ul li div{
 	display: inline-block;
 	margin-left: 30px;
