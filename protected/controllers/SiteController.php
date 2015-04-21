@@ -199,26 +199,6 @@ class SiteController extends Controller {
         $this->render('pages/about');
     }
 
-    public function actionGeoIp() {
-
-        //Yii::import('ext.sypexgeo.Sypexgeo');
-
-        $geo = new Sypexgeo();
-
-        // get by remote IP
-        $geo->get('85.250.187.241');                // also returned geo data as array
-        echo $geo->ip, '<br>';
-        echo $geo->ipAsLong, '<br>';
-        var_dump($geo->country);
-        echo '<br>';
-        var_dump($geo->region);
-        echo '<br>';
-        var_dump($geo->city);
-        echo '<br>';
-
-        // get by custom IP
-        //$geo->get('212.42.76.252');
-    }
 
     /**
      * Displays the contact page

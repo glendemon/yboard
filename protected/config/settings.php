@@ -1,13 +1,13 @@
 <? 
  return array (
-  'installed' => 'yes',
+  'installed' => 'no',
   'meta' => //Основные мета данные [static]
   array (
     'title' => 'Категория "<cat_name>". Бесплатная доска объявлений <site_name> . Страница <page_number>',
     'description' => 'Доска объявлений. <cat_name> купить продать. Объявление <adv_name>.',
     'keywords' => 'объявления, купить, продать',
   ),
-  'adv_meta' => //Основные мета данные [static]//Мета данные для вывода объявления [static]
+  'adv_meta' => //Мета данные для вывода объявления [static]
   array (
     'title' => 'Доска объявлений. <cat_name> купить продать. Объявление <adv_name>.',
     'description' => 'Доска объявлений. <cat_name> купить продать. Объявление <adv_name>.',

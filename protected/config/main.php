@@ -24,7 +24,6 @@ return array(
         'application.extensions.gallerymanager.*',
         'application.extensions.gallerymanager.models.*',
         'application.extensions.nestedset.*',
-        'application.extensions.sypexgeo.*',
     ),
     'modules' => array(
         // uncomment the following to enable the Gii tool

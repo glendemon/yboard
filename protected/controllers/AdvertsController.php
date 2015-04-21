@@ -183,6 +183,11 @@ class AdvertsController extends Controller {
                 'order' => 'id DESC',
             ))
         );
+        
+        if(Yii::app()->request->getParam('Adverts_page')) {
+            Yii::app()->params['meta']['vars']['page_number'] = 
+                Yii::app()->request->getParam('Adverts_page');
+        }
 
         $this->render('index', array(
             'data' => $dataProvider,

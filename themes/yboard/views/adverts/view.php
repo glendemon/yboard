@@ -63,7 +63,7 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
         <a href='javascript:void(0);' onclick='show_converter()' > открыть конвертор </a>
         <div class='price_converter'><?
             foreach(Yii::app()->params['currency'] as $cn=>$cur){
-                printf("%.2f",$model->price/Yii::app()->params['exchange'][$cn]);
+                printf("%.2f",$model->price/Yii::app()->params['exchange'][$model->currency]*Yii::app()->params['exchange'][$cn]);
                 echo " ".$cur." | ";
             }
         ?></div>
