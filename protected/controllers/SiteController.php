@@ -122,6 +122,14 @@ class SiteController extends Controller {
         $model = new InstallForm;
 
         if (Yii::app()->params['installed'] !== "yes") {
+			
+			if(!is_writable($CONFIG)) {
+				$model->addError("site_name", "Файл ".$CONFIG." должен быть доступен для записи");			
+			} 
+			
+			if(!is_writable(Yii::getPathOfAlias('application.config.settings').".php")) {
+				$model->addError("site_name", "Файл ".Yii::getPathOfAlias('application.config.settings').".php"." должен быть доступен для записи");			
+			} 
 
             if (isset($_POST['InstallForm'])) {
                 $model->attributes = $_POST['InstallForm'];
@@ -134,14 +142,18 @@ class SiteController extends Controller {
 
                 // данные пользователя                     
                 if (!$model->validate() or $model->userpass !== $model->userpass2) {
-                    $db_error = "Данные пользователя неправльные";
+					$model->addError('userpass2',"Пароли не совпадают");
                 }
-
-                $db_con = @mysqli_connect($server, $username, $password) or $db_error = mysqli_error();
-                @mysqli_select_db($db_con, $db_name) or $db_error = mysqli_error($db_con);
-
-                if (!$db_error) {
+				
+				if(!$model->errors) {
+					$db_con = mysqli_connect($server, $username, $password) or $db_error = mysqli_error();
+					mysqli_select_db($db_con, $db_name) or $db_error = mysqli_error($db_con);
+				}
+				
+                if (!$db_error and !$model->errors) {
                     $config_data = require $CONFIG;
+					
+					
 
                     $dump_file = file_get_contents(Yii::getPathOfAlias('application.data.install') . '.sql');
 
@@ -153,6 +165,8 @@ class SiteController extends Controller {
                             . " 1, 1);";
 
                     mysqli_multi_query($db_con, $dump_file) or $db_error = mysqli_error($db_con);
+					
+					
 
                     if (!$db_error) {
                         // Заполнение конфигурации
@@ -174,12 +188,15 @@ class SiteController extends Controller {
                         $settings->updateParam('installed','yes');
                         $settings->saveToFile();
                         
-                        $this->redirect(Yii::app()->createUrl('site/index'));
+                        $this->redirect(array('site/index'));
                     }
+					
                 }
+
             }
+			
             $this->render('install', array('model' => $model, 'db_error' => $db_error));
-        }
+        } 
     }
 
     /**
