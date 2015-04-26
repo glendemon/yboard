@@ -120,7 +120,7 @@ class SiteController extends Controller {
         $this->layout = "/install-layout";
         $db_error = false;
         $model = new InstallForm;
-
+		
         if (Yii::app()->params['installed'] !== "yes") {
 			
 			if(!is_writable($CONFIG)) {
@@ -165,8 +165,6 @@ class SiteController extends Controller {
                             . " 1, 1);";
 
                     mysqli_multi_query($db_con, $dump_file) or $db_error = mysqli_error($db_con);
-					
-					
 
                     if (!$db_error) {
                         // Заполнение конфигурации
@@ -179,8 +177,12 @@ class SiteController extends Controller {
                             'tablePrefix' => '',
                         );
                         $config_data['name'] = trim(stripslashes($_POST['InstallForm']['site_name']));
+                        $config_data['params'] = "require";
+						
+						$config_array_str=var_export($config_data, true);
+						$config_array_str=str_replace("'params' => 'require',", "'params' => require 'settings.php',", $config_array_str);
                         //Сохранение конфигурации 
-                        file_put_contents($CONFIG, "<? return " . var_export($config_data, true) . " ?>");
+                        file_put_contents($CONFIG, "<? return " . $config_array_str . " ?>");
                         
                         // Сохранение настроек
                         $settings = new ConfigForm(Yii::getPathOfAlias('application.config.settings').".php");
@@ -196,7 +198,9 @@ class SiteController extends Controller {
             }
 			
             $this->render('install', array('model' => $model, 'db_error' => $db_error));
-        } 
+        } else {
+			$this->redirect(array('site/index'));
+		}
     }
 
     /**
