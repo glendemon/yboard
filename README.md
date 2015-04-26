@@ -46,4 +46,4 @@
     
 Скачать можно на github - https://github.com/glendemon/yboard/
 
-По вопросам сотрудничества и поддержки - yboard@mail.r
+По вопросам сотрудничества и поддержки - yboard@mail.ru
