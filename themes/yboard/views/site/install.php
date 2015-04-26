@@ -17,13 +17,13 @@
 
 <h1> Установка Ybord </h1>
 
+<?php echo $form->errorSummary($model); ?>
 <p style='color:#ff0000; padding:15px; '><?=$db_error?></p>
 
 <h4> Данные создаваемого проекта </h4>
 <div style='padding-left:20px;'> 
     <?php echo $form->labelEx($model, 'site_name'); ?>
     <?php echo $form->textField($model, 'site_name'); ?>
-    <?php echo $form->error($model, 'site_name'); ?>
 </div>
 
 <h4> Данные администратора </h4>
