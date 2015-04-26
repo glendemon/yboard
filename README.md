@@ -9,6 +9,7 @@
 В ту же папку распаковываем Yboard. Пути к папке фрэимворка можно подправить в index.php. 
 
 Убедитесь что папки /assets  и /protected/runtime доступны для записи
+также необходимо открыть для записи файлы /protected/config/main.php и /protected/config/settings.php
 
 Создайте пустую базу данных. 
 
