@@ -38,9 +38,7 @@ class textValidator extends CValidator
                     return false;
                 }
             }
-        } else {
-            return false;
-        }
+        } 
         return true; 
     }
 }

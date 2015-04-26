@@ -47,6 +47,7 @@ class Adverts extends CActiveRecord
             array('name, user_id, category_id, text', 'required'),
             array('user_id, category_id, gallery_id, views, location, currency', 'numerical', 'integerOnly' => true),
             array('name', 'length', 'max' => 255),
+            array('email', 'mail'),
             array('price', 'type', 'type' => 'float'),
             array('type', 'safe'),
             array('created_at, updated_at', 'default', 'setOnEmpty'=>true, 'value'=>null),

@@ -7,7 +7,6 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
-	array('label' => "<i class='fa fa-folder-o'></i>Создать корневую категорию",  'url' => "javascript:void(0)","itemOptions"=>array('class'=>'btn', 'id'=>'add_root')),
     array('label' => "<i class='fa fa-folder-open-o'></i>".Yii::t('lang','Create Category'),  'url' => array('create'),"itemOptions"=>array('class'=>'btn')),
 	array('label' => "<i class='fa fa-cogs'></i>".Yii::t('lang','Manage Category'), 'url' => array('admin'),"itemOptions"=>array('class'=>'btn')),
 	array('label' => "<i class='fa fa-spinner'></i>Обновить древо",  'url' => "javascript:void(0)","itemOptions"=>array('class'=>'btn','id'=>'reload')),
