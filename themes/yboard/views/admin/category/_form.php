@@ -194,7 +194,7 @@ $val_success_message = ($model->isNewRecord) ?
 <?php endif; ?>
         <div class="control-group">
                <?php
-               echo CHtml::submitButton($model->isNewRecord ? Yii::t('global', 'Submit') : Yii::t('global', 'Save'), array('class' => 'btn btn-large pull-right'));
+               echo CHtml::submitButton($model->isNewRecord ? Yii::t('global', 'Submit') : Yii::t('global', 'Save'), array('class' => 'btn btn-large'));
                ?>
         </div>
     </fieldset>

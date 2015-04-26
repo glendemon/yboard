@@ -18,7 +18,7 @@
     <body>
         <div id='header'>
             <div id="topheader">
-                <a href='<?php echo Yii::app()->baseUrl; ?>' class="logo"></a>
+                <a href='<?= Yii::app()->createUrl("/") ?>' class="logo"></a>
                 <div class="menu_area">
                     <div class='ideas'>
                         <a href="<?= Yii::app()->createUrl("/adverts") ?>" class="general">Объявления</a> 
@@ -119,7 +119,7 @@
                     ?>  
                     </div>
                     <div>
-                       <? $this->widget('application.widgets.AdvancedSearch'); ?>
+                       <? $this->widget('application.widgets.advancedSearch'); ?>
                     </div>
                         <?= $this->getBanner('right_adv') ?>
                     <div class='articleList'> 

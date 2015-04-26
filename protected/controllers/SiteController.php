@@ -123,6 +123,26 @@ class SiteController extends Controller {
 
         if (Yii::app()->params['installed'] !== "yes") {
 
+            if (!is_writable($CONFIG)) {
+                $model->addError("site_name", "Файл " . $CONFIG . " должен быть доступен для записи");
+            }
+
+            if (!is_writable(Yii::getPathOfAlias('application.config.settings') . ".php")) {
+                $model->addError("site_name", "Файл " 
+                        .Yii::getPathOfAlias('application.config.settings') . ".php" 
+                        . " должен быть доступен для записи");
+            }
+
+            if (!is_writable(Yii::getPathOfAlias('application.runtime'))) {
+                $model->addError("site_name", "папка " 
+                        .Yii::getPathOfAlias('application.runtime') 
+                        . " должена быть доступена для записи");
+            }
+
+            if (!is_writable(Yii::app()->basePath . "/../assets")) {
+                $model->addError("site_name", "папка /assets должена быть доступена для записи");
+            }
+
             if (isset($_POST['InstallForm'])) {
                 $model->attributes = $_POST['InstallForm'];
 
@@ -134,14 +154,18 @@ class SiteController extends Controller {
 
                 // данные пользователя                     
                 if (!$model->validate() or $model->userpass !== $model->userpass2) {
-                    $db_error = "Данные пользователя неправльные";
+                    $model->addError('userpass2', "Пароли не совпадают");
                 }
 
-                $db_con = @mysqli_connect($server, $username, $password) or $db_error = mysqli_error();
-                @mysqli_select_db($db_con, $db_name) or $db_error = mysqli_error($db_con);
+                if (!$model->errors) {
+                    $db_con = mysqli_connect($server, $username, $password) or $db_error = mysqli_error();
+                    mysqli_select_db($db_con, $db_name) or $db_error = mysqli_error($db_con);
+                }
 
-                if (!$db_error) {
+                if (!$db_error and ! $model->errors) {
                     $config_data = require $CONFIG;
+
+
 
                     $dump_file = file_get_contents(Yii::getPathOfAlias('application.data.install') . '.sql');
 
@@ -165,20 +189,27 @@ class SiteController extends Controller {
                             'tablePrefix' => '',
                         );
                         $config_data['name'] = trim(stripslashes($_POST['InstallForm']['site_name']));
+                        $config_data['params'] = "require";
+
+                        $config_array_str = var_export($config_data, true);
+                        $config_array_str = str_replace("'params' => 'require',", "'params' => require 'settings.php',", $config_array_str);
                         //Сохранение конфигурации 
-                        file_put_contents($CONFIG, "<? return " . var_export($config_data, true) . " ?>");
-                        
+                        file_put_contents($CONFIG, "<? return " . $config_array_str . " ?>");
+
                         // Сохранение настроек
-                        $settings = new ConfigForm(Yii::getPathOfAlias('application.config.settings').".php");
-                        $settings->updateParam('adminEmail',$model->useremail);
-                        $settings->updateParam('installed','yes');
+                        $settings = new ConfigForm(Yii::getPathOfAlias('application.config.settings') . ".php");
+                        $settings->updateParam('adminEmail', $model->useremail);
+                        $settings->updateParam('installed', 'yes');
                         $settings->saveToFile();
-                        
-                        $this->redirect(Yii::app()->createUrl('site/index'));
+
+                        $this->redirect(array('site/index'));
                     }
                 }
             }
+
             $this->render('install', array('model' => $model, 'db_error' => $db_error));
+        } else {
+            $this->redirect(array('site/index'));
         }
     }
 
@@ -198,7 +229,6 @@ class SiteController extends Controller {
     public function actionAbout() {
         $this->render('pages/about');
     }
-
 
     /**
      * Displays the contact page
