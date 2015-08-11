@@ -121,7 +121,7 @@
                     <div>
                        <? $this->widget('application.widgets.advancedSearch'); ?>
                     </div>
-                        <?= $this->getBanner('right_adv') ?>
+                        <?= $this->getBanner('right_bn') ?>
                     <div class='articleList'> 
                         <? $this->widget('application.widgets.articleList'); ?>
                     </div>    
@@ -147,6 +147,6 @@
             </div>
         </div>
 
-
+        <?= $this->getBanner() ?>
     </body>
 </html>

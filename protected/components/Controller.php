@@ -67,37 +67,64 @@ class Controller extends CController {
         $this->meta['vars']['site_name'] = Yii::app()->name;
     }
 
-    public function getBanner($var) {
+    public function getBanner($var = false) {
         $debug = "";
         $banner_code = "";
         $cond_banners = array(); // баннеры подходящие по условиям
 
-        if (YII_DEBUG) {
-            $debug = "<div style='background:#990000; min-height:20px;' align='center'>" . $var . "</div>";
-            if (!isset($this->banners[$var]))
-                $debug.= "No Ads";
+        
+        if( $var === false) {
+            $footer_str = "";
+            foreach($this->banners['__FOOTER__'] as $bn){
+                $footer_str .= $bn;
+            }
+            
+            return $footer_str;
         }
 
         if (isset($this->banners[$var]) and sizeof($this->banners[$var]) > 0) {
             if (is_array($this->banners[$var])) {
                 // Составление списка баннеров подходящих по условиям 
                 foreach ($this->banners[$var] as $b_id => $banner) {
-
-                    if (is_array($banner['conditions']) and sizeof($banner['conditions']) > 0) {
-                        foreach ($banner['conditions'] as $cond) {
-                            // Сравнение на "равно " или "не равно"
-                            if ($cond['compare']) {
-                                if ($_GET[$cond['parameter']] === $cond['value']) {
-                                    $cond_banners[] = $b_id;
-                                }
-                            } else {
-                                if ($_GET[$cond['parameter']] !== $cond['value']) {
-                                    $cond_banners[] = $b_id;
-                                }
+                    if ( $banner['enable']!=="false" ) {
+                        if (is_array($banner['conditions']) and sizeof($banner['conditions']) > 0) {
+                            foreach ($banner['conditions'] as $cond) {
+                                // Сравнение Get параметров
+                                    if(isset( $cond['parameter'] )) {
+                                            if ($cond['compare']==="1") {
+                                                    if ($_GET[$cond['parameter']] === $cond['value']) {
+                                                            $cond_banners[] = $b_id;
+                                                    }
+                                            } elseif($cond['compare']==="0") {
+                                                    if ($_GET[$cond['parameter']] !== $cond['value']) {
+                                                            $cond_banners[] = $b_id;
+                                                    }
+                                            } elseif( $cond['exist'] === "1") {
+                                                    if(isset($_GET[$cond['parameter']])) {
+                                                            $cond_banners[] = $b_id;
+                                                    }
+                                            } elseif( $cond['exist'] === "0") {
+                                                    if(!isset($_GET[$cond['parameter']])) {
+                                                            $cond_banners[] = $b_id;
+                                                    }
+                                            }
+                                    }
+                                    // Сравнение URL 
+                                    if( isset($cond['url']) ) {
+                                            if ($cond['compare']==="1") {
+                                                    if ( Yii::app()->request->requestUri === $cond['url']) {
+                                                            $cond_banners[] = $b_id;
+                                                    }
+                                            } elseif($cond['compare']==="0") {
+                                                    if ( Yii::app()->request->requestUri !== $cond['url']) {
+                                                            $cond_banners[] = $b_id;
+                                                    }
+                                            }
+                                    }
                             }
+                        } else {
+                            $cond_banners[] = $b_id;
                         }
-                    } else {
-                        $cond_banners[] = $b_id;
                     }
                 }
             } else {
@@ -106,15 +133,26 @@ class Controller extends CController {
 
             if (sizeof($cond_banners) > 0) {
                 // вывод одного из подощедших баннеров
-                $b_id=$cond_banners[array_rand($cond_banners, 1)];
+                $b_id = $cond_banners[array_rand($cond_banners, 1)];
+                if($this->banners[$var][$b_id]['title']) {
+                    $debug = "\"".$this->banners[$var][$b_id]['title']."\"";
+                }
                 $banner_code = $this->banners[$var][$b_id]['code'];
+                $this->banners['__FOOTER__'][] = $this->banners[$var][$b_id]['code_footer'];
             }
         }
+		
+		// var_dump( $this->banners );
+        
+        if ($_COOKIE['adv_debug'] === "yes") {
+            $debug = "<div style='background:#990000; min-height:20px;' align='center'>" . $var ." - ".$debug. "</div>";
+            if (!isset($this->banners[$var]))
+                $debug.= "No Ads";
+        }
 
-        return "<div class='pblock " . $var . "' align='center'>"
+        return "<div class='pblock " . $var . "' >"
                 . $debug . $banner_code
                 . "</div>";
-
     }
 
     public function createAction($actionID) {

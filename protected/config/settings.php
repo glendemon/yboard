@@ -1,6 +1,6 @@
 <? 
  return array (
-  'installed' => 'no',
+  'installed' => 'yes',
   'meta' => //Основные мета данные [static]
   array (
     'title' => 'Категория "<cat_name>". Бесплатная доска объявлений <site_name> . Страница <page_number>',
