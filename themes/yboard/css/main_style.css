@@ -230,6 +230,8 @@ dt{
 /* Просмотр объявления */
 .advert_full .title{
     font-size:25px;
+    line-height: 25px;
+    margin-bottom: 10px;
 }
 .advert_full .date i{
     margin-right:3px;

@@ -8,8 +8,7 @@
     <div style='float:left; width: 95px; height: 60px; overflow:hidden;'>
         <? if ($data->gallery && $data->gallery->galleryPhotos) { ?>
             <?
-            $this->widget('application.extensions.fancybox.EFancyBox', array(
-                'target' => '.fancybox',
+            $this->widget('application.extensions.fancybox.ALFancyBox', array(
                 'config' => array(),
                     )
             );           

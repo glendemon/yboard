@@ -90,8 +90,6 @@
                                         'url' => array('/adverts/create')),
                                     array('label' => 'Правила работы', 
                                         'url' => array('/site/page', 'view' => 'about')),
-                                    array('label' => t( 'Answers'), 
-                                        'url' => array('/answer/index')),
                                     array('label' => 'Обратная связь', 
                                         'url' => array('/site/contact')),
                                     array('url' => Yii::app()->createUrl("login/login"), 

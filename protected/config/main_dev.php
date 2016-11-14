@@ -1,5 +1,5 @@
 <? return array (
-  'basePath' => 'D:\\xampp\\htdocs\\Yboard\\protected\\config\\..',
+  'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
   'language' => 'ru',
   'name' => 'Доска объявлений',
   'theme' => 'yboard',
