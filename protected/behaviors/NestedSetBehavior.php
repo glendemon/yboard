@@ -648,7 +648,7 @@ class NestedSetBehavior extends CActiveRecordBehavior
 			if($extTransFlag===null)
 				$transaction->commit();
 
-			$this->correctCachedOnAddNode($key);
+			// $this->correctCachedOnAddNode($key);
 		}
 		catch(Exception $e)
 		{

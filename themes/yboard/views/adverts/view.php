@@ -30,61 +30,63 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
                  data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir"></div>
         </div>
     </div>
-    <div>
-        <?php $this->widget('application.widgets.ShowImagesWidget', array('bulletin' => $model)); ?>
-    </div>
-    <div>
-        <?php $model->youtube_id ? $this->widget('ext.Yiitube', array('v' => $model->youtube_id, 'size' => 'small')) : '';
-            ?>
-    </div>
-    <div>
-        <?php echo CHtml::encode($model->text); ?>
-    </div>
-    <div class='attributes'>
-
-         <? 
-
-         if (sizeof($model->fields) > 0 and is_array($model->fields)) { ?>
-            <?php
-                if (is_array($model->fields))
-                    foreach ($model->fields as $f_name => $field) {
-                        echo "<div>"
-                        .Yii::app()->params['categories'][$model->category_id]
-                        ['fields'][$f_name]['name'] . " - " . $field 
-                        . "</div>";
-                    }
+    <div class="content">
+        <div>
+            <?php $this->widget('application.widgets.ShowImagesWidget', array('bulletin' => $model)); ?>
+        </div>
+        <div>
+            <?php $model->youtube_id ? $this->widget('ext.Yiitube', array('v' => $model->youtube_id, 'size' => 'small')) : '';
                 ?>
+        </div>
+        <div>
+            <?php echo CHtml::encode($model->text); ?>
+        </div>
+        <div class='attributes'>
 
-            <? } ?>
+             <? 
+
+             if (sizeof($model->fields) > 0 and is_array($model->fields)) { ?>
+                <?php
+                    if (is_array($model->fields))
+                        foreach ($model->fields as $f_name => $field) {
+                            echo "<div>"
+                            .Yii::app()->params['categories'][$model->category_id]
+                            ['fields'][$f_name]['name'] . " - " . $field 
+                            . "</div>";
+                        }
+                    ?>
+
+                <? } ?>
+        </div>
+        <div class='price'><?=t('Price')?> - 
+            <? if($model->price) { ?>
+            <?=$model->price?> ( <?=Yii::app()->params['currency'][$model->currency]?> ) 
+            <a href='javascript:void(0);' onclick='show_converter()' > открыть конвертор </a>
+            <div class='price_converter'><?
+                foreach(Yii::app()->params['currency'] as $cn=>$cur){
+                    printf("%.2f",$model->price/Yii::app()->params['exchange'][$model->currency]*Yii::app()->params['exchange'][$cn]);
+                    echo " ".$cur." | ";
+                }
+            ?></div>
+            <? } else {
+                echo "<i>".t('Not set')."</i>";
+            }?>
+        </div>
+
+        <div> 
+            <span> Контакты : </span> <br/>
+            <?=$model->user->phone?> <br/>
+            <?=$model->user->email?> <br/>
+            <?=$model->user->skype?> 
+        </div>
+        <? if(Yii::app()->user->id != $model->user->id){ ?>
+        <div>
+            <?php echo $this->renderPartial('/messages/_form', array(
+                'model'=>$mes_model, 
+                'receiver'=>$data->user->id)
+            ); ?>
+        </div>
+        <? } ?>
     </div>
-    <div class='price'><?=t('Price')?> - 
-        <? if($model->price) { ?>
-        <?=$model->price?> ( <?=Yii::app()->params['currency'][$model->currency]?> ) 
-        <a href='javascript:void(0);' onclick='show_converter()' > открыть конвертор </a>
-        <div class='price_converter'><?
-            foreach(Yii::app()->params['currency'] as $cn=>$cur){
-                printf("%.2f",$model->price/Yii::app()->params['exchange'][$model->currency]*Yii::app()->params['exchange'][$cn]);
-                echo " ".$cur." | ";
-            }
-        ?></div>
-        <? } else {
-            echo "<i>".t('Not set')."</i>";
-        }?>
-    </div>
-    
-    <div> 
-        <span> Контакты : </span> <br/>
-        <?=$model->user->phone?> <br/>
-        <?=$model->user->email?> <br/>
-        <?=$model->user->skype?> 
-    </div>
-    <? if(Yii::app()->user->id != $model->user->id){ ?>
-    <div>
-        <?php echo $this->renderPartial('/messages/_form', array(
-            'model'=>$mes_model, 
-            'receiver'=>$data->user->id)
-        ); ?>
-    </div>
-    <? } ?>
     
 </div>

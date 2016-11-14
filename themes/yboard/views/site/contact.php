@@ -44,32 +44,32 @@ $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
 
     <?php echo $form->errorSummary($model); ?>
 
-        <div class="row">
+        <div >
             <?php echo $form->labelEx($model, 'name'); ?>
             <?php echo $form->textField($model, 'name'); ?>
     <?php echo $form->error($model, 'name'); ?>
         </div>
 
-        <div class="row">
+        <div >
             <?php echo $form->labelEx($model, 'email'); ?>
             <?php echo $form->textField($model, 'email'); ?>
     <?php echo $form->error($model, 'email'); ?>
         </div>
 
-        <div class="row">
+        <div >
             <?php echo $form->labelEx($model, 'subject'); ?>
             <?php echo $form->textField($model, 'subject', array('size' => 60, 'maxlength' => 128)); ?>
     <?php echo $form->error($model, 'subject'); ?>
         </div>
 
-        <div class="row">
+        <div >
             <?php echo $form->labelEx($model, 'body'); ?>
             <?php echo $form->textArea($model, 'body', array('rows' => 6, 'cols' => 50)); ?>
     <?php echo $form->error($model, 'body'); ?>
         </div>
 
             <?php if (CCaptcha::checkRequirements()): ?>
-            <div class="row">
+            <div >
                     <?php echo $form->labelEx($model, 'verifyCode'); ?>
                 <div>
                     <?php $this->widget('CCaptcha'); ?>

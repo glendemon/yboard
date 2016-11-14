@@ -93,8 +93,8 @@ class CategoryController extends BackendController
     public function actionDelete($id)
     {
         $cat_model=$this->loadModel($id);
-        $cat_model->detachBehavior("NestedSetBehavior");
-        $cat_model->delete();
+        //$cat_model->detachBehavior("NestedSetBehavior");
+        $cat_model->deleteNode();
 
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if (!isset($_GET['ajax']))

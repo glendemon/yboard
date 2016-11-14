@@ -105,10 +105,16 @@ class SiteController extends Controller {
      */
     public function actionIndex() {
         $roots = Category::model()->roots()->findAll();
+        
+        
+        
         $criteria = new CDbCriteria();
         $criteria->limit = 10;
         $criteria->order = 'id desc';
         $IndexAdv = Adverts::model()->findAll($criteria);
+        
+        
+        
         $this->render('index', array(
             'roots' => $roots,
             'IndexAdv' => $IndexAdv,
@@ -336,3 +342,5 @@ class SiteController extends Controller {
     }
 
 }
+
+

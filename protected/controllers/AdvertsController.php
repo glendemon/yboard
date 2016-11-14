@@ -80,8 +80,6 @@ class AdvertsController extends Controller {
             'data' => $dataProvider,
         ));
 
-
-        //echo "ddddddddddd";
     }
 
     /**

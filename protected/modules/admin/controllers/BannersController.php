@@ -72,7 +72,6 @@ class BannersController extends BackendController {
                   
                   
                   <? }
-
     }
 
               ?></div>

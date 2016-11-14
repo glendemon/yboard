@@ -154,6 +154,15 @@ return array(
     'Update Site index' => 'Редактирование главной',
     'List pages' => 'Список страниц',
     'Pages' => 'Страницы',
+    'Please fill out the following form with your login credentials:' => "Пожалуйста, заполните следующую форму с вашими учетными данными для входа:",
+    'username or email' => "Емайл",
+    'password'  => "Пароль",
+    'Remember me next time' => 'Запомнить меня',
+    'Lost Password?' => 'Забыли пароль?',
+    'Authorisation for members:' => 'Авторизация зарегистрированых пользователей:',
+    'Advanced Search' => 'Расширеный поиск',
+    "Minimal password length 4 symbols." => "Минимальная длина пароля 4 символа",
+    "Registration" => "Регистрация",
 
     // Сообщения
     'Write messages to' => 'Написать сообщение для ',

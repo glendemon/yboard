@@ -16,7 +16,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
     <?php echo $form->errorSummary($model); ?>
 
-    <div class="row">
+    <div >
         <?php
         //$this->widget('application.widgets.BulletinCategoryWidget', array('model' => $model, 'form' => $form)); 
         ?>
@@ -31,20 +31,23 @@ $form = $this->beginWidget('CActiveForm', array(
 
     <div id='bulletin_form' style='display:none;'>
 
-        <div class="row">
+        <div >
             <?php echo $form->labelEx($model, 'name'); ?>
             <?php echo $form->textField($model, 'name', array('maxlength' => 255)); ?>
             <?php echo $form->error($model, 'name'); ?>
         </div>
 
-        <div class="row">
+        <div >
             <?php echo $form->labelEx($model, 'text'); ?>
-            <?php echo $form->textArea($model, 'text', array('style' => 'width:100%', 'rows' => '6')); ?>
+            <?php echo $form->textArea($model, 'text', array( 'rows' => '6')); ?>
             <?php echo $form->error($model, 'text'); ?>
         </div>
 
-        <div class="row">
-            <?php echo $form->labelEx($model, 'type'); ?>
+        
+        <?php 
+        /*
+        <div >
+            <?php  echo $form->labelEx($model, 'type'); ?>
             <?php
             echo CHtml::activeRadioButtonList($model, 'type', array(
                 t('Demand'), t('Offer')), array(
@@ -53,15 +56,18 @@ $form = $this->beginWidget('CActiveForm', array(
             ?>
             <?php echo $form->error($model, 'type'); ?>
         </div>
+         * 
+         */
+        ?>
         
-        <div class="row">
+        <div >
             <?php echo $form->labelEx($model, 'price'); ?>
             <?php echo $form->textField($model, 'price'); ?>
             <?php echo $form->dropDownList($model, 'currency', $this->settings['currency']); ?>
             <?php echo $form->error($model, 'price'); ?>
         </div>
 
-        <div class="row">
+        <div >
             <?php echo $form->labelEx($model, 'gallery_id'); ?>
             <?php
             $this->widget('CMultiFileUpload', array(
@@ -75,7 +81,7 @@ $form = $this->beginWidget('CActiveForm', array(
             <?php echo $form->error($model, 'gallery_id'); ?>
         </div>
 
-        <div class="row">
+        <div >
             <?php echo $form->labelEx($model, 'youtube_id'); ?>
             <?php echo $form->textField($model, 'youtube_id'); ?>
             <?php echo $form->error($model, 'youtube_id'); ?>

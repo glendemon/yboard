@@ -50,6 +50,10 @@ $this->menu = array(
             'level',
             'name',
             'icon',
+            'meta_title',
+            'meta_descr',
+            'meta_key',
+            'description',
         ),
     ));
     ?>

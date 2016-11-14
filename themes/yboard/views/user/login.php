@@ -15,7 +15,6 @@ $this->breadcrumbs = array(
 
 <?php endif; ?>
 
-<p><?php echo t("Please fill out the following form with your login credentials:"); ?></p>
 
 <div class="form well">
     <h3><?=t('Social networks authorisation :')?></h3>
@@ -28,36 +27,36 @@ $this->breadcrumbs = array(
     ?>
     
     <hr/>
-
+     <h3><?=t('Authorisation for members:')?></h3>
 
     <?php echo CHtml::beginForm(); ?>
 
-    <p class="note"><?php echo t('Fields with <span class="required">*</span> are required.'); ?></p>
-
     <?php echo CHtml::errorSummary($model); ?>
 
-    <div class="row">
-        <?php echo CHtml::activeLabelEx($model, 'username'); ?>
+    <div >
+        <?php echo CHtml::activeLabel($model, 'username'); ?>
         <?php echo CHtml::activeTextField($model, 'username') ?>
     </div>
 
-    <div class="row">
-        <?php echo CHtml::activeLabelEx($model, 'password'); ?>
+    <div >
+        <?php echo CHtml::activeLabel($model, 'password'); ?>
         <?php echo CHtml::activePasswordField($model, 'password') ?>
     </div>
+    
+    <div class=" rememberMe">
+        <?php echo CHtml::activeCheckBox($model, 'rememberMe'); ?>
+        <?php echo CHtml::activeLabel($model, 'rememberMe'); ?>
+    </div>
 
-    <div class="row">
+    <div >
         <p class="hint">
             <?php echo CHtml::link(t("Register"), Yii::app()->getModule('user')->registrationUrl); ?> | <?php echo CHtml::link(t("Lost Password?"), Yii::app()->getModule('user')->recoveryUrl); ?>
         </p>
     </div>
 
-    <div class="row rememberMe">
-        <?php echo CHtml::activeCheckBox($model, 'rememberMe'); ?>
-        <?php echo CHtml::activeLabelEx($model, 'rememberMe'); ?>
-    </div>
+    
 
-    <div class="row submit">
+    <div class=" submit">
         <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit', 'label' => 'Вход')); ?>
 
     </div>
