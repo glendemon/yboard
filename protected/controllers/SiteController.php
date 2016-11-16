@@ -104,14 +104,24 @@ class SiteController extends Controller {
      * отличается наличием виджета категорий вверху
      */
     public function actionIndex() {
+        
         $roots = Category::model()->roots()->findAll();
         
         
+        $IndexAdv = new CActiveDataProvider('Adverts', array(
+            'criteria' => array(
+                'limit' => '10',
+                'order' => 'id DESC',
+            ))
+        );
         
+        /*
         $criteria = new CDbCriteria();
         $criteria->limit = 10;
         $criteria->order = 'id desc';
         $IndexAdv = Adverts::model()->findAll($criteria);
+         * 
+         */
         
         
         

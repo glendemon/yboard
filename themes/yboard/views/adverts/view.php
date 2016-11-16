@@ -39,8 +39,11 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
                 ?>
         </div>
         <div>
-            <?php echo CHtml::encode($model->text); ?>
+            <?php echo CHtml::encode( str_replace("\n", "<br/>", $model->text) ); ?>
         </div>
+        
+        <br/>
+        
         <div class='attributes'>
 
              <? 

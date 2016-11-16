@@ -9,8 +9,7 @@
 
 <?php if ($bulletin->gallery && $bulletin->gallery->galleryPhotos): ?>
     <?php
-    $this->widget('application.extensions.fancybox.EFancyBox', array(
-        'target' => '.fancybox',
+    $this->widget('application.extensions.fancybox.AlFancyBox', array(
         'config' => array(),
         )
     );

@@ -35,7 +35,7 @@
                     array('id' => $data->id)) ?>' class='redact'> редактировать </a>
             <? } ?>
         </div>
-        <div><? echo CHtml::encode($data->text); ?></div>
+        <div><? echo CHtml::encode(mb_substr($data->text,0,220)); ?></div>
     </div>
     <table class="table" style='display:none'>
         <tr class="alert-info">

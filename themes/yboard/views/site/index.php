@@ -26,35 +26,13 @@ foreach( Yii::app()->params['categories'] as $cat) {
     }
 }
 
-?>
-                   
+?>                   
 </tr> </tbody> </table>                   
 
+<h3> Последние объявления </h3>
 
-
-
-<table class="table table-striped table-hover table-bordered">
-    <thead>
-        <tr>
-            <th colspan="5">
-                Топ объявлениий:
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-<?php foreach ($IndexAdv as $model): ?>
-            <tr>
-                <td>
-                    <?php if ($model->getPhoto()): ?>
-                        <img src="<?php echo $model->getPhoto()->getPreview(); ?>" width="150" alt="<?php echo CHtml::encode($model->name) ?>" />
-    <?php endif; ?>
-                </td>
-                <td><?php echo CHtml::link(CHtml::encode($model->category->name), array('/adverts/category', 'cat_id' => $model->category->id)); ?></td>
-                <td><?php echo CHtml::link(CHtml::encode($model->name), array('/adverts/view', 'id' => $model->id)); ?></td>
-                <td><?php echo Yii::app()->dateFormatter->formatDateTime($model->created_at); ?></td>
-                <td><?php echo $model->itemAlias('type', $model->type); ?></td>
-            </tr>
-<?php endforeach; ?>
-    </tbody>
-</table>
+<?php $this->widget('bootstrap.widgets.TbListView', array(
+	'dataProvider'=>$IndexAdv,
+	'itemView'=>'/adverts/_view',
+)); ?>
 

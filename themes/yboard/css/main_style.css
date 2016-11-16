@@ -177,6 +177,12 @@ table.roots{
     box-shadow:none;
 }
 
+.adv_redactor{
+    width: 550px;
+    height: 200px;
+    padding: 3px;
+}
+
 .articleList{
     padding:20px 0;
     margin:10px 0;
@@ -321,19 +327,19 @@ dt{
 .main-cats div{
     position: relative;
     height:150px;
+    margin: 10px;
 }
 .main-cats td{
-    padding: 10px;
+
 }
 .main-cats span{
     background: rgba(59, 127, 183, 0.67) none repeat scroll 0 0;
     position: absolute;
     bottom:0;
     display: block;
-    padding : 7px;
     font-size: 16px;
-    height: 40px;
-    line-height: 40px;
+    height: 50px;
+    line-height: 50px;
     width: 100%;
     color: #fff;
     font-weight: bold;
@@ -343,7 +349,7 @@ dt{
 
 .searchForm input[type=text]{
     padding: 10px 20px;
-    width: 530px;
+    width: 510px;
     margin: 0;
 }
 
@@ -611,7 +617,12 @@ div.row{margin:0px;}
 	border-right: 1px dashed #b9d7d4;
 	margin: 0 0 0 300px;
 	min-height: 600px;
-	padding: 0 10px;
+	padding: 0 10px 0 25px;
+}
+.midarea h4{
+    text-align: left;
+}
+.midarea {
 }
 .readmore:hover {
     background-image: url("../images/readmore1.png");
