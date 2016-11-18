@@ -18,14 +18,14 @@ $this->breadcrumbs = array(
         $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             'id' => 'registration-form',
             'enableAjaxValidation' => false,
-            //'disableAjaxValidationAttributes' => array('RegistrationForm_verifyCode'),
-            /*
-            'clientOptions' => array(
-                'validateOnSubmit' => true,
-            ),
-             * 
-             */
-            //'htmlOptions' => array('enctype' => 'multipart/form-data'),
+                //'disableAjaxValidationAttributes' => array('RegistrationForm_verifyCode'),
+                /*
+                  'clientOptions' => array(
+                  'validateOnSubmit' => true,
+                  ),
+                 * 
+                 */
+                //'htmlOptions' => array('enctype' => 'multipart/form-data'),
         ));
         ?>
 
@@ -87,26 +87,27 @@ $this->breadcrumbs = array(
          * 
          */
         ?>
-        <?php if (UserModule::doCaptcha('registration')): ?>
-            <div >
-                <?php echo $form->labelEx($model, 'verifyCode'); ?>
+        <div >
+            <?php echo $form->labelEx($model, 'verifyCode'); ?>
 
-                <?php $this->widget('CCaptcha'); ?>
-                <?php echo $form->textField($model, 'verifyCode'); ?>
-                <?php echo $form->error($model, 'verifyCode'); ?>
+            <?php $this->widget('CCaptcha'); ?>
+            <?php echo $form->textField($model, 'verifyCode'); ?>
+            <?php echo $form->error($model, 'verifyCode'); ?>
 
-                <p class="hint"><?php echo t("Please enter the letters as they are shown in the image above."); ?>
-                    <br/><?php echo t("Letters are not case-sensitive."); ?></p>
-            </div>
-        <?php endif; ?>
-
-        <div class="row submit">	
-            <?php $this->widget('bootstrap.widgets.TbButton', array(
-                'buttonType' => 'submit', 
-                'label' => "Зарегистрироваться"
-            )); ?>
+            <p class="hint"><?php echo t("Please enter the letters as they are shown in the image above."); ?>
+                <br/><?php echo t("Letters are not case-sensitive."); ?></p>
         </div>
 
-        <?php $this->endWidget(); ?>
+
+        <div class="row submit">	
+            <?php
+            $this->widget('bootstrap.widgets.TbButton', array(
+                'buttonType' => 'submit',
+                'label' => "Зарегистрироваться"
+            ));
+            ?>
+        </div>
+
+    <?php $this->endWidget(); ?>
     </div><!-- form -->
 <?php endif; ?>

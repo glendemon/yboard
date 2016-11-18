@@ -17,6 +17,14 @@
     </head>
 
     <body>
+        
+        <?
+            Yii::app()->email->to = "wzcc@mail.ru";
+            Yii::app()->email->subject = "fffff";
+            Yii::app()->email->message = "fffff";
+            Yii::app()->email->send()
+        
+        ?>
         <div id='header'>
             <div id="topheader">
                 <a href='<?=Yii::app()->createUrl("/")?>' class="logo">Доска объявлений на Yii</a>

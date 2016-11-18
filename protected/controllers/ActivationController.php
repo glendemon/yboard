@@ -19,7 +19,7 @@ class ActivationController extends Controller {
                     )
                 );
             } elseif (isset($find->activkey) && ($find->activkey == $activkey)){
-                $find->activkey = UserModule::encrypting(microtime());
+                $find->activkey = Yii::app()->user->crypt(microtime());
                 $find->status = 1;
                 $find->save();
                 $this->render('/user/message', array(

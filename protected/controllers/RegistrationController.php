@@ -39,9 +39,9 @@ class RegistrationController extends Controller {
                 //$profile->attributes = ((isset($_POST['Profile']) ? $_POST['Profile'] : array()));
                 if ($model->validate()) {
                     $soucePassword = $model->password;
-                    $model->activkey = UserModule::encrypting(microtime() . $model->password);
-                    $model->password = UserModule::encrypting($model->password);
-                    $model->verifyPassword = UserModule::encrypting($model->verifyPassword);
+                    $model->activkey = Yii::app()->user->crypt(microtime() . $model->password);
+                    $model->password = Yii::app()->user->crypt($model->password);
+                    $model->verifyPassword = Yii::app()->user->crypt($model->verifyPassword);
                     $model->superuser = 0;
                     $model->status = ((Yii::app()->controller->module->activeAfterRegister) ? User::STATUS_ACTIVE : User::STATUS_NOACTIVE);
 
@@ -50,7 +50,14 @@ class RegistrationController extends Controller {
                         //$profile->save();
                         if (Yii::app()->controller->module->sendActivationMail) {
                             $activation_url = $this->createAbsoluteUrl('/user/activation/activation', array("activkey" => $model->activkey, "email" => $model->email));
-                            UserModule::sendMail($model->email, t("You registered from {site_name}", array('{site_name}' => Yii::app()->name)), t("Please activate you account go to {activation_url}", array('{activation_url}' => $activation_url, '{username}' => $model->username, '{password}' => $model->password, '{site_name}' => Yii::app()->name)));
+                            
+                            Yii::app()->email->to = $model->email;
+                            Yii::app()->email->subject = t("You registered from {site_name}", array('{site_name}' => Yii::app()->name));
+                            Yii::app()->email->message = t("Please activate you account go to {activation_url}", array('{activation_url}' => $activation_url, '{username}' => $model->username, '{password}' => $model->password, '{site_name}' => Yii::app()->name));
+                            Yii::app()->email->send();
+                            
+                            
+                        
                         }
 
                         if ((Yii::app()->controller->module->loginNotActiv || (Yii::app()->controller->module->activeAfterRegister && Yii::app()->controller->module->sendActivationMail == false)) && Yii::app()->controller->module->autoLogin) {

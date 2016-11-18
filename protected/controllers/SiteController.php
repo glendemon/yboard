@@ -188,8 +188,8 @@ class SiteController extends Controller {
                     // Сохранение данных о пользователе 
                     $dump_file.=" INSERT INTO `users` 
                                     (`username`, `password`, `email`, `activkey`, `superuser`, `status`)     VALUES "
-                            . "('" . $model->username . "', '" . UserModule::encrypting($model->userpass) . "', "
-                            . "'" . $model->useremail . "', '" . UserModule::encrypting(microtime() . $model->userpass) . "',"
+                            . "('" . $model->username . "', '" . Yii::app()->user->crypt($model->userpass) . "', "
+                            . "'" . $model->useremail . "', '" . Yii::app()->user->crypt(microtime() . $model->userpass) . "',"
                             . " 1, 1);";
 
                     mysqli_multi_query($db_con, $dump_file) or $db_error = mysqli_error($db_con);
