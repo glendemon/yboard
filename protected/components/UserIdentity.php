@@ -28,6 +28,7 @@ class UserIdentity extends CUserIdentity {
             $user = User::model()->notsafe()->findByAttributes(array('username' => $this->username));
         }
         
+        var_dump( Yii::app()->user->crypt($this->password) );
         
         if ($user === null)
             if (strpos($this->username, "@")) {

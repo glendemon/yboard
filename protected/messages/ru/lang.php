@@ -121,6 +121,7 @@ return array(
     'Price' => "Цена",
     'Currency' => "Валюта",
     'Redact advert' => "Редактировать объявление",
+    'Profile update' => "Редактирование профиля",
     
     // Пользователи
     'Send a mail to the author' => 'Отправить письмо автору',
@@ -135,6 +136,7 @@ return array(
     'List User' => 'Список пользователей',
     'Last visit' => 'Был на сайте',
     'Social networks authorisation :' => 'Авторизуйтесь с помощью социальных сетей:',
+    'Full name' => 'Полное имя',
     // Страницы 
     'Lft' => 'левый',
     'Rgt' => 'правый',

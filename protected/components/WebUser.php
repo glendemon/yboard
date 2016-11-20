@@ -2,8 +2,7 @@
 
 class WebUser extends CWebUser {
 
-    public $aster = "master";
-
+    
     public function getRole() {
         return $this->getState('__role');
     }
@@ -33,11 +32,13 @@ class WebUser extends CWebUser {
 
     public function updateSession() {
         $user = User::model()->findByPk($this->id);
+                
         $userAttributes = array(
             'email' => $user->email,
             'username' => $user->username,
             'create_at' => $user->create_at,
             'lastvisit_at' => $user->lastvisit_at,
+            'superuser' => $user->superuser,
         );
         foreach ($userAttributes as $attrName => $attrValue) {
             $this->setState($attrName, $attrValue);
@@ -71,7 +72,7 @@ class WebUser extends CWebUser {
         if (Yii::app()->user->isGuest)
             return false;
         else {
-            if (Yii::app()->user->superuser)
+            if ( User::model()->findByPk($this->id)->superuser )
                 return true;
             else
                 return false;

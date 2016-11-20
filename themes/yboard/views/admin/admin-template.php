@@ -124,7 +124,7 @@
                             array('label' => t("Pages"), 'url' => array('/cms/cms')),
                             array('label' => "Баннерные блоки", 'url' => array('/admin/banners')),
                             array('label' => "Почтовая рассылка", 'url' => array('/admin/delivery')),
-                            array('label' => "Настройки", 'url' => array('/admin/settings')),
+                            array('label' => "Настройки", 'url' => array('/admin/default/settings')),
                             array('label' => "Помощь", 'url' => array('/admin/default/help')),
                         ),
                         'htmlOptions' => array('class'=>'nav sidebar-menu'),
