@@ -174,12 +174,19 @@ class AdvertsController extends Controller {
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
-
-        $dataProvider = new CActiveDataProvider('Adverts', array(
+        
+        $criteria = array(
             'criteria' => array(
                 'limit' => '10',
                 'order' => 'id DESC',
-            ))
+                
+            ));
+        
+        if( Yii::app()->params['moder_type'] ){
+            $criteria['criteria']['condition']='moderated=1';
+        }
+
+        $dataProvider = new CActiveDataProvider('Adverts', $criteria
         );
         
         if(Yii::app()->request->getParam('Adverts_page')) {
@@ -220,8 +227,7 @@ class AdvertsController extends Controller {
             $model->user_id = Yii::app()->user->id;
             $model->created_at = date("Y-m-d H:i:s");
             $model->fields = serialize($_POST['Fields']);
-
-
+            
             if ($model->save()) {
                 $video = CUploadedFile::getInstances($model, 'youtube_id');
                 //YoutubeHelper::processAdverts($model, $video);

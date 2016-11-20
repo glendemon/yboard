@@ -26,6 +26,10 @@ $this->menu = array(
 	<td><b><?php echo CHtml::encode($data->getAttributeLabel('user_id')); ?>:</b>
 		<?php echo CHtml::encode($data->user_id); ?>
 	</td>
+        
+        <td><b><?php echo CHtml::encode($data->getAttributeLabel('moderated')); ?>:</b>
+		<?php echo CHtml::encode($data->moderated); ?>
+	</td>
 
 	<td><b><?php echo CHtml::encode($data->getAttributeLabel('category_id')); ?>:</b>
 		<?php echo CHtml::encode($data->category_id); ?>

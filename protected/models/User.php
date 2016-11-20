@@ -123,6 +123,7 @@ class User extends CActiveRecord {
             'phone' => t("phone"),
             'birthday' => t("birthday"),
             'contacts' => t("Contacts"),
+            'location' => t("Location"),
         );
     }
 

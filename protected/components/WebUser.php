@@ -2,7 +2,6 @@
 
 class WebUser extends CWebUser {
 
-    
     public function getRole() {
         return $this->getState('__role');
     }
@@ -32,7 +31,7 @@ class WebUser extends CWebUser {
 
     public function updateSession() {
         $user = User::model()->findByPk($this->id);
-                
+
         $userAttributes = array(
             'email' => $user->email,
             'username' => $user->username,
@@ -72,7 +71,7 @@ class WebUser extends CWebUser {
         if (Yii::app()->user->isGuest)
             return false;
         else {
-            if ( User::model()->findByPk($this->id)->superuser )
+            if (User::model()->findByPk($this->id)->superuser)
                 return true;
             else
                 return false;

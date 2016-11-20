@@ -41,7 +41,7 @@
                         echo "<div>" . $this->renderInput($flags['title'], $n, $nc, $vc, $flags['options']);
 
                         if (isset($flags['dinamic']) and $flags['dinamic'] and ! $flags['static']) {
-                            echo "<a class='icon-remove' href='javascript:void(0)' onclick='removeOption(this)' >Del</a>";
+                            echo "<a class='icon-remove' href='javascript:void(0)' onclick='removeOption(this)' ></a>";
                         }
                         echo "</div>";
 
@@ -50,7 +50,7 @@
                         }
                     }
                     if (isset($flags['dinamic']) and $flags['dinamic'] and ! $flags['static']) {
-                        echo "<a class='icon-plus' href='javascript:void(0)' onclick='addOption(this,\"" . $n . "\")' >Add</a>";
+                        echo "<a class='icon-plus' href='javascript:void(0)' onclick='addOption(this,\"" . $n . "\")' ></a>";
                     }
                     echo "</div></fieldset>";
                 } else {

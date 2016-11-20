@@ -812,6 +812,12 @@ div div.rememberMe{
     text-transform: none;
     width: 135px;
 }
+.errorSummary{
+    color: #ff0000;
+}
+.errorSummary li{
+    font-weight: bold;
+}
 .news_link {
     color: #9ca27e;
     font-family: Arial;

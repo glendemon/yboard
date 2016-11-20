@@ -49,7 +49,7 @@ class RegistrationController extends Controller {
                         //$profile->user_id = $model->id;
                         //$profile->save();
                         if (Yii::app()->controller->module->sendActivationMail) {
-                            $activation_url = $this->createAbsoluteUrl('/user/activation/activation', array("activkey" => $model->activkey, "email" => $model->email));
+                            $activation_url = $this->createAbsoluteUrl('/user/registration/activation', array("activkey" => $model->activkey, "email" => $model->email));
                             
                             Yii::app()->email->to = $model->email;
                             Yii::app()->email->subject = t("You registered from {site_name}", array('{site_name}' => Yii::app()->name));
@@ -84,4 +84,37 @@ class RegistrationController extends Controller {
         }
     }
 
+    
+    public function actionActivation() {
+        $email = $_GET['email'];
+        $activkey = $_GET['activkey'];
+        if ($email && $activkey) {
+            $find = User::model()->notsafe()->findByAttributes(array('email' => $email));
+            if (isset($find) && $find->status) {
+                $this->render('/user/message', array(
+                    'title' => t("User activation"), 
+                    'content' => t("You account is active.")
+                    )
+                );
+            } elseif (isset($find->activkey) && ($find->activkey == $activkey)){
+                $find->activkey = Yii::app()->user->crypt(microtime());
+                $find->status = 1;
+                $find->save();
+                $this->render('/user/'. $find->id, array(
+                    'title' => t("User activation"), 
+                    'content' => t("You account is activated.")
+                ));
+            } else {
+                $this->render('/user/message', array(
+                    'title' => t("User activation"), 
+                    'content' => t("Incorrect activation URL.")
+                ));
+            }
+        } else {
+            $this->render('/user/message', array(
+                'title' => t("User activation"), 
+                'content' => t("Incorrect activation URL.")
+            ));
+        }
+    }
 }
