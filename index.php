@@ -2,8 +2,34 @@
 
 header("Content-Type: text/html; charset=UTF-8");
 
-if (isset($_COOKIE['YII_DEBUG'])) {
+if( !is_file( dirname(__FILE__) . '/yii/framework/yii.php' ) ){
+	die(" Yii framework it's not installed. ");
+}
+if( is_file( dirname(__FILE__) . '/install' ) ){
+	$error = false;
+	if(  !is_writable( dirname(__FILE__) . '\protected\runtime' )  ){
+		echo("'\\protected\\runtime' not writable <br/>");
+		$error = true;
+	}
+	if(  !is_writable( dirname(__FILE__) . '\assets' )  ){
+		echo("'\\assets' not writable <br/>");
+		$error = true;	
+	}
+	if(  !is_writable( dirname(__FILE__) . '\protected\config\main_conf.php' )  ){
+		echo("'\\protected\\config\\main_conf.php' not writable <br/>");
+		$error = true;	
+	}
+	if(  !is_writable( dirname(__FILE__) . '\protected\config\settings.php' )  ){
+		echo("'\protected\config\settings.php' not writable <br/>");
+		$error = true;	
+	}
 
+	if($error){
+		die("Fix error");
+	}
+}
+
+if (isset($_COOKIE['YII_DEBUG'])) {
     //Настройка вывода сообщений
     error_reporting(E_ALL ^ E_NOTICE);
     ini_set("display_errors", 1);
@@ -16,7 +42,7 @@ if (isset($_COOKIE['YII_DEBUG'])) {
 }
 
 // Подключение параметров для режима отладки 
-$yii = dirname(__FILE__) . '/../framework/yii.php';
+$yii = dirname(__FILE__) . '/yii/framework/yii.php';
 $CONFIG = dirname(__FILE__) . '/protected/config/main_conf.php';
 
 require_once($yii);

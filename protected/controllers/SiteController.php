@@ -138,7 +138,7 @@ class SiteController extends Controller {
         $error = false;
         $model = new InstallForm;
 
-        if (Yii::app()->params['installed'] !== "yes") {
+        if ( is_file( dirname($CONFIG)."/../../install" ) ) {
 
             if (!is_writable($CONFIG)) {
                 $model->addError("site_name", "Файл " . $CONFIG . " должен быть доступен для записи");
@@ -160,7 +160,7 @@ class SiteController extends Controller {
                 $model->addError("site_name", "папка /assets должена быть доступена для записи");
             }
             
-            if( ini_set( "short_open_tag" ) === "Off" or !ini_set( "short_open_tag" ) ){
+            if( ini_get( "short_open_tag" ) === "Off" or !ini_get( "short_open_tag" ) ){
                 $error = t("Your configuration requires changes.").t("
 short_open_tag option must be enabled in the php.ini or another method available");
             }
@@ -221,8 +221,9 @@ short_open_tag option must be enabled in the php.ini or another method available
                         // Сохранение настроек
                         $settings = new ConfigForm(Yii::getPathOfAlias('application.config.settings') . ".php");
                         $settings->updateParam('adminEmail', $model->useremail);
-                        $settings->updateParam('installed', 'yes');
                         $settings->saveToFile();
+                        
+                        unlink( dirname($CONFIG)."/../../install" );
 
                         $this->redirect(array('site/index'));
                     }

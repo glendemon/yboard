@@ -1,6 +1,5 @@
 <?php 
  return array (
-  'installed' => 'yes',
   'meta' => //Основные мета данные [hidden]
   array (
     'title' => 'Категория "<cat_name>". Бесплатная доска объявлений <site_name> . Страница <page_number>',

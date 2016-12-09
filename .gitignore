@@ -232,3 +232,4 @@ nbproject/project.properties
 .idea/Yboard.iml
 .idea/copyright/profiles_settings.xml
 themes/kubtab/css/admin.css
+yii/framework/yii.php

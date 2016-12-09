@@ -47,14 +47,11 @@ class Controller extends CController {
 
     public function __construct($id, $module = null) {
 
-        // var_dump($this->route);
-
+        global $CONFIG;
+        
         parent::__construct($id, $module);
 
-
-        //var_dump();
-
-        if (Yii::app()->params['installed'] === "yes") {
+        if (!is_file(dirname($CONFIG) . "/../../install")) {
             $this->settings = require Yii::getPathOfAlias('application.config.settings') . '.php';
             $this->banners = include_once Yii::getPathOfAlias('application.config.banners') . '.php';
             //$this->categories = $this->getCategories();
@@ -72,13 +69,13 @@ class Controller extends CController {
         $banner_code = "";
         $cond_banners = array(); // баннеры подходящие по условиям
 
-        
-        if( $var === false) {
+
+        if ($var === false) {
             $footer_str = "";
-            foreach($this->banners['__FOOTER__'] as $bn){
+            foreach ($this->banners['__FOOTER__'] as $bn) {
                 $footer_str .= $bn;
             }
-            
+
             return $footer_str;
         }
 
@@ -86,41 +83,41 @@ class Controller extends CController {
             if (is_array($this->banners[$var])) {
                 // Составление списка баннеров подходящих по условиям 
                 foreach ($this->banners[$var] as $b_id => $banner) {
-                    if ( $banner['enable']!=="false" ) {
+                    if ($banner['enable'] !== "false") {
                         if (is_array($banner['conditions']) and sizeof($banner['conditions']) > 0) {
                             foreach ($banner['conditions'] as $cond) {
                                 // Сравнение Get параметров
-                                    if(isset( $cond['parameter'] )) {
-                                            if ($cond['compare']==="1") {
-                                                    if ($_GET[$cond['parameter']] === $cond['value']) {
-                                                            $cond_banners[] = $b_id;
-                                                    }
-                                            } elseif($cond['compare']==="0") {
-                                                    if ($_GET[$cond['parameter']] !== $cond['value']) {
-                                                            $cond_banners[] = $b_id;
-                                                    }
-                                            } elseif( $cond['exist'] === "1") {
-                                                    if(isset($_GET[$cond['parameter']])) {
-                                                            $cond_banners[] = $b_id;
-                                                    }
-                                            } elseif( $cond['exist'] === "0") {
-                                                    if(!isset($_GET[$cond['parameter']])) {
-                                                            $cond_banners[] = $b_id;
-                                                    }
-                                            }
+                                if (isset($cond['parameter'])) {
+                                    if ($cond['compare'] === "1") {
+                                        if ($_GET[$cond['parameter']] === $cond['value']) {
+                                            $cond_banners[] = $b_id;
+                                        }
+                                    } elseif ($cond['compare'] === "0") {
+                                        if ($_GET[$cond['parameter']] !== $cond['value']) {
+                                            $cond_banners[] = $b_id;
+                                        }
+                                    } elseif ($cond['exist'] === "1") {
+                                        if (isset($_GET[$cond['parameter']])) {
+                                            $cond_banners[] = $b_id;
+                                        }
+                                    } elseif ($cond['exist'] === "0") {
+                                        if (!isset($_GET[$cond['parameter']])) {
+                                            $cond_banners[] = $b_id;
+                                        }
                                     }
-                                    // Сравнение URL 
-                                    if( isset($cond['url']) ) {
-                                            if ($cond['compare']==="1") {
-                                                    if ( Yii::app()->request->requestUri === $cond['url']) {
-                                                            $cond_banners[] = $b_id;
-                                                    }
-                                            } elseif($cond['compare']==="0") {
-                                                    if ( Yii::app()->request->requestUri !== $cond['url']) {
-                                                            $cond_banners[] = $b_id;
-                                                    }
-                                            }
+                                }
+                                // Сравнение URL 
+                                if (isset($cond['url'])) {
+                                    if ($cond['compare'] === "1") {
+                                        if (Yii::app()->request->requestUri === $cond['url']) {
+                                            $cond_banners[] = $b_id;
+                                        }
+                                    } elseif ($cond['compare'] === "0") {
+                                        if (Yii::app()->request->requestUri !== $cond['url']) {
+                                            $cond_banners[] = $b_id;
+                                        }
                                     }
+                                }
                             }
                         } else {
                             $cond_banners[] = $b_id;
@@ -134,20 +131,20 @@ class Controller extends CController {
             if (sizeof($cond_banners) > 0) {
                 // вывод одного из подощедших баннеров
                 $b_id = $cond_banners[array_rand($cond_banners, 1)];
-                if($this->banners[$var][$b_id]['title']) {
-                    $debug = "\"".$this->banners[$var][$b_id]['title']."\"";
+                if ($this->banners[$var][$b_id]['title']) {
+                    $debug = "\"" . $this->banners[$var][$b_id]['title'] . "\"";
                 }
                 $banner_code = $this->banners[$var][$b_id]['code'];
                 $this->banners['__FOOTER__'][] = $this->banners[$var][$b_id]['code_footer'];
             }
         }
-		
-		// var_dump( $this->banners );
-        
+
+        // var_dump( $this->banners );
+
         if ($_COOKIE['adv_debug'] === "yes") {
-            $debug = "<div style='background:#990000; min-height:20px;' align='center'>" . $var ." - ".$debug. "</div>";
+            $debug = "<div style='background:#990000; min-height:20px;' align='center'>" . $var . " - " . $debug . "</div>";
             if (!isset($this->banners[$var]))
-                $debug.= "No Ads";
+                $debug .= "No Ads";
         }
 
         return "<div class='pblock " . $var . "' >"
