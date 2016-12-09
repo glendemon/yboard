@@ -138,7 +138,7 @@ class SiteController extends Controller {
         $error = false;
         $model = new InstallForm;
 
-        if ( is_file( dirname($CONFIG)."/../../install" ) ) {
+        if ( is_file( dirname($CONFIG)."/install" ) ) {
 
             if (!is_writable($CONFIG)) {
                 $model->addError("site_name", "Файл " . $CONFIG . " должен быть доступен для записи");
@@ -223,7 +223,7 @@ short_open_tag option must be enabled in the php.ini or another method available
                         $settings->updateParam('adminEmail', $model->useremail);
                         $settings->saveToFile();
                         
-                        unlink( dirname($CONFIG)."/../../install" );
+                        unlink( dirname($CONFIG)."/install" );
 
                         $this->redirect(array('site/index'));
                     }

@@ -1,4 +1,4 @@
-<?php 
+<? 
  return array (
   'meta' => //Основные мета данные [hidden]
   array (
@@ -49,6 +49,6 @@
   array (
     0 => '4',
   ),
-  'adminEmail' => 'yboard@mail.ru',//Емайл администрации
+  'adminEmail' => 'wzcc@mail.ru',//Емайл администрации
 ) 
  ?>
