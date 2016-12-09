@@ -85,6 +85,7 @@
         '/banner_show' => '/admin/banners/show',
         'site/category/<cat_id:\\d+>' => 'adverts/category/cat_id/<cat_id>',
         'cat_fields/<cat_id:\\d+>' => 'adverts/getfields/cat_id/<cat_id>',
+        'admin/moderate/<adv_id:\\d+>' => 'admin/adverts/moderate/id/<adv_id>',
         'category/<action:\\w+>/' => 'admin/category/<action>',
         'user/<user_id:\\d+>/' => 'user/view/id/<user_id>',
         '<controller:\\w+>/<id:\\d+>' => '<controller>/view',
@@ -100,6 +101,8 @@
       'password' => '123456',
       'charset' => 'utf8',
       'tablePrefix' => '',
+		'enableProfiling' => YII_DEBUG,
+		'enableParamLogging' => YII_DEBUG,
     ),
     'errorHandler' => 
     array (

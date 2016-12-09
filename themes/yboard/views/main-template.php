@@ -8,24 +8,23 @@
 
         <script> baseUrl = '<?= Yii::app()->baseUrl ?>';</script>
 
-        
+
         <script src="<?php echo Yii::app()->baseUrl; ?>/assets/js_plugins/yboard.js" ></script>
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/main_style.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-		<link id="page_favicon" href="favicon.png" rel="icon" type="image/x-icon" />
-        
+        <link id="page_favicon" href="favicon.png" rel="icon" type="image/x-icon" />
+
     </head>
 
     <body>
-        
+
         <?
         //echo CHtml::link("Ожидает", array("/admin/adverts/update", "id" => $data->id ), array("target"=>"_blank")  );
-        
         ?>
-       
+
         <div id='header'>
             <div id="topheader">
-                <a href='<?=Yii::app()->createUrl("/")?>' class="logo">Доска объявлений на Yii</a>
+                <a href='<?= Yii::app()->createUrl("/") ?>' class="logo">Доска объявлений на Yii</a>
                 <div class="menu_area">
                     <div class='ideas'>
                         <a href="<?= Yii::app()->createUrl("/adverts") ?>" class="general">Объявления</a> 
@@ -68,8 +67,8 @@
                         'encodeLabel' => false,
                     ));
                     ?>  
-                    
-                   
+
+
                 </div>
             </div>
         </div>
@@ -92,50 +91,54 @@
                             ?>
                         </div>
                     </div>
-					
-                    
-                    <div>
-                       <? $this->widget('application.widgets.advancedSearch'); ?>
-                    </div>
-                        <?= $this->getBanner('right_adv') ?>
+
+
+
+                    <?= $this->getBanner('right_adv') ?>
                     <div class='articleList'> 
                         <? $this->widget('application.widgets.articleList'); ?>
                     </div>
-					
-					
+
+
                 </div>
                 <div class="midarea">
-				<form name='search_form' class='searchForm' action='<?= Yii::app()->createUrl('/adverts/search') ?>'>
-					<input type='text' name='searchStr'  
-						   value='<?=Yii::app()->request->getParam("searchStr")?>' />
-					<input type='submit' value='Поиск' class='btn' />
-				</form>
-<?php if (isset($this->breadcrumbs)): ?>
-    <?php
-    $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
-        'links' => $this->breadcrumbs,
-    ));
-    ?><!-- breadcrumbs -->
+                    <form name='search_form' class='searchForm' action='<?= Yii::app()->createUrl('/adverts/search') ?>'>
+                        <input type='text' name='searchStr'  
+                               value='<?= Yii::app()->request->getParam("searchStr") ?>' />
+                        <input type='submit' value='Поиск' class='btn' /> <br/>
+                        <a href="javascript:void(0)" onclick="open_search()" ><?= t("Advanced search") ?></a>
+                        
+                        
+                        <div class='advanced_search' <? echo is_array(Yii::app()->request->getParam("Adverts"))?"":"style='display:none'"?> >
+                            <? $this->widget('application.widgets.advancedSearch'); ?>
+                        </div>
+                    </form>
+                    <?php if (isset($this->breadcrumbs)): ?>
+                        <?php
+                        $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
+                            'links' => $this->breadcrumbs,
+                        ));
+                        ?><!-- breadcrumbs -->
                     <?php endif; ?>
 
 
 
-<?php echo $content; ?>
+                    <?php echo $content; ?>
 
                 </div>
                 <br style='clear:both' />
             </div>
         </div>
-		
+
         <div id="fotter">
             <div class="fotter_copyrights">
                 <div align="center"> © Copyright Information Goes Here. All Rights Reserved  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-				<a href="http://validator.w3.org/check?uri=referer" target="_blank" class="xhtml">XHTML</a> <a href="http://jigsaw.w3.org/css-validator/check/referer" target="_blank" class="css">CSS</a>
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-				
-				Developed By : <a href="http://vencendor.ru" class="fotter_designedlink">Vencendor</a> 
-				
-				
+                    <a href="http://validator.w3.org/check?uri=referer" target="_blank" class="xhtml">XHTML</a> <a href="http://jigsaw.w3.org/css-validator/check/referer" target="_blank" class="css">CSS</a>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+
+                    Developed By : <a href="http://vencendor.ru" class="fotter_designedlink">Vencendor</a> 
+
+
                 </div>
             </div>
 

@@ -432,6 +432,21 @@ dt{
     text-decoration: none;
     text-transform: none;
 }
+.advanced_search{
+    padding:5px 7px;
+}
+.advanced_search input[type=text]{
+    width: 150px;
+    padding:2px;
+    margin: 2px 5px;
+}
+.advanced_search label{
+    display: inline-block;
+    min-width: 150px;
+}
+.advanced_search label.sh{
+    min-width: auto;
+}
 #body_area {
     clear: both;
     font-size: 14px;
@@ -575,8 +590,11 @@ dt{
 	padding-top: 10px;
 }
 .sidebar-menu > li{
-	padding: 20px 5px;
+	padding: 5px 0px;
         border-bottom: 1px dotted #ccc;
+}
+.sidebar-menu > li > a{
+    padding: 15px 5px;
 }
 
 li.users{

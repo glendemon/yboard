@@ -67,7 +67,7 @@ class AdvertsController extends BackendController {
         $model = $this->loadModel($id);
         $model->moderated = 1;
         if ($model->save()) {
-            echo "oksss";
+            echo "ok";
             return true;
         }
 

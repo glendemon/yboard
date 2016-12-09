@@ -20,13 +20,18 @@
 <?php echo $form->errorSummary($model); ?>
 <p style='color:#ff0000; padding:15px; '><?=$db_error?></p>
 
-<h4> Данные создаваемого проекта </h4>
+
+<fieldset>
+    <label> Данные создаваемого проекта </label>
 <div style='padding-left:20px;'> 
     <?php echo $form->labelEx($model, 'site_name'); ?>
     <?php echo $form->textField($model, 'site_name'); ?>
 </div>
+</fieldset>
 
-<h4> Данные администратора </h4>
+
+<fieldset>
+<label> Данные администратора </label>
 <div style='padding-left:20px;'> 
     <?php echo $form->labelEx($model, 'username'); ?>
     <?php echo $form->textField($model, 'username'); ?>
@@ -45,8 +50,10 @@
     <?php echo $form->textField($model, 'useremail'); ?>
     <?php echo $form->error($model, 'useremail'); ?>
 </div>
+</fieldset>
 
-<h4> Данные для подключения к базе данных </h4>
+<fieldset>
+<label> Данные для подключения к базе данных </label>
 <div style='padding-left:20px;'> 
     <?php echo $form->labelEx($model, 'mysql_server'); ?>
     <?php echo $form->textField($model, 'mysql_server'); ?>
@@ -64,6 +71,7 @@
     <?php echo $form->textField($model, 'mysql_password'); ?>
     <?php echo $form->error($model, 'mysql_password'); ?>
 </div>
+</fieldset>
 
 <br/>
 

@@ -16,6 +16,8 @@ class Adverts extends CActiveRecord {
 
     const TYPE_DEMAND = 0;
     const TYPE_OFFER = 1;
+    public $price_min;
+    public $price_max;
 
     /**
      * Returns the static model of the specified AR class.
@@ -107,14 +109,13 @@ class Adverts extends CActiveRecord {
      * Retrieves a list of models based on the current search/filter conditions.
      * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
      */
-    public function search() {
+    public function search($strict=true) {
         // Warning: Please modify the following code to remove attributes that
         // should not be searched.
 
         $criteria = new CDbCriteria;
 
         $criteria->compare('id', $this->id);
-        $criteria->compare('name', $this->name, true);
         $criteria->compare('user_id', $this->user_id);
 
         //$criteria->compare('category_id', $this->category_id);
@@ -128,17 +129,35 @@ class Adverts extends CActiveRecord {
         if ($this->fields) {
             $criteria->addCondition(" t.fields regexp '" . $this->fields . "' ");
         }
+        
+        if(is_numeric($this->price_min) and $this->price_max > 0){
+            $criteria->addCondition("price >= ".$this->price_min." and price <= ".$this->price_max);
+        }
 
         $criteria->join = 'inner join category on category.id=t.category_id';
 
         $criteria->compare('type', $this->type);
+        $criteria->compare('location', $this->location, true);
         $criteria->compare('views', $this->views);
-        $criteria->compare('text', $this->text, true);
+        
         $criteria->compare('moderated', $this->moderated, true);
 
         $criteria->order = 'id desc';
         $criteria->limit = Yii::app()->params['adv_on_page'];
-
+        
+        if( $strict ){
+            $criteria->compare('t.name', $this->name, true, "or");
+            $criteria->compare('text', $this->text, true, "or");
+        } else {
+            $search_str = explode(" ",$this->text);
+            foreach( $search_str as $v){
+                if(mb_strlen( $v ) >2 ) {
+                    $criteria->compare('t.name', $v, true, "or");
+                    $criteria->compare('text', $v, true, "or");
+                }
+            }
+        }
+        
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));

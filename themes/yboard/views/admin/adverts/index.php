@@ -65,7 +65,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'class' => 'CLinkColumn',
             'header' => t('moderated'),
             'labelExpression' => '$data->moderated?"Отмодереровано":"Ожидает"',
-            'urlExpression' => 'Yii::app()->createUrl("/admin/adverts/moderate",array("id"=>$data->id))',
+            'urlExpression' => 'Yii::app()->createUrl("/admin/moderate/".$data->id)',
             'linkHtmlOptions' => array(
                 'class' => 'moder',
             )
@@ -91,19 +91,11 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 
     $('a.moder').click(function (e) {
         e.preventDefault();
-        console.log($(this).attr('href').toString());
-        $.ajax({
-            type: "GET",
-            url: "http://localhost/Yboard/admin/adverts/",
-            success: function (data) {
-                alert("Data Loaded: " + data);
-            }, error: function (XMLHttpRequest, textStatus, errorThrown) {
-                console.log(textStatus);
-                console.log(XMLHttpRequest);
-                console.log(errorThrown);
+        $.get($(this).attr('href').toString(), function (data) {
+                if(data == "ok")
             }
-        });
-        console.log($(this).attr('href'));
+        $(this).parent().html("Отмодереровано");
+        );
     });
 
 </script>

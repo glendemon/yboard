@@ -17,7 +17,7 @@
     <?php echo $form->errorSummary($model); ?>
 
     <div >
-        <?php if (isset($_POST['Adverts']['category_id'])) { ?>
+        <?php if (isset($_POST['Adverts']['name']) or $model->name ) { ?>
             <div >
                 <?php echo $form->labelEx($model, 'category_id'); ?>
                 <?php echo CHtml::dropDownList('category_id', $model->category_id, CHtml::listData(Category::model()->findAll(), "id", "name"), array('empty' => t('Choose category')));
@@ -36,7 +36,7 @@
         <div class='ajax-div'></div>
     </div>
     
-    <div id='bulletin_form'  <?php echo isset($_POST['Adverts']['name'])?"":"style='display:none;'" ?> >
+    <div id='bulletin_form'  <?php echo (isset($_POST['Adverts']['name']) or $model->name )?"":"style='display:none;'" ?> >
 
         <div >
             <?php echo $form->labelEx($model, 'name'); ?>
@@ -66,10 +66,13 @@
          * 
          */
         ?>
-
-        <div >
-            <?php echo $form->labelEx($model, 'price'); ?>
-            <?php echo $form->textField($model, 'price'); ?>
+        <div>
+            <?php echo CHtml::checkBox('no_price', $model->price==0?true:false, array('onclick' => 'hide_price()') ); ?>
+            <?php echo CHtml::label(t('no price'), 'no_price'); ?>
+        </div>
+        <div class='price'>
+            <?php echo $form->labelEx($model, 'price', array( 'disabled' => $model->price==0?'disabled':"" )); ?>
+            <?php echo $form->textField($model, 'price', array( 'disabled' => $model->price==0?'disabled':"" )); ?>
             <?php echo $form->dropDownList($model, 'currency', $this->settings['currency']); ?>
             <?php echo $form->error($model, 'price'); ?>
         </div>
