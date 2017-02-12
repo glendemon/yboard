@@ -2,6 +2,8 @@
 
 Основное зеркало проекта на котором будут выходить обновления - https://github.com/vencendor/yboard
 
+Сайт движка и демо - http://yboard.org
+
 ### Установка:
 
 Загрузите framework Yii https://github.com/yiisoft/yii
