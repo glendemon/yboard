@@ -1,5 +1,7 @@
 # Yboard - движок доски объявлений на Yii
 
+Основное зеркало проекта на котором будут выходить обновления - https://github.com/vencendor/yboard
+
 ### Установка:
 
 Загрузите framework Yii https://github.com/yiisoft/yii
