@@ -50,6 +50,6 @@
     Поддержка многоязычности на сайте
     
     
-Скачать можно на github - https://github.com/glendemon/yboard/
+Скачать можно на github - https://github.com/vencendor/yboard
 
 По вопросам сотрудничества и поддержки - yboard@mail.ru
