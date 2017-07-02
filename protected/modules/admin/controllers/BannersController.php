@@ -90,6 +90,8 @@ class BannersController extends BackendController {
      * Lists all models.
      */
     public function actionIndex() {
+	
+		$message = "";
 
         $banners_file = Yii::getPathOfAlias('application.config.banners') . ".php";
         //include $banners_file;
@@ -140,8 +142,12 @@ class BannersController extends BackendController {
             }
             $save_banners = true;
         }
-
+	
         if ($save_banners) {
+			
+			if( !is_writable($banners_file) ){
+				$message = t("Error write to file").$banners_file;
+			}
             file_put_contents($banners_file, "<? return " . var_export($this->banners, true) . "; ");
             $this->redirect(array('/admin/banners'));
         }
@@ -149,7 +155,7 @@ class BannersController extends BackendController {
 
 
 
-        $this->render('/banners');
+        $this->render('/banners', $message);
     }
 
 }

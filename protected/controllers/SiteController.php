@@ -181,6 +181,7 @@ short_open_tag option must be enabled in the php.ini or another method available
 
                 if (!$model->errors) {
                     $db_con = mysqli_connect($server, $username, $password) or $db_error = mysqli_error();
+					mysqli_set_charset($db_con, "utf8");
                     mysqli_select_db($db_con, $db_name) or $db_error = mysqli_error($db_con);
                 }
 

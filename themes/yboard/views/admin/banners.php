@@ -109,6 +109,10 @@
     }
 
 </script>
+<? if( $message ){ 
+	echo "<div style='color:#ff0000'> $message </div>";
+} ?>
+
 <div align='center' class='add_code_form'>
     <a href='<?=Yii::app()->createUrl("/admin/default/help")?>#banners'> Инструкция </a>
 <form method='post' name='insert_ads_form' action='<?= Yii::app()->createUrl('admin/banners') ?>' 

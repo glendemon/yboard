@@ -268,6 +268,8 @@ class AdvertsController extends Controller {
         $this->meta['vars']['cat_name'] = 
                 Yii::app()->params['categories'][$model->category_id]['name'];
         $this->meta['vars']['adv_title'] = $model->name;
+		
+		$model->moderated;
         
         // Похожие объявления   
         $dataRel = new CActiveDataProvider('Adverts', array(

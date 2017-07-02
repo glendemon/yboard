@@ -51,7 +51,7 @@ class Adverts extends CActiveRecord {
             array('youtube_id', 'file', 'types' => 'mov, mpeg4, avi, wmv, mpegps, flv, 3gpp, webm', 'allowEmpty' => true),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, name, user_id, category_id, type, views, text, price, currency', 'safe', 'on' => 'search'),
+            array('id, name, user_id, category_id, type, views, text, price, currency, moderated', 'safe', 'on' => 'search'),
             array('text, name', 'application.components.textValidator', 'format' => 'stopwords')
         );
     }
@@ -139,9 +139,7 @@ class Adverts extends CActiveRecord {
         $criteria->compare('type', $this->type);
         $criteria->compare('location', $this->location, true);
         $criteria->compare('views', $this->views);
-        
         $criteria->compare('moderated', $this->moderated, true);
-
         $criteria->order = 'id desc';
         $criteria->limit = Yii::app()->params['adv_on_page'];
         

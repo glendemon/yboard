@@ -23,7 +23,7 @@
 
 <fieldset>
     <label> Данные создаваемого проекта </label>
-<div style='padding-left:20px;'> 
+<div class='install_blocks' > 
     <?php echo $form->labelEx($model, 'site_name'); ?>
     <?php echo $form->textField($model, 'site_name'); ?>
 </div>
@@ -32,7 +32,7 @@
 
 <fieldset>
 <label> Данные администратора </label>
-<div style='padding-left:20px;'> 
+<div class='install_blocks' > 
     <?php echo $form->labelEx($model, 'username'); ?>
     <?php echo $form->textField($model, 'username'); ?>
     <?php echo $form->error($model, 'username'); ?>
@@ -54,7 +54,7 @@
 
 <fieldset>
 <label> Данные для подключения к базе данных </label>
-<div style='padding-left:20px;'> 
+<div  class='install_blocks' > 
     <?php echo $form->labelEx($model, 'mysql_server'); ?>
     <?php echo $form->textField($model, 'mysql_server'); ?>
     <?php echo $form->error($model, 'mysql_server'); ?>

@@ -9,7 +9,7 @@
         <script> baseUrl = '<?= Yii::app()->baseUrl ?>';</script>
 
 
-        <script src="<?php echo Yii::app()->baseUrl; ?>/assets/js_plugins/yboard.js" ></script>
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/yboard.js" ></script>
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/main_style.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
         <link id="page_favicon" href="favicon.png" rel="icon" type="image/x-icon" />

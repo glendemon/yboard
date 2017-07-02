@@ -55,7 +55,7 @@ class MessagesController extends Controller
 		));
 	}
         
-        public function actionDialog($user)
+    public function actionDialog($user)
 	{
             $model=new Messages;
             
