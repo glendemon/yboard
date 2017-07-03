@@ -22,7 +22,7 @@ class RegistrationForm extends User {
 			array('username', 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u','message' => t("Incorrect symbols (A-z0-9).")),
 		);
 		if (!(isset($_POST['ajax']) && $_POST['ajax']==='registration-form')) {
-			array_push($rules,array('verifyCode', 'captcha', 'allowEmpty'=>!UserModule::doCaptcha('registration')));
+			array_push($rules,array('verifyCode', 'captcha', 'allowEmpty'=> false ));
 		}
 
 		array_push($rules,array('verifyPassword', 'compare', 'compareAttribute'=>'password', 'message' => t("Retype Password is incorrect.")));

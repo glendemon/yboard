@@ -104,11 +104,27 @@ class SiteController extends Controller {
      * отличается наличием виджета категорий вверху
      */
     public function actionIndex() {
+        
         $roots = Category::model()->roots()->findAll();
+        
+        
+        $IndexAdv = new CActiveDataProvider('Adverts', array(
+            'criteria' => array(
+                'limit' => '10',
+                'order' => 'id DESC',
+            ))
+        );
+        
+        /*
         $criteria = new CDbCriteria();
         $criteria->limit = 10;
         $criteria->order = 'id desc';
         $IndexAdv = Adverts::model()->findAll($criteria);
+         * 
+         */
+        
+        
+        
         $this->render('index', array(
             'roots' => $roots,
             'IndexAdv' => $IndexAdv,
@@ -119,9 +135,10 @@ class SiteController extends Controller {
         global $CONFIG; // Путь к файлу конфигурации для его изменения
         $this->layout = "/install-layout";
         $db_error = false;
+        $error = false;
         $model = new InstallForm;
 
-        if (Yii::app()->params['installed'] !== "yes") {
+        if ( is_file( dirname($CONFIG)."/install" ) ) {
 
             if (!is_writable($CONFIG)) {
                 $model->addError("site_name", "Файл " . $CONFIG . " должен быть доступен для записи");
@@ -142,8 +159,13 @@ class SiteController extends Controller {
             if (!is_writable(Yii::app()->basePath . "/../assets")) {
                 $model->addError("site_name", "папка /assets должена быть доступена для записи");
             }
+            
+            if( ini_get( "short_open_tag" ) === "Off" or !ini_get( "short_open_tag" ) ){
+                $error = t("Your configuration requires changes.").t("
+short_open_tag option must be enabled in the php.ini or another method available");
+            }
 
-            if (isset($_POST['InstallForm'])) {
+            if (isset($_POST['InstallForm']) and !$error) {
                 $model->attributes = $_POST['InstallForm'];
 
                 // данные Mysql 
@@ -172,9 +194,9 @@ class SiteController extends Controller {
                     // Сохранение данных о пользователе 
                     $dump_file.=" INSERT INTO `users` 
                                     (`username`, `password`, `email`, `activkey`, `superuser`, `status`)     VALUES "
-                            . "('" . $model->username . "', '" . UserModule::encrypting($model->userpass) . "', "
-                            . "'" . $model->useremail . "', '" . UserModule::encrypting(microtime() . $model->userpass) . "',"
-                            . " 1, 1);";
+                            . "('" . $model->username . "', '" . Yii::app()->user->crypt($model->userpass) . "', "
+                            . "'" . $model->useremail . "', '" . Yii::app()->user->crypt(microtime() . $model->userpass) . "',"
+                            . " 2, 1);";
 
                     mysqli_multi_query($db_con, $dump_file) or $db_error = mysqli_error($db_con);
 
@@ -199,15 +221,16 @@ class SiteController extends Controller {
                         // Сохранение настроек
                         $settings = new ConfigForm(Yii::getPathOfAlias('application.config.settings') . ".php");
                         $settings->updateParam('adminEmail', $model->useremail);
-                        $settings->updateParam('installed', 'yes');
                         $settings->saveToFile();
+                        
+                        unlink( dirname($CONFIG)."/install" );
 
                         $this->redirect(array('site/index'));
                     }
                 }
             }
 
-            $this->render('install', array('model' => $model, 'db_error' => $db_error));
+            $this->render('install', array('model' => $model, 'db_error' => $db_error, 'error' => $error));
         } else {
             $this->redirect(array('site/index'));
         }
@@ -336,3 +359,5 @@ class SiteController extends Controller {
     }
 
 }
+
+

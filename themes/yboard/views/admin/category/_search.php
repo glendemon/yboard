@@ -29,6 +29,11 @@
 <?php echo $form->label($model, 'icon'); ?>
 <?php echo $form->textField($model, 'icon', array('size' => 60, 'maxlength' => 255)); ?>
     </div>
+    
+        <div class="row">
+<?php echo $form->label($model, 'level'); ?>
+<?php echo $form->textField($model, 'level', array('size' => 60, 'maxlength' => 255)); ?>
+    </div>
 
     <div class="row buttons">
       <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit', 'label' => 'Отправить')); ?>

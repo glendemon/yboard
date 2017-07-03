@@ -18,4 +18,4 @@ $this->menu=array(
 
 <h4> <?=t('Redact advert')?> "<?php echo $model->name; ?>"</h4>
 
-<?php echo $this->renderPartial('_redact', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

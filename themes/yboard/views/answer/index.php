@@ -32,3 +32,8 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'label'=>Yii::t('main', 'Ask'))); ?>
 
 <?php $this->endWidget(); ?>
+
+<?php 
+
+?>
+

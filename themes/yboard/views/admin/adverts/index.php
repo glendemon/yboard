@@ -3,13 +3,13 @@
 /* @var $model Bulletin */
 
 $this->breadcrumbs = array(
-    Yii::t('lang','Bulletins') => array('index'),
-    Yii::t('lang','Manage'),
+    Yii::t('lang', 'Bulletins') => array('index'),
+    Yii::t('lang', 'Manage'),
 );
 
 $this->menu = array(
-    array('label' => Yii::t('lang','List Bulletin'), 'icon' => 'icon-list', 'url' => array('index'),"itemOptions"=>array('class'=>'btn')),
-    array('label' => Yii::t('lang','Create Bulletin'), 'icon' => 'icon-plus', 'url' => array('create') ,"itemOptions"=>array('class'=>'btn')),
+    array('label' => Yii::t('lang', 'List Bulletin'), 'icon' => 'icon-list', 'url' => array('index'), "itemOptions" => array('class' => 'btn')),
+    array('label' => Yii::t('lang', 'Create Bulletin'), 'icon' => 'icon-plus', 'url' => array('create'), "itemOptions" => array('class' => 'btn')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,14 +26,14 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1><?php echo Yii::t('lang','Manage Bulletins'); ?></h1>
 
-<p>
-    You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-    or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
 
-<?php echo CHtml::link('Advanced Search', '#', array('class' => 'search-button')); ?>
+
+<h1><?php echo t('Manage Bulletins'); ?></h1>
+
+
+
+<?php echo CHtml::link(t('Advanced Search'), '#', array('class' => 'search-button')); ?>
 <div class="search-form" style="display:none">
     <?php
     $this->renderPartial('_search', array(
@@ -49,23 +49,31 @@ $this->widget('bootstrap.widgets.TbGridView', array(
     'dataProvider' => $model->search(),
     'filter' => $model,
     'columns' => array(
-		array(            // display 'create_time' using an expression
-            'class'=>'CLinkColumn',
-			'header'=>'name',
-			'labelExpression'=>'$data->name',
-			'urlExpression'=>'Yii::app()->createUrl("/admin/adverts/view",array("id"=>$data->id))',
+        array(// display 'create_time' using an expression
+            'class' => 'CLinkColumn',
+            'header' => t('name'),
+            'labelExpression' => '$data->name',
+            'urlExpression' => 'Yii::app()->createUrl("/admin/adverts/view",array("id"=>$data->id))',
         ),
-		array(            // display 'create_time' using an expression
-            'class'=>'CLinkColumn',
-			'header'=>'user_id',
-			'labelExpression'=>'$data->user->username',
-			'urlExpression'=>'Yii::app()->createUrl("/user/view",array("id"=>$data->id))',
+        array(// display 'create_time' using an expression
+            'class' => 'CLinkColumn',
+            'header' => t('user_id'),
+            'labelExpression' => '$data->user->username',
+            'urlExpression' => 'Yii::app()->createUrl("/user/view",array("id"=>$data->id))',
         ),
-		array(
-			'name'=>'category_id',
-			'value'=>'$data->category->name',
-		),
-        'type',
+        array(
+            'class' => 'CLinkColumn',
+            'header' => t('moderated'),
+            'labelExpression' => '$data->moderated?"Отмодереровано":"Ожидает"',
+            'urlExpression' => 'Yii::app()->createUrl("/admin/moderate/".$data->id)',
+            'linkHtmlOptions' => array(
+                'class' => 'moder',
+            )
+        ),
+        array(
+            'name' => 'category_id',
+            'value' => '$data->category->name',
+        ),
         'views',
         /*
           'text',
@@ -77,3 +85,18 @@ $this->widget('bootstrap.widgets.TbGridView', array(
     ),
 ));
 ?>
+
+
+<script>
+
+    $('a.moder').click(function (e) {
+        e.preventDefault();
+        $.get($(this).attr('href').toString(), function (data) {
+                if(data == "ok")
+            }
+        $(this).parent().html("Отмодереровано");
+        );
+    });
+
+</script>
+

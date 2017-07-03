@@ -80,8 +80,6 @@ class AdvertsController extends Controller {
             'data' => $dataProvider,
         ));
 
-
-        //echo "ddddddddddd";
     }
 
     /**
@@ -162,6 +160,9 @@ class AdvertsController extends Controller {
 
         if (isset($_POST['Reviews'])) {
             $model->attributes = $_POST['Reviews'];
+            if( $_POST['Adverts']['no_price']==="on" ){
+                $model->price = 0;
+            }
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
@@ -176,12 +177,19 @@ class AdvertsController extends Controller {
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
-
-        $dataProvider = new CActiveDataProvider('Adverts', array(
+        
+        $criteria = array(
             'criteria' => array(
                 'limit' => '10',
                 'order' => 'id DESC',
-            ))
+                
+            ));
+        
+        if( Yii::app()->params['moder_type'] ){
+            $criteria['criteria']['condition']='moderated=1';
+        }
+
+        $dataProvider = new CActiveDataProvider('Adverts', $criteria
         );
         
         if(Yii::app()->request->getParam('Adverts_page')) {
@@ -222,8 +230,10 @@ class AdvertsController extends Controller {
             $model->user_id = Yii::app()->user->id;
             $model->created_at = date("Y-m-d H:i:s");
             $model->fields = serialize($_POST['Fields']);
-
-
+            if( $_POST['Adverts']['no_price']==="on" ){
+                $model->price = 0;
+            }
+            
             if ($model->save()) {
                 $video = CUploadedFile::getInstances($model, 'youtube_id');
                 //YoutubeHelper::processAdverts($model, $video);
@@ -258,10 +268,21 @@ class AdvertsController extends Controller {
         $this->meta['vars']['cat_name'] = 
                 Yii::app()->params['categories'][$model->category_id]['name'];
         $this->meta['vars']['adv_title'] = $model->name;
+        
+        // Похожие объявления   
+        $dataRel = new CActiveDataProvider('Adverts', array(
+            'criteria' => array(
+                'select' => 't.*',
+                'condition' => 't.category_id = '.$model->category_id ." and t.id != ".$model->id,
+                'order' => 'id DESC',
+                'limit' => 5,
+            ),
+        ));
 
         $this->render('view', array(
             'model' => $model,
             'mes_model' => $mes_model,
+            'dataRel' => $dataRel,
         ));
     }
 
@@ -389,16 +410,19 @@ class AdvertsController extends Controller {
 
     public function actionSearch($searchStr = "") {
         $model = new Adverts('search');
+        $results = true;
 
         $model->unsetAttributes();  // clear any default values
-        //$model->attributes=$_POST;
 
         if ($searchStr) {
             $model->name = $searchStr;
             $model->text = $searchStr;
         }
         $model->category_id = Yii::app()->request->getParam("cat_id");
-
+        $model->location = Yii::app()->request->getParam("Adverts")['location'];
+        $model->price_min = Yii::app()->request->getParam("Adverts")['price_min'];
+        $model->price_max = Yii::app()->request->getParam("Adverts")['price_max'];
+        
         // Обработка дополнительных полей для поиска 
         $s_fields = $_GET['fields'];
         $txt_vld = new textValidator();
@@ -420,9 +444,17 @@ class AdvertsController extends Controller {
         }
 
         $dataProvider = $model->search();
+        
+        if( $dataProvider->getItemCount() == 0 ){
+            $model->unsetAttributes();
+            $model->name = $searchStr;
+            $model->text = $searchStr;
+            $dataProvider = $model->search(false);
+            $results = false;
+        }
 
         $this->render('index', array(
-            'data' => $dataProvider,
+            'data' => $dataProvider, 'results' => $results
         ));
     }
 

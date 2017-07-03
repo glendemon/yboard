@@ -16,11 +16,10 @@ class CompanyController extends Controller
 	 */
 	public function actionView()
 	{
-
-		$model = $this->loadUser();
+            $model = $this->loadUser();
 	    $this->render('profile',array(
 	    	'model'=>$model,
-			'profile'=>$model->profile,
+		'profile'=>$model->profile,
 	    ));
 	}
 	

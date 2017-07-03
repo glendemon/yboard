@@ -20,3 +20,8 @@ $this->widget('bootstrap.widgets.TbListView', array(
     'itemView' => '_view',
 ));
 ?>
+
+
+<?php 
+
+?>

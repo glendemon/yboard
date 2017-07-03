@@ -225,3 +225,12 @@ pip-log.txt
 /.gitignore
 nbproject/*
 nbproject/project.properties
+.idea/modules.xml
+.idea/deployment.xml
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/Yboard.iml
+.idea/copyright/profiles_settings.xml
+themes/kubtab/css/admin.css
+yii/framework/yii.php
+-install

@@ -19,3 +19,9 @@ $this->menu=array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_list',
 )); ?>
+
+
+<?php 
+
+?>
+

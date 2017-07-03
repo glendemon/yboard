@@ -37,9 +37,10 @@ class Category extends CActiveRecord {
         return array(
             array('name', 'required'),
             array('name, icon', 'length', 'max' => 255),
+            array('description', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, name, icon, fields', 'safe', 'on' => 'search'),
+            array('id, name, icon, fields, level', 'safe', 'on' => 'search'),
             array('meta_title, meta_descr, meta_key', 'application.components.textValidator', 'format' => 'text'),
             
         );
@@ -167,6 +168,7 @@ class Category extends CActiveRecord {
         $criteria->compare('name', $this->name, true);
         $criteria->compare('icon', $this->icon, true);
         $criteria->compare('fields', $this->fields, true);
+        $criteria->compare('level', $this->level, true);
 
 
         return new CActiveDataProvider($this, array(
@@ -183,6 +185,7 @@ class Category extends CActiveRecord {
 
     public function fieldsSave() {
         $fields = Array();
+        if(is_array($_POST['Category']['fields']))
         foreach ($_POST['Category']['fields'] as $fn => $fd) {
             if (preg_match('#fn_[0-9]+#is', $fn))
                 $fields[Translit::latin($fd['name'])] = $fd;

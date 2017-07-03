@@ -1,17 +1,12 @@
 <?php
 
-class WebUser extends CWebUser
-{
-    
-    //public $username="gggg";
+class WebUser extends CWebUser {
 
-    public function getRole()
-    {
+    public function getRole() {
         return $this->getState('__role');
     }
-    
-    public function getId()
-    {
+
+    public function getId() {
         return $this->getState('__id') ? $this->getState('__id') : 0;
     }
 
@@ -29,34 +24,35 @@ class WebUser extends CWebUser
 //        return true;
 //    }
 
-    protected function afterLogin($fromCookie)
-	{
+    protected function afterLogin($fromCookie) {
         parent::afterLogin($fromCookie);
         $this->updateSession();
-	}
+    }
 
     public function updateSession() {
         $user = User::model()->findByPk($this->id);
+
         $userAttributes = array(
-            'email'=>$user->email,
-            'username'=>$user->username,
-            'create_at'=>$user->create_at,
-            'lastvisit_at'=>$user->lastvisit_at,
+            'email' => $user->email,
+            'username' => $user->username,
+            'create_at' => $user->create_at,
+            'lastvisit_at' => $user->lastvisit_at,
+            'superuser' => $user->superuser,
         );
-        foreach ($userAttributes as $attrName=>$attrValue) {
-            $this->setState($attrName,$attrValue);
+        foreach ($userAttributes as $attrName => $attrValue) {
+            $this->setState($attrName, $attrValue);
         }
     }
-    
-    public function getUsername($id=0){
+
+    public function getUsername($id = 0) {
         return $this->username;
     }
 
-    public function model($id=0) {
+    public function model($id = 0) {
         return User::model()->findByPk($id);
     }
 
-    public function user($id=0) {
+    public function user($id = 0) {
         return $this->model($id);
     }
 
@@ -66,14 +62,37 @@ class WebUser extends CWebUser
     }
 
     public function getAdmins() {
-        
+
         //return Yii::app()->getModule('user')->getAdmins();
         return "Not defined function";
     }
 
     public function isAdmin() {
-        //return Yii::app()->getModule('user')->isAdmin();
-        return "Not defined function";
+        if (Yii::app()->user->isGuest)
+            return false;
+        else {
+            if (User::model()->findByPk($this->id)->superuser)
+                return true;
+            else
+                return false;
+        }
+    }
+
+    /**
+     * @return hash string.
+     */
+    public static function crypt($string = "") {
+
+        $hash = 'md5';
+
+        $salt = "!~ALZ875(%";
+
+        if ($hash == "md5")
+            return md5($string . $salt);
+        if ($hash == "sha1")
+            return sha1($string . $salt);
+        else
+            return hash($hash, $string . $salt);
     }
 
 }

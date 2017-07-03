@@ -38,9 +38,9 @@ return array(
     'Update Answer' => 'Обновить ответ',
     'Delete Answer' => 'Удалить ответ',
     'Manage Answers' => 'Управление ответами',
-    'Fields with <span class="required">*</span> are required.' => 
+    'Fields with <span class="required">*</span> are required.' =>
     '<span class="required">*</span> Обязательные поля.',
-    '<span style="color:red;">Warning: Direct changes!</span>' => 
+    '<span style="color:red;">Warning: Direct changes!</span>' =>
     '<span style="color:red;">Осторожно: изменения вносятся сразу!</span>',
     'Advertisements' => 'Реклама',
     'Answers' => 'Уголок ветеринара',
@@ -58,7 +58,7 @@ return array(
     'Updated At' => 'Обновлен',
     'Location' => 'Местоположение',
     'Not set' => 'Не укзана',
-    'Fields with <span class="required">*</span> are required.' => 
+    'Fields with <span class="required">*</span> are required.' =>
     '<span class="required">*</span> Обязательные поля.',
     'Demand' => '<span class="demand">Cпрос</span>',
     'Offer' => '<span class="offer">Предложение</span>',
@@ -76,7 +76,7 @@ return array(
     'Text' => 'Текст объявления',
     'Created At' => 'Дата опубликования',
     'Updated At' => 'Обновлен',
-    'Fields with <span class="required">*</span> are required.' => 
+    'Fields with <span class="required">*</span> are required.' =>
     '<span class="required">*</span> Обязательные поля.',
     'Demand' => '<span class="demand">Cпрос</span>',
     'Offer' => '<span class="offer">Предложение</span>',
@@ -107,7 +107,7 @@ return array(
     'Text' => 'Текст объявления',
     'Created At' => 'Дата опубликования',
     'Updated At' => 'Обновлен',
-    'Fields with <span class="required">*</span> are required.' => 
+    'Fields with <span class="required">*</span> are required.' =>
     '<span class="required">*</span> Обязательные поля.',
     'Demand' => '<span class="demand">Cпрос</span>',
     'Offer' => '<span class="offer">Предложение</span>',
@@ -121,7 +121,7 @@ return array(
     'Price' => "Цена",
     'Currency' => "Валюта",
     'Redact advert' => "Редактировать объявление",
-    
+    'Profile update' => "Редактирование профиля",
     // Пользователи
     'Send a mail to the author' => 'Отправить письмо автору',
     'View User' => 'Просмотр пользователя',
@@ -135,6 +135,11 @@ return array(
     'List User' => 'Список пользователей',
     'Last visit' => 'Был на сайте',
     'Social networks authorisation :' => 'Авторизуйтесь с помощью социальных сетей:',
+    'Full name' => 'Полное имя',
+    'phone' => "Телефон",
+    'birthday' => "День рождения",
+    'contacts' => "Дополнительные контакты",
+    'moderated' => "Отмодерировано",
     // Страницы 
     'Lft' => 'левый',
     'Rgt' => 'правый',
@@ -154,10 +159,19 @@ return array(
     'Update Site index' => 'Редактирование главной',
     'List pages' => 'Список страниц',
     'Pages' => 'Страницы',
-
+    'Please fill out the following form with your login credentials:' => "Пожалуйста, заполните следующую форму с вашими учетными данными для входа:",
+    'username or email' => "Емайл",
+    'password' => "Пароль",
+    'Remember me next time' => 'Запомнить меня',
+    'Lost Password?' => 'Забыли пароль?',
+    'Authorisation for members:' => 'Авторизация зарегистрированых пользователей:',
+    'Advanced search' => 'Расширеный поиск',
+    "Minimal password length 4 symbols." => "Минимальная длина пароля 4 символа",
+    "Registration" => "Регистрация",
     // Сообщения
     'Write messages to' => 'Написать сообщение для ',
     'Sender' => 'Отправитель ',
+    'no price' => 'Договорная цена',
     'Receiver' => 'Получатель ',
     'Message' => 'Сообщение ',
     'Messages' => 'Сообщения ',
@@ -167,20 +181,24 @@ return array(
     'View Messages' => 'Просмотр сообщения',
     'Read' => 'Прочитанно',
     'Dialog' => 'Диалог',
+    'Your configuration requires changes.' => '
+Ваша конфигурация требует изменений.',
+    "short_open_tag option must be enabled in the php.ini or another method available" => "Параметр short_open_tag должен быть включен в php.ini или другим доступным методом",
+    "No results for full search. Show simplified search results:" => "Нет результатов для полного поиска. Выводим результаты упрощенного поиска:",
     // Работа с датами
     'dates' => array(
-        'Январь',	'Янв',	
-        'Февраль',	'Фев',	
-        'Март',		'Мар',	
-        'Апрель',	'Апр',	
-        'Май',		'Май',	
-        'Июнь',		'Июн',	
-        'Июль',		'Июл',	
-        'Август',	'Авг',	
-        'Сентябрь',	'Сен',	
-        'Октябрь',	'Окт',
-        'Ноябрь',	'Ноя',	
-        'Декабрь',	'Дек',	
+        'Январь', 'Янв',
+        'Февраль', 'Фев',
+        'Март', 'Мар',
+        'Апрель', 'Апр',
+        'Май', 'Май',
+        'Июнь', 'Июн',
+        'Июль', 'Июл',
+        'Август', 'Авг',
+        'Сентябрь', 'Сен',
+        'Октябрь', 'Окт',
+        'Ноябрь', 'Ноя',
+        'Декабрь', 'Дек',
         'Понедельник',
         'Вторник',
         'Среда',
@@ -196,6 +214,5 @@ return array(
         'Сб',
         'Вс',
     ),
-
 );
 

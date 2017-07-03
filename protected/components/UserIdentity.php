@@ -27,12 +27,15 @@ class UserIdentity extends CUserIdentity {
         } else {
             $user = User::model()->notsafe()->findByAttributes(array('username' => $this->username));
         }
+        
+        var_dump( Yii::app()->user->crypt($this->password) );
+        
         if ($user === null)
             if (strpos($this->username, "@")) {
                 $this->errorCode = self::ERROR_EMAIL_INVALID;
             } else {
                 $this->errorCode = self::ERROR_USERNAME_INVALID;
-            } else if (UserModule::encrypting($this->password) !== $user->password)
+            } else if (Yii::app()->user->crypt($this->password) !== $user->password)
             $this->errorCode = self::ERROR_PASSWORD_INVALID;
         else if ($user->status == 0)
             $this->errorCode = self::ERROR_STATUS_NOTACTIV;

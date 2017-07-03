@@ -13,7 +13,7 @@ $this->menu = array(
     array('label' => Yii::t('lang','Create Category'), 'icon' => 'icon-plus', 'url' => array('create')),
     array('label' => Yii::t('lang','View Category'), 'icon' => ' icon-eye-open', 'url' => array('view', 'id' => $model->id)),
     array('label' => Yii::t('lang','Manage Category'), 'icon' => 'icon-folder-open', 'url' => array('admin')),
-    array('label' => Yii::t('lang','Удалить категорию'), 'icon' => 'icon-folder-open', 'url' => array('delete', 'id' => $model->id)),
+    array('label' => Yii::t('lang','Удалить категорию'), 'icon' => 'icon-folder-open', 'url' => array('/admin/category/delete', 'id' => $model->id)),
 );
 ?>
 

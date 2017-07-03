@@ -10,7 +10,7 @@
 <body>
 <div id='header'>
  <div id="topheader">
-   <a href='<?php echo Yii::app()->baseUrl; ?>' class="logo"></a>
+   <a href='<?php echo Yii::app()->baseUrl; ?>' class="logo">Доска объявлений на Yii</a>
    <div class="menu_area">
 		<div class='ideas'>
 			<a href="<?=Yii::app()->createUrl("/adverts")?>" class="general">Объявления</a> 

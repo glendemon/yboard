@@ -58,7 +58,8 @@ class YiiDebugToolbarPanelSettings extends YiiDebugToolbarPanel
 
     protected function getApplicationParams()
     {
-        return $this->prepareData(Yii::app()->params);
+        //return $this->prepareData(Yii::app()->params);
+        return array();
     }
 
     protected function getComponentsData()

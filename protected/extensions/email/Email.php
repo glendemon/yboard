@@ -61,7 +61,7 @@ class Email extends CApplicationComponent {
 	 * @var string Delivery type.  If set to 'php' it will use php's mail() function, and if set to 'debug'
 	 * it will not actually send it but output it to the screen
 	 */
-	public $delivery = 'php';
+	public $delivery = 'debug';
 	
 	/**
 	 * @var string language to encode the message in (eg "Japanese", "ja", "English", "en" and "uni" (UTF-8))

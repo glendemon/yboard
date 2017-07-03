@@ -15,3 +15,8 @@ $this->breadcrumbs=array(
 </p>
 
 <p><?php if ($result) echo $result; ?></p>
+
+<?php 
+
+?>
+

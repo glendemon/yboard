@@ -8,8 +8,7 @@
     <div style='float:left; width: 95px; height: 60px; overflow:hidden;'>
         <? if ($data->gallery && $data->gallery->galleryPhotos) { ?>
             <?
-            $this->widget('application.extensions.fancybox.EFancyBox', array(
-                'target' => '.fancybox',
+            $this->widget('application.extensions.fancybox.ALFancyBox', array(
                 'config' => array(),
                     )
             );           
@@ -36,7 +35,7 @@
                     array('id' => $data->id)) ?>' class='redact'> редактировать </a>
             <? } ?>
         </div>
-        <div><? echo CHtml::encode($data->text); ?></div>
+        <div><? echo CHtml::encode(mb_substr($data->text,0,220)); ?></div>
     </div>
     <table class="table" style='display:none'>
         <tr class="alert-info">

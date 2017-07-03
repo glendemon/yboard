@@ -79,30 +79,30 @@ EOD;
         //Yii::app()->clientScript->registerCoreScript('jquery');
 
         //uncomment to register bootstrap css if you have not already included  it (optional),or else you will have to style the html by yourself.
-        //Yii::app()->clientScript->registerCssFile($baseUrl . '/js_plugins/bootstrap/css/bootstrap.css');
+        //Yii::app()->clientScript->registerCssFile($baseUrl . '/assets/js_plugins/bootstrap/css/bootstrap.css');
         Yii::app()->clientScript->registerCoreScript('cookie');
         Yii::app()->clientScript->registerScript(__CLASS__ . 'jstree_behavior_params', $jstree_behavior_js, CClientScript::POS_END);
 
         //modal dialog with noty.js
-        Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/noty/js/noty/jquery.noty.js', CClientScript::POS_END);
-        Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/noty/js/noty/layouts/center.js', CClientScript::POS_END);
-        Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/noty/js/noty/themes/default.js', CClientScript::POS_END);
+        Yii::app()->clientScript->registerScriptFile($baseUrl . '/assets/js_plugins/noty/js/noty/jquery.noty.js', CClientScript::POS_END);
+        Yii::app()->clientScript->registerScriptFile($baseUrl . '/assets/js_plugins/noty/js/noty/layouts/center.js', CClientScript::POS_END);
+        Yii::app()->clientScript->registerScriptFile($baseUrl . '/assets/js_plugins/noty/js/noty/themes/default.js', CClientScript::POS_END);
         //js spinner
-        Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/spin.min.js', CClientScript::POS_END);
+        Yii::app()->clientScript->registerScriptFile($baseUrl . '/assets/js_plugins/spin.min.js', CClientScript::POS_END);
         //fancybox
-       Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/fancybox2/jquery.fancybox.js', CClientScript::POS_END);
-        Yii::app()->clientScript->registerCssFile($baseUrl . '/js_plugins/fancybox2/jquery.fancybox.css');
+       Yii::app()->clientScript->registerScriptFile($baseUrl . '/assets/js_plugins/fancybox2/jquery.fancybox.js', CClientScript::POS_END);
+        Yii::app()->clientScript->registerCssFile($baseUrl . '/assets/js_plugins/fancybox2/jquery.fancybox.css');
 
-        Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/json2/json2.js');
+        Yii::app()->clientScript->registerScriptFile($baseUrl . '/assets/js_plugins/json2/json2.js');
 
         Yii::app()->clientScript->registerCoreScript('yiiactiveform');
 
         // jquery.form.js plugin http://malsup.com/jquery/form/
-        Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/ajaxform/jquery.form.js', CClientScript::POS_END);
-        Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/ajaxform/form.js', CClientScript::POS_END);
+        Yii::app()->clientScript->registerScriptFile($baseUrl . '/assets/js_plugins/ajaxform/jquery.form.js', CClientScript::POS_END);
+        Yii::app()->clientScript->registerScriptFile($baseUrl . '/assets/js_plugins/ajaxform/form.js', CClientScript::POS_END);
         //jstree
-        Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/jstree/jquery.jstree.js', CClientScript::POS_END);
-        Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/jstree.behavior.js', CClientScript::POS_END);
+        Yii::app()->clientScript->registerScriptFile($baseUrl . '/assets/js_plugins/jstree/jquery.jstree.js', CClientScript::POS_END);
+        Yii::app()->clientScript->registerScriptFile($baseUrl . '/assets/js_plugins/jstree.behavior.js', CClientScript::POS_END);
     }
 
     /**
