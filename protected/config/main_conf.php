@@ -1,5 +1,6 @@
-<? return array (
-  'basePath' => 'D:\\xampp\\htdocs\\Yboard\\protected\\config\\..',
+<? 
+return array (
+  'basePath' => BASEPATH,
   'language' => 'ru',
   'name' => 'Доска объявлений',
   'theme' => 'yboard',

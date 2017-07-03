@@ -256,7 +256,11 @@ dt{
     padding: 4px;
 }
 
-
+.install_blocks{
+	padding-left:20px; 
+	border: 1px solid #ccc;
+	margin-bottom: 30px;
+}
 
 /* Меню */
 

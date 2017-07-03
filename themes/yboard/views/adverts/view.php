@@ -82,12 +82,14 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
             <?= $model->user->email ?> <br/>
             <?= $model->user->skype ?> 
         </div>
-        <? if (Yii::app()->user->id != $model->user->id) { ?>
+		
+		
+        <? if (Yii::app()->user->id != $model->user->id and isset($model->user->id) ) { ?>
             <div>
                 <?php
                 echo $this->renderPartial('/messages/_form', array(
                     'model' => $mes_model,
-                    'receiver' => $data->user->id)
+                    'receiver' => $model->user->id)
                 );
                 ?>
             </div>

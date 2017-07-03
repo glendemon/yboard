@@ -1,8 +1,12 @@
 <?php
-
 header("Content-Type: text/html; charset=UTF-8");
 
-if( !is_file( dirname(__FILE__) . '/yii/framework/yii.php' ) ){
+// Path to Yii framework
+$yii = dirname(__FILE__) . '/framework/yii.php';
+// Path to config folder
+define("BASEPATH",dirname(__FILE__) . '/protected/');
+
+if( !is_file( $yii ) ){
 	die(" Yii framework it's not installed. ");
 }
 if( is_file( dirname(__FILE__) . '/install' ) ){
@@ -23,7 +27,7 @@ if( is_file( dirname(__FILE__) . '/install' ) ){
 		echo("'/protected/config/settings.php' not writable <br/>");
 		$error = true;	
 	}
-	if(  !is_writable( dirname(__FILE__) . '/protected/config/install' )  ){
+	if(  !is_writable( dirname(__FILE__) . '/protected/config/install') and is_file(dirname(__FILE__) . '/protected/config/install')   ){
 		echo("'/protected/config/install' not writable <br/>");
 		$error = true;	
 	}
@@ -50,7 +54,7 @@ if (isset($_COOKIE['YII_DEBUG'])) {
 }
 
 // Подключение параметров для режима отладки 
-$yii = dirname(__FILE__) . '/yii/framework/yii.php';
+
 $CONFIG = dirname(__FILE__) . '/protected/config/main_conf.php';
 
 require_once($yii);

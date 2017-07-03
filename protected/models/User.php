@@ -139,7 +139,7 @@ class User extends CActiveRecord {
                 'condition' => 'status=' . self::STATUS_BANNED,
             ),
             'superuser' => array(
-                'condition' => 'superuser=1',
+                'condition' => 'superuser=1 or superuser=2',
             ),
             'notsafe' => array(
                 'select' => 'id, username, password, email, activkey, create_at, lastvisit_at, superuser, status',

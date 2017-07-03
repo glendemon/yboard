@@ -6,7 +6,7 @@
 ?>
 
 <h4><?=t('Dialog')?> с 
-    <a href='<? echo Yii::app()->createUrl('user/user/view/', array('id'=>$userData->id))?>'>
+    <a href='<? echo Yii::app()->createUrl('user/view/', array('id'=>$userData->id))?>'>
             <?=$userData->username?></a>
 </h4>
 

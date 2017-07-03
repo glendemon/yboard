@@ -31,11 +31,10 @@ class BackendController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                //'actions'=>array('admin','delete'),
                 'users' => User::getAdmins(),
             ),
             array('deny', // deny all users
-                'users' => array('*'),
+                'users' => array("*"),
             ),
         );
     }

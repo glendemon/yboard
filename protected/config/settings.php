@@ -49,6 +49,6 @@
   array (
     0 => '4',
   ),
-  'adminEmail' => 'wzcc@mail.ru',//Емайл администрации
+  'adminEmail' => 'admin@yboard.org',//Емайл администрации
 ) 
  ?>
