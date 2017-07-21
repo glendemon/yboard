@@ -22,8 +22,6 @@ class DefaultController extends BackendController {
 
     public function actionIndex() {
 	
-		var_dump(User::getAdmins());
-	
         $registrations = Yii::app()->db->createCommand("select count(*) as num, DATE_FORMAT(create_at, '%d %b') as data "
                         . "from users group by DATE_FORMAT(create_at, '%Y %m %d') limit 7 ")->queryAll();
         $adverts = Yii::app()->db->createCommand("select count(*) as num, DATE_FORMAT(created_at, '%d %b') as data "
@@ -78,6 +76,8 @@ class DefaultController extends BackendController {
         $chart[2]['data'] = "[" . $chart[2]['data'] . "]";
         $chart[2]['label'] = "[" . $chart[2]['label'] . "]";
 
+        
+        //var_dump($chart);
 
         $this->render('index', array(
             'chart' => $chart,

@@ -60,3 +60,11 @@ function removeOption(t) {
     $(t.parentNode).css('display', 'none');
 
 }
+
+
+function open_search(){
+    if( $(".advanced_search").css('display') == 'none' )
+        $(".advanced_search").show();
+    else
+        $(".advanced_search").hide();
+}

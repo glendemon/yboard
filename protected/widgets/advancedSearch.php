@@ -52,20 +52,7 @@ class advancedSearch extends CWidget {
         } else {
             echo "<input type='hidden' name='cat_id' value='$cat_id' />";
         }
-        if (is_array($curent_cat['fields'])) {
-            foreach ($curent_cat['fields'] as $f_id => $field) {
-                if ($field['type'] === "1") {
-                    echo "<input type='checkbox' name='fields[$f_id]' /> " . $field['name'] . "<br/>";
-                } elseif ($field['type'] === "2") {
-                    echo $field['name'] . "<select name='fields[$f_id]'> ";
-                    echo "<option value=''></option>";
-                    foreach ($field['atr'] as $a_n => $atr) {
-                        echo "<option value='$a_n'>$atr</option>";
-                    }
-                    echo "</select>";
-                }
-            }
-        }
+
 
         echo "<label for='Adverts[price_min]'>Цена от</label><input type='text' name='Adverts[price_min]' value='".Yii::app()->request->getParam("Adverts")["price_min"]."' />";
         echo "<label for='Adverts[price_max]' class='sh'>до</label><input type='text' name='Adverts[price_max]' value='".Yii::app()->request->getParam("Adverts")["price_max"]."' /><br/>";

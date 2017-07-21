@@ -114,6 +114,7 @@ class CmsHandler extends Controller
     
     function showError()
     {   
+        header("HTTP/1.0 404 Not Found");
         if($error=Yii::app()->errorHandler->error)
         {
             if(Yii::app()->request->isAjaxRequest)
