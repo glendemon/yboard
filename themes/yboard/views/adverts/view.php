@@ -10,12 +10,6 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
 ?>
 <div class="advert_full">
     <div class='title' style='padding:0px 3px;'><?= $model->name ?> 
-        <div style='float:right'>
-            <a href='<?
-            echo Yii::app()->createUrl('adverts/update', array('id' => $model->id));
-            ?>'><i class='fa fa-pencil'></i></a> 
-            <a href='javascript:void(0)' onclick='setFavoriteAdv("<?= $model->id ?>", this)'><i class='fa fa-bookmark-o'></i></a>
-        </div>
     </div>
     <div class='date'>
         <span><a href='<? echo Yii::app()->createUrl('user/view', array('id' => $model->user->id))
@@ -24,10 +18,11 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
             </a></span>  
         <span><i class='fa fa-clock-o'></i><?= PeopleDate::format($model->created_at) ?></span> 
         <span><i class='fa fa-eye'></i><?= $model->views ?></span>
-        <div style='float:right; margin-top:-6px; '> 
-            <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
-            <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="link" 
-                 data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir"></div>
+        <div style='float:right; font-size:20px;'>
+            <a href='<?
+            echo Yii::app()->createUrl('adverts/update', array('id' => $model->id));
+            ?>'><i class='fa fa-pencil'></i></a> 
+            <a href='javascript:void(0)' onclick='setFavoriteAdv("<?= $model->id ?>", this)'><i class='fa fa-bookmark-o'></i></a>
         </div>
     </div>
     <div class="content">

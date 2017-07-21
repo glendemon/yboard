@@ -170,31 +170,21 @@ class Controller extends CController {
 
     public function meta_title() {
 
+        echo $this->meta['title'];
+        
         $title = $this->subMetaVars($this->meta['title']);
         return $title;
     }
 
     public function meta_description() {
+        
+        echo $this->meta['description'];
+        
         $description = $this->subMetaVars($this->meta['description']);
         return $description;
     }
 
     public function subMetaVars($str) {
-
-        if (strpos($str, "<") !== false) {
-            preg_match_all("~<([-_0-9a-z]+)>~is", $str, $m_v);
-            foreach ($m_v[1] as $v) {
-                if (isset($this->meta['vars'][$v])) {
-                    $str = str_replace("<" . $v . ">", $this->meta['vars'][$v], $str);
-                    $str = str_replace("]", "", $str);
-                    $str = str_replace("[", "", $str);
-                } else {
-                    $str = preg_replace("~\[" . $v . "[^\[]]*\]~is", "", $str);
-                    $str = preg_replace("~[^\.]*<" . $v . ">[^\.]*\.~is", "", $str);
-                }
-            }
-        }
-
         return $str;
     }
 

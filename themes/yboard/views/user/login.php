@@ -17,16 +17,6 @@ $this->breadcrumbs = array(
 
 
 <div class="form well">
-    <h3><?=t('Social networks authorisation :')?></h3>
-    <?
-    $this->widget('application.widgets.UloginWidget', array(
-        'params' => array(
-            'redirect' => Yii::app()->baseUrl . '/index.php?r=login/ulogin' //Адрес, на который ulogin будет редиректить браузер клиента. Он должен соответствовать контроллеру ulogin и действию login
-        )
-    ));
-    ?>
-    
-    <hr/>
      <h3><?=t('Authorisation for members:')?></h3>
 
     <?php echo CHtml::beginForm(); ?>

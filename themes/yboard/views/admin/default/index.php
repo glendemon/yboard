@@ -1,5 +1,5 @@
 
-<script type="application/javascript" src="<?=Yii::app()->baseUrl?>/assets/js_plugins/awesomechart.js"></script>
+<script type="application/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/awesomechart.js"></script>
 
 <canvas id="canvas1" width="300" height="300">
     Your web-browser does not support the HTML 5 canvas element.
@@ -51,8 +51,4 @@
 
    window.onload = drawMyChart;
  </script>
-
-<?php 
-
-?>
 

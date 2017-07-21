@@ -1,5 +1,2 @@
 <? return array (
-  'ffffff' => 
-  array (
-  ),
 ); 

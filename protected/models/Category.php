@@ -183,19 +183,6 @@ class Category extends CActiveRecord {
         );
     }
 
-    public function fieldsSave() {
-        $fields = Array();
-        if(is_array($_POST['Category']['fields']))
-        foreach ($_POST['Category']['fields'] as $fn => $fd) {
-            if (preg_match('#fn_[0-9]+#is', $fn))
-                $fields[Translit::latin($fd['name'])] = $fd;
-            else
-                $fields[$fn] = $fd;
-        }
-
-        $this->fields = json_encode($fields);
-    }
-
     public function behaviors() {
         return array(
             'NestedSetBehavior' => array(
